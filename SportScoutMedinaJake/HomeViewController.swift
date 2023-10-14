@@ -25,7 +25,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     let locationCellIdentifier = "LocationCellIdentifier"
     var locations:[Location] = []
-    var picArray:[UIImage] = []
     
     let HomeToLocationDetailsSegueIdentifier = "HomeToLocationDetailsSegueIdentifier"
     
@@ -67,53 +66,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return try? queryDocumentSnapshot.data(as: Location.self)
           }
             
-//            for location in self.locations {
-////                let storageRef = storage.reference(withPath: location.imgPath)
-//                let storageRef = storage.reference(forURL: location.imgPath)
-//                // Download the data, assuming a max size of 1MB (you can change this as necessary)
-//                storageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) -> Void in
-//                    if data != nil {
-//                        print("adding image for \(location.name)")
-//                        // Create a UIImage, add it to the array
-//                          let pic = UIImage(data: data!)
-//                          self.picArray.append(pic!)
-//                    } else {
-//                        print("error fetching image for location with name \(location.name): \(error?.localizedDescription)")
-//                    }
-//                }
-//            }
-            
-            print(self.locations[0].imgPath)
-            
             // update table view
             DispatchQueue.main.async {
                 self.homeTableView.reloadData()
             }
         }
     }
-    
-//    func fetchImages() {
-//        for location in self.locations {
-//            //                let storageRef = storage.reference(withPath: location.imgPath)
-//            let storageRef = storage.reference(forURL: location.imgPath)
-//            // Download the data, assuming a max size of 1MB (you can change this as necessary)
-//            storageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) -> Void in
-//                if data != nil {
-//                    print("adding image for \(location.name)")
-//                    // Create a UIImage, add it to the array
-//                    let pic = UIImage(data: data!)
-//                    self.picArray.append(pic!)
-//                } else {
-//                    print("error fetching image for location with name \(location.name): \(error?.localizedDescription)")
-//                }
-//            }
-//        }
-//        print(self.picArray.description)
-//        // update table view
-//        DispatchQueue.main.async {
-//            self.homeTableView.reloadData()
-//        }
-//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return locations.count
@@ -146,16 +104,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-//    func getImage(url: String, completion: @escaping (UIImage?) -> ()) {
-//        URLSession.shared.dataTask(with: URL(string: url)!) { data, response, error in
-//            if error == nil {
-//                completion(UIImage(data: data!))
-//            } else {
-//                completion(nil)
-//            }
-//        }.resume()
-//    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: locationCellIdentifier, for: indexPath as IndexPath)
         
@@ -164,16 +112,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.textLabel?.text = locations[row].name
         cell.detailTextLabel?.text = locations[row].addr_field_1
         
+        
+        // retrieve the cell's image
+        // this works for dummy data but images
+        // might seem like they load slowly when
+        // scrolling due to the cellForRowAt function
+        // only being called when a cell is becoming visible
         cell.tag += 1
         let tag = cell.tag
-        
-//        cell.imageView?.image = UIImage(named: "\(images[row])")
-        if picArray.indices.contains(row) {
-            print("seeing image for row \(row)")
-            cell.imageView?.image = picArray[row]
-        }
-//        cell.imageView?.image = picArray[row]
-        
         let photoUrl = locations[row].imgPath
         getImage(url: photoUrl) { photo in
             if photo != nil {
