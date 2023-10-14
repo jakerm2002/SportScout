@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66C066652ADA3FB500DE3845 /* SSLocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */; };
+		66C066672ADA406600DE3845 /* SSModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066662ADA406600DE3845 /* SSModels.swift */; };
 		66C3D97A2AD88FEC003E1C99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9792AD88FEC003E1C99 /* AppDelegate.swift */; };
 		66C3D97C2AD88FEC003E1C99 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D97B2AD88FEC003E1C99 /* SceneDelegate.swift */; };
 		66C3D97E2AD88FEC003E1C99 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D97D2AD88FEC003E1C99 /* ViewController.swift */; };
@@ -35,6 +37,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLocationDetailsViewController.swift; sourceTree = "<group>"; };
+		66C066662ADA406600DE3845 /* SSModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSModels.swift; sourceTree = "<group>"; };
 		66C3D9762AD88FEC003E1C99 /* SportScoutMedinaJake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportScoutMedinaJake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66C3D9792AD88FEC003E1C99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66C3D97B2AD88FEC003E1C99 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,9 +99,11 @@
 			isa = PBXGroup;
 			children = (
 				66C3D9792AD88FEC003E1C99 /* AppDelegate.swift */,
+				66C066662ADA406600DE3845 /* SSModels.swift */,
 				66C3D97B2AD88FEC003E1C99 /* SceneDelegate.swift */,
 				66C3D97D2AD88FEC003E1C99 /* ViewController.swift */,
 				66C3D97F2AD88FEC003E1C99 /* Main.storyboard */,
+				66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */,
 				66C3D9E52AD91034003E1C99 /* SSNewEventViewController.swift */,
 				66C3D9E32AD903DF003E1C99 /* SSSettingsViewController.swift */,
 				66C3D9DF2AD8FF75003E1C99 /* SSTabBarController.swift */,
@@ -208,11 +214,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				66C3D9D62AD8A7BB003E1C99 /* LoginViewController.swift in Sources */,
+				66C066672ADA406600DE3845 /* SSModels.swift in Sources */,
 				66C3D9D82AD8A7C4003E1C99 /* SignupViewController.swift in Sources */,
 				66C3D9DC2AD8F4A9003E1C99 /* CustomizeProfileViewController.swift in Sources */,
 				66C3D9912AD89553003E1C99 /* HomeViewController.swift in Sources */,
 				66C3D9842AD88FEC003E1C99 /* SportScoutMedinaJake.xcdatamodeld in Sources */,
 				66C3D9E02AD8FF75003E1C99 /* SSTabBarController.swift in Sources */,
+				66C066652ADA3FB500DE3845 /* SSLocationDetailsViewController.swift in Sources */,
 				66C3D97E2AD88FEC003E1C99 /* ViewController.swift in Sources */,
 				66C3D9DE2AD8FC79003E1C99 /* ProfileViewController.swift in Sources */,
 				66C3D97A2AD88FEC003E1C99 /* AppDelegate.swift in Sources */,

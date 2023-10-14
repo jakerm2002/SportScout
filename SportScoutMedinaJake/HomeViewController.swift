@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseCore
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 public let names = ["Gregory Gym", "Recreational Sports Center", "Northwest Recreation Center", "Austin Recreation Center", "Hancock Recreation Center"]
 public let images = ["gregGym", "recSports", "northwestRec", "austinRec", "hancockRec"]
@@ -15,13 +16,15 @@ public let addresses = ["2100 Speedway", "2001 San Jacinto Blvd", "2913 Northlan
 
 
 let db = Firestore.firestore()
-let docRef = db.collection("Locations").document("evFLYvq5Lq5634C5hxsn")
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var homeTableView: UITableView!
 
     let locationCellIdentifier = "LocationCellIdentifier"
+    var locations:[Location] = []
+    
+    let HomeToLocationDetailsSegueIdentifier = "HomeToLocationDetailsSegueIdentifier"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,18 +32,32 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         homeTableView.delegate = self
         homeTableView.dataSource = self
         
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
-            } else {
-                print("Document does not exist")
+        fetchData()
+    }
+    
+    // get locations and refresh table view
+    func fetchData() {
+        db.collection("Locations").addSnapshotListener { (querySnapshot, error) in
+          guard let documents = querySnapshot?.documents else {
+            print("No documents")
+            return
+          }
+            
+            // convert each database entry into Location object
+            // add to locations array
+          self.locations = documents.compactMap { queryDocumentSnapshot -> Location? in
+            return try? queryDocumentSnapshot.data(as: Location.self)
+          }
+            
+            // update table view
+            DispatchQueue.main.async {
+                self.homeTableView.reloadData()
             }
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return names.count
+        return locations.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -59,10 +76,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: locationCellIdentifier, for: indexPath as IndexPath)
         
         let row = indexPath.row
-        cell.textLabel?.text = names[row]
-        cell.detailTextLabel?.text = addresses[row]
+        cell.textLabel?.text = locations[row].name
+        cell.detailTextLabel?.text = locations[row].addr_field_1
         
-        cell.imageView?.image = UIImage(named: "\(images[row])")
+//        cell.imageView?.image = UIImage(named: "\(images[row])")
         
         cell.imageView?.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
 //        cell.contentView.frame = cell.contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
@@ -79,15 +96,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-    */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == HomeToLocationDetailsSegueIdentifier,
+           let destination = segue.destination as? SSLocationDetailsViewController,
+           let index = homeTableView.indexPathForSelectedRow?.row
+        {
+            // send the id so that the LocationDetailsVC can load in the data
+            destination.documentID = locations[index].id!
+        }
+    }
+    
 
 }
