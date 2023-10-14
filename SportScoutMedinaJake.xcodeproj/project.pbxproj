@@ -34,6 +34,9 @@
 		66C3D9E02AD8FF75003E1C99 /* SSTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9DF2AD8FF75003E1C99 /* SSTabBarController.swift */; };
 		66C3D9E42AD903DF003E1C99 /* SSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9E32AD903DF003E1C99 /* SSSettingsViewController.swift */; };
 		66C3D9E62AD91034003E1C99 /* SSNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9E52AD91034003E1C99 /* SSNewEventViewController.swift */; };
+		E35264542ADB34E400CAAA09 /* JakeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */; };
+		E35264562ADB374600CAAA09 /* JoshStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */; };
+		E35264582ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264572ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +66,9 @@
 		66C3D9DF2AD8FF75003E1C99 /* SSTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTabBarController.swift; sourceTree = "<group>"; };
 		66C3D9E32AD903DF003E1C99 /* SSSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSSettingsViewController.swift; sourceTree = "<group>"; };
 		66C3D9E52AD91034003E1C99 /* SSNewEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSNewEventViewController.swift; sourceTree = "<group>"; };
+		E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JakeStoryboard.storyboard; sourceTree = "<group>"; };
+		E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoshStoryboard.storyboard; sourceTree = "<group>"; };
+		E35264572ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomizeProfileStoryboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +88,9 @@
 		66C3D96D2AD88FEC003E1C99 = {
 			isa = PBXGroup;
 			children = (
+				E35264572ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard */,
+				E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */,
+				E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */,
 				66C3D9782AD88FEC003E1C99 /* SportScoutMedinaJake */,
 				66C3D9772AD88FEC003E1C99 /* Products */,
 			);
@@ -198,11 +207,14 @@
 				66C3D9892AD88FED003E1C99 /* LaunchScreen.storyboard in Resources */,
 				66C3D9862AD88FED003E1C99 /* Assets.xcassets in Resources */,
 				66C3D9DA2AD8ADE4003E1C99 /* SportScout.png in Resources */,
+				E35264562ADB374600CAAA09 /* JoshStoryboard.storyboard in Resources */,
 				66C3D9812AD88FEC003E1C99 /* Main.storyboard in Resources */,
 				66C3D99B2AD89873003E1C99 /* gregGym.png in Resources */,
+				E35264582ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard in Resources */,
 				66C3D9992AD89857003E1C99 /* austinRec.png in Resources */,
 				66C3D9932AD897BE003E1C99 /* recSports.png in Resources */,
 				66C3D9972AD89844003E1C99 /* hancockRec.png in Resources */,
+				E35264542ADB34E400CAAA09 /* JakeStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +398,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -414,6 +427,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
