@@ -16,6 +16,8 @@ class SSLocationDetailsViewController: UIViewController {
     var LocationObject:Location!
     var documentID = "" // will be set from home VC
     
+    var LocationDetailsToNewEventSegueIdentifier = "LocationDetailsToNewEventSegueIdentifier"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -46,15 +48,14 @@ class SSLocationDetailsViewController: UIViewController {
             }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == LocationDetailsToNewEventSegueIdentifier,
+           let destination = segue.destination as? SSNewEventViewController
+        {
+            // send the id so that the LocationDetailsVC can load in the data
+            destination.documentID = documentID
+            destination.locationName = self.LocationObject.name
+        }
     }
-    */
 
 }

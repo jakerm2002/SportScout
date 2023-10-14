@@ -191,7 +191,7 @@
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="mvT-8g-7B9"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="3kk-Yg-PAj">
                             <connections>
-                                <segue destination="toB-EY-ksP" kind="show" id="8MH-UN-Jyu"/>
+                                <segue destination="toB-EY-ksP" kind="show" identifier="LocationDetailsToNewEventSegueIdentifier" id="8MH-UN-Jyu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

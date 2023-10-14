@@ -11,6 +11,11 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var newEventTableView: UITableView!
     
+    
+    // will be passed in from LocationDetailsVC
+    var documentID = ""
+    var locationName = ""
+    
     let NewEventTitleCellIdentifier = "NewEventTitleCellIdentifier"
     let NewEventLocationCellIdentifier = "NewEventLocationCellIdentifier"
     let NewEventDateTimeCellIdentifier = "NewEventDateTimeCellIdentifier"
@@ -26,6 +31,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewEventLocationCellIdentifier, for: indexPath)
+            // fill in the location from the LocationDetailsVC
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewEventDateTimeCellIdentifier, for: indexPath)
@@ -46,6 +52,8 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         // Do any additional setup after loading the view.
         newEventTableView.delegate = self
         newEventTableView.dataSource = self
+        print(documentID)
+        print(locationName)
     }
     
 
