@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
 
 public let names = ["Gregory Gym", "Recreational Sports Center", "Northwest Recreation Center", "Austin Recreation Center", "Hancock Recreation Center"]
 public let images = ["gregGym", "recSports", "northwestRec", "austinRec", "hancockRec"]
 public let addresses = ["2100 Speedway", "2001 San Jacinto Blvd", "2913 Northland Dr", "1301 Shoal Creek Blvd", "811 E 41st St"]
+
+
+let db = Firestore.firestore()
+let docRef = db.collection("Locations").document("evFLYvq5Lq5634C5hxsn")
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -22,6 +28,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Do any additional setup after loading the view.
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
