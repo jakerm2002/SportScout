@@ -36,7 +36,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     let customLocationCellIdentifier = "CustomLocationCellIdentifier"
     var locations:[Location] = []
     
-    let HomeToLocationDetailsSegueIdentifier = "HomeToLocationDetailsSegueIdentifier"
     let CustomLocationCellToLocationDetailsSegueIdentifier = "CustomLocationCellToLocationDetailsSegueIdentifier"
     
     override func viewDidLoad() {
