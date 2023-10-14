@@ -287,6 +287,55 @@
                                             <segue destination="6VT-6n-R47" kind="show" identifier="HomeToLocationDetailsSegueIdentifier" id="Qqo-ha-l37"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CustomLocationCellIdentifier" rowHeight="120" id="h98-UV-Od4" customClass="SSHomeTableViewCell" customModule="SportScoutMedinaJake" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="133.66666412353516" width="393" height="120"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="h98-UV-Od4" id="mZJ-3Z-abt">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="120"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ggV-af-wHl">
+                                                    <rect key="frame" x="20" y="10" width="140" height="100"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="140" id="QWS-Jn-RRm"/>
+                                                        <constraint firstAttribute="height" constant="100" id="oJm-0A-tuN"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdZ-L6-orE">
+                                                    <rect key="frame" x="176" y="10" width="197" height="75"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="75" id="VqJ-SR-XRm"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BD-bI-I75">
+                                                    <rect key="frame" x="176" y="85" width="197" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2BD-bI-I75" firstAttribute="trailing" secondItem="mZJ-3Z-abt" secondAttribute="trailingMargin" id="2o3-zz-MN7"/>
+                                                <constraint firstAttribute="bottom" secondItem="ggV-af-wHl" secondAttribute="bottom" constant="10" id="Gfc-Sn-bw1"/>
+                                                <constraint firstItem="OdZ-L6-orE" firstAttribute="leading" secondItem="ggV-af-wHl" secondAttribute="trailing" constant="16" id="H9g-Sd-rBN"/>
+                                                <constraint firstItem="OdZ-L6-orE" firstAttribute="top" secondItem="mZJ-3Z-abt" secondAttribute="top" constant="10" id="K9a-az-tmr"/>
+                                                <constraint firstItem="ggV-af-wHl" firstAttribute="leading" secondItem="mZJ-3Z-abt" secondAttribute="leading" constant="20" symbolic="YES" id="YrU-Xk-kmM"/>
+                                                <constraint firstItem="2BD-bI-I75" firstAttribute="top" secondItem="OdZ-L6-orE" secondAttribute="bottom" id="c5f-m5-jgR"/>
+                                                <constraint firstItem="OdZ-L6-orE" firstAttribute="trailing" secondItem="mZJ-3Z-abt" secondAttribute="trailingMargin" id="fE3-xK-wxO"/>
+                                                <constraint firstItem="ggV-af-wHl" firstAttribute="top" secondItem="mZJ-3Z-abt" secondAttribute="top" constant="10" id="ubF-8R-Uza"/>
+                                                <constraint firstItem="2BD-bI-I75" firstAttribute="leading" secondItem="ggV-af-wHl" secondAttribute="trailing" constant="16" id="vtl-8D-t1A"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="locationAddressTextLabel" destination="2BD-bI-I75" id="9aZ-VB-4yw"/>
+                                            <outlet property="locationImageView" destination="ggV-af-wHl" id="RLg-eN-LMy"/>
+                                            <outlet property="locationTitleTextLabel" destination="OdZ-L6-orE" id="jpV-B1-A6a"/>
+                                            <segue destination="6VT-6n-R47" kind="show" identifier="CustomLocationCellToLocationDetailsSegueIdentifier" id="onT-R3-rrt"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -352,6 +401,9 @@
             <point key="canvasLocation" x="3129" y="1569"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="onT-R3-rrt"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="doc.text.image.fill" catalog="system" width="115" height="128"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>

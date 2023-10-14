@@ -19,14 +19,25 @@ public let addresses = ["2100 Speedway", "2001 San Jacinto Blvd", "2913 Northlan
 let db = Firestore.firestore()
 let storage = Storage.storage()
 
+class SSHomeTableViewCell: UITableViewCell {
+    @IBOutlet weak var locationTitleTextLabel: UILabel!
+    @IBOutlet weak var locationAddressTextLabel: UILabel!
+    @IBOutlet weak var locationImageView: UIImageView!
+}
+
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var homeTableView: UITableView!
 
+    // deprecated: the first prototype cell on the storyboard
     let locationCellIdentifier = "LocationCellIdentifier"
+    
+    // the new custom cell on the storyboard
+    let customLocationCellIdentifier = "CustomLocationCellIdentifier"
     var locations:[Location] = []
     
     let HomeToLocationDetailsSegueIdentifier = "HomeToLocationDetailsSegueIdentifier"
+    let CustomLocationCellToLocationDetailsSegueIdentifier = "CustomLocationCellToLocationDetailsSegueIdentifier"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +80,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             // update table view
             DispatchQueue.main.async {
                 self.homeTableView.reloadData()
+                print(self.locations.description)
             }
         }
     }
@@ -105,12 +117,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: locationCellIdentifier, for: indexPath as IndexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: customLocationCellIdentifier, for: indexPath as IndexPath) as! SSHomeTableViewCell
         
         let row = indexPath.row
         print("generating cell for row \(row)")
-        cell.textLabel?.text = locations[row].name
-        cell.detailTextLabel?.text = locations[row].addr_field_1
+        cell.locationTitleTextLabel?.text = locations[row].name
+        cell.locationAddressTextLabel?.text = locations[row].addr_field_1
         
         
         // retrieve the cell's image
@@ -125,8 +137,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             if photo != nil {
                 if cell.tag == tag {
                     DispatchQueue.main.async {
-                        cell.imageView?.image = photo
-                        cell.layoutSubviews() // refreshed cell will check for imageView so that the UIImageView will appear
+                        cell.locationImageView?.layer.cornerRadius = 5.0
+                        cell.locationImageView?.layer.masksToBounds = true
+                        cell.locationImageView?.image = photo
                     }
                 }
             }
@@ -152,7 +165,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == HomeToLocationDetailsSegueIdentifier,
+        if segue.identifier == CustomLocationCellToLocationDetailsSegueIdentifier,
            let destination = segue.destination as? SSLocationDetailsViewController,
            let index = homeTableView.indexPathForSelectedRow?.row
         {
