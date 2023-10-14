@@ -15,4 +15,5 @@ struct Location: Identifiable, Codable {
     var city: String
     var state: String
     var zip: String
+    var imgPath: String
 }
