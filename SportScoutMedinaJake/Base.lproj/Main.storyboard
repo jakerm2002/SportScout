@@ -149,8 +149,34 @@
                     <view key="view" contentMode="scaleToFill" id="5nA-Vs-Pa3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Location Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2K6-NT-xqo">
+                                <rect key="frame" x="16" y="267" width="361" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epR-Nw-Ffn">
+                                <rect key="frame" x="16" y="296" width="361" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MAg-xA-Z7y">
+                                <rect key="frame" x="76" y="120" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="41Q-hX-AgO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="41Q-hX-AgO" firstAttribute="trailing" secondItem="2K6-NT-xqo" secondAttribute="trailing" constant="16" id="76I-c0-nvx"/>
+                            <constraint firstItem="MAg-xA-Z7y" firstAttribute="top" secondItem="41Q-hX-AgO" secondAttribute="top" constant="17" id="Cs9-Rq-eau"/>
+                            <constraint firstItem="epR-Nw-Ffn" firstAttribute="leading" secondItem="41Q-hX-AgO" secondAttribute="leading" constant="16" id="Kez-eY-8QN"/>
+                            <constraint firstItem="41Q-hX-AgO" firstAttribute="trailing" secondItem="epR-Nw-Ffn" secondAttribute="trailing" constant="16" id="WiZ-k0-xXO"/>
+                            <constraint firstItem="2K6-NT-xqo" firstAttribute="leading" secondItem="41Q-hX-AgO" secondAttribute="leading" constant="16" id="gTn-4h-sgd"/>
+                            <constraint firstItem="2K6-NT-xqo" firstAttribute="top" secondItem="MAg-xA-Z7y" secondAttribute="bottom" constant="19" id="vpk-eq-i3e"/>
+                            <constraint firstItem="epR-Nw-Ffn" firstAttribute="top" secondItem="2K6-NT-xqo" secondAttribute="bottom" constant="8" symbolic="YES" id="zd1-Ld-2Jj"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Location Details" id="Bwa-ec-3xs">
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="mvT-8g-7B9"/>
@@ -163,7 +189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZFU-XM-dbq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1801" y="2336"/>
+            <point key="canvasLocation" x="1800.7633587786258" y="2335.9154929577467"/>
         </scene>
         <!--New Event-->
         <scene sceneID="y96-av-O53">
@@ -421,6 +447,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="g5O-cd-cZW" customClass="SSTabBarController" customModule="SportScoutMedinaJake" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="d2p-yc-2NZ">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
