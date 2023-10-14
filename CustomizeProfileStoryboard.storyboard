@@ -96,7 +96,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Done"/>
                                 <connections>
-                                    <segue destination="OPQ-Un-uWY" kind="show" id="XJk-1Y-WG0"/>
+                                    <segue destination="OPQ-Un-uWY" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="XJk-1Y-WG0"/>
                                 </connections>
                             </button>
                         </subviews>
