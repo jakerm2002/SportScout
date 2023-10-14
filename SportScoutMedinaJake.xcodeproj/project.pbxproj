@@ -88,9 +88,6 @@
 		66C3D96D2AD88FEC003E1C99 = {
 			isa = PBXGroup;
 			children = (
-				E35264572ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard */,
-				E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */,
-				E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */,
 				66C3D9782AD88FEC003E1C99 /* SportScoutMedinaJake */,
 				66C3D9772AD88FEC003E1C99 /* Products */,
 			);
@@ -107,6 +104,9 @@
 		66C3D9782AD88FEC003E1C99 /* SportScoutMedinaJake */ = {
 			isa = PBXGroup;
 			children = (
+				E35264572ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard */,
+				E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */,
+				E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */,
 				66C3D9792AD88FEC003E1C99 /* AppDelegate.swift */,
 				66C066662ADA406600DE3845 /* SSModels.swift */,
 				66C3D97B2AD88FEC003E1C99 /* SceneDelegate.swift */,
