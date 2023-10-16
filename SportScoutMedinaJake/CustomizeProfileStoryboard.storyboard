@@ -96,6 +96,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Done"/>
                                 <connections>
+                                    <action selector="doneButtonPressed:" destination="8eW-zY-BdC" eventType="touchUpInside" id="zDE-Wd-hDY"/>
                                     <segue destination="OPQ-Un-uWY" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="XJk-1Y-WG0"/>
                                 </connections>
                             </button>
@@ -132,6 +133,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="CUSTOMIZE PROFILE" id="dWF-QZ-Duz"/>
+                    <connections>
+                        <outlet property="feetField" destination="aih-UV-AwN" id="03s-Oo-Rjh"/>
+                        <outlet property="inchesField" destination="BEQ-tQ-yQk" id="bCL-O2-xfn"/>
+                        <outlet property="nameField" destination="ra4-Y6-Rxc" id="wY5-i2-sLW"/>
+                        <outlet property="profileImage" destination="mHd-LG-yaS" id="VFl-uB-Yfo"/>
+                        <outlet property="usernameField" destination="ra4-Y6-Rxc" id="bhs-uJ-ehg"/>
+                        <outlet property="weightField" destination="4fb-Sa-8cx" id="cwG-5q-ahN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZNn-2m-sG9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
