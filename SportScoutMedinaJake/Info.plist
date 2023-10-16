@@ -21,5 +21,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Please allow permission to import photos for profile picture.</string>
 </dict>
 </plist>

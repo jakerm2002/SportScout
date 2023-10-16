@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomizeProfileViewController: UIViewController, UITextFieldDelegate {
+class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var inchesField: UITextField!
@@ -59,4 +59,22 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate {
         }
         return characterSet.isSuperset(of: characterSet)
     }
+    
+    @IBAction func addPhotoButtonPressed(_ sender: Any) {
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
+            profileImage.image = image
+        }
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
 }
+
