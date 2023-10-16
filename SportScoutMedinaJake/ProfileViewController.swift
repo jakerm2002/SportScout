@@ -8,7 +8,16 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    @IBOutlet weak var profilePhoto: UIImageView!
+    @IBOutlet weak var nameText: UILabel!
+    @IBOutlet weak var usernameText: UILabel!
+    @IBOutlet weak var sportsText: UILabel!
+    @IBOutlet weak var weightText: UILabel!
+    @IBOutlet weak var heightText: UILabel!
+    @IBOutlet weak var locationText: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
