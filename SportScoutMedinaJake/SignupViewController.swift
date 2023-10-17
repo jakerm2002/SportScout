@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import CoreData
 
 class SignupViewController: UIViewController, UITextFieldDelegate {
 
@@ -56,6 +57,31 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func storeUser(username:String, fullName:String) {
+        // store a user's username and Full Name into Core Data
+        
+        let user = NSEntityDescription.insertNewObject(
+            forEntityName: "User",
+            into: context)
+        
+        user.setValue(username, forKey: "username")
+        user.setValue(fullName, forKey: "fullName")
+        
+        // commit the changes
+        saveContext()
+    }
+    
+    func saveContext () {
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+    
     // Keyboard code
     // Called when 'return' key pressed
 
@@ -65,43 +91,8 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     }
     
     // Called when the user clicks on the view outside of the UITextField
-
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
 }
-
-     // Code from Firebase to get a user's profile info
-
-     //import { getAuth } from "firebase/auth";
-     //
-     //const auth = getAuth();
-     //const user = auth.currentUser;
-     //if (user !== null) {
-     //  // The user object has basic properties such as display name, email, etc.
-     //  const displayName = user.displayName;
-     //  const email = user.email;
-     //  const photoURL = user.photoURL;
-     //  const emailVerified = user.emailVerified;
-     //
-     //  // The user's ID, unique to the Firebase project. Do NOT use
-     //  // this value to authenticate with your backend server, if
-     //  // you have one. Use User.getToken() instead.
-     //  const uid = user.uid;
-     //}
-
-
-     // Update a user's profile
-
-     //import { getAuth, updateProfile } from "firebase/auth";
-     //const auth = getAuth();
-     //updateProfile(auth.currentUser, {
-     //  displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
-     //}).then(() => {
-     //  // Profile updated!
-     //  // ...
-     //}).catch((error) => {
-     //  // An error occurred
-     //  // ...
-     //});
 
