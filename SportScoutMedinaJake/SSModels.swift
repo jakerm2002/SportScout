@@ -30,24 +30,34 @@ struct Location: Identifiable, Codable {
     
     // we can use getDocument to access the document referenced by the DocumentReference
     var eventObjects: [Event]? {
-        events?.compactMap { doc -> Event? in
-                do {
-                    // catch possible errors with the SSModels here
-                    return try? doc.getDocument(as: Event.self) {
-                        return self
-                    }
-                } catch {
-                    print("error fetching event data")
-                    abort()
-                }
+        guard let events = events else {
+            return nil
         }
+
+        var resultArr: [Event] = []
+
+        for doc in events {
+            doc.getDocument(as: Event.self) { result in
+                do {
+                    let value = try result.get()
+                    print("Found event at location \(self.name) with value: \(value).")
+                    resultArr.append(value)
+                } catch {
+                    print("Error retrieving event at location \(self.name): \(error)")
+                }
+            }
+        }
+
+        return resultArr
     }
+
 }
 
 struct Event: Identifiable, Codable {
     @DocumentID var id: String?
     var name: String
-    var locaton: String
+    var location: String
+    var sport: String
     var startTime: Date
     var endTime: Date
 }
