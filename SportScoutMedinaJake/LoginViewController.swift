@@ -34,12 +34,14 @@ class LoginViewController: UIViewController {
         
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) {
             (authResult,error) in
-                if let error = error as NSError? {
+            if ((error as NSError?) != nil) {
                     self.errorMessage.text = "Invalid email or password"
-                } else {
-                    self.errorMessage.text = ""
-                    self.performSegue(withIdentifier: "loginSegue", sender: nil)
-                }
+            } else {
+                self.errorMessage.text = ""
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                self.emailTextField.text = nil
+                self.passwordTextField.text = nil
+            }
         }
     }
     
