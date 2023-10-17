@@ -48,6 +48,9 @@ class SSHomeTableViewCell: UITableViewCell {
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var homeTableView: UITableView!
+    
+    var leftNavBarSegment = UISegmentedControl(items: ["Map", "List"])
+    var searchBar = UISearchBar()
 
     // deprecated: the first prototype cell on the storyboard
     let locationCellIdentifier = "LocationCellIdentifier"
@@ -68,6 +71,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         fetchData()
 //        fetchImages()
+        searchBar.sizeToFit()
+        leftNavBarSegment.selectedSegmentIndex = 1
+        leftNavBarSegment.selectedSegmentTintColor = UIColor(red: 0.36, green: 0.35, blue: 0.56, alpha: 1.00)
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        leftNavBarSegment.setTitleTextAttributes(titleTextAttributes, for: .selected)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftNavBarSegment)
+        navigationItem.titleView = searchBar
     }
     
     // generate placeholder image
