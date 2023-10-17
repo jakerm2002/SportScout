@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-SportScoutMedinaJake/Pods-SportScoutMedinaJake-frameworks.sh
+${BUILT_PRODUCTS_DIR}/CalendarLib/CalendarLib.framework
+${BUILT_PRODUCTS_DIR}/OSCache/OSCache.framework
+${BUILT_PRODUCTS_DIR}/OrderedDictionary/OrderedDictionary.framework
