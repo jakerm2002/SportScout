@@ -105,13 +105,21 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             // convert each database entry into Location object
             // add to locations array
           self.locations = documents.compactMap { queryDocumentSnapshot -> Location? in
-            return try? queryDocumentSnapshot.data(as: Location.self)
+                  do {
+                      // catch possible errors with the SSModels here
+                      print(try? queryDocumentSnapshot.data(as: Location.self))
+                      return try? queryDocumentSnapshot.data(as: Location.self)
+                  } catch {
+                      print("error fetching location data")
+                      abort()
+                  }
           }
             
             // update table view
             DispatchQueue.main.async {
                 self.homeTableView.reloadData()
-                print(self.locations.description)
+                print(self.locations.debugDescription)
+                print("event paths!!!! \(self.locations[4].eventPaths?.description)")
             }
         }
     }
