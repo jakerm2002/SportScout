@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -17,17 +17,11 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        
         // Hide password
         passwordTextField.isSecureTextEntry = true
-
-//        Auth.auth().addStateDidChangeListener() {
-//            (auth,user) in
-//            if user != nil {
-//                self.performSegue(withIdentifier: "loginSegue", sender: nil)
-//                self.emailTextField.text = nil
-//                self.passwordTextField.text = nil
-//            }
-//        }
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
@@ -45,17 +39,17 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // Keyboard code
+    // Called when 'return' key pressed
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
-    */
     
-    
+    // Called when the user clicks on the view outside of the UITextField
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }

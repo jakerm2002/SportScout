@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class SignupViewController: UIViewController {
+class SignupViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var fullNameTextField: UITextField!
@@ -21,31 +21,16 @@ class SignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        usernameTextField.delegate = self
+        fullNameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        confirmPasswordTextField.delegate = self
+        
         // Hide password
         passwordTextField.isSecureTextEntry = true
         confirmPasswordTextField.isSecureTextEntry = true
-        
-//        Auth.auth().addStateDidChangeListener() {
-//            (auth,user) in
-//            if user != nil {
-//                self.performSegue(withIdentifier: self.SignupToCustomizeProfileSegueIdentifier, sender: nil)
-//                self.emailTextField.text = nil
-//                self.passwordTextField.text = nil
-//            }
-//        }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     @IBAction func signupButtonPressed(_ sender: Any) {
         // Firebase user creation
@@ -69,6 +54,20 @@ class SignupViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    // Keyboard code
+    // Called when 'return' key pressed
+
+    func textFieldShouldReturn(_ textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // Called when the user clicks on the view outside of the UITextField
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 
