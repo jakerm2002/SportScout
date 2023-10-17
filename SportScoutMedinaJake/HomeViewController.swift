@@ -23,6 +23,26 @@ class SSHomeTableViewCell: UITableViewCell {
     @IBOutlet weak var locationTitleTextLabel: UILabel!
     @IBOutlet weak var locationAddressTextLabel: UILabel!
     @IBOutlet weak var locationImageView: UIImageView!
+
+    // https://stackoverflow.com/questions/37645408/uitableviewcell-rounded-corners-and-shadow
+    override func layoutSubviews() {
+         super.layoutSubviews()
+        let bottomSpace: CGFloat = 10.0 // Let's assume the space you want is 10
+         self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: bottomSpace, right: 0))
+        
+        
+        // add shadow on cell
+        self.backgroundColor = .clear // very important
+        self.layer.masksToBounds = false
+        self.layer.shadowOpacity = 0.23
+        self.layer.shadowRadius = 4
+        self.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.layer.shadowColor = UIColor.black.cgColor
+
+        // add corner radius on `contentView`
+        self.contentView.backgroundColor = .white
+        self.contentView.layer.cornerRadius = 8
+    }
 }
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -43,6 +63,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Do any additional setup after loading the view.
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        homeTableView.separatorStyle = .none
+        homeTableView.clipsToBounds = false
         
         fetchData()
 //        fetchImages()
@@ -84,12 +106,21 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    // https://stackoverflow.com/questions/37645408/uitableviewcell-rounded-corners-and-shadow
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.layer.masksToBounds = true
+        let radius = cell.contentView.layer.cornerRadius
+        
+        // removing this line makes the drop shadow less wonky
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return locations.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 130
     }
     
 //    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
