@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mHd-LG-yaS">
-                                <rect key="frame" x="132" y="139" width="128" height="128"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="mHd-LG-yaS">
+                                <rect key="frame" x="132" y="141" width="128" height="124.66666666666669"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="5Qf-uJ-6op"/>
                                     <constraint firstAttribute="height" constant="128" id="pf3-Ob-73s"/>
@@ -96,8 +96,8 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Done"/>
                                 <connections>
-                                    <action selector="doneButtonPressed:" destination="8eW-zY-BdC" eventType="touchUpInside" id="zDE-Wd-hDY"/>
-                                    <segue destination="OPQ-Un-uWY" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="XJk-1Y-WG0"/>
+                                    <action selector="doneButtonPressed:" destination="8eW-zY-BdC" eventType="touchUpInside" id="Fcs-b9-ZLC"/>
+                                    <segue destination="OPQ-Un-uWY" kind="presentation" identifier="TabBarSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="XJk-1Y-WG0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tlp-an-SUE">
@@ -168,6 +168,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

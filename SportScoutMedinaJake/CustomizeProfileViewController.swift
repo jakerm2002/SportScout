@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import CoreData
+
+let appDelegate = UIApplication.shared.delegate as! AppDelegate
+let context = appDelegate.persistentContainer.viewContext
 
 class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -15,6 +19,8 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     @IBOutlet weak var weightField: UITextField!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var nameField: UITextField!
+    
+    let tabBarSegueIdentifier = "TabBarSegue"
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,21 +29,9 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
         feetField.delegate = self
         weightField.delegate = self
         usernameField.delegate = self
+        nameField.delegate = self
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    @IBAction func doneButtonPressed(_ sender: Any) {
-    }
     
     // Called when 'return' key pressed
     func textFieldShouldReturn(_ textField:UITextField) -> Bool {
@@ -68,6 +62,24 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
         present(vc, animated: true)
     }
     
+    @IBAction func doneButtonPressed(_ sender: Any) {
+        if (nameField.text == "" || usernameField.text == "" || weightField.text == "" || feetField.text == "" || inchesField.text == "") {
+            let controller = UIAlertController(
+                title: "Missing info",
+                message: "Please fill all fields before submitting.",
+                preferredStyle: .alert
+            )
+            present(controller, animated: true)
+        } else {
+            let profile = NSEntityDescription.insertNewObject(forEntityName: "Profile", into: context)
+            profile.setValue(nameField.text, forKey: "name")
+            profile.setValue(usernameField.text, forKey: "username")
+            profile.setValue(weightField.text, forKey: "weight")
+            profile.setValue(inchesField.text, forKey: "inches")
+            profile.setValue(feetField.text, forKey: "feet")
+            saveContext()
+        }
+    }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
             profileImage.image = image
@@ -76,5 +88,26 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == tabBarSegueIdentifier,
+           let destination = segue.destination as? SSTabBarController
+        {
+            print("Completed segue")
+        }
+        
+    }
+    
+    func saveContext () {
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+    
 }
 
