@@ -37,6 +37,8 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     var eventsArr:[Event] = []
     var LocationDetailsToNewEventSegueIdentifier = "LocationDetailsToNewEventSegueIdentifier"
     
+    var exampleStartDateForCalendar:NSDate = NSDate(timeIntervalSince1970: TimeInterval(1697812200))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -46,6 +48,10 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
         calendarView.showsAllDayEvents = false
         calendarView.eventIndicatorDotColor = UIColor(.red)
         calendarView.dataSource = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        calendarView.scroll(to: exampleStartDateForCalendar as Date, options: .dateTime, animated: true)
     }
     
     func getImage(url: String, completion: @escaping (UIImage?) -> ()) {
