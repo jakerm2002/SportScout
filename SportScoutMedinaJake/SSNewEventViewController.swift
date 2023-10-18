@@ -11,7 +11,6 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var newEventTableView: UITableView!
     
-    
     // will be passed in from LocationDetailsVC
     var documentID = ""
     var locationName = ""
@@ -20,8 +19,17 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     let NewEventLocationCellIdentifier = "NewEventLocationCellIdentifier"
     let NewEventDateTimeCellIdentifier = "NewEventDateTimeCellIdentifier"
     let NewEventDescriptionCellIdentifier = "NewEventDescriptionCellIdentifier"
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        newEventTableView.delegate = self
+        newEventTableView.dataSource = self
+        // print(documentID)
+        // print(locationName)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 4 // hardcoded number of cells
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -31,7 +39,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewEventLocationCellIdentifier, for: indexPath)
-            // fill in the location from the LocationDetailsVC
+            // TODO: fill in the location from the LocationDetailsVC
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewEventDateTimeCellIdentifier, for: indexPath)
@@ -45,26 +53,9 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        newEventTableView.delegate = self
-        newEventTableView.dataSource = self
-        print(documentID)
-        print(locationName)
+    // TODO: Process/validate data and create event
+    // TODO: Segue back to LocationDetailsVC
+    @IBAction func createEventButtonPressed(_ sender: Any) {
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

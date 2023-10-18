@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6607E9A82ADF85AA00F90978 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */; };
 		66C066652ADA3FB500DE3845 /* SSLocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */; };
 		66C066672ADA406600DE3845 /* SSModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066662ADA406600DE3845 /* SSModels.swift */; };
 		66C3D97A2AD88FEC003E1C99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9792AD88FEC003E1C99 /* AppDelegate.swift */; };
@@ -34,12 +35,16 @@
 		66C3D9E02AD8FF75003E1C99 /* SSTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9DF2AD8FF75003E1C99 /* SSTabBarController.swift */; };
 		66C3D9E42AD903DF003E1C99 /* SSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9E32AD903DF003E1C99 /* SSSettingsViewController.swift */; };
 		66C3D9E62AD91034003E1C99 /* SSNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9E52AD91034003E1C99 /* SSNewEventViewController.swift */; };
+		BF2BADDFF2D1ABC54FBA5885 /* Pods_SportScoutMedinaJake.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B82BE8E04B0D578ECB220C9 /* Pods_SportScoutMedinaJake.framework */; };
 		E35264542ADB34E400CAAA09 /* JakeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */; };
 		E35264562ADB374600CAAA09 /* JoshStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */; };
 		E35264582ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264572ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard */; };
+		E3E1EEA82ADB417300AFCC05 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E3E1EEA72ADB417300AFCC05 /* FirebaseStorage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B82BE8E04B0D578ECB220C9 /* Pods_SportScoutMedinaJake.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportScoutMedinaJake.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLocationDetailsViewController.swift; sourceTree = "<group>"; };
 		66C066662ADA406600DE3845 /* SSModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSModels.swift; sourceTree = "<group>"; };
 		66C3D9762AD88FEC003E1C99 /* SportScoutMedinaJake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportScoutMedinaJake.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,9 +71,11 @@
 		66C3D9DF2AD8FF75003E1C99 /* SSTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTabBarController.swift; sourceTree = "<group>"; };
 		66C3D9E32AD903DF003E1C99 /* SSSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSSettingsViewController.swift; sourceTree = "<group>"; };
 		66C3D9E52AD91034003E1C99 /* SSNewEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSNewEventViewController.swift; sourceTree = "<group>"; };
+		69F70E63FDA415362A7BAFDD /* Pods-SportScoutMedinaJake.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportScoutMedinaJake.release.xcconfig"; path = "Target Support Files/Pods-SportScoutMedinaJake/Pods-SportScoutMedinaJake.release.xcconfig"; sourceTree = "<group>"; };
 		E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JakeStoryboard.storyboard; sourceTree = "<group>"; };
 		E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoshStoryboard.storyboard; sourceTree = "<group>"; };
 		E35264572ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomizeProfileStoryboard.storyboard; sourceTree = "<group>"; };
+		F2E33A87BF0A9E64A7F50FCD /* Pods-SportScoutMedinaJake.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportScoutMedinaJake.debug.xcconfig"; path = "Target Support Files/Pods-SportScoutMedinaJake/Pods-SportScoutMedinaJake.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +84,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				66C3D9B82AD8A3F8003E1C99 /* FirebaseFirestore in Frameworks */,
+				E3E1EEA82ADB417300AFCC05 /* FirebaseStorage in Frameworks */,
 				66C3D9BC2AD8A3F8003E1C99 /* FirebaseFirestoreSwift in Frameworks */,
 				66C3D9AC2AD8A3F8003E1C99 /* FirebaseAuth in Frameworks */,
+				BF2BADDFF2D1ABC54FBA5885 /* Pods_SportScoutMedinaJake.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +99,8 @@
 			children = (
 				66C3D9782AD88FEC003E1C99 /* SportScoutMedinaJake */,
 				66C3D9772AD88FEC003E1C99 /* Products */,
+				E3E1EEA62ADB417300AFCC05 /* Frameworks */,
+				C57FF900B231F4B5A2E92D53 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,6 +132,7 @@
 				66C3D9D52AD8A7BB003E1C99 /* LoginViewController.swift */,
 				66C3D9D72AD8A7C4003E1C99 /* SignupViewController.swift */,
 				66C3D9902AD89553003E1C99 /* HomeViewController.swift */,
+				6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */,
 				66C3D9852AD88FED003E1C99 /* Assets.xcassets */,
 				66C3D9872AD88FED003E1C99 /* LaunchScreen.storyboard */,
 				66C3D98A2AD88FED003E1C99 /* Info.plist */,
@@ -136,6 +148,23 @@
 			path = SportScoutMedinaJake;
 			sourceTree = "<group>";
 		};
+		C57FF900B231F4B5A2E92D53 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F2E33A87BF0A9E64A7F50FCD /* Pods-SportScoutMedinaJake.debug.xcconfig */,
+				69F70E63FDA415362A7BAFDD /* Pods-SportScoutMedinaJake.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E3E1EEA62ADB417300AFCC05 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1B82BE8E04B0D578ECB220C9 /* Pods_SportScoutMedinaJake.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,9 +172,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 66C3D98D2AD88FED003E1C99 /* Build configuration list for PBXNativeTarget "SportScoutMedinaJake" */;
 			buildPhases = (
+				E0B770BAE13AC5696024843B /* [CP] Check Pods Manifest.lock */,
 				66C3D9722AD88FEC003E1C99 /* Sources */,
 				66C3D9732AD88FEC003E1C99 /* Frameworks */,
 				66C3D9742AD88FEC003E1C99 /* Resources */,
+				0EF1E70F80A55175B646EA00 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -156,6 +187,7 @@
 				66C3D9AB2AD8A3F8003E1C99 /* FirebaseAuth */,
 				66C3D9B72AD8A3F8003E1C99 /* FirebaseFirestore */,
 				66C3D9BB2AD8A3F8003E1C99 /* FirebaseFirestoreSwift */,
+				E3E1EEA72ADB417300AFCC05 /* FirebaseStorage */,
 			);
 			productName = SportScoutMedinaJake;
 			productReference = 66C3D9762AD88FEC003E1C99 /* SportScoutMedinaJake.app */;
@@ -213,12 +245,55 @@
 				E35264582ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard in Resources */,
 				66C3D9992AD89857003E1C99 /* austinRec.png in Resources */,
 				66C3D9932AD897BE003E1C99 /* recSports.png in Resources */,
+				6607E9A82ADF85AA00F90978 /* LaunchScreen.storyboard in Resources */,
 				66C3D9972AD89844003E1C99 /* hancockRec.png in Resources */,
 				E35264542ADB34E400CAAA09 /* JakeStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0EF1E70F80A55175B646EA00 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SportScoutMedinaJake/Pods-SportScoutMedinaJake-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SportScoutMedinaJake/Pods-SportScoutMedinaJake-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SportScoutMedinaJake/Pods-SportScoutMedinaJake-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E0B770BAE13AC5696024843B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SportScoutMedinaJake-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		66C3D9722AD88FEC003E1C99 /* Sources */ = {
@@ -301,7 +376,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -316,7 +391,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -364,7 +439,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -373,7 +448,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -385,6 +460,7 @@
 		};
 		66C3D98E2AD88FED003E1C99 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F2E33A87BF0A9E64A7F50FCD /* Pods-SportScoutMedinaJake.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -394,7 +470,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SportScoutMedinaJake/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -414,6 +490,7 @@
 		};
 		66C3D98F2AD88FED003E1C99 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69F70E63FDA415362A7BAFDD /* Pods-SportScoutMedinaJake.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -423,7 +500,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SportScoutMedinaJake/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -490,6 +567,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 66C3D99E2AD8A3F7003E1C99 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		E3E1EEA72ADB417300AFCC05 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 66C3D99E2AD8A3F7003E1C99 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 
