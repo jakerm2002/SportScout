@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6607E9A82ADF85AA00F90978 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */; };
 		66C066652ADA3FB500DE3845 /* SSLocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */; };
 		66C066672ADA406600DE3845 /* SSModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066662ADA406600DE3845 /* SSModels.swift */; };
 		66C3D97A2AD88FEC003E1C99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9792AD88FEC003E1C99 /* AppDelegate.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		1B82BE8E04B0D578ECB220C9 /* Pods_SportScoutMedinaJake.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportScoutMedinaJake.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLocationDetailsViewController.swift; sourceTree = "<group>"; };
 		66C066662ADA406600DE3845 /* SSModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSModels.swift; sourceTree = "<group>"; };
 		66C3D9762AD88FEC003E1C99 /* SportScoutMedinaJake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportScoutMedinaJake.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,7 @@
 				66C3D9D52AD8A7BB003E1C99 /* LoginViewController.swift */,
 				66C3D9D72AD8A7C4003E1C99 /* SignupViewController.swift */,
 				66C3D9902AD89553003E1C99 /* HomeViewController.swift */,
+				6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */,
 				66C3D9852AD88FED003E1C99 /* Assets.xcassets */,
 				66C3D9872AD88FED003E1C99 /* LaunchScreen.storyboard */,
 				66C3D98A2AD88FED003E1C99 /* Info.plist */,
@@ -242,6 +245,7 @@
 				E35264582ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard in Resources */,
 				66C3D9992AD89857003E1C99 /* austinRec.png in Resources */,
 				66C3D9932AD897BE003E1C99 /* recSports.png in Resources */,
+				6607E9A82ADF85AA00F90978 /* LaunchScreen.storyboard in Resources */,
 				66C3D9972AD89844003E1C99 /* hancockRec.png in Resources */,
 				E35264542ADB34E400CAAA09 /* JakeStoryboard.storyboard in Resources */,
 			);
@@ -466,7 +470,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SportScoutMedinaJake/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -496,7 +500,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SportScoutMedinaJake/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
