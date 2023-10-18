@@ -14,8 +14,8 @@
             filePath = "SportScoutMedinaJake/SSLocationDetailsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "dayPlannerView(_:numberOfEventsOf:at:)"
             landmarkType = "7">
             <Locations>
@@ -77,8 +77,8 @@
             filePath = "SportScoutMedinaJake/SSLocationDetailsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "fetchEvents()"
             landmarkType = "7">
          </BreakpointContent>
@@ -93,8 +93,8 @@
             filePath = "SportScoutMedinaJake/SSLocationDetailsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "fetchEvents()"
             landmarkType = "7">
          </BreakpointContent>
@@ -109,9 +109,41 @@
             filePath = "SportScoutMedinaJake/SSLocationDetailsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "fetchEvents()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BB89712E-B985-44B1-8DC1-7F2F4B250EEA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SportScoutMedinaJake/SSLocationDetailsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "dayPlannerView(_:viewForEventOf:at:date:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "410BD883-39FB-4BC1-9D19-310B7D942448"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SportScoutMedinaJake/SSLocationDetailsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "dayPlannerView(_:viewForEventOf:at:date:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

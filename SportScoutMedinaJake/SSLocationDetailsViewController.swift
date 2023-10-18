@@ -8,6 +8,20 @@
 import UIKit
 import CalendarLib
 
+//let eventViewColors:[UIColor] = [
+//    UIColor(red: 0.80, green: 0.45, blue: 0.88, alpha: 1.00),
+//    UIColor(red: 0.40, green: 0.86, blue: 0.22, alpha: 1.00),
+//    UIColor(red: 1.00, green: 0.80, blue: 0.00, alpha: 1.00),
+//    UIColor(red: 1.00, green: 0.58, blue: 0.00, alpha: 1.00),
+//]
+
+let eventViewColors:[UIColor] = [
+    UIColor(red: 0.69, green: 0.29, blue: 0.79, alpha: 1.00),
+    UIColor(red: 0.29, green: 0.75, blue: 0.12, alpha: 1.00),
+    UIColor(red: 0.88, green: 0.67, blue: 0.00, alpha: 1.00),
+    UIColor(red: 1.00, green: 0.50, blue: 0.00, alpha: 1.00)
+]
+
 class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSource {
 
     @IBOutlet weak var locationNameTextLabel: UILabel!
@@ -29,7 +43,8 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
         fetchData()
 //        locationImageView?.layer.cornerRadius = 5.0
 //        locationImageView?.layer.masksToBounds = true
-        calendarView.largeContentTitle = "Events"
+        calendarView.showsAllDayEvents = false
+        calendarView.eventIndicatorDotColor = UIColor(.red)
         calendarView.dataSource = self
     }
     
@@ -46,6 +61,14 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
                 completion(nil)
             }
         }
+    }
+    
+    // make this implementation better later,
+    // try to avoid having the same color next to each other
+    // maybe assign color by sport or start time?
+    func selectEventViewColor(forIndex idx: UInt) -> UIColor {
+        var index = Int(idx)
+        return eventViewColors.randomElement()!
     }
     
     // Count events on same day as date
@@ -66,10 +89,15 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     
     func dayPlannerView(_ view: MGCDayPlannerView!, viewForEventOf type: MGCEventType, at index: UInt, date: Date!) -> MGCEventView! {
         let curEventObj = eventsArr[Int(index)]
+        
+        // get only the events that are on this date??
         let resultMGCEventView = MGCStandardEventView()
 
         resultMGCEventView.title = curEventObj.name
         resultMGCEventView.subtitle = curEventObj.sport
+        
+        // select a color for this view
+        resultMGCEventView.color = selectEventViewColor(forIndex: index)
         
         return resultMGCEventView
     }
