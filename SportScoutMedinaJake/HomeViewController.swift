@@ -20,7 +20,7 @@ class SSHomeTableViewCell: UITableViewCell {
     @IBOutlet weak var locationTitleTextLabel: UILabel!
     @IBOutlet weak var locationAddressTextLabel: UILabel!
     @IBOutlet weak var locationImageView: UIImageView!
-
+    
     // Rounded corners and drop shadow for table view cells
     // https://stackoverflow.com/questions/37645408/uitableviewcell-rounded-corners-and-shadow
     override func layoutSubviews() {
@@ -35,7 +35,7 @@ class SSHomeTableViewCell: UITableViewCell {
         self.layer.shadowRadius = 4
         self.layer.shadowOffset = CGSize(width: 0, height: 0)
         self.layer.shadowColor = UIColor.black.cgColor
-
+        
         // add corner radius on `contentView`
         self.contentView.backgroundColor = .white
         self.contentView.layer.cornerRadius = 8
@@ -43,7 +43,7 @@ class SSHomeTableViewCell: UITableViewCell {
 }
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var homeTableView: UITableView!
     
     var locations:[Location] = []
@@ -82,17 +82,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // Get all locations from Firestore and refresh table view.
     func fetchData() {
         db.collection("Locations").addSnapshotListener { (querySnapshot, error) in
-          guard let documents = querySnapshot?.documents else {
-            print("No documents")
-            return
-          }
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
             
             // Convert each location DB entry into Location object,
             // add to locations array.
-          self.locations = documents.compactMap { queryDocumentSnapshot -> Location? in
-              // TODO: catch possible errors with the SSModels here
-              return try? queryDocumentSnapshot.data(as: Location.self)
-          }
+            self.locations = documents.compactMap { queryDocumentSnapshot -> Location? in
+                // TODO: catch possible errors with the SSModels here
+                return try? queryDocumentSnapshot.data(as: Location.self)
+            }
             
             // update table view
             DispatchQueue.main.async {
@@ -135,7 +135,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 130
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 200
     }

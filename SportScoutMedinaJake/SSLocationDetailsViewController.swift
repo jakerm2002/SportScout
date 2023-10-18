@@ -25,7 +25,7 @@ let eventViewColors:[UIColor] = [
 ]
 
 class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSource {
-
+    
     @IBOutlet weak var locationNameTextLabel: UILabel!
     @IBOutlet weak var locationAddrTextLabel: UILabel!
     @IBOutlet weak var locationCityStateZipTextLabel: UILabel!
@@ -123,10 +123,10 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     func fetchData() {
         db.collection("Locations").document(documentID)
             .addSnapshotListener { documentSnapshot, error in
-              guard let document = documentSnapshot else {
-                print("Error fetching document: \(error!)")
-                return
-              }
+                guard let document = documentSnapshot else {
+                    print("Error fetching document: \(error!)")
+                    return
+                }
                 
                 do {
                     self.LocationObject = try document.data(as: Location.self)
@@ -186,5 +186,5 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
             destination.locationName = self.LocationObject.name
         }
     }
-
+    
 }

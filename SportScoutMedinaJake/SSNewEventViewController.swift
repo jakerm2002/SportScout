@@ -19,7 +19,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     let NewEventLocationCellIdentifier = "NewEventLocationCellIdentifier"
     let NewEventDateTimeCellIdentifier = "NewEventDateTimeCellIdentifier"
     let NewEventDescriptionCellIdentifier = "NewEventDescriptionCellIdentifier"
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         newEventTableView.delegate = self
