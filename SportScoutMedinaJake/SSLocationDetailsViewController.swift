@@ -27,8 +27,9 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         fetchData()
-        locationImageView?.layer.cornerRadius = 5.0
-        locationImageView?.layer.masksToBounds = true
+//        locationImageView?.layer.cornerRadius = 5.0
+//        locationImageView?.layer.masksToBounds = true
+        calendarView.largeContentTitle = "Events"
         calendarView.dataSource = self
     }
     

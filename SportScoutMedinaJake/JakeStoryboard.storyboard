@@ -175,32 +175,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwX-p9-0Ub">
-                                <rect key="frame" x="16" y="226" width="361" height="30"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                <rect key="frame" x="16" y="278" width="361" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address Line 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rt3-B5-Bjq">
-                                <rect key="frame" x="16" y="264" width="361" height="21"/>
+                                <rect key="frame" x="16" y="310" width="361" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City, State, Zip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cqd-YG-00P">
-                                <rect key="frame" x="16" y="293" width="361" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="16" y="339" width="361" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wAf-I7-2kV" customClass="MGCDayPlannerView">
-                                <rect key="frame" x="0.0" y="333" width="393" height="436"/>
+                                <rect key="frame" x="0.0" y="376" width="393" height="393"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rxK-qP-8lA">
-                                <rect key="frame" x="106.66666666666669" y="120" width="180" height="96"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="165"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="96" id="u3F-bn-NPF"/>
-                                    <constraint firstAttribute="width" constant="180" id="vFu-P1-uXG"/>
+                                    <constraint firstAttribute="height" constant="165" id="zNJ-PM-Ezt"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -212,12 +211,14 @@
                             <constraint firstItem="Kv8-tP-Xgq" firstAttribute="trailing" secondItem="RwX-p9-0Ub" secondAttribute="trailing" constant="16" id="6VW-NI-Aeg"/>
                             <constraint firstItem="wAf-I7-2kV" firstAttribute="trailing" secondItem="Kv8-tP-Xgq" secondAttribute="trailing" id="6oe-OM-QNh"/>
                             <constraint firstItem="RwX-p9-0Ub" firstAttribute="leading" secondItem="Kv8-tP-Xgq" secondAttribute="leading" constant="16" id="9TI-oL-Vzf"/>
-                            <constraint firstItem="rxK-qP-8lA" firstAttribute="top" secondItem="Kv8-tP-Xgq" secondAttribute="top" constant="17" id="ATc-Ie-CwB"/>
                             <constraint firstItem="Rt3-B5-Bjq" firstAttribute="leading" secondItem="Kv8-tP-Xgq" secondAttribute="leading" constant="16" id="CLi-TR-RQd"/>
+                            <constraint firstItem="rxK-qP-8lA" firstAttribute="leading" secondItem="Kv8-tP-Xgq" secondAttribute="leading" id="KDl-pQ-SxV"/>
                             <constraint firstItem="Rt3-B5-Bjq" firstAttribute="top" secondItem="RwX-p9-0Ub" secondAttribute="bottom" constant="8" symbolic="YES" id="O0w-QR-z8l"/>
                             <constraint firstItem="Cqd-YG-00P" firstAttribute="leading" secondItem="Kv8-tP-Xgq" secondAttribute="leading" constant="16" id="ZPQ-Ed-A4V"/>
                             <constraint firstItem="Kv8-tP-Xgq" firstAttribute="trailing" secondItem="Cqd-YG-00P" secondAttribute="trailing" constant="16" id="awZ-pt-jlg"/>
                             <constraint firstItem="RwX-p9-0Ub" firstAttribute="top" secondItem="rxK-qP-8lA" secondAttribute="bottom" constant="10" id="dHd-29-zZq"/>
+                            <constraint firstItem="rxK-qP-8lA" firstAttribute="trailing" secondItem="Kv8-tP-Xgq" secondAttribute="trailing" id="dKn-AJ-tjp"/>
+                            <constraint firstItem="rxK-qP-8lA" firstAttribute="top" secondItem="Kv8-tP-Xgq" secondAttribute="top" id="fwJ-ep-3pQ"/>
                             <constraint firstItem="wAf-I7-2kV" firstAttribute="top" secondItem="Cqd-YG-00P" secondAttribute="bottom" constant="19" id="i4P-Bp-RXX"/>
                             <constraint firstItem="wAf-I7-2kV" firstAttribute="leading" secondItem="Kv8-tP-Xgq" secondAttribute="leading" id="utc-5l-NzP"/>
                             <constraint firstItem="Kv8-tP-Xgq" firstAttribute="bottom" secondItem="wAf-I7-2kV" secondAttribute="bottom" id="yYT-eV-YP7"/>
@@ -226,7 +227,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Location Details" id="nZU-oJ-EsR">
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="h2H-1F-ZUE"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="HsL-EH-M1V">
+                        <barButtonItem key="rightBarButtonItem" title="Add Event" id="HsL-EH-M1V">
                             <connections>
                                 <segue destination="6yU-Tq-mb9" kind="show" identifier="LocationDetailsToNewEventSegueIdentifier" id="mIQ-On-KXq"/>
                             </connections>
