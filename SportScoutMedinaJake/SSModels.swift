@@ -27,29 +27,6 @@ struct Location: Identifiable, Codable {
             return document.path
         }
     }
-    
-    // we can use getDocument to access the document referenced by the DocumentReference
-    var eventObjects: [Event]? {
-        guard let events = events else {
-            return nil
-        }
-
-        var resultArr: [Event] = []
-
-        for doc in events {
-            doc.getDocument(as: Event.self) { result in
-                do {
-                    let value = try result.get()
-                    print("Found event at location \(self.name) with value: \(value).")
-                    resultArr.append(value)
-                } catch {
-                    print("Error retrieving event at location \(self.name): \(error)")
-                }
-            }
-        }
-
-        return resultArr
-    }
 
 }
 

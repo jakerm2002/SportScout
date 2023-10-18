@@ -196,8 +196,8 @@
                                 <rect key="frame" x="0.0" y="333" width="393" height="436"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rxK-qP-8lA">
-                                <rect key="frame" x="106" y="120" width="180" height="96"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rxK-qP-8lA">
+                                <rect key="frame" x="106.66666666666669" y="120" width="180" height="96"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="96" id="u3F-bn-NPF"/>
                                     <constraint firstAttribute="width" constant="180" id="vFu-P1-uXG"/>
@@ -208,6 +208,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Cqd-YG-00P" firstAttribute="top" secondItem="Rt3-B5-Bjq" secondAttribute="bottom" constant="8" symbolic="YES" id="33z-Gh-L3T"/>
+                            <constraint firstItem="rxK-qP-8lA" firstAttribute="centerX" secondItem="ogX-Gy-Lcc" secondAttribute="centerX" id="5Wv-Cz-4MX"/>
                             <constraint firstItem="Kv8-tP-Xgq" firstAttribute="trailing" secondItem="RwX-p9-0Ub" secondAttribute="trailing" constant="16" id="6VW-NI-Aeg"/>
                             <constraint firstItem="wAf-I7-2kV" firstAttribute="trailing" secondItem="Kv8-tP-Xgq" secondAttribute="trailing" id="6oe-OM-QNh"/>
                             <constraint firstItem="RwX-p9-0Ub" firstAttribute="leading" secondItem="Kv8-tP-Xgq" secondAttribute="leading" constant="16" id="9TI-oL-Vzf"/>
@@ -235,6 +236,7 @@
                         <outlet property="calendarView" destination="wAf-I7-2kV" id="4nH-hm-deS"/>
                         <outlet property="locationAddrTextLabel" destination="Rt3-B5-Bjq" id="wq0-TW-t4u"/>
                         <outlet property="locationCityStateZipTextLabel" destination="Cqd-YG-00P" id="Gus-6Z-dON"/>
+                        <outlet property="locationImageView" destination="rxK-qP-8lA" id="81X-uj-B90"/>
                         <outlet property="locationNameTextLabel" destination="RwX-p9-0Ub" id="EZ7-UM-apu"/>
                     </connections>
                 </viewController>

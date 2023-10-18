@@ -113,8 +113,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             DispatchQueue.main.async {
                 self.homeTableView.reloadData()
                 print(self.locations.debugDescription)
-                print("event paths!!!! \(self.locations[4].eventPaths?.description)")
-                print("events!!!!! \(self.locations[4].eventObjects?.description)")
             }
         }
     }
