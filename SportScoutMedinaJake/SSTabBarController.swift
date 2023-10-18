@@ -11,11 +11,9 @@ class SSTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         self.selectedIndex = 1 // Default load to home tab
     }
     
-
     /*
     // MARK: - Navigation
 
