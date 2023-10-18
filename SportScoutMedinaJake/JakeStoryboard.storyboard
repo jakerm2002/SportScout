@@ -140,7 +140,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Event" id="TQe-gT-tF9">
-                        <barButtonItem key="rightBarButtonItem" title="Create" style="done" id="fhQ-ab-Qwc"/>
+                        <barButtonItem key="rightBarButtonItem" title="Create" style="done" id="fhQ-ab-Qwc">
+                            <connections>
+                                <action selector="createEventButtonPressed:" destination="6yU-Tq-mb9" id="7H1-v4-Bgx"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="newEventTableView" destination="hSX-aW-PfX" id="FCp-ZC-FcE"/>
