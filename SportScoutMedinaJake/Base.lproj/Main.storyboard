@@ -128,11 +128,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yty-wx-szL">
-                                <rect key="frame" x="16" y="341" width="361" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CREATE ACCOUNT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mn1-rH-h9A">
                                 <rect key="frame" x="119.66666666666669" y="228" width="154" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -147,7 +142,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDl-qX-J57">
-                                <rect key="frame" x="16" y="577" width="361" height="35"/>
+                                <rect key="frame" x="16" y="523" width="361" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Sign Up"/>
                                 <connections>
@@ -155,22 +150,22 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QnR-OX-Vco">
-                                <rect key="frame" x="16" y="395" width="361" height="34"/>
+                                <rect key="frame" x="16" y="341" width="361" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fgo-qV-Trc">
-                                <rect key="frame" x="16" y="449" width="361" height="34"/>
+                                <rect key="frame" x="16" y="395" width="361" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yS1-6i-oC7">
-                                <rect key="frame" x="16" y="503" width="361" height="34"/>
+                                <rect key="frame" x="16" y="449" width="361" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtD-ab-xtb">
-                                <rect key="frame" x="16" y="620" width="361" height="33"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtD-ab-xtb">
+                                <rect key="frame" x="16" y="566" width="361" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
@@ -182,20 +177,17 @@
                             <constraint firstItem="yS1-6i-oC7" firstAttribute="leading" secondItem="FoJ-Sg-Ex7" secondAttribute="leading" constant="16" id="1E7-EO-RfS"/>
                             <constraint firstItem="XN0-aM-aXv" firstAttribute="top" secondItem="Mn1-rH-h9A" secondAttribute="bottom" constant="38" id="3JS-HD-YcL"/>
                             <constraint firstItem="XN0-aM-aXv" firstAttribute="leading" secondItem="FoJ-Sg-Ex7" secondAttribute="leading" constant="16" id="6uz-oe-GgJ"/>
-                            <constraint firstItem="yty-wx-szL" firstAttribute="leading" secondItem="FoJ-Sg-Ex7" secondAttribute="leading" constant="16" id="Cya-bA-E5k"/>
                             <constraint firstItem="FDl-qX-J57" firstAttribute="leading" secondItem="FoJ-Sg-Ex7" secondAttribute="leading" constant="16" id="FCP-aQ-eMV"/>
                             <constraint firstItem="FoJ-Sg-Ex7" firstAttribute="trailing" secondItem="dtD-ab-xtb" secondAttribute="trailing" constant="16" id="Hkk-6P-aYz"/>
-                            <constraint firstItem="yty-wx-szL" firstAttribute="top" secondItem="XN0-aM-aXv" secondAttribute="bottom" constant="20" id="KAq-wI-FxC"/>
                             <constraint firstItem="dtD-ab-xtb" firstAttribute="top" secondItem="FDl-qX-J57" secondAttribute="bottom" constant="8" symbolic="YES" id="L1P-T5-2cF"/>
-                            <constraint firstItem="FoJ-Sg-Ex7" firstAttribute="trailing" secondItem="yty-wx-szL" secondAttribute="trailing" constant="16" id="Qkw-8E-09R"/>
                             <constraint firstItem="FoJ-Sg-Ex7" firstAttribute="trailing" secondItem="yS1-6i-oC7" secondAttribute="trailing" constant="16" id="S5M-uf-At7"/>
                             <constraint firstItem="yS1-6i-oC7" firstAttribute="top" secondItem="Fgo-qV-Trc" secondAttribute="bottom" constant="20" id="Wq2-Yn-Iht"/>
                             <constraint firstItem="Fgo-qV-Trc" firstAttribute="top" secondItem="QnR-OX-Vco" secondAttribute="bottom" constant="20" id="X10-dv-MVk"/>
+                            <constraint firstItem="QnR-OX-Vco" firstAttribute="top" secondItem="XN0-aM-aXv" secondAttribute="bottom" constant="20" id="e7h-5Q-qMI"/>
                             <constraint firstItem="iIr-JN-Xlw" firstAttribute="top" secondItem="FoJ-Sg-Ex7" secondAttribute="top" constant="2" id="fYw-uh-fEb"/>
                             <constraint firstItem="FoJ-Sg-Ex7" firstAttribute="trailing" secondItem="Fgo-qV-Trc" secondAttribute="trailing" constant="16" id="h1e-tC-Evh"/>
                             <constraint firstItem="FoJ-Sg-Ex7" firstAttribute="trailing" secondItem="XN0-aM-aXv" secondAttribute="trailing" constant="16" id="jsa-Li-Bgg"/>
                             <constraint firstItem="QnR-OX-Vco" firstAttribute="leading" secondItem="FoJ-Sg-Ex7" secondAttribute="leading" constant="16" id="kmv-hf-5Oc"/>
-                            <constraint firstItem="QnR-OX-Vco" firstAttribute="top" secondItem="yty-wx-szL" secondAttribute="bottom" constant="20" id="lTP-dE-Ojy"/>
                             <constraint firstItem="Mn1-rH-h9A" firstAttribute="centerX" secondItem="eKM-GH-nSF" secondAttribute="centerX" id="lr5-Bi-JAQ"/>
                             <constraint firstItem="iIr-JN-Xlw" firstAttribute="centerX" secondItem="eKM-GH-nSF" secondAttribute="centerX" id="pWt-Pt-yrM"/>
                             <constraint firstItem="FDl-qX-J57" firstAttribute="top" secondItem="yS1-6i-oC7" secondAttribute="bottom" constant="40" id="qDy-1u-UJH"/>
@@ -211,7 +203,6 @@
                         <outlet property="confirmPasswordTextField" destination="yS1-6i-oC7" id="tY8-qk-ZCQ"/>
                         <outlet property="emailTextField" destination="QnR-OX-Vco" id="214-E1-juQ"/>
                         <outlet property="errorMessage" destination="dtD-ab-xtb" id="MdN-Ig-i4r"/>
-                        <outlet property="fullNameTextField" destination="yty-wx-szL" id="Fn8-5P-xOg"/>
                         <outlet property="passwordTextField" destination="Fgo-qV-Trc" id="pBI-UP-XOA"/>
                         <outlet property="usernameTextField" destination="XN0-aM-aXv" id="ZL8-Dw-K6J"/>
                         <segue destination="ahf-nb-1ll" kind="show" identifier="SignupToCustomizeProfileSegue" id="Dog-4O-M7K"/>

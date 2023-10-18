@@ -12,18 +12,17 @@ import CoreData
 class SignupViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var fullNameTextField: UITextField!
+
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var errorMessage: UILabel!
     
-    var SignupToCustomizeProfileSegueIdentifier = "SignupToCustomizeProfileSegue"
+    var signupToCustomizeProfileSegueIdentifier = "SignupToCustomizeProfileSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         usernameTextField.delegate = self
-        fullNameTextField.delegate = self
         emailTextField.delegate = self
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
@@ -35,7 +34,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signupButtonPressed(_ sender: Any) {
         // Firebase user creation
-        if self.usernameTextField.text == "" || self.fullNameTextField.text == "" || self.emailTextField.text == "" || self.passwordTextField.text == "" { // If a field is empty
+        if self.usernameTextField.text == "" || self.emailTextField.text == "" || self.passwordTextField.text == "" { // If a field is empty
             self.errorMessage.text = "One or more fields are missing"
         } else if self.passwordTextField.text != self.confirmPasswordTextField.text { // Passwords do not match
             self.errorMessage.text = "Passwords do not match"
@@ -45,13 +44,12 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                 if let error = error as NSError? { // If there is an error
                     self.errorMessage.text = "\(error.localizedDescription)"
                 } else {
-                     self.errorMessage.text = ""
-                     self.performSegue(withIdentifier: self.SignupToCustomizeProfileSegueIdentifier, sender: nil)
-                     self.usernameTextField.text = nil
-                     self.fullNameTextField.text = nil
-                     self.emailTextField.text = nil
-                     self.passwordTextField.text = nil
-                     self.confirmPasswordTextField.text = nil
+                    self.performSegue(withIdentifier: self.signupToCustomizeProfileSegueIdentifier, sender: nil)
+                    self.errorMessage.text = ""
+                    self.usernameTextField.text = nil
+                    self.emailTextField.text = nil
+                    self.passwordTextField.text = nil
+                    self.confirmPasswordTextField.text = nil
                 }
             }
         }
@@ -60,12 +58,12 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
     func storeUser(username:String, fullName:String) {
         // store a user's username and Full Name into Core Data
         
-        let user = NSEntityDescription.insertNewObject(
-            forEntityName: "User",
+        let profile = NSEntityDescription.insertNewObject(
+            forEntityName: "Profile",
             into: context)
         
-        user.setValue(username, forKey: "username")
-        user.setValue(fullName, forKey: "fullName")
+        profile.setValue(username, forKey: "username")
+        profile.setValue(fullName, forKey: "fullName")
         
         // commit the changes
         saveContext()
@@ -79,6 +77,15 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("Inside prepare")
+        if segue.identifier == signupToCustomizeProfileSegueIdentifier,
+           let destination = segue.destination as? CustomizeProfileViewController
+        {
+            destination.username = usernameTextField.text!
         }
     }
     

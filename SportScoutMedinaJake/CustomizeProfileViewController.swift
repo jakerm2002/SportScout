@@ -16,11 +16,14 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var inchesField: UITextField!
     @IBOutlet weak var feetField: UITextField!
-    @IBOutlet weak var weightField: UITextField!
-    @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var nameField: UITextField!
-    
+    @IBOutlet weak var weightField: UITextField!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var errorLabel: UILabel!
     let tabBarSegueIdentifier = "TabBarSegue"
+    
+    var username:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,8 +31,8 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
         inchesField.delegate = self
         feetField.delegate = self
         weightField.delegate = self
-        usernameField.delegate = self
         nameField.delegate = self
+        usernameLabel.text = username
     }
 
     
@@ -63,21 +66,18 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     }
     
     @IBAction func doneButtonPressed(_ sender: Any) {
-        if (nameField.text == "" || usernameField.text == "" || weightField.text == "" || feetField.text == "" || inchesField.text == "") {
-            let controller = UIAlertController(
-                title: "Missing info",
-                message: "Please fill all fields before submitting.",
-                preferredStyle: .alert
-            )
-            present(controller, animated: true)
+        if (nameField.text == ""  || weightField.text == "" || feetField.text == "" || inchesField.text == "") {
+            print("error")
+            self.errorLabel.text = "Fill out all fields."
         } else {
             let profile = NSEntityDescription.insertNewObject(forEntityName: "Profile", into: context)
-            profile.setValue(nameField.text, forKey: "name")
-            profile.setValue(usernameField.text, forKey: "username")
+            profile.setValue(nameField.text, forKey: "fullName")
+            profile.setValue(usernameLabel.text, forKey: "username")
             profile.setValue(weightField.text, forKey: "weight")
             profile.setValue(inchesField.text, forKey: "inches")
             profile.setValue(feetField.text, forKey: "feet")
             saveContext()
+            self.performSegue(withIdentifier: self.tabBarSegueIdentifier, sender: nil)
         }
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -89,14 +89,6 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
         picker.dismiss(animated: true, completion: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == tabBarSegueIdentifier,
-           let destination = segue.destination as? SSTabBarController
-        {
-            print("Completed segue")
-        }
-        
-    }
     
     func saveContext () {
         if context.hasChanges {
