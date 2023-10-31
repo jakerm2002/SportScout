@@ -7,7 +7,19 @@
 
 import UIKit
 
-class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+protocol SportChanger {
+    func changeSport(newSport: String, newIndex: Int)
+}
+
+class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SportChanger {
+    func changeSport(newSport: String, newIndex: Int) {
+        let sportIndexPath = IndexPath(row: 2, section: 0)
+        let sportCell = newEventTableView.cellForRow(at: sportIndexPath) as! SSNewEventSportTableViewCell
+        sportCell.selectedSportLabel.text = newSport
+        sportCell.selectedSportIndex = newIndex
+//        newEventTableView.reloadRows(at: [sportIndexPath], with: .automatic)
+    }
+    
     
     @IBOutlet weak var newEventTableView: UITableView!
     
@@ -23,6 +35,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     let NewEventDescriptionCellIdentifier = "NewEventDescriptionCellIdentifier"
     
     let SSNewEventFinishCreationSegue = "SSNewEventFinishCreationSegue"
+    let SSChooseSportSegue = "SSChooseSportSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +44,11 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         // print(documentID)
         // print(locationName)
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        newEventTableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6 // hardcoded number of cells
@@ -46,7 +64,8 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             // TODO: fill in the location from the LocationDetailsVC
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: NewEventSportCellIdentifier, for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: NewEventSportCellIdentifier, for: indexPath) as! SSNewEventSportTableViewCell
+            cell.parentVC = self
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewEventStartsAtCellIdentifier, for: indexPath) as! SSNewEventStartsAtTableViewCell
@@ -60,6 +79,12 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewEventTitleCellIdentifier, for: indexPath)
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 2 {
+            performSegue(withIdentifier: SSChooseSportSegue, sender: nil)
         }
     }
     
@@ -84,7 +109,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         let locationCell = newEventTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! SSNewEventLocationTableViewCell
         
         // TODO: Make this of type sport cell
-        let sportCell = newEventTableView.cellForRow(at: IndexPath(row: 2, section: 0))
+        let sportCell = newEventTableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! SSNewEventSportTableViewCell
         
         let startsAtCell = newEventTableView.cellForRow(at: IndexPath(row: 3, section: 0)) as! SSNewEventStartsAtTableViewCell
         
@@ -114,7 +139,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             
             let newEvent = Event(name: nameCell.titleTextField.text!,
                                  location: locationCell.locationTextField.text!,
-                                 sport: "Volleyball",
+                                 sport: sportCell.selectedSportLabel.text!,
                                  startTime: startsAtCell.startsAtDatePicker.date,
                                  endTime: endsAtCell.endsAtDatePicker.date,
                                  description: descriptionCell.descriptionTextField.text!
@@ -134,4 +159,14 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SSChooseSportSegue,
+           let nextVC = segue.destination as? SSChooseSportViewController
+        {
+            let sportIndexPath = IndexPath(row: 2, section: 0)
+            let sportCell = newEventTableView.cellForRow(at: sportIndexPath) as! SSNewEventSportTableViewCell
+            nextVC.delegate = self
+            nextVC.selectedRowIndex = sportCell.selectedSportIndex
+        }
+    }
 }

@@ -76,7 +76,7 @@
                                             <outlet property="locationTextField" destination="yW7-Gf-OC0" id="aft-Mc-0bn"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewEventSportCellIdentifier" editingAccessoryType="disclosureIndicator" id="cer-g2-tc0" customClass="SSNewEventDescriptionTableViewCell" customModule="SportScoutMedinaJake" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewEventSportCellIdentifier" editingAccessoryType="disclosureIndicator" id="cer-g2-tc0" customClass="SSNewEventSportTableViewCell" customModule="SportScoutMedinaJake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="137.33333587646484" width="393" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cer-g2-tc0" id="kAO-9R-lV3">
@@ -90,8 +90,27 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nsY-qB-D34">
+                                                    <rect key="frame" x="299" y="5" width="83" height="35"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Choose"/>
+                                                    <connections>
+                                                        <action selector="chooseSportButtonPressed:" destination="cer-g2-tc0" eventType="touchUpInside" id="d1c-Ac-n9m"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Selected sport" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bk3-e7-wfG">
+                                                    <rect key="frame" x="124" y="12" width="175" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="selectedSportLabel" destination="bk3-e7-wfG" id="G5x-vA-OHW"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewEventStartsAtCellIdentifier" id="s8V-8Q-GuD" customClass="SSNewEventStartsAtTableViewCell" customModule="SportScoutMedinaJake" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="181.00000381469727" width="393" height="43.666667938232422"/>
@@ -201,11 +220,62 @@
                     </navigationItem>
                     <connections>
                         <outlet property="newEventTableView" destination="hSX-aW-PfX" id="FCp-ZC-FcE"/>
+                        <segue destination="Luh-EM-8eg" kind="show" identifier="SSChooseSportSegue" id="K5T-GD-MLB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A3g-Lm-x9R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2858.7786259541986" y="2335.9154929577467"/>
+        </scene>
+        <!--Choose Sport View Controller-->
+        <scene sceneID="78x-Um-in9">
+            <objects>
+                <viewController id="Luh-EM-8eg" customClass="SSChooseSportViewController" customModule="SportScoutMedinaJake" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZPM-xL-gpQ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uQ3-se-kdA">
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SportOptionCellIdentifier" textLabel="Na1-jf-2AW" style="IBUITableViewCellStyleDefault" id="ZAF-0b-hoE">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZAF-0b-hoE" id="LVO-6y-pJb">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Na1-jf-2AW">
+                                                    <rect key="frame" x="20" y="0.0" width="353" height="43.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="rHC-3H-uv9"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uQ3-se-kdA" firstAttribute="bottom" secondItem="rHC-3H-uv9" secondAttribute="bottom" id="HhL-4N-X2C"/>
+                            <constraint firstItem="uQ3-se-kdA" firstAttribute="leading" secondItem="rHC-3H-uv9" secondAttribute="leading" id="fJE-3A-wju"/>
+                            <constraint firstItem="uQ3-se-kdA" firstAttribute="trailing" secondItem="rHC-3H-uv9" secondAttribute="trailing" id="glV-t3-dTA"/>
+                            <constraint firstItem="uQ3-se-kdA" firstAttribute="top" secondItem="rHC-3H-uv9" secondAttribute="top" id="wl3-DG-WEn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="4ij-i2-8lo"/>
+                    <connections>
+                        <outlet property="sportsTableView" destination="uQ3-se-kdA" id="MM8-Lv-v8w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BCh-7F-KxS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3603.8167938931297" y="2335.9154929577467"/>
         </scene>
         <!--Timeline-->
         <scene sceneID="oCE-4t-YMM">
