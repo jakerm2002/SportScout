@@ -33,7 +33,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5 // hardcoded number of cells
+        return 6 // hardcoded number of cells
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -92,27 +92,45 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let descriptionCell = newEventTableView.cellForRow(at: IndexPath(row: 5, section: 0)) as! SSNewEventDescriptionTableViewCell
         
-        let newEvent = Event(name: nameCell.titleTextField.text!,
-                             location: locationCell.locationTextField.text!,
-                             sport: "Volleyball",
-                             startTime: startsAtCell.startsAtDatePicker.date,
-                             endTime: endsAtCell.endsAtDatePicker.date,
-                             description: descriptionCell.descriptionTextField.text!
-        )
+        var validationErrors: [String] = []
         
         // TODO: Validate input
+        if nameCell.titleTextField.text!.isEmpty {
+            validationErrors.append("The event is missing a title.")
+        }
         
-        // let document ID be auto-generated
-        do {
-//            try db.collection("events").document().setData(from: newEvent)
-            try db.collection("events").document().setData(from: newEvent) {
-                _ in
-                print("New event created successfully in Firestore.")
+        if !(startsAtCell.startsAtDatePicker.date < endsAtCell.endsAtDatePicker.date) {
+            validationErrors.append("The ending date/time must come after the starting date/time.")
+        }
+        
+        if !validationErrors.isEmpty {
+            let alert = UIAlertController(title: "Can't create event", message: "The following information is malformed:", preferredStyle: .alert)
+            for err in validationErrors {
+                alert.message?.append("\n\u{2022} \(err)")
+            }
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        } else {
+            
+            let newEvent = Event(name: nameCell.titleTextField.text!,
+                                 location: locationCell.locationTextField.text!,
+                                 sport: "Volleyball",
+                                 startTime: startsAtCell.startsAtDatePicker.date,
+                                 endTime: endsAtCell.endsAtDatePicker.date,
+                                 description: descriptionCell.descriptionTextField.text!
+            )
+            
+            // let document ID be auto-generated
+            do {
+                try db.collection("events").document().setData(from: newEvent) {
+                    _ in
+                    print("New event created successfully in Firestore.")
+                    self.navigationController?.popViewController(animated: true)
+                }
+            } catch let error {
+                print("Error creating event in Firestore: \(error.localizedDescription)")
                 self.navigationController?.popViewController(animated: true)
             }
-        } catch let error {
-            print("Error creating event in Firestore: \(error.localizedDescription)")
-            self.navigationController?.popViewController(animated: true)
         }
     }
     
