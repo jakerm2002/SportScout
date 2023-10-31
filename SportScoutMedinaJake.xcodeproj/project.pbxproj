@@ -35,6 +35,11 @@
 		66C3D9E02AD8FF75003E1C99 /* SSTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9DF2AD8FF75003E1C99 /* SSTabBarController.swift */; };
 		66C3D9E42AD903DF003E1C99 /* SSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9E32AD903DF003E1C99 /* SSSettingsViewController.swift */; };
 		66C3D9E62AD91034003E1C99 /* SSNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9E52AD91034003E1C99 /* SSNewEventViewController.swift */; };
+		69348A9D2AF16C1A00175A7B /* SSNewEventTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348A9C2AF16C1A00175A7B /* SSNewEventTitleTableViewCell.swift */; };
+		69348A9F2AF16C3300175A7B /* SSNewEventLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348A9E2AF16C3300175A7B /* SSNewEventLocationTableViewCell.swift */; };
+		69348AA12AF16C4F00175A7B /* SSNewEventStartsAtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348AA02AF16C4F00175A7B /* SSNewEventStartsAtTableViewCell.swift */; };
+		69348AA32AF16C6600175A7B /* SSNewEventEndsAtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348AA22AF16C6600175A7B /* SSNewEventEndsAtTableViewCell.swift */; };
+		69348AA52AF16C7A00175A7B /* SSNewEventDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348AA42AF16C7A00175A7B /* SSNewEventDescriptionTableViewCell.swift */; };
 		BF2BADDFF2D1ABC54FBA5885 /* Pods_SportScoutMedinaJake.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B82BE8E04B0D578ECB220C9 /* Pods_SportScoutMedinaJake.framework */; };
 		E35264542ADB34E400CAAA09 /* JakeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */; };
 		E35264562ADB374600CAAA09 /* JoshStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */; };
@@ -71,6 +76,11 @@
 		66C3D9DF2AD8FF75003E1C99 /* SSTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTabBarController.swift; sourceTree = "<group>"; };
 		66C3D9E32AD903DF003E1C99 /* SSSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSSettingsViewController.swift; sourceTree = "<group>"; };
 		66C3D9E52AD91034003E1C99 /* SSNewEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSNewEventViewController.swift; sourceTree = "<group>"; };
+		69348A9C2AF16C1A00175A7B /* SSNewEventTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSNewEventTitleTableViewCell.swift; sourceTree = "<group>"; };
+		69348A9E2AF16C3300175A7B /* SSNewEventLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSNewEventLocationTableViewCell.swift; sourceTree = "<group>"; };
+		69348AA02AF16C4F00175A7B /* SSNewEventStartsAtTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSNewEventStartsAtTableViewCell.swift; sourceTree = "<group>"; };
+		69348AA22AF16C6600175A7B /* SSNewEventEndsAtTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSNewEventEndsAtTableViewCell.swift; sourceTree = "<group>"; };
+		69348AA42AF16C7A00175A7B /* SSNewEventDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSNewEventDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		69F70E63FDA415362A7BAFDD /* Pods-SportScoutMedinaJake.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportScoutMedinaJake.release.xcconfig"; path = "Target Support Files/Pods-SportScoutMedinaJake/Pods-SportScoutMedinaJake.release.xcconfig"; sourceTree = "<group>"; };
 		E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JakeStoryboard.storyboard; sourceTree = "<group>"; };
 		E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoshStoryboard.storyboard; sourceTree = "<group>"; };
@@ -125,6 +135,11 @@
 				66C3D97F2AD88FEC003E1C99 /* Main.storyboard */,
 				66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */,
 				66C3D9E52AD91034003E1C99 /* SSNewEventViewController.swift */,
+				69348A9C2AF16C1A00175A7B /* SSNewEventTitleTableViewCell.swift */,
+				69348A9E2AF16C3300175A7B /* SSNewEventLocationTableViewCell.swift */,
+				69348AA02AF16C4F00175A7B /* SSNewEventStartsAtTableViewCell.swift */,
+				69348AA22AF16C6600175A7B /* SSNewEventEndsAtTableViewCell.swift */,
+				69348AA42AF16C7A00175A7B /* SSNewEventDescriptionTableViewCell.swift */,
 				66C3D9E32AD903DF003E1C99 /* SSSettingsViewController.swift */,
 				66C3D9DF2AD8FF75003E1C99 /* SSTabBarController.swift */,
 				66C3D9DD2AD8FC79003E1C99 /* ProfileViewController.swift */,
@@ -304,9 +319,11 @@
 				66C066672ADA406600DE3845 /* SSModels.swift in Sources */,
 				66C3D9D82AD8A7C4003E1C99 /* SignupViewController.swift in Sources */,
 				66C3D9DC2AD8F4A9003E1C99 /* CustomizeProfileViewController.swift in Sources */,
+				69348AA32AF16C6600175A7B /* SSNewEventEndsAtTableViewCell.swift in Sources */,
 				66C3D9912AD89553003E1C99 /* HomeViewController.swift in Sources */,
 				66C3D9842AD88FEC003E1C99 /* SportScoutMedinaJake.xcdatamodeld in Sources */,
 				66C3D9E02AD8FF75003E1C99 /* SSTabBarController.swift in Sources */,
+				69348AA12AF16C4F00175A7B /* SSNewEventStartsAtTableViewCell.swift in Sources */,
 				66C066652ADA3FB500DE3845 /* SSLocationDetailsViewController.swift in Sources */,
 				66C3D97E2AD88FEC003E1C99 /* ViewController.swift in Sources */,
 				66C3D9DE2AD8FC79003E1C99 /* ProfileViewController.swift in Sources */,
@@ -314,6 +331,9 @@
 				66C3D9E42AD903DF003E1C99 /* SSSettingsViewController.swift in Sources */,
 				66C3D9E62AD91034003E1C99 /* SSNewEventViewController.swift in Sources */,
 				66C3D97C2AD88FEC003E1C99 /* SceneDelegate.swift in Sources */,
+				69348AA52AF16C7A00175A7B /* SSNewEventDescriptionTableViewCell.swift in Sources */,
+				69348A9F2AF16C3300175A7B /* SSNewEventLocationTableViewCell.swift in Sources */,
+				69348A9D2AF16C1A00175A7B /* SSNewEventTitleTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
