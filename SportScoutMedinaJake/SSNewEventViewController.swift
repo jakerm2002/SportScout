@@ -17,7 +17,8 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     
     let NewEventTitleCellIdentifier = "NewEventTitleCellIdentifier"
     let NewEventLocationCellIdentifier = "NewEventLocationCellIdentifier"
-    let NewEventDateTimeCellIdentifier = "NewEventDateTimeCellIdentifier"
+    let NewEventBeginsAtCellIdentifier = "NewEventBeginsAtCellIdentifier"
+    let NewEventEndsAtCellIdentifier = "NewEventEndsAtCellIdentifier"
     let NewEventDescriptionCellIdentifier = "NewEventDescriptionCellIdentifier"
     
     override func viewDidLoad() {
@@ -29,7 +30,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4 // hardcoded number of cells
+        return 5 // hardcoded number of cells
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,9 +43,12 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             // TODO: fill in the location from the LocationDetailsVC
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: NewEventDateTimeCellIdentifier, for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: NewEventBeginsAtCellIdentifier, for: indexPath)
             return cell
         case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: NewEventEndsAtCellIdentifier, for: indexPath)
+            return cell
+        case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewEventDescriptionCellIdentifier, for: indexPath)
             return cell
         default:
