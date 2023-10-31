@@ -17,9 +17,12 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     
     let NewEventTitleCellIdentifier = "NewEventTitleCellIdentifier"
     let NewEventLocationCellIdentifier = "NewEventLocationCellIdentifier"
+    let NewEventSportCellIdentifier = "NewEventSportCellIdentifier"
     let NewEventStartsAtCellIdentifier = "NewEventStartsAtCellIdentifier"
     let NewEventEndsAtCellIdentifier = "NewEventEndsAtCellIdentifier"
     let NewEventDescriptionCellIdentifier = "NewEventDescriptionCellIdentifier"
+    
+    let SSNewEventFinishCreationSegue = "SSNewEventFinishCreationSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,18 +46,20 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             // TODO: fill in the location from the LocationDetailsVC
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: NewEventStartsAtCellIdentifier, for: indexPath) as! SSNewEventStartsAtTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: NewEventSportCellIdentifier, for: indexPath)
             return cell
         case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: NewEventEndsAtCellIdentifier, for: indexPath) as! SSNewEventEndsAtTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: NewEventStartsAtCellIdentifier, for: indexPath) as! SSNewEventStartsAtTableViewCell
             return cell
         case 4:
+            let cell = tableView.dequeueReusableCell(withIdentifier: NewEventEndsAtCellIdentifier, for: indexPath) as! SSNewEventEndsAtTableViewCell
+            return cell
+        case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewEventDescriptionCellIdentifier, for: indexPath) as! SSNewEventDescriptionTableViewCell
             return cell
         default:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: NewEventTitleCellIdentifier, for: indexPath)
-//            return cell
-            break
+            let cell = tableView.dequeueReusableCell(withIdentifier: NewEventTitleCellIdentifier, for: indexPath)
+            return cell
         }
     }
     
@@ -72,19 +77,42 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         // but we might want to access the event's location somewhere else
         // in the app
         
+        // TODO: see if we can create a function for this code
+        // TODO: or simplify it somehow
         let nameCell = newEventTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SSNewEventTitleTableViewCell
         
+        let locationCell = newEventTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! SSNewEventLocationTableViewCell
+        
+        // TODO: Make this of type sport cell
+        let sportCell = newEventTableView.cellForRow(at: IndexPath(row: 2, section: 0))
+        
+        let startsAtCell = newEventTableView.cellForRow(at: IndexPath(row: 3, section: 0)) as! SSNewEventStartsAtTableViewCell
+        
+        let endsAtCell = newEventTableView.cellForRow(at: IndexPath(row: 4, section: 0)) as! SSNewEventEndsAtTableViewCell
+        
+        let descriptionCell = newEventTableView.cellForRow(at: IndexPath(row: 5, section: 0)) as! SSNewEventDescriptionTableViewCell
+        
         let newEvent = Event(name: nameCell.titleTextField.text!,
-                             location: <#T##String#>,
-                             sport: <#T##String#>,
-                             startTime: <#T##Date#>,
-                             endTime: <#T##Date#>)
+                             location: locationCell.locationTextField.text!,
+                             sport: "Volleyball",
+                             startTime: startsAtCell.startsAtDatePicker.date,
+                             endTime: endsAtCell.endsAtDatePicker.date,
+                             description: descriptionCell.descriptionTextField.text!
+        )
+        
+        // TODO: Validate input
         
         // let document ID be auto-generated
         do {
-            try db.collection("events").document().setData(from: newEvent)
+//            try db.collection("events").document().setData(from: newEvent)
+            try db.collection("events").document().setData(from: newEvent) {
+                _ in
+                print("New event created successfully in Firestore.")
+                self.navigationController?.popViewController(animated: true)
+            }
         } catch let error {
             print("Error creating event in Firestore: \(error.localizedDescription)")
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

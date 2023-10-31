@@ -37,4 +37,5 @@ struct Event: Identifiable, Codable {
     var sport: String
     var startTime: Date
     var endTime: Date
+    var description: String
 }
