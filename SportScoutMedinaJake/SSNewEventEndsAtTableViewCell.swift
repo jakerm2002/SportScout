@@ -11,15 +11,8 @@ class SSNewEventEndsAtTableViewCell: UITableViewCell {
 
     @IBOutlet weak var endsAtDatePicker: UIDatePicker!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    // TODO: final phase
+    // restrict the range of the end date
+    // by using minimumDate to only allow dates/times
+    // after the start date
 }

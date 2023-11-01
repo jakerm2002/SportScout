@@ -124,8 +124,16 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             validationErrors.append("The event is missing a title.")
         }
         
+        if sportCell.selectedSportLabel.text! == "None selected" {
+            validationErrors.append("The event is missing a sport.")
+        }
+        
         if !(startsAtCell.startsAtDatePicker.date < endsAtCell.endsAtDatePicker.date) {
             validationErrors.append("The ending date/time must come after the starting date/time.")
+        }
+        
+        if !(endsAtCell.endsAtDatePicker.date.timeIntervalSince(startsAtCell.startsAtDatePicker.date) >= 300) {
+            validationErrors.append("The event must last for at least 5 minutes.")
         }
         
         if !validationErrors.isEmpty {

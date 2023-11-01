@@ -26,7 +26,7 @@ class SSChooseSportViewController: UIViewController, UITableViewDataSource, UITa
     
     let SportOptionCellIdentifier = "SportOptionCellIdentifier"
     
-    var selectedRowIndex = 0
+    var selectedRowIndex: Int!
     
 //    let selectedCell: UITableViewCell =
     
@@ -39,7 +39,7 @@ class SSChooseSportViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sports.count + 1
+        return sports.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,28 +50,22 @@ class SSChooseSportViewController: UIViewController, UITableViewDataSource, UITa
         } else {
             cell.accessoryType = .none
         }
-        if row == 0 {
-            cell.textLabel!.text = "None"
-            return cell
-        }
-        cell.textLabel!.text = sports[row - 1]
+        cell.textLabel!.text = sports[row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let oldSelectedIndex = selectedRowIndex
         selectedRowIndex = indexPath.row
-//        DispatchQueue.main.async {
-//            print("setting sport to \(sports[self.selectedRowIndex-1])")
-//            let otherVC = self.delegate as! SportChanger
-//            otherVC.changeSport(newSport: sports[self.selectedRowIndex - 1], newIndex: self.selectedRowIndex)
-//        }
-        print("setting sport to \(sports[selectedRowIndex-1])")
         let otherVC = delegate as! SportChanger
-        otherVC.changeSport(newSport: sports[selectedRowIndex - 1], newIndex: selectedRowIndex)
+        otherVC.changeSport(newSport: sports[selectedRowIndex], newIndex: selectedRowIndex)
         sportsTableView.deselectRow(at: indexPath, animated: true)
+        if oldSelectedIndex != -1 {
+            sportsTableView.reloadRows(at: [
+                IndexPath(row: oldSelectedIndex!, section: 0)
+            ], with: .automatic)
+        }
         sportsTableView.reloadRows(at: [
-            IndexPath(row: oldSelectedIndex, section: 0),
             IndexPath(row: selectedRowIndex, section: 0)
         ], with: .automatic)
     }

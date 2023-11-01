@@ -11,7 +11,7 @@ class SSNewEventSportTableViewCell: UITableViewCell {
     
     @IBOutlet weak var selectedSportLabel: UILabel!
 
-    var selectedSportIndex = 0
+    var selectedSportIndex = -1
     var parentVC: UIViewController?
     let SSChooseSportSegue = "SSChooseSportSegue"
     
