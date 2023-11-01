@@ -33,6 +33,12 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     @IBOutlet weak var calendarView: MGCDayPlannerView!
     
     var LocationObject:Location!
+    
+    // TODO: Change the structure of eventsArr to:
+    // eventsArr: [Date: [Event]]
+    // where the events under a certain date key
+    // must occur on that date
+    
     var eventsArr:[Event] = []
     var documentID = "" // will be set from home VC
     
@@ -90,16 +96,16 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
                 count += 1
             }
         }
+        print("service called numberOfEventsOf for:\n\ttype: \(type.rawValue)\t\n\tdate: \(date.description)\n\tvalue returned: \(count)")
         return count
     }
     
     // Custom calendar protocol function: returns a View for a specific event
     func dayPlannerView(_ view: MGCDayPlannerView!, viewForEventOf type: MGCEventType, at index: UInt, date: Date!) -> MGCEventView! {
-        // TODO: get only the events that are on this date?? figure out how index arg works
-        // TODO: check for index out of bounds
         let curEventObj = eventsArr[Int(index)] // the Event object we need to look at
-        
-        let resultMGCEventView = MGCStandardEventView()
+
+        view.register(MGCStandardEventView.self, forEventViewWithReuseIdentifier: "SSCalendarEventViewIdentifier")
+        let resultMGCEventView = view.dequeueReusableView(withIdentifier: "SSCalendarEventViewIdentifier", forEventOf: type, at: index, date: date) as! MGCStandardEventView
         resultMGCEventView.title = curEventObj.name
         resultMGCEventView.subtitle = curEventObj.sport
         resultMGCEventView.color = selectEventViewColor(forIndex: index)
@@ -108,6 +114,7 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     
     // Custom calendar protocol function: returns the date range for a specific event
     func dayPlannerView(_ view: MGCDayPlannerView!, dateRangeForEventOf type: MGCEventType, at index: UInt, date: Date!) -> MGCDateRange! {
+        print("service called dateRangeForEventOf for:\n\ttype: \(type.rawValue)\n\tindex: \(index)\n\tdate: \(date.description)")
         // TODO: get only the events that are on this date?? figure out how index arg works
         // TODO: check for index out of bounds
         let curEventObj = eventsArr[Int(index)] // the Event object we need to look at
