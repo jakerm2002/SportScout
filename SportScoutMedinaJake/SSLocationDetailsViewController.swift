@@ -39,7 +39,8 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     // where the events under a certain date key
     // must occur on that date
     
-    var eventsArr:[Event] = []
+//    var eventsArr:[Event] = []
+    var eventsArr: [Date: [Event]] = [:]
     var documentID = "" // will be set from home VC
     
     var LocationDetailsToNewEventSegueIdentifier = "LocationDetailsToNewEventSegueIdentifier"
@@ -84,25 +85,42 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
         return eventViewColors.randomElement()!
     }
     
+    // https://stackoverflow.com/questions/35392538/remove-time-from-a-date-like-this-2016-02-10-000000
+    func removeTimeStamp(fromDate: Date) -> Date {
+        guard let date = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month, .day], from: fromDate)) else {
+            fatalError("Failed to strip time from Date object")
+        }
+        return date
+    }
+    
     // Custom calendar protocol function: Count events on same day as date
     func dayPlannerView(_ view: MGCDayPlannerView!, numberOfEventsOf type: MGCEventType, at date: Date!) -> Int {
         guard LocationObject != nil else {
             return 0 // Location is not set or is nil
         }
         
-        var count = 0
-        for event in eventsArr {
-            if (Calendar.current.isDate(date, inSameDayAs: event.startTime)) {
-                count += 1
-            }
+//        var count = 0
+//        for event in eventsArr {
+//            if (Calendar.current.isDate(date, inSameDayAs: event.startTime)) {
+//                count += 1
+//            }
+//        }
+        
+        let dateWithoutTime = self.removeTimeStamp(fromDate: date)
+        
+        if let eventsOnDay = self.eventsArr[dateWithoutTime] {
+            print("service called numberOfEventsOf for:\n\ttype: \(type.rawValue)\t\n\tdate: \(date.description)\n\tvalue returned: \(eventsOnDay.count)")
+            return eventsOnDay.count
+        } else {
+            print("service called numberOfEventsOf for:\n\ttype: \(type.rawValue)\t\n\tdate: \(date.description)\n\tvalue returned: 0")
+            return 0
         }
-        print("service called numberOfEventsOf for:\n\ttype: \(type.rawValue)\t\n\tdate: \(date.description)\n\tvalue returned: \(count)")
-        return count
     }
     
     // Custom calendar protocol function: returns a View for a specific event
     func dayPlannerView(_ view: MGCDayPlannerView!, viewForEventOf type: MGCEventType, at index: UInt, date: Date!) -> MGCEventView! {
-        let curEventObj = eventsArr[Int(index)] // the Event object we need to look at
+        let dateWithoutTime = self.removeTimeStamp(fromDate: date)
+        let curEventObj = eventsArr[dateWithoutTime]![Int(index)]
 
         view.register(MGCStandardEventView.self, forEventViewWithReuseIdentifier: "SSCalendarEventViewIdentifier")
         let resultMGCEventView = view.dequeueReusableView(withIdentifier: "SSCalendarEventViewIdentifier", forEventOf: type, at: index, date: date) as! MGCStandardEventView
@@ -115,9 +133,8 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     // Custom calendar protocol function: returns the date range for a specific event
     func dayPlannerView(_ view: MGCDayPlannerView!, dateRangeForEventOf type: MGCEventType, at index: UInt, date: Date!) -> MGCDateRange! {
         print("service called dateRangeForEventOf for:\n\ttype: \(type.rawValue)\n\tindex: \(index)\n\tdate: \(date.description)")
-        // TODO: get only the events that are on this date?? figure out how index arg works
-        // TODO: check for index out of bounds
-        let curEventObj = eventsArr[Int(index)] // the Event object we need to look at
+        let dateWithoutTime = self.removeTimeStamp(fromDate: date)
+        let curEventObj = eventsArr[dateWithoutTime]![Int(index)]
         
         return MGCDateRange(
             start: curEventObj.startTime,
@@ -169,7 +186,15 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
                     do {
                         let value = try result.get()
                         // print("Found event at location \(self.LocationObject.name) with value: \(value).")
-                        self.eventsArr.append(value)
+                        let dateWithoutTime = self.removeTimeStamp(fromDate: value.startTime)
+                        if self.eventsArr[dateWithoutTime] != nil {
+                            // https://stackoverflow.com/a/24535563
+                            // by using the below syntax, we can mutate the array directly.
+                            self.eventsArr[dateWithoutTime]!.append(value)
+                        } else {
+                            self.eventsArr[dateWithoutTime] = [value]
+                        }
+
                         DispatchQueue.main.async {
                             // TODO: Figure out how to reload after all events added, not after each event
                             self.calendarView.reloadAllEvents() // force refresh to see new event
