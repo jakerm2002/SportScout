@@ -167,7 +167,6 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    // TODO: send over the location where the Create button was pressed
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SSChooseSportSegue,
            let nextVC = segue.destination as? SSChooseSportViewController

@@ -206,6 +206,7 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     
     // For beta version: send data to the New Event screen
     // so it can prepopulate with some data.
+    // TODO: send over the location where the Create button was pressed
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == LocationDetailsToNewEventSegueIdentifier,
            let destination = segue.destination as? SSNewEventViewController
