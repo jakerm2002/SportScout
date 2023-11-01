@@ -34,13 +34,7 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     
     var LocationObject:Location!
     
-    // TODO: Change the structure of eventsArr to:
-    // eventsArr: [Date: [Event]]
-    // where the events under a certain date key
-    // must occur on that date
-    
-//    var eventsArr:[Event] = []
-    var eventsArr: [Date: [Event]] = [:]
+    var eventsOnDate: [Date: [Event]] = [:] // the events under a certain date key must occur on that date
     var documentID = "" // will be set from home VC
     
     var LocationDetailsToNewEventSegueIdentifier = "LocationDetailsToNewEventSegueIdentifier"
@@ -98,17 +92,10 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
         guard LocationObject != nil else {
             return 0 // Location is not set or is nil
         }
-        
-//        var count = 0
-//        for event in eventsArr {
-//            if (Calendar.current.isDate(date, inSameDayAs: event.startTime)) {
-//                count += 1
-//            }
-//        }
-        
+
         let dateWithoutTime = self.removeTimeStamp(fromDate: date)
         
-        if let eventsOnDay = self.eventsArr[dateWithoutTime] {
+        if let eventsOnDay = self.eventsOnDate[dateWithoutTime] {
             print("service called numberOfEventsOf for:\n\ttype: \(type.rawValue)\t\n\tdate: \(date.description)\n\tvalue returned: \(eventsOnDay.count)")
             return eventsOnDay.count
         } else {
@@ -120,7 +107,7 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     // Custom calendar protocol function: returns a View for a specific event
     func dayPlannerView(_ view: MGCDayPlannerView!, viewForEventOf type: MGCEventType, at index: UInt, date: Date!) -> MGCEventView! {
         let dateWithoutTime = self.removeTimeStamp(fromDate: date)
-        let curEventObj = eventsArr[dateWithoutTime]![Int(index)]
+        let curEventObj = eventsOnDate[dateWithoutTime]![Int(index)]
 
         view.register(MGCStandardEventView.self, forEventViewWithReuseIdentifier: "SSCalendarEventViewIdentifier")
         let resultMGCEventView = view.dequeueReusableView(withIdentifier: "SSCalendarEventViewIdentifier", forEventOf: type, at: index, date: date) as! MGCStandardEventView
@@ -134,7 +121,7 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     func dayPlannerView(_ view: MGCDayPlannerView!, dateRangeForEventOf type: MGCEventType, at index: UInt, date: Date!) -> MGCDateRange! {
         print("service called dateRangeForEventOf for:\n\ttype: \(type.rawValue)\n\tindex: \(index)\n\tdate: \(date.description)")
         let dateWithoutTime = self.removeTimeStamp(fromDate: date)
-        let curEventObj = eventsArr[dateWithoutTime]![Int(index)]
+        let curEventObj = eventsOnDate[dateWithoutTime]![Int(index)]
         
         return MGCDateRange(
             start: curEventObj.startTime,
@@ -187,12 +174,12 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
                         let value = try result.get()
                         // print("Found event at location \(self.LocationObject.name) with value: \(value).")
                         let dateWithoutTime = self.removeTimeStamp(fromDate: value.startTime)
-                        if self.eventsArr[dateWithoutTime] != nil {
+                        if self.eventsOnDate[dateWithoutTime] != nil {
                             // https://stackoverflow.com/a/24535563
                             // by using the below syntax, we can mutate the array directly.
-                            self.eventsArr[dateWithoutTime]!.append(value)
+                            self.eventsOnDate[dateWithoutTime]!.append(value)
                         } else {
-                            self.eventsArr[dateWithoutTime] = [value]
+                            self.eventsOnDate[dateWithoutTime] = [value]
                         }
 
                         DispatchQueue.main.async {
