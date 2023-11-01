@@ -24,7 +24,7 @@ let eventViewColors:[UIColor] = [
     UIColor(red: 1.00, green: 0.50, blue: 0.00, alpha: 1.00)
 ]
 
-class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSource {
+class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSource, MGCDayPlannerViewDelegate {
     
     @IBOutlet weak var locationNameTextLabel: UILabel!
     @IBOutlet weak var locationAddrTextLabel: UILabel!
@@ -48,6 +48,7 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
         calendarView.showsAllDayEvents = false
         calendarView.eventIndicatorDotColor = UIColor(.red)
         calendarView.dataSource = self
+        calendarView.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -128,6 +129,15 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
             end: curEventObj.endTime
         )
     }
+    
+    func dayPlannerView(_ view: MGCDayPlannerView!, didSelectEventOf type: MGCEventType, at index: UInt, date: Date!) {
+        let dateWithoutTime = self.removeTimeStamp(fromDate: date)
+        let curEventObj = eventsOnDate[dateWithoutTime]![Int(index)]
+        print("Calendar detected event selection:\n\tTitle: \(curEventObj.name)\n\tLocation: \(curEventObj.location)\n\tSport: \(curEventObj.sport)\n\tStart time (UTC): \(curEventObj.startTime.description)\n\tEnd time (UTC): \(curEventObj.endTime.description)\n\tDescription: \(curEventObj.description)")
+        
+        // TODO: perform a segue to the event/game page and send over the data from the selected event.
+    }
+    
     
     // Get all data for this location entry in Firestore database.
     // Populate the UI.
