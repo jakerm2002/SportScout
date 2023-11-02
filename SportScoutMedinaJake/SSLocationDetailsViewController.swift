@@ -218,7 +218,7 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
            let destination = segue.destination as? SSNewEventViewController
         {
             // send the id so that the NewEventVC can load in the data if necessary
-            destination.documentID = documentID
+            destination.locationDocumentID = documentID
             destination.locationName = self.LocationObject.name
         }
     }
