@@ -147,7 +147,8 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         } else {
             
             let newEvent = Event(name: nameCell.titleTextField.text!,
-                                 location: locationCell.locationTextField.text!,
+                                 location: db.collection("Locations").document(locationDocumentID),
+                                 locationName: locationName,
                                  sport: sportCell.selectedSportLabel.text!,
                                  startTime: startsAtCell.startsAtDatePicker.date,
                                  endTime: endsAtCell.endsAtDatePicker.date,
