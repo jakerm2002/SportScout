@@ -37,6 +37,7 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     var eventsOnDate: [Date: [Event]] = [:] // the events under a certain date key must occur on that date
     var documentID = "" // will be set from home VC
     
+    var LocationDetailsToSelectedEventSegueIdentifier = "LocationDetailsToSelectedEventSegueIdentifier"
     var LocationDetailsToNewEventSegueIdentifier = "LocationDetailsToNewEventSegueIdentifier"
     
     // dummy start date where some of our dummy events are happening
@@ -52,8 +53,11 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        // move to dummy start date
-        calendarView.scroll(to: exampleStartDateForCalendar as Date, options: .dateTime, animated: true)
+        // TODO: Enable this feature only when accessing a location from the home page (list of locations page)
+        // If coming to back to the view from the NewEventVC or EventVC, the calendar freezes and is not scrollable
+        
+        // move the calendar to dummy start date where all of our dummy events are
+        // calendarView.scroll(to: exampleStartDateForCalendar as Date, options: .dateTime, animated: true)
     }
     
     // retrieve an image from Firestore and execute a function once finished
@@ -135,7 +139,9 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
         let curEventObj = eventsOnDate[dateWithoutTime]![Int(index)]
         print("Calendar detected event selection:\n\tTitle: \(curEventObj.name)\n\tLocation: \(curEventObj.location)\n\tSport: \(curEventObj.sport)\n\tStart time (UTC): \(curEventObj.startTime.description)\n\tEnd time (UTC): \(curEventObj.endTime.description)\n\tDescription: \(curEventObj.description)")
         
+        calendarView.deselectEvent()
         // TODO: perform a segue to the event/game page and send over the data from the selected event.
+        performSegue(withIdentifier: LocationDetailsToSelectedEventSegueIdentifier, sender: nil)
     }
     
     

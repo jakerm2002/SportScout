@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		6607E9A82ADF85AA00F90978 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */; };
+		66408F4F2AF331D500763C4A /* NewEventStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */; };
+		66408F512AF3320600763C4A /* LocationDetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */; };
+		66408F572AF336F400763C4A /* EventDetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F562AF336F400763C4A /* EventDetailsStoryboard.storyboard */; };
+		66408F592AF3379B00763C4A /* SSEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66408F582AF3379B00763C4A /* SSEventDetailsViewController.swift */; };
 		66C066652ADA3FB500DE3845 /* SSLocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */; };
 		66C066672ADA406600DE3845 /* SSModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066662ADA406600DE3845 /* SSModels.swift */; };
 		66C3D97A2AD88FEC003E1C99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9792AD88FEC003E1C99 /* AppDelegate.swift */; };
@@ -52,6 +56,10 @@
 /* Begin PBXFileReference section */
 		1B82BE8E04B0D578ECB220C9 /* Pods_SportScoutMedinaJake.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportScoutMedinaJake.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewEventStoryboard.storyboard; sourceTree = "<group>"; };
+		66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetailsStoryboard.storyboard; sourceTree = "<group>"; };
+		66408F562AF336F400763C4A /* EventDetailsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventDetailsStoryboard.storyboard; sourceTree = "<group>"; };
+		66408F582AF3379B00763C4A /* SSEventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEventDetailsViewController.swift; sourceTree = "<group>"; };
 		66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLocationDetailsViewController.swift; sourceTree = "<group>"; };
 		66C066662ADA406600DE3845 /* SSModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSModels.swift; sourceTree = "<group>"; };
 		66C3D9762AD88FEC003E1C99 /* SportScoutMedinaJake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportScoutMedinaJake.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +140,10 @@
 				E35264572ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard */,
 				E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */,
 				E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */,
+				66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */,
+				66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */,
+				66408F562AF336F400763C4A /* EventDetailsStoryboard.storyboard */,
+				66408F582AF3379B00763C4A /* SSEventDetailsViewController.swift */,
 				698634132AF19EF5008ADA0A /* SSNewEventSportTableViewCell.swift */,
 				698634112AF19ACA008ADA0A /* SSChooseSportViewController.swift */,
 				66C3D9792AD88FEC003E1C99 /* AppDelegate.swift */,
@@ -257,6 +269,8 @@
 			files = (
 				66C3D9952AD89838003E1C99 /* northwestRec.png in Resources */,
 				66C3D99D2AD8A328003E1C99 /* GoogleService-Info.plist in Resources */,
+				66408F4F2AF331D500763C4A /* NewEventStoryboard.storyboard in Resources */,
+				66408F512AF3320600763C4A /* LocationDetailsStoryboard.storyboard in Resources */,
 				66C3D9892AD88FED003E1C99 /* LaunchScreen.storyboard in Resources */,
 				66C3D9862AD88FED003E1C99 /* Assets.xcassets in Resources */,
 				66C3D9DA2AD8ADE4003E1C99 /* SportScout.png in Resources */,
@@ -266,6 +280,7 @@
 				E35264582ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard in Resources */,
 				66C3D9992AD89857003E1C99 /* austinRec.png in Resources */,
 				66C3D9932AD897BE003E1C99 /* recSports.png in Resources */,
+				66408F572AF336F400763C4A /* EventDetailsStoryboard.storyboard in Resources */,
 				6607E9A82ADF85AA00F90978 /* LaunchScreen.storyboard in Resources */,
 				66C3D9972AD89844003E1C99 /* hancockRec.png in Resources */,
 				E35264542ADB34E400CAAA09 /* JakeStoryboard.storyboard in Resources */,
@@ -337,6 +352,7 @@
 				698634142AF19EF5008ADA0A /* SSNewEventSportTableViewCell.swift in Sources */,
 				66C3D97A2AD88FEC003E1C99 /* AppDelegate.swift in Sources */,
 				66C3D9E42AD903DF003E1C99 /* SSSettingsViewController.swift in Sources */,
+				66408F592AF3379B00763C4A /* SSEventDetailsViewController.swift in Sources */,
 				66C3D9E62AD91034003E1C99 /* SSNewEventViewController.swift in Sources */,
 				66C3D97C2AD88FEC003E1C99 /* SceneDelegate.swift in Sources */,
 				69348AA52AF16C7A00175A7B /* SSNewEventDescriptionTableViewCell.swift in Sources */,
