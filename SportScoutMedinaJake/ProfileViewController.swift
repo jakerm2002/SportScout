@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Firebase
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var profilePhoto: UIImageView!
     @IBOutlet weak var nameText: UILabel!
     @IBOutlet weak var usernameText: UILabel!
@@ -16,15 +17,26 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var heightText: UILabel!
     @IBOutlet weak var locationText: UILabel!
     
-    
+    @IBOutlet weak var horizontalScrollView: UIScrollView!
+    var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        imageView = UIImageView(image: UIImage(named: "recSports"))
+        imageView.frame = CGRect(x: 0, y: 0, width: 144, height: 144)
+
+        horizontalScrollView.backgroundColor = UIColor.white
+        horizontalScrollView.contentSize = CGSize(width: 360, height: 144)
+        for _ in 1...10 {
+            horizontalScrollView.addSubview(imageView)
+        }
+        horizontalScrollView.delegate = self
     }
     
-
+    
+    
     /*
     // MARK: - Navigation
 

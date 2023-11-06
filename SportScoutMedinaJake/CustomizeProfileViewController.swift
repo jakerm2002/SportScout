@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import FirebaseAuth
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
@@ -77,9 +78,18 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
             profile.setValue(inchesField.text, forKey: "inches")
             profile.setValue(feetField.text, forKey: "feet")
             saveContext()
-            self.performSegue(withIdentifier: self.tabBarSegueIdentifier, sender: nil)
+            storeUserInfo(fullName: nameField.text!, username: usernameLabel.text!, weight: weightField.text!, inches: inchesField.text!, feet: feetField.text!)
+//            self.performSegue(withIdentifier: self.tabBarSegueIdentifier, sender: nil)
         }
     }
+    
+    private func storeUserInfo(fullName: String, username: String, weight: String, inches: String, feet: String) {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let userData = ["uid": uid, "fullName": fullName, "username": username, "weight": weight, "inches": inches, "feet":feet]
+        db.collection("users").document(uid).setData(userData)
+        print("user data stored")
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
             profileImage.image = image
