@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreData
 import FirebaseAuth
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -16,14 +15,16 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var inchesField: UITextField!
+    @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var feetField: UITextField!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var weightField: UITextField!
-    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var locationField: UITextField!
+    @IBOutlet weak var bioField: UITextField!
+    @IBOutlet weak var sportsText: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
-    let tabBarSegueIdentifier = "TabBarSegue"
-    
-    var username:String = ""
+    var username = ""
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
         feetField.delegate = self
         weightField.delegate = self
         nameField.delegate = self
-        usernameLabel.text = username
+        usernameField.text = username
     }
 
     
@@ -52,7 +53,7 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let allowedCharacters = CharacterSet.decimalDigits
         let characterSet = CharacterSet(charactersIn: string)
-        if (textField == inchesField || textField == feetField) {
+        if (textField == inchesField || textField == feetField || textField == weightField) {
             return allowedCharacters.isSuperset(of: characterSet)
         }
         return characterSet.isSuperset(of: characterSet)
@@ -67,25 +68,17 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     }
     
     @IBAction func doneButtonPressed(_ sender: Any) {
-        if (nameField.text == ""  || weightField.text == "" || feetField.text == "" || inchesField.text == "") {
+        if (nameField.text == ""  || usernameField.text == ""  || weightField.text == "" || feetField.text == "" || inchesField.text == "" || locationField.text == "" || sportsText.text == "" || bioField.text == "") {
             print("error")
             self.errorLabel.text = "Fill out all fields."
         } else {
-            let profile = NSEntityDescription.insertNewObject(forEntityName: "Profile", into: context)
-            profile.setValue(nameField.text, forKey: "fullName")
-            profile.setValue(usernameLabel.text, forKey: "username")
-            profile.setValue(weightField.text, forKey: "weight")
-            profile.setValue(inchesField.text, forKey: "inches")
-            profile.setValue(feetField.text, forKey: "feet")
-            saveContext()
-            storeUserInfo(fullName: nameField.text!, username: usernameLabel.text!, weight: weightField.text!, inches: inchesField.text!, feet: feetField.text!)
-//            self.performSegue(withIdentifier: self.tabBarSegueIdentifier, sender: nil)
+            storeUserInfo(fullName: nameField.text!, username: usernameField.text!, weight: weightField.text!, feet: feetField.text!, inches: inchesField.text!, location: locationField.text!, sports: sportsText.text!, bio: bioField.text!)
         }
     }
     
-    private func storeUserInfo(fullName: String, username: String, weight: String, inches: String, feet: String) {
+    private func storeUserInfo(fullName: String, username: String, weight: String, feet: String, inches: String, location: String, sports: String, bio: String) {
         guard let uid = Auth.auth().currentUser?.uid else {return}
-        let userData = ["uid": uid, "fullName": fullName, "username": username, "weight": weight, "inches": inches, "feet":feet]
+        let userData = ["uid": uid, "username": username,"fullName": fullName, "weight": weight, "feet":feet, "inches": inches, "location": location, "sports": sports, "bio": bio]
         db.collection("users").document(uid).setData(userData)
         print("user data stored")
     }
@@ -95,21 +88,11 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
             profileImage.image = image
         }
     }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
     
-    
-    func saveContext () {
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }
     
 }
 

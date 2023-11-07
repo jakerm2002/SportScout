@@ -12,30 +12,37 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var profilePhoto: UIImageView!
     @IBOutlet weak var nameText: UILabel!
     @IBOutlet weak var usernameText: UILabel!
+    @IBOutlet weak var bioText: UILabel!
     @IBOutlet weak var sportsText: UILabel!
     @IBOutlet weak var weightText: UILabel!
     @IBOutlet weak var heightText: UILabel!
     @IBOutlet weak var locationText: UILabel!
     
-    @IBOutlet weak var horizontalScrollView: UIScrollView!
-    var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        imageView = UIImageView(image: UIImage(named: "recSports"))
-        imageView.frame = CGRect(x: 0, y: 0, width: 144, height: 144)
-
-        horizontalScrollView.backgroundColor = UIColor.white
-        horizontalScrollView.contentSize = CGSize(width: 360, height: 144)
-        for _ in 1...10 {
-            horizontalScrollView.addSubview(imageView)
-        }
-        horizontalScrollView.delegate = self
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let docRef = db.collection("users").document(String(uid))
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.nameText.text = String(describing: document.get("fullName")!)
+                self.usernameText.text = String(describing: document.get("username")!)
+                self.weightText.text = String(describing: document.get("weight")!)
+                var newHeight:String = String(describing: document.get("feet")!) + " ft " + String(describing: document.get("inches")!) + " in"
+                self.heightText.text = newHeight
+                self.locationText.text = String(describing: document.get("location")!)
+                self.sportsText.text = String(describing: document.get("sports")!)
+                self.bioText.text = String(describing: document.get("bio")!)
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
     
     /*
     // MARK: - Navigation

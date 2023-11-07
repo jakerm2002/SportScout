@@ -49,7 +49,6 @@
 		BF2BADDFF2D1ABC54FBA5885 /* Pods_SportScoutMedinaJake.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B82BE8E04B0D578ECB220C9 /* Pods_SportScoutMedinaJake.framework */; };
 		E35264542ADB34E400CAAA09 /* JakeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */; };
 		E35264562ADB374600CAAA09 /* JoshStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */; };
-		E35264582ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264572ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard */; };
 		E3E1EEA82ADB417300AFCC05 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E3E1EEA72ADB417300AFCC05 /* FirebaseStorage */; };
 /* End PBXBuildFile section */
 
@@ -96,7 +95,6 @@
 		69F70E63FDA415362A7BAFDD /* Pods-SportScoutMedinaJake.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportScoutMedinaJake.release.xcconfig"; path = "Target Support Files/Pods-SportScoutMedinaJake/Pods-SportScoutMedinaJake.release.xcconfig"; sourceTree = "<group>"; };
 		E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JakeStoryboard.storyboard; sourceTree = "<group>"; };
 		E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoshStoryboard.storyboard; sourceTree = "<group>"; };
-		E35264572ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomizeProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		F2E33A87BF0A9E64A7F50FCD /* Pods-SportScoutMedinaJake.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportScoutMedinaJake.debug.xcconfig"; path = "Target Support Files/Pods-SportScoutMedinaJake/Pods-SportScoutMedinaJake.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,7 +135,6 @@
 		66C3D9782AD88FEC003E1C99 /* SportScoutMedinaJake */ = {
 			isa = PBXGroup;
 			children = (
-				E35264572ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard */,
 				E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */,
 				E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */,
 				66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */,
@@ -277,7 +274,6 @@
 				E35264562ADB374600CAAA09 /* JoshStoryboard.storyboard in Resources */,
 				66C3D9812AD88FEC003E1C99 /* Main.storyboard in Resources */,
 				66C3D99B2AD89873003E1C99 /* gregGym.png in Resources */,
-				E35264582ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard in Resources */,
 				66C3D9992AD89857003E1C99 /* austinRec.png in Resources */,
 				66C3D9932AD897BE003E1C99 /* recSports.png in Resources */,
 				66408F572AF336F400763C4A /* EventDetailsStoryboard.storyboard in Resources */,
