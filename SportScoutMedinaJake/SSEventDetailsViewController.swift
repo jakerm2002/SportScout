@@ -9,6 +9,8 @@ import UIKit
 
 class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var participantCellIdentifier = "SSEventDetailsParticipantCellIdentifier"
+    
     var event: Event!
     @IBOutlet var eventOwnerLabel: UILabel!
     @IBOutlet var locationLabel: UILabel!
@@ -32,7 +34,12 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: participantCellIdentifier, for: indexPath) as! SSEventDetailsParticipantTableViewCell
+    
         
+        let participant = event.participants![indexPath.row]
+        
+        return cell
     }
     
 
