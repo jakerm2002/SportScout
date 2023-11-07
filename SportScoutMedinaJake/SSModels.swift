@@ -50,12 +50,13 @@ struct Event: Identifiable, Codable {
     }
 }
 
-struct User: Identifiable, Codable {
+struct User: Identifiable, Codable, Equatable {
     @DocumentID var id: String?
+    var bio: String
     var feet: String
     var fullName: String
     var inches: String
-    var uid: Date
-    var username: Date
+    var sports: String
+    var username: String
     var weight: String
 }

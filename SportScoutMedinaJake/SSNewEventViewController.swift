@@ -15,7 +15,28 @@ protocol SportChanger {
     func changeSport(newSport: String, newIndex: Int)
 }
 
-class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SportChanger {
+protocol ParticipantsChanger {
+    func addParticipant(participant: User)
+    func removeParticipant(participant: User)
+}
+
+class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SportChanger, ParticipantsChanger {
+    
+    func addParticipant(participant: User) {
+        participants.append(participant)
+        for participant in participants {
+            print("Participant: \(participant.fullName)")
+        }
+    }
+    
+    func removeParticipant(participant: User) {
+        if let idx = participants.firstIndex(of: participant) {
+            participants.remove(at: idx)
+        }
+        for participant in participants {
+            print("Participant: \(participant.fullName)")
+        }
+    }
     
     func changeSport(newSport: String, newIndex: Int) {
         let sportIndexPath = IndexPath(row: 2, section: 0)
@@ -31,7 +52,6 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     // will be passed in from LocationDetailsVC
     var documentID = ""
     var locationName = ""
-    var users:[User] = []
     
     let NewEventTitleCellIdentifier = "NewEventTitleCellIdentifier"
     let NewEventLocationCellIdentifier = "NewEventLocationCellIdentifier"
@@ -42,32 +62,18 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     
     let SSNewEventFinishCreationSegue = "SSNewEventFinishCreationSegue"
     let SSChooseSportSegue = "SSChooseSportSegue"
+    let SSChooseParticipantsSegue = "SSChooseParticipantsSegue"
+    
+    var participants:[User] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         newEventTableView.delegate = self
         newEventTableView.dataSource = self
-        fetchData()
-        for user in users {
-            print("fullName: \(user.fullName), username: \(user.username), feet: \(user.feet), inches: \(user.inches), weight: \(user.weight)")
-        }
-        print("RENDERED NEWEVENT")
         // print(documentID)
         // print(locationName)
     }
     
-    func fetchData() {
-        db.collection("users").addSnapshotListener {(querySnapshot, error) in
-            guard let documents = querySnapshot?.documents else {
-                print("No documents")
-                return
-            }
-            print("queryLength: \(querySnapshot!.documents.count)")
-            self.users = documents.compactMap { (queryDocumentSnapshot) -> User? in
-                return try? queryDocumentSnapshot.data(as: User.self)
-            }
-        }
-    }
     
 //    override func viewDidAppear(_ animated: Bool) {
 //        super.viewDidAppear(animated)
@@ -168,8 +174,9 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)
         } else {
-            
-            let newEvent = Event(name: nameCell.titleTextField.text!,
+            let owner:User = User(bio: "Hi", feet: "6", fullName: "John Smith", inches: "0", sports: "Basketball", username: "jsmith", weight: "160")
+            let newEvent = Event(owner: owner,
+                                 name: nameCell.titleTextField.text!,
                                  location: locationCell.locationTextField.text!,
                                  sport: sportCell.selectedSportLabel.text!,
                                  startTime: startsAtCell.startsAtDatePicker.date,
@@ -199,9 +206,11 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             let sportCell = newEventTableView.cellForRow(at: sportIndexPath) as! SSNewEventSportTableViewCell
             nextVC.delegate = self
             nextVC.selectedRowIndex = sportCell.selectedSportIndex
+        } else if segue.identifier == SSChooseParticipantsSegue, let nextVC = segue.destination as? SSChooseParticipantsViewController {
+            nextVC.navigationItem.title = "Select Participants"
         }
     }
     @IBAction func invitePeopleButtonPressed(_ sender: Any) {
-        
+        performSegue(withIdentifier: SSChooseParticipantsSegue, sender: nil)
     }
 }
