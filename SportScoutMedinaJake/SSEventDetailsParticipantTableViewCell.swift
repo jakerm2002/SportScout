@@ -8,6 +8,10 @@
 import UIKit
 
 class SSEventDetailsParticipantTableViewCell: UITableViewCell {
+    
+    @IBOutlet var profilePicture: UIView!
+    @IBOutlet var username: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

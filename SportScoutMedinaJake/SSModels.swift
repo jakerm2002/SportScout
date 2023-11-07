@@ -38,6 +38,15 @@ struct Event: Identifiable, Codable {
     var startTime: Date
     var endTime: Date
     var description: String
+    var participants: [FirebaseFirestore.DocumentReference]?
+    
+    // get the path of each participant DocumentReference
+    var participantPaths: [String]? {
+        participants?.compactMap() {
+            document -> String in
+            return document.path
+        }
+    }
 }
 
 struct User: Identifiable, Codable {
