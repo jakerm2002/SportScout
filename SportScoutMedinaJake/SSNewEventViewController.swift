@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseStorage
 
 protocol SportChanger {
     func changeSport(newSport: String, newIndex: Int)
 }
 
 class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SportChanger {
+    
     func changeSport(newSport: String, newIndex: Int) {
         let sportIndexPath = IndexPath(row: 2, section: 0)
         let sportCell = newEventTableView.cellForRow(at: sportIndexPath) as! SSNewEventSportTableViewCell
@@ -26,6 +31,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     // will be passed in from LocationDetailsVC
     var documentID = ""
     var locationName = ""
+    var users:[User] = []
     
     let NewEventTitleCellIdentifier = "NewEventTitleCellIdentifier"
     let NewEventLocationCellIdentifier = "NewEventLocationCellIdentifier"
@@ -41,8 +47,26 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         newEventTableView.delegate = self
         newEventTableView.dataSource = self
+        fetchData()
+        for user in users {
+            print("fullName: \(user.fullName), username: \(user.username), feet: \(user.feet), inches: \(user.inches), weight: \(user.weight)")
+        }
+        print("RENDERED NEWEVENT")
         // print(documentID)
         // print(locationName)
+    }
+    
+    func fetchData() {
+        db.collection("users").addSnapshotListener {(querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+            print("queryLength: \(querySnapshot!.documents.count)")
+            self.users = documents.compactMap { (queryDocumentSnapshot) -> User? in
+                return try? queryDocumentSnapshot.data(as: User.self)
+            }
+        }
     }
     
 //    override func viewDidAppear(_ animated: Bool) {
@@ -176,5 +200,8 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             nextVC.delegate = self
             nextVC.selectedRowIndex = sportCell.selectedSportIndex
         }
+    }
+    @IBAction func invitePeopleButtonPressed(_ sender: Any) {
+        
     }
 }

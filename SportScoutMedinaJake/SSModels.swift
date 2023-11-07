@@ -39,3 +39,13 @@ struct Event: Identifiable, Codable {
     var endTime: Date
     var description: String
 }
+
+struct User: Identifiable, Codable {
+    @DocumentID var id: String?
+    var feet: String
+    var fullName: String
+    var inches: String
+    var uid: Date
+    var username: Date
+    var weight: String
+}
