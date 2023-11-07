@@ -32,6 +32,7 @@ struct Location: Identifiable, Codable {
 
 struct Event: Identifiable, Codable {
     @DocumentID var id: String?
+    var owner: User
     var name: String
     var location: String
     var sport: String
