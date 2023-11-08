@@ -177,10 +177,11 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)
         } else {
-            let owner:User = User(bio: "Hi", feet: "6", fullName: "John Smith", inches: "0", sports: "Basketball", username: "jsmith", weight: "160")
-            let newEvent = Event(owner: owner,
+            
+            let newEvent = Event(owner: db.collection("Locations").document(locationDocumentID),
                                  name: nameCell.titleTextField.text!,
-                                 location: locationCell.locationTextField.text!,
+                                 location: db.collection("Locations").document(locationDocumentID),
+                                 locationName: locationName,
                                  sport: sportCell.selectedSportLabel.text!,
                                  startTime: startsAtCell.startsAtDatePicker.date,
                                  endTime: endsAtCell.endsAtDatePicker.date,
@@ -190,10 +191,18 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             
             // let document ID be auto-generated
             do {
-                try db.collection("events").document().setData(from: newEvent) {
+                let newEventReference = db.collection("events").document()
+                try newEventReference.setData(from: newEvent) {
                     _ in
-                    print("New event created successfully in Firestore.")
-                    self.navigationController?.popViewController(animated: true)
+                    // add the event to the corresponding location's 'events' array.
+                    // TODO: catch possible error from this operation
+                    db.collection("Locations").document(self.locationDocumentID).updateData([
+                        "events": FieldValue.arrayUnion([newEventReference])
+                    ]) {
+                        _ in
+                        print("New event created successfully in Firestore.")
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
             } catch let error {
                 print("Error creating event in Firestore: \(error.localizedDescription)")

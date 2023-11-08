@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -14,6 +16,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     var event: Event!
     var participantsInEvent: [String: [User]] = [:] // the users in a certain event key must be at that event
+    var currentParticipants : [User] = []
     // TODO: Set document ID for event in location VC
     var documentID = "" // will be set from location VC prob
     
@@ -27,6 +30,11 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        participantList.delegate = self
+        participantList.dataSource = self
+        print("Fetching data")
+        fetchData()
+        fetchMoreData()
 
         // Do any additional setup after loading the view.
     }
@@ -45,7 +53,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         let participant = event.participants![indexPath.row]
         
         // TODO: give pfp to participants in list
-//        cell.username = participant.
+        cell.username.text = currentParticipants[indexPath.row].username
         
         return cell
     }
@@ -66,18 +74,34 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
+//    func currentUserDoc() -> FirebaseFirestore.DocumentReference? {
+//        if Auth.auth().currentUser != nil {
+//            guard let uid = Auth.auth().currentUser?.uid else {return nil}
+//            return db.collection("users").document(String(uid))
+//        }
+//        return nil
+//    }
+    
     // Get all data for this event entry in Firestore database.
     // Populate the UI.
+    
     func fetchData() {
-//        db.collection("events").document(documentID)
-//            .addSnapshotListener { documentSnapshot, error in
-//                guard let document = documentSnapshot else {
-//                    print("Error fetching document: \(error!)")
-//                    return
-//                }
-//
-//            }
-        
+        db.collection("users").addSnapshotListener {(querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("No documents")
+                return
+            }
+            self.currentParticipants = documents.compactMap { (queryDocumentSnapshot) -> User? in
+                return try? queryDocumentSnapshot.data(as: User.self)
+            }
+            DispatchQueue.main.async {
+                self.participantList.reloadData()
+                // print(self.locations.debugDescription)
+            }
+        }
+    }
+    
+    func fetchMoreData() {
         db.collection("events").document(documentID)
           .addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else {
@@ -86,14 +110,25 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             }
               do {
                   self.event = try document.data(as: Event.self)
-                  // update UI labels, get events for calendar
+                  
+                  let docRef = db.collection("users").document(self.event.owner.documentID)
+                  docRef.getDocument { (document, error) in
+                      if let document = document, document.exists {
+                          let ownerName = String(describing: document.get("fullName")!)
+                          self.eventOwnerLabel.text = ("\(ownerName)'s team: \(self.event.sport)")
+                      } else {
+                          print("Document does not exist")
+                      }
+                  }
+                  
+                  // update UI labels, get participants for event
                   DispatchQueue.main.async {
-                  self.eventOwnerLabel.text = ("\(self.event.owner.username)'s team: \(self.event.sport)")
-                      self.locationLabel.text = self.event.location
-                  self.dateLabel.text = self.reformatDateTime(date:self.event.startTime, format: "EEEE, MMMM dd")
-                  self.timeLabel.text = self.reformatDateTime(date: self.event.startTime, format: "h:mm a")
-                  self.eventDescription.text = self.event.description
-                  self.numParticipantsLabel.text = String(self.event.participants!.count)
+
+                      self.locationLabel.text = self.event.locationName
+                      self.dateLabel.text = self.reformatDateTime(date:self.event.startTime, format: "EEEE, MMMM dd")
+                      self.timeLabel.text = self.reformatDateTime(date: self.event.startTime, format: "h:mm a")
+                      self.eventDescription.text = self.event.description
+                      self.numParticipantsLabel.text = String(self.event.participants!.count)
                       self.fetchParticipants()
                       self.participantList.reloadData()
                   }
@@ -137,9 +172,12 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func reformatDateTime(date:Date, format:String) -> String {
+        print(date.description)
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "format"
-        return dateFormatter.string(from: date)
+        dateFormatter.dateFormat = format
+        let output = dateFormatter.string(from: date)
+        print("formatted dateTime: \(output)")
+        return output
         
     }
     
