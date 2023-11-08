@@ -212,13 +212,13 @@
             </objects>
             <point key="canvasLocation" x="940" y="-27"/>
         </scene>
-        <!--CustomizeProfileStoryboard-->
+        <!--JoshStoryboard-->
         <scene sceneID="xhx-iV-KP2">
             <objects>
-                <viewControllerPlaceholder storyboardName="CustomizeProfileStoryboard" id="ahf-nb-1ll" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Huo-BM-AIC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardIdentifier="customize" storyboardName="JoshStoryboard" id="ahf-nb-1ll" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Kdf-Xb-7mT"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Huo-BM-AIC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1592" y="-44"/>
         </scene>

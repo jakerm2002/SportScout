@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import CoreData
+import FirebaseAuth
+import FirebaseStorage
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
@@ -15,14 +16,17 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var inchesField: UITextField!
+    @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var feetField: UITextField!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var weightField: UITextField!
-    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var locationField: UITextField!
+    @IBOutlet weak var bioField: UITextField!
+    @IBOutlet weak var sportsText: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
-    let tabBarSegueIdentifier = "TabBarSegue"
-    
-    var username:String = ""
+    var username = ""
+    var imageURL = ""
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +36,27 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
         feetField.delegate = self
         weightField.delegate = self
         nameField.delegate = self
-        usernameLabel.text = username
+        usernameField.text = username
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let docRef = db.collection("users").document(String(uid))
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.nameField.text = String(describing: document.get("fullName")!)
+                self.usernameField.text = String(describing: document.get("username")!)
+                self.weightField.text = String(describing: document.get("weight")!)
+                self.feetField.text = String(describing: document.get("feet")!)
+                self.inchesField.text = String(describing: document.get("inches")!)
+                self.locationField.text = String(describing: document.get("location")!)
+                self.sportsText.text = String(describing: document.get("sports")!)
+                self.bioField.text = String(describing: document.get("bio")!)
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
     
     // Called when 'return' key pressed
     func textFieldShouldReturn(_ textField:UITextField) -> Bool {
@@ -51,7 +73,7 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let allowedCharacters = CharacterSet.decimalDigits
         let characterSet = CharacterSet(charactersIn: string)
-        if (textField == inchesField || textField == feetField) {
+        if (textField == inchesField || textField == feetField || textField == weightField) {
             return allowedCharacters.isSuperset(of: characterSet)
         }
         return characterSet.isSuperset(of: characterSet)
@@ -66,40 +88,48 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     }
     
     @IBAction func doneButtonPressed(_ sender: Any) {
-        if (nameField.text == ""  || weightField.text == "" || feetField.text == "" || inchesField.text == "") {
+        if (nameField.text == ""  || usernameField.text == ""  || weightField.text == "" || feetField.text == "" || inchesField.text == "" || locationField.text == "" || sportsText.text == "" || bioField.text == "") {
             print("error")
             self.errorLabel.text = "Fill out all fields."
         } else {
-            let profile = NSEntityDescription.insertNewObject(forEntityName: "Profile", into: context)
-            profile.setValue(nameField.text, forKey: "fullName")
-            profile.setValue(usernameLabel.text, forKey: "username")
-            profile.setValue(weightField.text, forKey: "weight")
-            profile.setValue(inchesField.text, forKey: "inches")
-            profile.setValue(feetField.text, forKey: "feet")
-            saveContext()
-            self.performSegue(withIdentifier: self.tabBarSegueIdentifier, sender: nil)
+            storeImageinStorage()
+            storeUserInfo(fullName: nameField.text!, username: usernameField.text!, weight: weightField.text!, feet: feetField.text!, inches: inchesField.text!, location: locationField.text!, sports: sportsText.text!, bio: bioField.text!, url: imageURL)
         }
     }
+    
+    private func storeUserInfo(fullName: String, username: String, weight: String, feet: String, inches: String, location: String, sports: String, bio: String, url: String) {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let userData = ["uid": uid, "username": username,"fullName": fullName, "weight": weight, "feet": feet, "inches": inches, "location": location, "sports": sports, "bio": bio, "url": url]
+        db.collection("users").document(uid).setData(userData)
+        print("user data stored")
+    }
+    
+    private func storeImageinStorage() {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let ref = Storage.storage().reference()
+        let path = "userImages/\(UUID().uuidString).jpg"
+        self.imageURL = path
+        let fileRef = ref.child(path)
+        guard let imageData = profileImage.image?.jpegData(compressionQuality: 0.8) else {return}
+        fileRef.putData(imageData, metadata: nil) { metadata, err in
+            if let err = err {
+                print("Failed to store image")
+            }
+        }
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
             profileImage.image = image
         }
+        picker.dismiss(animated: true, completion: nil)
+
     }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
     
-    
-    func saveContext () {
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }
     
 }
 
