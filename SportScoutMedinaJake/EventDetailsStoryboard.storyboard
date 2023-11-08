@@ -88,6 +88,7 @@
                                         <connections>
                                             <outlet property="profilePicture" destination="w17-ME-VOF" id="W6Q-id-AoD"/>
                                             <outlet property="username" destination="XLZ-HY-BTx" id="b0f-RO-gdH"/>
+                                            <segue destination="4HB-ad-dF2" kind="showDetail" identifier="SegueToSelectedUserProfile" id="arv-6h-z9h"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -160,6 +161,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="130.53435114503816" y="-28.169014084507044"/>
+        </scene>
+        <!--JoshStoryboard-->
+        <scene sceneID="Xe1-Xk-fZT">
+            <objects>
+                <viewControllerPlaceholder storyboardName="JoshStoryboard" id="4HB-ad-dF2" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XYi-FK-3LH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="707" y="-114"/>
         </scene>
     </scenes>
     <resources>
