@@ -50,7 +50,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var newEventTableView: UITableView!
     
     // will be passed in from LocationDetailsVC
-    var documentID = ""
+    var locationDocumentID = ""
     var locationName = ""
     
     let NewEventTitleCellIdentifier = "NewEventTitleCellIdentifier"
@@ -70,7 +70,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         newEventTableView.delegate = self
         newEventTableView.dataSource = self
-        // print(documentID)
+        // print(locationDocumentID)
         // print(locationName)
     }
     
@@ -91,7 +91,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewEventLocationCellIdentifier, for: indexPath) as! SSNewEventLocationTableViewCell
-            // TODO: fill in the location from the LocationDetailsVC
+            cell.locationTextField.text! = locationName
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewEventSportCellIdentifier, for: indexPath) as! SSNewEventSportTableViewCell

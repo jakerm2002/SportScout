@@ -34,7 +34,8 @@ struct Event: Identifiable, Codable {
     @DocumentID var id: String?
     var owner: User
     var name: String
-    var location: String
+    var location: DocumentReference // a reference to the location
+    var locationName: String        // the name of the location
     var sport: String
     var startTime: Date
     var endTime: Date
