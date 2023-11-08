@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 protocol SportChanger {
     func changeSport(newSport: String, newIndex: Int)
@@ -24,7 +25,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var newEventTableView: UITableView!
     
     // will be passed in from LocationDetailsVC
-    var documentID = ""
+    var locationDocumentID = ""
     var locationName = ""
     
     let NewEventTitleCellIdentifier = "NewEventTitleCellIdentifier"
@@ -41,7 +42,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         newEventTableView.delegate = self
         newEventTableView.dataSource = self
-        // print(documentID)
+        // print(locationDocumentID)
         // print(locationName)
     }
     
@@ -61,7 +62,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewEventLocationCellIdentifier, for: indexPath) as! SSNewEventLocationTableViewCell
-            // TODO: fill in the location from the LocationDetailsVC
+            cell.locationTextField.text! = locationName
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: NewEventSportCellIdentifier, for: indexPath) as! SSNewEventSportTableViewCell
@@ -146,7 +147,8 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         } else {
             
             let newEvent = Event(name: nameCell.titleTextField.text!,
-                                 location: locationCell.locationTextField.text!,
+                                 location: db.collection("Locations").document(locationDocumentID),
+                                 locationName: locationName,
                                  sport: sportCell.selectedSportLabel.text!,
                                  startTime: startsAtCell.startsAtDatePicker.date,
                                  endTime: endsAtCell.endsAtDatePicker.date,
@@ -155,10 +157,18 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             
             // let document ID be auto-generated
             do {
-                try db.collection("events").document().setData(from: newEvent) {
+                let newEventReference = db.collection("events").document()
+                try newEventReference.setData(from: newEvent) {
                     _ in
-                    print("New event created successfully in Firestore.")
-                    self.navigationController?.popViewController(animated: true)
+                    // add the event to the corresponding location's 'events' array.
+                    // TODO: catch possible error from this operation
+                    db.collection("Locations").document(self.locationDocumentID).updateData([
+                        "events": FieldValue.arrayUnion([newEventReference])
+                    ]) {
+                        _ in
+                        print("New event created successfully in Firestore.")
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
             } catch let error {
                 print("Error creating event in Firestore: \(error.localizedDescription)")
