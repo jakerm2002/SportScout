@@ -16,26 +16,28 @@ protocol SportChanger {
 }
 
 protocol ParticipantsChanger {
-    func addParticipant(participant: User)
-    func removeParticipant(participant: User)
+    func addParticipant(userId: String)
+    func removeParticipant(userId: String)
 }
 
 class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SportChanger, ParticipantsChanger {
     
-    func addParticipant(participant: User) {
-        participants.append(participant)
-        for participant in participants {
-            print("Participant: \(participant.fullName)")
+    func addParticipant(userId: String) {
+        users.append(userId)
+        for userId in users {
+            print("Participant: \(userId)")
         }
+        numberParticipantsLabel.text = "\(users.count) participants"
     }
     
-    func removeParticipant(participant: User) {
-        if let idx = participants.firstIndex(of: participant) {
-            participants.remove(at: idx)
+    func removeParticipant(userId: String) {
+        if let idx = users.firstIndex(of: userId) {
+            users.remove(at: idx)
         }
-        for participant in participants {
-            print("Participant: \(participant.fullName)")
+        for userId in users {
+            print("Participant: \(userId)")
         }
+        numberParticipantsLabel.text = "\(users.count) participants"
     }
     
     func changeSport(newSport: String, newIndex: Int) {
@@ -47,6 +49,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     
+    @IBOutlet weak var numberParticipantsLabel: UILabel!
     @IBOutlet weak var newEventTableView: UITableView!
     
     // will be passed in from LocationDetailsVC
@@ -64,7 +67,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     let SSChooseSportSegue = "SSChooseSportSegue"
     let SSChooseParticipantsSegue = "SSChooseParticipantsSegue"
     
-    var participants:[User] = []
+    var users:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -181,7 +184,8 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
                                  sport: sportCell.selectedSportLabel.text!,
                                  startTime: startsAtCell.startsAtDatePicker.date,
                                  endTime: endsAtCell.endsAtDatePicker.date,
-                                 description: descriptionCell.descriptionTextField.text!
+                                 description: descriptionCell.descriptionTextField.text!,
+                                 participants: fetchUsers(userIds: users)
             )
             
             // let document ID be auto-generated
@@ -198,6 +202,25 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
+    func fetchUsers(userIds: [String]) -> [FirebaseFirestore.DocumentReference] {
+        var result:[FirebaseFirestore.DocumentReference] = []
+        for userId in userIds {
+            let docRef = db.collection("users").document(userId)
+
+            docRef.getDocument { document, error in
+              if let error = error as NSError? {
+                  print("error")
+              }
+              else {
+                if let document = document {
+                    result.append(docRef)
+                }
+              }
+            }
+        }
+        return result
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SSChooseSportSegue,
            let nextVC = segue.destination as? SSChooseSportViewController
@@ -208,6 +231,8 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             nextVC.selectedRowIndex = sportCell.selectedSportIndex
         } else if segue.identifier == SSChooseParticipantsSegue, let nextVC = segue.destination as? SSChooseParticipantsViewController {
             nextVC.navigationItem.title = "Select Participants"
+            nextVC.delegate = self
+            nextVC.usersSelected = users
         }
     }
     @IBAction func invitePeopleButtonPressed(_ sender: Any) {
