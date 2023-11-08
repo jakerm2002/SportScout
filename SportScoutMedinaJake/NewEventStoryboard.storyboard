@@ -55,20 +55,20 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewEventLocationCellIdentifier" id="UCc-Jy-yg1" customClass="SSNewEventLocationTableViewCell" customModule="SportScoutMedinaJake" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="93.666667938232422" width="393" height="43.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="93.666667938232422" width="393" height="42.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UCc-Jy-yg1" id="A8V-4K-3Np">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="42.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwZ-aA-3Q1">
-                                                    <rect key="frame" x="20" y="10.999999999999998" width="66" height="21.333333333333329"/>
+                                                    <rect key="frame" x="20" y="11.000000000000002" width="66" height="20.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OoR-04-Xrm">
-                                                    <rect key="frame" x="124" y="5" width="249" height="33.333333333333336"/>
+                                                    <rect key="frame" x="124" y="5" width="249" height="32.666666666666664"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="249" id="tvW-6x-wYX"/>
                                                     </constraints>
@@ -90,10 +90,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewEventSportCellIdentifier" editingAccessoryType="disclosureIndicator" id="0fP-07-A3e" customClass="SSNewEventSportTableViewCell" customModule="SportScoutMedinaJake" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="137" width="393" height="45.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="136.33333587646484" width="393" height="44.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0fP-07-A3e" id="L3J-IP-ejd">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="45.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="44.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sport" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGf-Xe-Tnk">
@@ -106,7 +106,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lV5-ZR-eyI">
-                                                    <rect key="frame" x="299" y="5" width="83" height="35.333333333333336"/>
+                                                    <rect key="frame" x="299" y="5" width="83" height="34.666666666666664"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Choose"/>
                                                     <connections>
@@ -114,7 +114,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="None selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NR9-xK-RxY">
-                                                    <rect key="frame" x="124" y="11.999999999999998" width="175" height="21.333333333333329"/>
+                                                    <rect key="frame" x="124" y="12.000000000000002" width="175" height="20.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -138,7 +138,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewEventStartsAtCellIdentifier" id="Gcr-Ng-wSE" customClass="SSNewEventStartsAtTableViewCell" customModule="SportScoutMedinaJake" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="182.33333206176758" width="393" height="44.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="181.00000381469727" width="393" height="44.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gcr-Ng-wSE" id="ym8-hV-zvf">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="44.333332061767578"/>
@@ -171,7 +171,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewEventEndsAtCellIdentifier" id="w7a-LF-Q1c" customClass="SSNewEventEndsAtTableViewCell" customModule="SportScoutMedinaJake" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="226.66666412353516" width="393" height="44.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="225.33333587646484" width="393" height="44.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w7a-LF-Q1c" id="aYP-kT-9dg">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="44.333332061767578"/>
@@ -204,20 +204,20 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewEventDescriptionCellIdentifier" id="qMp-pY-n1U" customClass="SSNewEventDescriptionTableViewCell" customModule="SportScoutMedinaJake" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="270.99999618530273" width="393" height="43.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="269.66666793823242" width="393" height="42.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qMp-pY-n1U" id="ONL-Ox-7Oe">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="42.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJL-nx-2pW">
-                                                    <rect key="frame" x="20" y="10.999999999999998" width="88" height="21.333333333333329"/>
+                                                    <rect key="frame" x="20" y="11.000000000000002" width="88" height="20.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tab-Ev-bys">
-                                                    <rect key="frame" x="124" y="4" width="249" height="35.333333333333336"/>
+                                                    <rect key="frame" x="124" y="4" width="249" height="34.666666666666664"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="249" id="oR1-AU-0ze"/>
                                                     </constraints>
@@ -247,12 +247,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Qf-PW-0PS">
-                                <rect key="frame" x="16" y="494" width="122" height="35"/>
+                                <rect key="frame" x="16" y="494" width="167" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Vea-31-bc4"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Invite People"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Select Participants"/>
                                 <connections>
                                     <action selector="invitePeopleButtonPressed:" destination="IGg-bA-a45" eventType="touchUpInside" id="FRe-an-tjI"/>
                                 </connections>
@@ -283,6 +283,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="newEventTableView" destination="e9S-0A-uWt" id="Rme-2p-sst"/>
+                        <outlet property="numberParticipantsLabel" destination="1ka-jr-Ttd" id="pp6-ut-pbx"/>
                         <segue destination="RHM-Bg-Ehj" kind="show" identifier="SSChooseSportSegue" id="PUN-pF-OQA"/>
                         <segue destination="NHf-3l-MpW" kind="show" identifier="SSChooseParticipantsSegue" id="mOK-vs-ZQK"/>
                     </connections>

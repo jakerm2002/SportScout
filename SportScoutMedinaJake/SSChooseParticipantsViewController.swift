@@ -10,8 +10,9 @@ import UIKit
 class SSChooseParticipantsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var participantsTableView: UITableView!
+    var delegate: UIViewController?
     var users:[User] = []
-    var rowsSelected:[Int] = []
+    var usersSelected:[String] = []
     let participantOptionCellIdentifier = "ParticipantOptionCellIdentifier"
 
     override func viewDidLoad() {
@@ -28,9 +29,7 @@ class SSChooseParticipantsViewController: UIViewController, UITableViewDataSourc
                 print("No documents")
                 return
             }
-            print("queryLength: \(querySnapshot!.documents.count)")
             self.users = documents.compactMap { (queryDocumentSnapshot) -> User? in
-                print(queryDocumentSnapshot.data())
                 return try? queryDocumentSnapshot.data(as: User.self)
             }
             DispatchQueue.main.async {
@@ -38,20 +37,18 @@ class SSChooseParticipantsViewController: UIViewController, UITableViewDataSourc
                 // print(self.locations.debugDescription)
             }
         }
-        print("Users stored: \(self.users.count)")
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
+        let user = users[row]
         let cell = tableView.dequeueReusableCell(withIdentifier: participantOptionCellIdentifier, for: indexPath)
-        cell.textLabel?.text = users[row].fullName
-        cell.detailTextLabel?.text = users[row].username
-        if (rowsSelected.contains(row)) {
+        cell.textLabel?.text = user.fullName
+        cell.detailTextLabel?.text = user.username
+        if (usersSelected.contains(user.id!)) {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
@@ -60,17 +57,47 @@ class SSChooseParticipantsViewController: UIViewController, UITableViewDataSourc
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = indexPath.row
-        if !rowsSelected.contains(row) {
-            rowsSelected.append(row)
+        let user = users[row]
+        let otherVC = delegate as! ParticipantsChanger
+        if !usersSelected.contains(user.id!) {
+            usersSelected.append(user.id!)
+            otherVC.addParticipant(userId: user.id!)
         } else {
-            if let idx = rowsSelected.firstIndex(where: {$0 == row}) {
-                rowsSelected.remove(at: idx)
+            if let idx = usersSelected.firstIndex(where: {$0 == user.id!}) {
+                usersSelected.remove(at: idx)
+                otherVC.removeParticipant(userId: user.id!)
             }
         }
         participantsTableView.reloadRows(at: [
             IndexPath(row: row, section: 0)
         ], with: .automatic)
     }
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let row = indexPath.row
+//        let cell = tableView.dequeueReusableCell(withIdentifier: participantOptionCellIdentifier, for: indexPath)
+//        cell.textLabel?.text = users[row].fullName
+//        cell.detailTextLabel?.text = users[row].username
+//        if (rowsSelected.contains(row)) {
+//            cell.accessoryType = .checkmark
+//        } else {
+//            cell.accessoryType = .none
+//        }
+//        return cell
+//    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let row = indexPath.row
+//        let otherVC = delegate as! ParticipantsChanger
+//        if !rowsSelected.contains(row) {
+//            rowsSelected.append(row)
+//        } else {
+//            if let idx = rowsSelected.firstIndex(where: {$0 == row}) {
+//                rowsSelected.remove(at: idx)
+//            }
+//        }
+//        participantsTableView.reloadRows(at: [
+//            IndexPath(row: row, section: 0)
+//        ], with: .automatic)
+//    }
     /*
     // MARK: - Navigation
 
