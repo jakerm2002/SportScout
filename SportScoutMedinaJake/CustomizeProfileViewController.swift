@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseStorage
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
@@ -24,6 +25,7 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     @IBOutlet weak var sportsText: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
     var username = ""
+    var imageURL = ""
 
     
     override func viewDidLoad() {
@@ -36,7 +38,25 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
         nameField.delegate = self
         usernameField.text = username
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let docRef = db.collection("users").document(String(uid))
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.nameField.text = String(describing: document.get("fullName")!)
+                self.usernameField.text = String(describing: document.get("username")!)
+                self.weightField.text = String(describing: document.get("weight")!)
+                self.feetField.text = String(describing: document.get("feet")!)
+                self.inchesField.text = String(describing: document.get("inches")!)
+                self.locationField.text = String(describing: document.get("location")!)
+                self.sportsText.text = String(describing: document.get("sports")!)
+                self.bioField.text = String(describing: document.get("bio")!)
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
     
     // Called when 'return' key pressed
     func textFieldShouldReturn(_ textField:UITextField) -> Bool {
@@ -72,21 +92,38 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
             print("error")
             self.errorLabel.text = "Fill out all fields."
         } else {
-            storeUserInfo(fullName: nameField.text!, username: usernameField.text!, weight: weightField.text!, feet: feetField.text!, inches: inchesField.text!, location: locationField.text!, sports: sportsText.text!, bio: bioField.text!)
+            storeImageinStorage()
+            storeUserInfo(fullName: nameField.text!, username: usernameField.text!, weight: weightField.text!, feet: feetField.text!, inches: inchesField.text!, location: locationField.text!, sports: sportsText.text!, bio: bioField.text!, url: imageURL)
         }
     }
     
-    private func storeUserInfo(fullName: String, username: String, weight: String, feet: String, inches: String, location: String, sports: String, bio: String) {
+    private func storeUserInfo(fullName: String, username: String, weight: String, feet: String, inches: String, location: String, sports: String, bio: String, url: String) {
         guard let uid = Auth.auth().currentUser?.uid else {return}
-        let userData = ["uid": uid, "username": username,"fullName": fullName, "weight": weight, "feet":feet, "inches": inches, "location": location, "sports": sports, "bio": bio]
+        let userData = ["uid": uid, "username": username,"fullName": fullName, "weight": weight, "feet": feet, "inches": inches, "location": location, "sports": sports, "bio": bio, "url": url]
         db.collection("users").document(uid).setData(userData)
         print("user data stored")
+    }
+    
+    private func storeImageinStorage() {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        let ref = Storage.storage().reference()
+        let path = "userImages/\(UUID().uuidString).jpg"
+        self.imageURL = path
+        let fileRef = ref.child(path)
+        guard let imageData = profileImage.image?.jpegData(compressionQuality: 0.8) else {return}
+        fileRef.putData(imageData, metadata: nil) { metadata, err in
+            if let err = err {
+                print("Failed to store image")
+            }
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
             profileImage.image = image
         }
+        picker.dismiss(animated: true, completion: nil)
+
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
