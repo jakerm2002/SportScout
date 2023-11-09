@@ -1,19 +1,13 @@
 Contributions:
 
-Ankit Bhattacharyya (20%)
-- Customize Profile screen
-- Helped with signup screen
-- Set up core data structures
-Ashley Yude (30%)
-- Login and Signup screens
-- Set up core data structures
-- Set up firebase
-Jake Medina (35%)
-- Home and Location screens
-- start of new event and settings screen
-Joshua Chen (15%)
-- Profile screen
-- Researched into future features
+Ankit Bhattacharyya (Release 25%, Overall 25%)
+event creation/new event page/firestore
+Ashley Yude (Release 25%, Overall 25%)
+Event/Game page/firestore
+Jake Medina (Release 25%, Overall 25%)
+Location/calendar page/firestore
+Joshua Chen (Release 25%, Overall 25%)
+Profile screen / firestore
 
 Deviations:
-Joshua was sick the last few days before the project.
+Basic feature functionality is available. However, bugs are present in features that will be polished by final release.

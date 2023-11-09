@@ -10,6 +10,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseStorage
+import FirebaseAuth
 
 protocol SportChanger {
     func changeSport(newSport: String, newIndex: Int)
@@ -177,8 +178,9 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)
         } else {
+            guard let uid = Auth.auth().currentUser?.uid else {return}
             
-            let newEvent = Event(owner: db.collection("Locations").document(locationDocumentID),
+            let newEvent = Event(owner: db.collection("users").document(String(uid)),
                                  name: nameCell.titleTextField.text!,
                                  location: db.collection("Locations").document(locationDocumentID),
                                  locationName: locationName,

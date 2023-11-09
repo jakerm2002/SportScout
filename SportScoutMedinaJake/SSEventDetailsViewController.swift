@@ -35,7 +35,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         print("Fetching data")
         fetchData()
         fetchMoreData()
-
+        eventDescription.isEditable = false
         // Do any additional setup after loading the view.
     }
     

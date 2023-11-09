@@ -12,6 +12,7 @@
 		66408F512AF3320600763C4A /* LocationDetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */; };
 		66408F572AF336F400763C4A /* EventDetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F562AF336F400763C4A /* EventDetailsStoryboard.storyboard */; };
 		66408F592AF3379B00763C4A /* SSEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66408F582AF3379B00763C4A /* SSEventDetailsViewController.swift */; };
+		66B8C6762AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66B8C6752AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard */; };
 		66C066652ADA3FB500DE3845 /* SSLocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */; };
 		66C066672ADA406600DE3845 /* SSModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066662ADA406600DE3845 /* SSModels.swift */; };
 		66C3D97A2AD88FEC003E1C99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9792AD88FEC003E1C99 /* AppDelegate.swift */; };
@@ -50,7 +51,6 @@
 		BF2BADDFF2D1ABC54FBA5885 /* Pods_SportScoutMedinaJake.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B82BE8E04B0D578ECB220C9 /* Pods_SportScoutMedinaJake.framework */; };
 		E35264542ADB34E400CAAA09 /* JakeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */; };
 		E35264562ADB374600CAAA09 /* JoshStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */; };
-		E35264582ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264572ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard */; };
 		E355B2E72AFADCD4004D0066 /* SSChooseParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E355B2E62AFADCD4004D0066 /* SSChooseParticipantsViewController.swift */; };
 		E3E1EEA82ADB417300AFCC05 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = E3E1EEA72ADB417300AFCC05 /* FirebaseStorage */; };
 /* End PBXBuildFile section */
@@ -62,6 +62,7 @@
 		66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetailsStoryboard.storyboard; sourceTree = "<group>"; };
 		66408F562AF336F400763C4A /* EventDetailsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventDetailsStoryboard.storyboard; sourceTree = "<group>"; };
 		66408F582AF3379B00763C4A /* SSEventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEventDetailsViewController.swift; sourceTree = "<group>"; };
+		66B8C6752AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomizeProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLocationDetailsViewController.swift; sourceTree = "<group>"; };
 		66C066662ADA406600DE3845 /* SSModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSModels.swift; sourceTree = "<group>"; };
 		66C3D9762AD88FEC003E1C99 /* SportScoutMedinaJake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportScoutMedinaJake.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,7 +100,6 @@
 		9611118A2AF5C08600B9DF78 /* SSEventDetailsParticipantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEventDetailsParticipantTableViewCell.swift; sourceTree = "<group>"; };
 		E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JakeStoryboard.storyboard; sourceTree = "<group>"; };
 		E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoshStoryboard.storyboard; sourceTree = "<group>"; };
-		E35264572ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomizeProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		E355B2E62AFADCD4004D0066 /* SSChooseParticipantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSChooseParticipantsViewController.swift; sourceTree = "<group>"; };
 		F2E33A87BF0A9E64A7F50FCD /* Pods-SportScoutMedinaJake.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportScoutMedinaJake.debug.xcconfig"; path = "Target Support Files/Pods-SportScoutMedinaJake/Pods-SportScoutMedinaJake.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */,
+				66B8C6752AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard */,
 				E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */,
 				66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */,
 				66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */,
@@ -286,6 +287,7 @@
 				66C3D9932AD897BE003E1C99 /* recSports.png in Resources */,
 				66408F572AF336F400763C4A /* EventDetailsStoryboard.storyboard in Resources */,
 				6607E9A82ADF85AA00F90978 /* LaunchScreen.storyboard in Resources */,
+				66B8C6762AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard in Resources */,
 				66C3D9972AD89844003E1C99 /* hancockRec.png in Resources */,
 				E35264542ADB34E400CAAA09 /* JakeStoryboard.storyboard in Resources */,
 			);
