@@ -32,6 +32,7 @@ struct Location: Identifiable, Codable {
 
 struct Event: Identifiable, Codable {
     @DocumentID var id: String?
+    var owner: DocumentReference
     var name: String
     var location: DocumentReference // a reference to the location
     var locationName: String        // the name of the location
@@ -39,4 +40,24 @@ struct Event: Identifiable, Codable {
     var startTime: Date
     var endTime: Date
     var description: String
+    var participants: [FirebaseFirestore.DocumentReference]?
+    
+    // get the path of each participant DocumentReference
+    var participantPaths: [String]? {
+        participants?.compactMap() {
+            document -> String in
+            return document.path
+        }
+    }
+}
+
+struct User: Identifiable, Codable, Equatable {
+    @DocumentID var id: String?
+    var bio: String
+    var feet: String
+    var fullName: String
+    var inches: String
+    var sports: String
+    var username: String
+    var weight: String
 }

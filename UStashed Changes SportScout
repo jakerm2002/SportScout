@@ -1,0 +1,347 @@
+diff --git a/.DS_Store b/.DS_Store
+index 8efbcd5..7ef6669 100644
+Binary files a/.DS_Store and b/.DS_Store differ
+diff --git a/SportScoutMedinaJake.xcodeproj/project.pbxproj b/SportScoutMedinaJake.xcodeproj/project.pbxproj
+index 9080277..90ac7a6 100644
+--- a/SportScoutMedinaJake.xcodeproj/project.pbxproj
++++ b/SportScoutMedinaJake.xcodeproj/project.pbxproj
+@@ -46,6 +46,7 @@
+ 		69348AA52AF16C7A00175A7B /* SSNewEventDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348AA42AF16C7A00175A7B /* SSNewEventDescriptionTableViewCell.swift */; };
+ 		698634122AF19ACA008ADA0A /* SSChooseSportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698634112AF19ACA008ADA0A /* SSChooseSportViewController.swift */; };
+ 		698634142AF19EF5008ADA0A /* SSNewEventSportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698634132AF19EF5008ADA0A /* SSNewEventSportTableViewCell.swift */; };
++		9611118B2AF5C08600B9DF78 /* SSEventDetailsParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9611118A2AF5C08600B9DF78 /* SSEventDetailsParticipantTableViewCell.swift */; };
+ 		BF2BADDFF2D1ABC54FBA5885 /* Pods_SportScoutMedinaJake.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B82BE8E04B0D578ECB220C9 /* Pods_SportScoutMedinaJake.framework */; };
+ 		E35264542ADB34E400CAAA09 /* JakeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */; };
+ 		E35264562ADB374600CAAA09 /* JoshStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */; };
+@@ -94,6 +95,7 @@
+ 		698634112AF19ACA008ADA0A /* SSChooseSportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSChooseSportViewController.swift; sourceTree = "<group>"; };
+ 		698634132AF19EF5008ADA0A /* SSNewEventSportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSNewEventSportTableViewCell.swift; sourceTree = "<group>"; };
+ 		69F70E63FDA415362A7BAFDD /* Pods-SportScoutMedinaJake.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportScoutMedinaJake.release.xcconfig"; path = "Target Support Files/Pods-SportScoutMedinaJake/Pods-SportScoutMedinaJake.release.xcconfig"; sourceTree = "<group>"; };
++		9611118A2AF5C08600B9DF78 /* SSEventDetailsParticipantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEventDetailsParticipantTableViewCell.swift; sourceTree = "<group>"; };
+ 		E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JakeStoryboard.storyboard; sourceTree = "<group>"; };
+ 		E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoshStoryboard.storyboard; sourceTree = "<group>"; };
+ 		E35264572ADB38B600CAAA09 /* CustomizeProfileStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomizeProfileStoryboard.storyboard; sourceTree = "<group>"; };
+@@ -158,6 +160,7 @@
+ 				69348AA02AF16C4F00175A7B /* SSNewEventStartsAtTableViewCell.swift */,
+ 				69348AA22AF16C6600175A7B /* SSNewEventEndsAtTableViewCell.swift */,
+ 				69348AA42AF16C7A00175A7B /* SSNewEventDescriptionTableViewCell.swift */,
++				9611118A2AF5C08600B9DF78 /* SSEventDetailsParticipantTableViewCell.swift */,
+ 				66C3D9E32AD903DF003E1C99 /* SSSettingsViewController.swift */,
+ 				66C3D9DF2AD8FF75003E1C99 /* SSTabBarController.swift */,
+ 				66C3D9DD2AD8FC79003E1C99 /* ProfileViewController.swift */,
+@@ -356,6 +359,7 @@
+ 				66C3D9E62AD91034003E1C99 /* SSNewEventViewController.swift in Sources */,
+ 				66C3D97C2AD88FEC003E1C99 /* SceneDelegate.swift in Sources */,
+ 				69348AA52AF16C7A00175A7B /* SSNewEventDescriptionTableViewCell.swift in Sources */,
++				9611118B2AF5C08600B9DF78 /* SSEventDetailsParticipantTableViewCell.swift in Sources */,
+ 				69348A9F2AF16C3300175A7B /* SSNewEventLocationTableViewCell.swift in Sources */,
+ 				69348A9D2AF16C1A00175A7B /* SSNewEventTitleTableViewCell.swift in Sources */,
+ 			);
+diff --git a/SportScoutMedinaJake.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved b/SportScoutMedinaJake.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+index eb8e973..8679bdf 100644
+--- a/SportScoutMedinaJake.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
++++ b/SportScoutMedinaJake.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+@@ -14,8 +14,8 @@
+       "kind" : "remoteSourceControl",
+       "location" : "https://github.com/firebase/firebase-ios-sdk",
+       "state" : {
+-        "revision" : "837d4af6ead57cec1fc38007892500d3139c7556",
+-        "version" : "10.16.0"
++        "revision" : "8872dbd7d947acf757abab933da10e83c1842280",
++        "version" : "10.17.0"
+       }
+     },
+     {
+@@ -23,8 +23,8 @@
+       "kind" : "remoteSourceControl",
+       "location" : "https://github.com/google/GoogleAppMeasurement.git",
+       "state" : {
+-        "revision" : "56f681586ff006a7982b53dc94082eea31971acf",
+-        "version" : "10.16.0"
++        "revision" : "6b332152355c372ace9966d8ee76ed191f97025e",
++        "version" : "10.17.0"
+       }
+     },
+     {
+@@ -41,8 +41,8 @@
+       "kind" : "remoteSourceControl",
+       "location" : "https://github.com/google/GoogleUtilities.git",
+       "state" : {
+-        "revision" : "c38ce365d77b04a9a300c31061c5227589e5597b",
+-        "version" : "7.11.5"
++        "revision" : "1cd556b33550982ec17f80e358253d905e756f0f",
++        "version" : "7.11.6"
+       }
+     },
+     {
+@@ -104,8 +104,8 @@
+       "kind" : "remoteSourceControl",
+       "location" : "https://github.com/apple/swift-protobuf.git",
+       "state" : {
+-        "revision" : "3c54ab05249f59f2c6641dd2920b8358ea9ed127",
+-        "version" : "1.24.0"
++        "revision" : "07f7f26ded8df9645c072f220378879c4642e063",
++        "version" : "1.25.1"
+       }
+     }
+   ],
+diff --git a/SportScoutMedinaJake.xcodeproj/project.xcworkspace/xcuserdata/ayud0371.xcuserdatad/UserInterfaceState.xcuserstate b/SportScoutMedinaJake.xcodeproj/project.xcworkspace/xcuserdata/ayud0371.xcuserdatad/UserInterfaceState.xcuserstate
+index 27f3334..eaab2f5 100644
+Binary files a/SportScoutMedinaJake.xcodeproj/project.xcworkspace/xcuserdata/ayud0371.xcuserdatad/UserInterfaceState.xcuserstate and b/SportScoutMedinaJake.xcodeproj/project.xcworkspace/xcuserdata/ayud0371.xcuserdatad/UserInterfaceState.xcuserstate differ
+diff --git a/SportScoutMedinaJake.xcodeproj/xcuserdata/ayud0371.xcuserdatad/xcschemes/xcschememanagement.plist b/SportScoutMedinaJake.xcodeproj/xcuserdata/ayud0371.xcuserdatad/xcschemes/xcschememanagement.plist
+index 8dbd15b..22d1e1b 100644
+--- a/SportScoutMedinaJake.xcodeproj/xcuserdata/ayud0371.xcuserdatad/xcschemes/xcschememanagement.plist
++++ b/SportScoutMedinaJake.xcodeproj/xcuserdata/ayud0371.xcuserdatad/xcschemes/xcschememanagement.plist
+@@ -28,7 +28,7 @@
+ 		<key>SportScoutMedinaJake.xcscheme_^#shared#^_</key>
+ 		<dict>
+ 			<key>orderHint</key>
+-			<integer>1</integer>
++			<integer>3</integer>
+ 		</dict>
+ 	</dict>
+ </dict>
+diff --git a/SportScoutMedinaJake/EventDetailsStoryboard.storyboard b/SportScoutMedinaJake/EventDetailsStoryboard.storyboard
+index 19f6c1d..24b089d 100644
+--- a/SportScoutMedinaJake/EventDetailsStoryboard.storyboard
++++ b/SportScoutMedinaJake/EventDetailsStoryboard.storyboard
+@@ -1,9 +1,9 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
++<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+     <device id="retina6_12" orientation="portrait" appearance="light"/>
+     <dependencies>
+         <deployment identifier="iOS"/>
+-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
++        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+@@ -17,24 +17,144 @@
+                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                         <subviews>
+-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event/Game page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sau-5c-yYh">
+-                                <rect key="frame" x="129" y="416" width="135" height="21"/>
+-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
++                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sau-5c-yYh">
++                                <rect key="frame" x="16" y="59" width="100" height="21"/>
+                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                 <nil key="textColor"/>
+                                 <nil key="highlightedColor"/>
+                             </label>
++                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="___'s team: &lt;sport&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJH-nU-26i">
++                                <rect key="frame" x="16" y="120" width="361" height="21"/>
++                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
++                                <nil key="textColor"/>
++                                <nil key="highlightedColor"/>
++                            </label>
++                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;location&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKt-hc-1hE">
++                                <rect key="frame" x="16" y="149" width="361" height="21"/>
++                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
++                                <nil key="textColor"/>
++                                <nil key="highlightedColor"/>
++                            </label>
++                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;date&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6q-Lf-NRr">
++                                <rect key="frame" x="16" y="178" width="361" height="21"/>
++                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
++                                <nil key="textColor"/>
++                                <nil key="highlightedColor"/>
++                            </label>
++                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;time&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uk2-gA-BET">
++                                <rect key="frame" x="16" y="207" width="361" height="21"/>
++                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
++                                <nil key="textColor"/>
++                                <nil key="highlightedColor"/>
++                            </label>
++                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JmR-Di-hb4">
++                                <rect key="frame" x="16" y="542" width="361" height="276"/>
++                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
++                                <prototypes>
++                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="58" id="gr2-0o-PFn" customClass="SSEventDetailsParticipantTableViewCell" customModule="SportScoutMedinaJake" customModuleProvider="target">
++                                        <rect key="frame" x="0.0" y="50" width="361" height="58"/>
++                                        <autoresizingMask key="autoresizingMask"/>
++                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gr2-0o-PFn" id="2Xf-jN-zVu">
++                                            <rect key="frame" x="0.0" y="0.0" width="361" height="58"/>
++                                            <autoresizingMask key="autoresizingMask"/>
++                                            <subviews>
++                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Participant Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Y5-51-qgI">
++                                                    <rect key="frame" x="77" y="19" width="264" height="21"/>
++                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
++                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
++                                                    <nil key="textColor"/>
++                                                    <nil key="highlightedColor"/>
++                                                </label>
++                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vc5-Ej-A2P">
++                                                    <rect key="frame" x="20" y="6" width="47" height="47"/>
++                                                    <constraints>
++                                                        <constraint firstAttribute="width" constant="47" id="5ZI-Nu-NtB"/>
++                                                        <constraint firstAttribute="height" constant="47" id="cZ7-rh-67m"/>
++                                                    </constraints>
++                                                </imageView>
++                                            </subviews>
++                                        </tableViewCellContentView>
++                                        <connections>
++                                            <outlet property="profilePicture" destination="2Xf-jN-zVu" id="kGQ-lZ-pe8"/>
++                                            <outlet property="username" destination="9Y5-51-qgI" id="gEV-Hj-05b"/>
++                                        </connections>
++                                    </tableViewCell>
++                                </prototypes>
++                            </tableView>
++                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q09-gh-hBM">
++                                <rect key="frame" x="125" y="437" width="143" height="35"/>
++                                <state key="normal" title="Button"/>
++                                <buttonConfiguration key="configuration" style="tinted" title="Request to Join" cornerStyle="capsule"/>
++                                <connections>
++                                    <action selector="requestToJoinPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="KBB-eJ-cON"/>
++                                </connections>
++                            </button>
++                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="__ Participants" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hg7-cf-eLW">
++                                <rect key="frame" x="16" y="513" width="361" height="21"/>
++                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
++                                <nil key="textColor"/>
++                                <nil key="highlightedColor"/>
++                            </label>
++                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SdB-d8-haq">
++                                <rect key="frame" x="59" y="258" width="275" height="158"/>
++                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
++                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
++                                <color key="textColor" systemColor="labelColor"/>
++                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
++                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
++                            </textView>
+                         </subviews>
+                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
++                        <constraints>
++                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="SdB-d8-haq" secondAttribute="trailing" constant="59" id="0Qf-Ww-1H2"/>
++                            <constraint firstItem="SdB-d8-haq" firstAttribute="top" secondItem="Uk2-gA-BET" secondAttribute="bottom" constant="30" id="4lm-E3-pco"/>
++                            <constraint firstItem="u6q-Lf-NRr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="54f-Jl-CRR"/>
++                            <constraint firstItem="hg7-cf-eLW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="66Y-Vi-sqr"/>
++                            <constraint firstItem="JmR-Di-hb4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="9hi-39-rFt"/>
++                            <constraint firstItem="WJH-nU-26i" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="ADv-CW-QAh"/>
++                            <constraint firstItem="Sau-5c-yYh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="DZX-ul-fep"/>
++                            <constraint firstItem="u6q-Lf-NRr" firstAttribute="top" secondItem="UKt-hc-1hE" secondAttribute="bottom" constant="8" symbolic="YES" id="DjR-BO-L21"/>
++                            <constraint firstItem="UKt-hc-1hE" firstAttribute="top" secondItem="WJH-nU-26i" secondAttribute="bottom" constant="8" symbolic="YES" id="EK8-0b-S5a"/>
++                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="JmR-Di-hb4" secondAttribute="trailing" constant="16" id="Ffh-mp-Dqu"/>
++                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="JmR-Di-hb4" secondAttribute="bottom" id="Gjg-wH-dVd"/>
++                            <constraint firstItem="Sau-5c-yYh" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="HXJ-8n-Qkn"/>
++                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="WJH-nU-26i" secondAttribute="trailing" constant="16" id="JRX-la-WjD"/>
++                            <constraint firstItem="Uk2-gA-BET" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="JYc-sk-bLK"/>
++                            <constraint firstItem="q09-gh-hBM" firstAttribute="top" secondItem="SdB-d8-haq" secondAttribute="bottom" constant="21" id="LUG-1Y-a2g"/>
++                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="UKt-hc-1hE" secondAttribute="trailing" constant="16" id="LuW-i5-vNC"/>
++                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Uk2-gA-BET" secondAttribute="trailing" constant="16" id="M0G-1t-Voz"/>
++                            <constraint firstItem="hg7-cf-eLW" firstAttribute="top" secondItem="q09-gh-hBM" secondAttribute="bottom" constant="41" id="MgL-BB-7Jc"/>
++                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hg7-cf-eLW" secondAttribute="trailing" constant="16" id="Nzp-Cy-D1P"/>
++                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="q09-gh-hBM" secondAttribute="trailing" constant="125" id="T7a-iA-GGB"/>
++                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="u6q-Lf-NRr" secondAttribute="trailing" constant="16" id="bGD-tr-ZIw"/>
++                            <constraint firstItem="WJH-nU-26i" firstAttribute="top" secondItem="Sau-5c-yYh" secondAttribute="bottom" constant="40" id="cUY-Fp-KOa"/>
++                            <constraint firstItem="q09-gh-hBM" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="125" id="cqm-ra-a8C"/>
++                            <constraint firstItem="UKt-hc-1hE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="li2-Z0-Nzo"/>
++                            <constraint firstItem="SdB-d8-haq" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="59" id="r27-Pu-C8F"/>
++                            <constraint firstItem="Uk2-gA-BET" firstAttribute="top" secondItem="u6q-Lf-NRr" secondAttribute="bottom" constant="8" symbolic="YES" id="rg3-Ta-fRp"/>
++                            <constraint firstItem="JmR-Di-hb4" firstAttribute="top" secondItem="hg7-cf-eLW" secondAttribute="bottom" constant="8" symbolic="YES" id="yaV-3K-24d"/>
++                        </constraints>
+                     </view>
++                    <connections>
++                        <outlet property="dateLabel" destination="u6q-Lf-NRr" id="tYV-Hk-rQu"/>
++                        <outlet property="eventDescription" destination="SdB-d8-haq" id="hD8-Rh-hdv"/>
++                        <outlet property="eventOwnerLabel" destination="WJH-nU-26i" id="CSL-5P-7cu"/>
++                        <outlet property="locationLabel" destination="UKt-hc-1hE" id="ieV-TQ-Baw"/>
++                        <outlet property="numParticipantsLabel" destination="hg7-cf-eLW" id="2Fj-nc-nW1"/>
++                        <outlet property="participantList" destination="JmR-Di-hb4" id="t4G-hz-oQb"/>
++                        <outlet property="timeLabel" destination="Uk2-gA-BET" id="y3d-62-beC"/>
++                    </connections>
+                 </viewController>
+                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+             </objects>
+-            <point key="canvasLocation" x="132" y="-28"/>
++            <point key="canvasLocation" x="130.53435114503816" y="-28.169014084507044"/>
+         </scene>
+     </scenes>
+     <resources>
++        <systemColor name="labelColor">
++            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
++        </systemColor>
+         <systemColor name="systemBackgroundColor">
+             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+         </systemColor>
+diff --git a/SportScoutMedinaJake/SSEventDetailsParticipantTableViewCell.swift b/SportScoutMedinaJake/SSEventDetailsParticipantTableViewCell.swift
+index 5b14f25..e9b6b2a 100644
+--- a/SportScoutMedinaJake/SSEventDetailsParticipantTableViewCell.swift
++++ b/SportScoutMedinaJake/SSEventDetailsParticipantTableViewCell.swift
+@@ -8,6 +8,10 @@
+ import UIKit
+ 
+ class SSEventDetailsParticipantTableViewCell: UITableViewCell {
++    
++    @IBOutlet var profilePicture: UIView!
++    @IBOutlet var username: UILabel!
++    
+ 
+     override func awakeFromNib() {
+         super.awakeFromNib()
+diff --git a/SportScoutMedinaJake/SSEventDetailsViewController.swift b/SportScoutMedinaJake/SSEventDetailsViewController.swift
+index a863538..909efd1 100644
+--- a/SportScoutMedinaJake/SSEventDetailsViewController.swift
++++ b/SportScoutMedinaJake/SSEventDetailsViewController.swift
+@@ -7,23 +7,33 @@
+ 
+ import UIKit
+ 
+-class SSEventDetailsViewController: UIViewController {
+-
++class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
++    
++    var event: Event!
++    @IBOutlet var eventOwnerLabel: UILabel!
++    @IBOutlet var locationLabel: UILabel!
++    @IBOutlet var dateLabel: UILabel!
++    @IBOutlet var timeLabel: UILabel!
++    @IBOutlet var eventDescription: UITextView!
++    @IBOutlet var numParticipantsLabel: UILabel!
++    @IBOutlet var participantList: UITableView!
++    
+     override func viewDidLoad() {
+         super.viewDidLoad()
+ 
+         // Do any additional setup after loading the view.
+     }
+     
+-
+-    /*
+-    // MARK: - Navigation
+-
+-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+-        // Get the new view controller using segue.destination.
+-        // Pass the selected object to the new view controller.
++    @IBAction func requestToJoinPressed(_ sender: Any) {
+     }
+-    */
++    
++    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
++        // return num participants
++    }
++    
++    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
++        
++    }
++    
+ 
+ }
+diff --git a/SportScoutMedinaJake/SSModels.swift b/SportScoutMedinaJake/SSModels.swift
+index 1b27102..265865a 100644
+--- a/SportScoutMedinaJake/SSModels.swift
++++ b/SportScoutMedinaJake/SSModels.swift
+@@ -38,4 +38,10 @@ struct Event: Identifiable, Codable {
+     var startTime: Date
+     var endTime: Date
+     var description: String
++//    var participants: [User]
+ }
++
++//struct User: Identifiable, Codable {
++//    @DocumentID var id: String?
++//    var username: String
++//}

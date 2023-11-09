@@ -37,6 +37,9 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     var eventsOnDate: [Date: [Event]] = [:] // the events under a certain date key must occur on that date
     var documentID = "" // will be set from home VC
     
+    var selectedEventDate: Date?
+    var selectedEventIndex: UInt = 0
+    
     var LocationDetailsToSelectedEventSegueIdentifier = "LocationDetailsToSelectedEventSegueIdentifier"
     var LocationDetailsToNewEventSegueIdentifier = "LocationDetailsToNewEventSegueIdentifier"
     
@@ -139,6 +142,9 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
         let curEventObj = eventsOnDate[dateWithoutTime]![Int(index)]
         print("Calendar detected event selection:\n\tTitle: \(curEventObj.name)\n\tLocation: \(curEventObj.location)\n\tSport: \(curEventObj.sport)\n\tStart time (UTC): \(curEventObj.startTime.description)\n\tEnd time (UTC): \(curEventObj.endTime.description)\n\tDescription: \(curEventObj.description)")
         
+        selectedEventDate = date
+        selectedEventIndex = index
+        
         calendarView.deselectEvent()
         // TODO: perform a segue to the event/game page and send over the data from the selected event.
         performSegue(withIdentifier: LocationDetailsToSelectedEventSegueIdentifier, sender: nil)
@@ -220,7 +226,15 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
             // send the id so that the NewEventVC can load in the data if necessary
             destination.locationDocumentID = documentID
             destination.locationName = self.LocationObject.name
-        }
+        } else if segue.identifier == LocationDetailsToSelectedEventSegueIdentifier,
+                  let destination = segue.destination as? SSEventDetailsViewController {
+            let dateWithoutTime = self.removeTimeStamp(fromDate: selectedEventDate!)
+            let curEventObj = eventsOnDate[dateWithoutTime]![Int(selectedEventIndex)]
+            
+            // populate fields of next VC
+            destination.event = curEventObj
+            destination.documentID = curEventObj.id!
+               }
     }
     
 }

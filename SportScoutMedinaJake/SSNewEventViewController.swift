@@ -6,13 +6,41 @@
 //
 
 import UIKit
+import FirebaseCore
 import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseStorage
+import FirebaseAuth
 
 protocol SportChanger {
     func changeSport(newSport: String, newIndex: Int)
 }
 
-class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SportChanger {
+protocol ParticipantsChanger {
+    func addParticipant(userId: String)
+    func removeParticipant(userId: String)
+}
+
+class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SportChanger, ParticipantsChanger {
+    
+    func addParticipant(userId: String) {
+        users.append(userId)
+        for userId in users {
+            print("Participant: \(userId)")
+        }
+        numberParticipantsLabel.text = "\(users.count) participants"
+    }
+    
+    func removeParticipant(userId: String) {
+        if let idx = users.firstIndex(of: userId) {
+            users.remove(at: idx)
+        }
+        for userId in users {
+            print("Participant: \(userId)")
+        }
+        numberParticipantsLabel.text = "\(users.count) participants"
+    }
+    
     func changeSport(newSport: String, newIndex: Int) {
         let sportIndexPath = IndexPath(row: 2, section: 0)
         let sportCell = newEventTableView.cellForRow(at: sportIndexPath) as! SSNewEventSportTableViewCell
@@ -22,6 +50,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     
+    @IBOutlet weak var numberParticipantsLabel: UILabel!
     @IBOutlet weak var newEventTableView: UITableView!
     
     // will be passed in from LocationDetailsVC
@@ -37,6 +66,9 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     
     let SSNewEventFinishCreationSegue = "SSNewEventFinishCreationSegue"
     let SSChooseSportSegue = "SSChooseSportSegue"
+    let SSChooseParticipantsSegue = "SSChooseParticipantsSegue"
+    
+    var users:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +77,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         // print(locationDocumentID)
         // print(locationName)
     }
+    
     
 //    override func viewDidAppear(_ animated: Bool) {
 //        super.viewDidAppear(animated)
@@ -145,14 +178,17 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)
         } else {
+            guard let uid = Auth.auth().currentUser?.uid else {return}
             
-            let newEvent = Event(name: nameCell.titleTextField.text!,
+            let newEvent = Event(owner: db.collection("users").document(String(uid)),
+                                 name: nameCell.titleTextField.text!,
                                  location: db.collection("Locations").document(locationDocumentID),
                                  locationName: locationName,
                                  sport: sportCell.selectedSportLabel.text!,
                                  startTime: startsAtCell.startsAtDatePicker.date,
                                  endTime: endsAtCell.endsAtDatePicker.date,
-                                 description: descriptionCell.descriptionTextField.text!
+                                 description: descriptionCell.descriptionTextField.text!,
+                                 participants: fetchUsers(userIds: users)
             )
             
             // let document ID be auto-generated
@@ -177,6 +213,25 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
+    func fetchUsers(userIds: [String]) -> [FirebaseFirestore.DocumentReference] {
+        var result:[FirebaseFirestore.DocumentReference] = []
+        for userId in userIds {
+            let docRef = db.collection("users").document(userId)
+
+            docRef.getDocument { document, error in
+              if let error = error as NSError? {
+                  print("error")
+              }
+              else {
+                if let document = document {
+                    result.append(docRef)
+                }
+              }
+            }
+        }
+        return result
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SSChooseSportSegue,
            let nextVC = segue.destination as? SSChooseSportViewController
@@ -185,6 +240,13 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             let sportCell = newEventTableView.cellForRow(at: sportIndexPath) as! SSNewEventSportTableViewCell
             nextVC.delegate = self
             nextVC.selectedRowIndex = sportCell.selectedSportIndex
+        } else if segue.identifier == SSChooseParticipantsSegue, let nextVC = segue.destination as? SSChooseParticipantsViewController {
+            nextVC.navigationItem.title = "Select Participants"
+            nextVC.delegate = self
+            nextVC.usersSelected = users
         }
+    }
+    @IBAction func invitePeopleButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: SSChooseParticipantsSegue, sender: nil)
     }
 }
