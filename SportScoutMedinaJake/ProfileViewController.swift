@@ -27,7 +27,6 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        var imageURL = ""
         guard let uid = Auth.auth().currentUser?.uid else {return}
         let docRef = db.collection("users").document(String(uid))
         docRef.getDocument { (document, error) in
@@ -40,16 +39,16 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate {
                 self.locationText.text = String(describing: document.get("location")!)
                 self.sportsText.text = String(describing: document.get("sports")!)
                 self.bioText.text = String(describing: document.get("bio")!)
-                imageURL = String(describing: document.get("url")!)
+                let imageURL = String(describing: document.get("url")!)
+                
+                let fileRef = storage.reference(withPath: imageURL)
+                fileRef.getData(maxSize: 1024 * 1024) { data, err in
+                    if err == nil && data != nil {
+                        self.profilePhoto.image = UIImage(data: data!)
+                    }
+                }
             } else {
                 print("Document does not exist")
-            }
-        }
-        let fileRef = Storage.storage().reference().child(imageURL)
-        fileRef.getData(maxSize: 1024 * 1024) { data, err in
-            if err == nil && data != nil {
-                print("retrieve worked")
-                self.profilePhoto.image = UIImage(data: data!)
             }
         }
     }
