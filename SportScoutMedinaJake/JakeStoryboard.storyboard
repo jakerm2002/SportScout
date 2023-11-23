@@ -52,9 +52,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bii-tA-RqI">
-                                <rect key="frame" x="0.0" y="59" width="393" height="710"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bii-tA-RqI">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CustomLocationCellIdentifier" rowHeight="120" id="h98-UV-Od4" customClass="SSHomeTableViewCell" customModule="SportScoutMedinaJake" customModuleProvider="target">
@@ -111,6 +110,12 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iWh-Ns-e6L"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="bii-tA-RqI" firstAttribute="bottom" secondItem="iWh-Ns-e6L" secondAttribute="bottom" id="9Kk-Uc-CQX"/>
+                            <constraint firstItem="bii-tA-RqI" firstAttribute="trailing" secondItem="iWh-Ns-e6L" secondAttribute="trailing" id="k2E-QV-HrQ"/>
+                            <constraint firstItem="bii-tA-RqI" firstAttribute="leading" secondItem="iWh-Ns-e6L" secondAttribute="leading" id="riT-Oy-1uw"/>
+                            <constraint firstItem="bii-tA-RqI" firstAttribute="top" secondItem="4Sa-k6-o40" secondAttribute="top" id="z6V-4d-1Kh"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XlR-I0-ttT"/>
                     <connections>

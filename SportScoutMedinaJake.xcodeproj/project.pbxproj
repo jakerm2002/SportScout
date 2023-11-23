@@ -12,6 +12,7 @@
 		66408F512AF3320600763C4A /* LocationDetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */; };
 		66408F572AF336F400763C4A /* EventDetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F562AF336F400763C4A /* EventDetailsStoryboard.storyboard */; };
 		66408F592AF3379B00763C4A /* SSEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66408F582AF3379B00763C4A /* SSEventDetailsViewController.swift */; };
+		6669FDF72B0D926500D8D17C /* SSHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6669FDF62B0D926500D8D17C /* SSHomeTableViewCell.swift */; };
 		66B8C6762AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66B8C6752AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard */; };
 		66C066652ADA3FB500DE3845 /* SSLocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */; };
 		66C066672ADA406600DE3845 /* SSModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066662ADA406600DE3845 /* SSModels.swift */; };
@@ -62,6 +63,7 @@
 		66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetailsStoryboard.storyboard; sourceTree = "<group>"; };
 		66408F562AF336F400763C4A /* EventDetailsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventDetailsStoryboard.storyboard; sourceTree = "<group>"; };
 		66408F582AF3379B00763C4A /* SSEventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEventDetailsViewController.swift; sourceTree = "<group>"; };
+		6669FDF62B0D926500D8D17C /* SSHomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSHomeTableViewCell.swift; sourceTree = "<group>"; };
 		66B8C6752AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomizeProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLocationDetailsViewController.swift; sourceTree = "<group>"; };
 		66C066662ADA406600DE3845 /* SSModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSModels.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				66C3D9D52AD8A7BB003E1C99 /* LoginViewController.swift */,
 				66C3D9D72AD8A7C4003E1C99 /* SignupViewController.swift */,
 				66C3D9902AD89553003E1C99 /* HomeViewController.swift */,
+				6669FDF62B0D926500D8D17C /* SSHomeTableViewCell.swift */,
 				6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */,
 				66C3D9852AD88FED003E1C99 /* Assets.xcassets */,
 				66C3D9872AD88FED003E1C99 /* LaunchScreen.storyboard */,
@@ -346,6 +349,7 @@
 				66C066672ADA406600DE3845 /* SSModels.swift in Sources */,
 				66C3D9D82AD8A7C4003E1C99 /* SignupViewController.swift in Sources */,
 				66C3D9DC2AD8F4A9003E1C99 /* CustomizeProfileViewController.swift in Sources */,
+				6669FDF72B0D926500D8D17C /* SSHomeTableViewCell.swift in Sources */,
 				69348AA32AF16C6600175A7B /* SSNewEventEndsAtTableViewCell.swift in Sources */,
 				66C3D9912AD89553003E1C99 /* HomeViewController.swift in Sources */,
 				66C3D9842AD88FEC003E1C99 /* SportScoutMedinaJake.xcdatamodeld in Sources */,
