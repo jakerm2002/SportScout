@@ -9,21 +9,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Timeline-->
-        <scene sceneID="oCE-4t-YMM">
+        <!--TimelineStoryboard-->
+        <scene sceneID="pPh-tF-fou">
             <objects>
-                <viewController id="Z2v-gy-Ale" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6bA-1z-C1g">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="XSs-0z-Kgr"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Timeline" image="doc.text.image.fill" catalog="system" id="GYM-hS-rCm"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aU0-vV-5Mf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="TimelineStoryboard" id="QR3-96-Zee" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="mEZ-96-YcR"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2FJ-E6-fUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="156" y="1556"/>
+            <point key="canvasLocation" x="1311" y="1560"/>
         </scene>
         <!--Home-->
         <scene sceneID="D5O-9B-kpB">
@@ -42,7 +36,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FEm-Kj-X8d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="875.57251908396938" y="1555.6338028169014"/>
+            <point key="canvasLocation" x="1956.4885496183206" y="1555.6338028169014"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="ATj-jN-L99">
@@ -124,7 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RyY-4W-gsR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1802.2900763358778" y="1555.6338028169014"/>
+            <point key="canvasLocation" x="2729.0076335877861" y="1555.6338028169014"/>
         </scene>
         <!--LocationDetailsStoryboard-->
         <scene sceneID="NyH-4E-QTj">
@@ -147,7 +141,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Z2v-gy-Ale" kind="relationship" relationship="viewControllers" id="LsI-Cx-Ixx"/>
+                        <segue destination="saw-Fc-8Wu" kind="relationship" relationship="viewControllers" id="sep-hF-HT6"/>
                         <segue destination="hoh-Cd-LCY" kind="relationship" relationship="viewControllers" id="43B-OP-lgm"/>
                         <segue destination="aAE-TQ-iNV" kind="relationship" relationship="viewControllers" id="dhr-jU-zpB"/>
                     </connections>
@@ -173,7 +167,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DqJ-3u-cFE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2478.6259541984732" y="1555.6338028169014"/>
+            <point key="canvasLocation" x="3405.3435114503814" y="1555.6338028169014"/>
         </scene>
         <!--JoshStoryboard-->
         <scene sceneID="XMQ-gv-gLH">
@@ -183,11 +177,30 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UGO-zn-9co" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3129" y="1569"/>
+            <point key="canvasLocation" x="4054.9618320610684" y="1568.3098591549297"/>
+        </scene>
+        <!--Timeline-->
+        <scene sceneID="DMF-mJ-94k">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="saw-Fc-8Wu" userLabel="Timeline" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Timeline" selectedImage="doc.text.image" catalog="system" id="dAe-bg-IdN"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FP4-tM-Mnx">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QR3-96-Zee" kind="relationship" relationship="rootViewController" id="nEI-kI-a93"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SdD-lf-jPj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="735" y="1556"/>
         </scene>
     </scenes>
     <resources>
-        <image name="doc.text.image.fill" catalog="system" width="115" height="128"/>
+        <image name="doc.text.image" catalog="system" width="115" height="128"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">

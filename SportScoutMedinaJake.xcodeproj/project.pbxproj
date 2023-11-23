@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6607E9A82ADF85AA00F90978 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */; };
+		66119D5A2B0F1F3C004E3530 /* TimelineStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66119D592B0F1F3C004E3530 /* TimelineStoryboard.storyboard */; };
+		66119D5E2B0F20FA004E3530 /* SSTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66119D5D2B0F20FA004E3530 /* SSTimelineViewController.swift */; };
 		66408F4F2AF331D500763C4A /* NewEventStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */; };
 		66408F512AF3320600763C4A /* LocationDetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */; };
 		66408F572AF336F400763C4A /* EventDetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F562AF336F400763C4A /* EventDetailsStoryboard.storyboard */; };
@@ -59,6 +61,8 @@
 /* Begin PBXFileReference section */
 		1B82BE8E04B0D578ECB220C9 /* Pods_SportScoutMedinaJake.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportScoutMedinaJake.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		66119D592B0F1F3C004E3530 /* TimelineStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimelineStoryboard.storyboard; sourceTree = "<group>"; };
+		66119D5D2B0F20FA004E3530 /* SSTimelineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTimelineViewController.swift; sourceTree = "<group>"; };
 		66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewEventStoryboard.storyboard; sourceTree = "<group>"; };
 		66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetailsStoryboard.storyboard; sourceTree = "<group>"; };
 		66408F562AF336F400763C4A /* EventDetailsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventDetailsStoryboard.storyboard; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 				E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */,
 				66B8C6752AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard */,
 				E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */,
+				66119D592B0F1F3C004E3530 /* TimelineStoryboard.storyboard */,
+				66119D5D2B0F20FA004E3530 /* SSTimelineViewController.swift */,
 				66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */,
 				66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */,
 				66408F582AF3379B00763C4A /* SSEventDetailsViewController.swift */,
@@ -280,6 +286,7 @@
 				66C3D99D2AD8A328003E1C99 /* GoogleService-Info.plist in Resources */,
 				66408F4F2AF331D500763C4A /* NewEventStoryboard.storyboard in Resources */,
 				66408F512AF3320600763C4A /* LocationDetailsStoryboard.storyboard in Resources */,
+				66119D5A2B0F1F3C004E3530 /* TimelineStoryboard.storyboard in Resources */,
 				66C3D9892AD88FED003E1C99 /* LaunchScreen.storyboard in Resources */,
 				66C3D9862AD88FED003E1C99 /* Assets.xcassets in Resources */,
 				66C3D9DA2AD8ADE4003E1C99 /* SportScout.png in Resources */,
@@ -348,6 +355,7 @@
 				66C3D9D62AD8A7BB003E1C99 /* LoginViewController.swift in Sources */,
 				66C066672ADA406600DE3845 /* SSModels.swift in Sources */,
 				66C3D9D82AD8A7C4003E1C99 /* SignupViewController.swift in Sources */,
+				66119D5E2B0F20FA004E3530 /* SSTimelineViewController.swift in Sources */,
 				66C3D9DC2AD8F4A9003E1C99 /* CustomizeProfileViewController.swift in Sources */,
 				6669FDF72B0D926500D8D17C /* SSHomeTableViewCell.swift in Sources */,
 				69348AA32AF16C6600175A7B /* SSNewEventEndsAtTableViewCell.swift in Sources */,
