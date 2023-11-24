@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,8 +17,36 @@
                     <view key="view" contentMode="scaleToFill" id="KMH-W9-i1a">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YMz-Wo-M7R">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZsC-nF-4c5">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="C2e-4X-OmB">
+                                        <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wUi-tT-QGu">
+                                            <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="0sv-SQ-XJ0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="YMz-Wo-M7R" firstAttribute="leading" secondItem="0sv-SQ-XJ0" secondAttribute="leading" id="Bks-XQ-S6r"/>
+                            <constraint firstItem="0sv-SQ-XJ0" firstAttribute="bottom" secondItem="YMz-Wo-M7R" secondAttribute="bottom" id="EX2-7G-OuX"/>
+                            <constraint firstItem="0sv-SQ-XJ0" firstAttribute="trailing" secondItem="YMz-Wo-M7R" secondAttribute="trailing" id="GME-WE-EUH"/>
+                            <constraint firstItem="YMz-Wo-M7R" firstAttribute="top" secondItem="0sv-SQ-XJ0" secondAttribute="top" id="fCF-j5-RMg"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Timeline" image="doc.text.image.fill" catalog="system" id="zo5-fz-ZMu"/>
                 </viewController>
