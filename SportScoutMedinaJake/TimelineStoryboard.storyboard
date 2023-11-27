@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kCC-n9-NfT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="McX-yF-lRk">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Timeline-->
+        <!--Timeline View Controller-->
         <scene sceneID="cvZ-QL-Rf8">
             <objects>
                 <viewController id="kCC-n9-NfT" customClass="SSTimelineViewController" customModule="SportScoutMedinaJake" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YMz-Wo-M7R">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZsC-nF-4c5">
                                     <size key="itemSize" width="376" height="356"/>
@@ -106,12 +106,72 @@
                             <constraint firstItem="YMz-Wo-M7R" firstAttribute="top" secondItem="0sv-SQ-XJ0" secondAttribute="top" id="fCF-j5-RMg"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Timeline" image="doc.text.image.fill" catalog="system" id="zo5-fz-ZMu"/>
+                    <navigationItem key="navigationItem" id="sYZ-4L-eIA"/>
                     <connections>
                         <outlet property="collectionView" destination="YMz-Wo-M7R" id="nT2-uE-YgM"/>
+                        <segue destination="taz-4z-W7w" kind="show" id="Ahi-6p-wdr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jnR-Ge-ET0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1081.679389312977" y="1555.6338028169014"/>
+        </scene>
+        <!--New Post-->
+        <scene sceneID="sVe-Rv-GRP">
+            <objects>
+                <viewController id="taz-4z-W7w" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rbh-1d-Ug0">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0Q-Al-v4n">
+                                <rect key="frame" x="0.0" y="103" width="393" height="250"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoE-la-fwj">
+                                        <rect key="frame" x="144" y="108" width="106" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Add Media"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="8if-cp-JeK"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="AOH-sx-SuZ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="e0Q-Al-v4n" firstAttribute="leading" secondItem="AOH-sx-SuZ" secondAttribute="leading" id="SI0-h1-Hi6"/>
+                            <constraint firstItem="e0Q-Al-v4n" firstAttribute="trailing" secondItem="AOH-sx-SuZ" secondAttribute="trailing" id="eM1-xo-lBg"/>
+                            <constraint firstItem="e0Q-Al-v4n" firstAttribute="top" secondItem="AOH-sx-SuZ" secondAttribute="top" id="wXI-tr-Blk"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Post" id="uMC-H4-mnt">
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="iaS-az-NsI"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t0C-2w-gtP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1884.7328244274809" y="1555.6338028169014"/>
+        </scene>
+        <!--Timeline-->
+        <scene sceneID="pLu-4z-8sL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="McX-yF-lRk" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Timeline" image="doc.text.image.fill" catalog="system" id="zo5-fz-ZMu"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Tq-gg-jox">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kCC-n9-NfT" kind="relationship" relationship="rootViewController" id="HI8-ay-ppB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IYj-Kh-quS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="154.96183206106869" y="1555.6338028169014"/>
         </scene>
@@ -124,6 +184,9 @@
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
