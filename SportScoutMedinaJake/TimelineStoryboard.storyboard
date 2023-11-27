@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="McX-yF-lRk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kCC-n9-NfT">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YMz-Wo-M7R">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZsC-nF-4c5">
                                     <size key="itemSize" width="376" height="356"/>
@@ -109,34 +109,38 @@
                     <navigationItem key="navigationItem" id="sYZ-4L-eIA"/>
                     <connections>
                         <outlet property="collectionView" destination="YMz-Wo-M7R" id="nT2-uE-YgM"/>
-                        <segue destination="taz-4z-W7w" kind="show" id="Ahi-6p-wdr"/>
+                        <segue destination="taz-4z-W7w" kind="show" identifier="TimelineToNewPostSegueIdentifier" id="Ahi-6p-wdr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jnR-Ge-ET0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1081.679389312977" y="1555.6338028169014"/>
+            <point key="canvasLocation" x="2008.3969465648854" y="1555.6338028169014"/>
         </scene>
         <!--New Post-->
         <scene sceneID="sVe-Rv-GRP">
             <objects>
-                <viewController id="taz-4z-W7w" sceneMemberID="viewController">
+                <viewController id="taz-4z-W7w" customClass="SSNewPostViewController" customModule="SportScoutMedinaJake" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rbh-1d-Ug0">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0Q-Al-v4n">
-                                <rect key="frame" x="0.0" y="103" width="393" height="250"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="250"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoE-la-fwj">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoE-la-fwj">
                                         <rect key="frame" x="144" y="108" width="106" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Add Media"/>
+                                        <connections>
+                                            <action selector="addMediaButtonPressed:" destination="taz-4z-W7w" eventType="touchUpInside" id="tQN-me-iSr"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="8if-cp-JeK"/>
+                                    <constraint firstItem="hoE-la-fwj" firstAttribute="centerX" secondItem="e0Q-Al-v4n" secondAttribute="centerX" id="kLL-j5-di9"/>
+                                    <constraint firstItem="hoE-la-fwj" firstAttribute="centerY" secondItem="e0Q-Al-v4n" secondAttribute="centerY" id="r2s-7h-Fez"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -151,33 +155,16 @@
                     <navigationItem key="navigationItem" title="New Post" id="uMC-H4-mnt">
                         <barButtonItem key="rightBarButtonItem" title="Share" id="iaS-az-NsI"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mediaView" destination="e0Q-Al-v4n" id="QG7-pZ-fhw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t0C-2w-gtP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1884.7328244274809" y="1555.6338028169014"/>
-        </scene>
-        <!--Timeline-->
-        <scene sceneID="pLu-4z-8sL">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="McX-yF-lRk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Timeline" image="doc.text.image.fill" catalog="system" id="zo5-fz-ZMu"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Tq-gg-jox">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="kCC-n9-NfT" kind="relationship" relationship="rootViewController" id="HI8-ay-ppB"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IYj-Kh-quS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="154.96183206106869" y="1555.6338028169014"/>
+            <point key="canvasLocation" x="2811.450381679389" y="1555.6338028169014"/>
         </scene>
     </scenes>
     <resources>
-        <image name="doc.text.image.fill" catalog="system" width="115" height="128"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

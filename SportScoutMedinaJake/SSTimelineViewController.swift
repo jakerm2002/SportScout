@@ -13,7 +13,8 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
     
     let timelineCollectionViewCellIdentifier = "TimelineCollectionViewCellIdentifier"
     
-    var rightNavBarSegment = UIBarButtonItem(systemItem: .add)
+    let timelineToNewPostSegueIdentifier = "TimelineToNewPostSegueIdentifier"
+    
     var searchBar = UISearchBar()
     
     override func viewDidLoad() {
@@ -22,7 +23,7 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        navigationItem.rightBarButtonItem = rightNavBarSegment
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(SSTimelineViewController.newPostButtonPressed))
         navigationItem.titleView = searchBar
     }
     
@@ -48,6 +49,10 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         collectionView.collectionViewLayout = layout
+    }
+    
+    @objc func newPostButtonPressed() {
+        performSegue(withIdentifier: timelineToNewPostSegueIdentifier, sender: nil)
     }
 
 }
