@@ -22,6 +22,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         // Hide password
         passwordTextField.isSecureTextEntry = true
+        
+        // sign in the user if they already signed in
+        Auth.auth().addStateDidChangeListener() {
+            (auth,user) in
+            if user != nil {
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                self.emailTextField.text = nil
+                self.passwordTextField.text = nil
+            }
+        }
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
