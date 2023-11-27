@@ -17,6 +17,8 @@
 		66408F572AF336F400763C4A /* EventDetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F562AF336F400763C4A /* EventDetailsStoryboard.storyboard */; };
 		66408F592AF3379B00763C4A /* SSEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66408F582AF3379B00763C4A /* SSEventDetailsViewController.swift */; };
 		6669FDF72B0D926500D8D17C /* SSHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6669FDF62B0D926500D8D17C /* SSHomeTableViewCell.swift */; };
+		666DD41B2B147F3900FAA43F /* SSPhotoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666DD41A2B147F3900FAA43F /* SSPhotoButton.swift */; };
+		666DD41D2B14827B00FAA43F /* SSVideoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666DD41C2B14827B00FAA43F /* SSVideoButton.swift */; };
 		66B8C6762AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66B8C6752AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard */; };
 		66C066652ADA3FB500DE3845 /* SSLocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */; };
 		66C066672ADA406600DE3845 /* SSModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066662ADA406600DE3845 /* SSModels.swift */; };
@@ -73,6 +75,8 @@
 		66408F562AF336F400763C4A /* EventDetailsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EventDetailsStoryboard.storyboard; sourceTree = "<group>"; };
 		66408F582AF3379B00763C4A /* SSEventDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEventDetailsViewController.swift; sourceTree = "<group>"; };
 		6669FDF62B0D926500D8D17C /* SSHomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSHomeTableViewCell.swift; sourceTree = "<group>"; };
+		666DD41A2B147F3900FAA43F /* SSPhotoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSPhotoButton.swift; sourceTree = "<group>"; };
+		666DD41C2B14827B00FAA43F /* SSVideoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSVideoButton.swift; sourceTree = "<group>"; };
 		66B8C6752AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomizeProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLocationDetailsViewController.swift; sourceTree = "<group>"; };
 		66C066662ADA406600DE3845 /* SSModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSModels.swift; sourceTree = "<group>"; };
@@ -157,6 +161,8 @@
 				66B8C6752AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard */,
 				E35264532ADB34E400CAAA09 /* TarBarControllerStoryboard.storyboard */,
 				66119D592B0F1F3C004E3530 /* TimelineStoryboard.storyboard */,
+				666DD41A2B147F3900FAA43F /* SSPhotoButton.swift */,
+				666DD41C2B14827B00FAA43F /* SSVideoButton.swift */,
 				66CEDB8F2B146A32009F8B7D /* SSNewPostViewController.swift */,
 				661FB4A42B11421E0056E307 /* SSTimelineCollectionViewCell.swift */,
 				66119D5D2B0F20FA004E3530 /* SSTimelineViewController.swift */,
@@ -377,11 +383,13 @@
 				66C066652ADA3FB500DE3845 /* SSLocationDetailsViewController.swift in Sources */,
 				698634122AF19ACA008ADA0A /* SSChooseSportViewController.swift in Sources */,
 				66C3D97E2AD88FEC003E1C99 /* ViewController.swift in Sources */,
+				666DD41D2B14827B00FAA43F /* SSVideoButton.swift in Sources */,
 				66C3D9DE2AD8FC79003E1C99 /* ProfileViewController.swift in Sources */,
 				698634142AF19EF5008ADA0A /* SSNewEventSportTableViewCell.swift in Sources */,
 				66C3D97A2AD88FEC003E1C99 /* AppDelegate.swift in Sources */,
 				66C3D9E42AD903DF003E1C99 /* SSSettingsViewController.swift in Sources */,
 				66408F592AF3379B00763C4A /* SSEventDetailsViewController.swift in Sources */,
+				666DD41B2B147F3900FAA43F /* SSPhotoButton.swift in Sources */,
 				66C3D9E62AD91034003E1C99 /* SSNewEventViewController.swift in Sources */,
 				66C3D97C2AD88FEC003E1C99 /* SceneDelegate.swift in Sources */,
 				E355B2E72AFADCD4004D0066 /* SSChooseParticipantsViewController.swift in Sources */,

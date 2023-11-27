@@ -22,29 +22,31 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         picker.delegate = self
     }
     
-    @IBAction func addMediaButtonPressed(_ sender: Any) {
+    func addMediaButtonPressed(type: String) {
         let alert = UIAlertController()
         alert.addAction(UIAlertAction(title: "Use camera", style: .default) {
             (action) in
-            self.cameraButtonSelected()
+            self.cameraButtonSelected(type: type)
         })
         alert.addAction(UIAlertAction(title: "Choose from library", style: .default) {
             (action) in
-            self.libraryButtonSelected()
+            self.libraryButtonSelected(type: type)
         })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
     }
     
-    func libraryButtonSelected() {
-        // allow photo cropping and video trimming
-        picker.allowsEditing = true
-        
+    func libraryButtonSelected(type: String) {
         picker.sourceType = .photoLibrary
-        picker.mediaTypes = [UTType.image.identifier as String, UTType.movie.identifier as String]
+        if type == "photo" {
+            picker.mediaTypes = [UTType.image.identifier as String]
+        } else {
+            picker.mediaTypes = [UTType.movie.identifier as String]
+        }
         present(picker,animated:true)
     }
     
-    func cameraButtonSelected() {
+    func cameraButtonSelected(type: String) {
         if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
             switch AVCaptureDevice.authorizationStatus(for: .video) {
             case .notDetermined:
@@ -60,10 +62,14 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
                 present(accessDeniedAlert,animated:true)
                 return
             }
-            picker.allowsEditing = false
             picker.sourceType = .camera
-            picker.mediaTypes = [UTType.image.identifier as String, UTType.movie.identifier as String]
-            picker.cameraCaptureMode = .photo
+            if type == "photo" {
+                picker.mediaTypes = [UTType.image.identifier as String]
+                picker.cameraCaptureMode = .photo
+            } else {
+                picker.mediaTypes = [UTType.movie.identifier as String]
+                picker.cameraCaptureMode = .video
+            }
             present(picker,animated: true)
         } else {
             let noCameraAlert = UIAlertController(title: "No camera", message: "No rear camera detected", preferredStyle: .alert)
@@ -88,6 +94,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         case UTType.movie.identifier:
             let chosenVideo = info[.mediaURL] as! URL
             let player = AVPlayer(url: chosenVideo)
+            player.allowsExternalPlayback = false
             avpController.player = player
             avpController.view.frame.size.height = mediaView.frame.height
             avpController.view.frame.size.width = mediaView.frame.width
@@ -100,4 +107,15 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         dismiss(animated: true)
     }
 
+    @IBAction func photoButtonPressed(_ sender: Any) {
+        picker.allowsEditing = false
+        addMediaButtonPressed(type: "photo")
+    }
+    
+    @IBAction func videoButtonPressed(_ sender: Any) {
+        // allow video trimming
+        picker.allowsEditing = true
+        addMediaButtonPressed(type: "video")
+        
+    }
 }

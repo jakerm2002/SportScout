@@ -127,20 +127,35 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0Q-Al-v4n">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="250"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoE-la-fwj">
-                                        <rect key="frame" x="144" y="108" width="106" height="35"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add Media"/>
-                                        <connections>
-                                            <action selector="addMediaButtonPressed:" destination="taz-4z-W7w" eventType="touchUpInside" id="tQN-me-iSr"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="iKW-mb-a3t">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="250"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U2M-r3-JmH" customClass="SSPhotoButton" customModule="SportScoutMedinaJake" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="250"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                <connections>
+                                                    <action selector="photoButtonPressed:" destination="taz-4z-W7w" eventType="touchUpInside" id="swY-Vq-IzX"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PiZ-bG-V4O" customClass="SSVideoButton" customModule="SportScoutMedinaJake" customModuleProvider="target">
+                                                <rect key="frame" x="196.66666666666663" y="0.0" width="196.33333333333337" height="250"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                <connections>
+                                                    <action selector="videoButtonPressed:" destination="taz-4z-W7w" eventType="touchUpInside" id="ke5-mX-TJr"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="8if-cp-JeK"/>
-                                    <constraint firstItem="hoE-la-fwj" firstAttribute="centerX" secondItem="e0Q-Al-v4n" secondAttribute="centerX" id="kLL-j5-di9"/>
-                                    <constraint firstItem="hoE-la-fwj" firstAttribute="centerY" secondItem="e0Q-Al-v4n" secondAttribute="centerY" id="r2s-7h-Fez"/>
+                                    <constraint firstItem="iKW-mb-a3t" firstAttribute="top" secondItem="e0Q-Al-v4n" secondAttribute="top" id="ODv-eS-Hrk"/>
+                                    <constraint firstAttribute="bottom" secondItem="iKW-mb-a3t" secondAttribute="bottom" id="Z6p-Gj-LgQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="iKW-mb-a3t" secondAttribute="trailing" id="hLu-zb-IyM"/>
+                                    <constraint firstItem="iKW-mb-a3t" firstAttribute="leading" secondItem="e0Q-Al-v4n" secondAttribute="leading" id="ogN-7i-Wsc"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -161,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t0C-2w-gtP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2811.450381679389" y="1555.6338028169014"/>
+            <point key="canvasLocation" x="2809.9236641221373" y="1555.6338028169014"/>
         </scene>
     </scenes>
     <resources>
