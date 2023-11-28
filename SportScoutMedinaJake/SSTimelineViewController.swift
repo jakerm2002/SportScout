@@ -22,6 +22,14 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
 
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.isScrollEnabled = true
+        collectionView.alwaysBounceVertical = true
+        collectionView.bounces = true
+        
+        // dismiss search bar when user scrolls the collection view
+        collectionView.keyboardDismissMode = .onDrag
+        
+//        searchBar.delegate = self
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(SSTimelineViewController.newPostButtonPressed))
         navigationItem.titleView = searchBar

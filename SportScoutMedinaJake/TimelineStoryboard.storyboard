@@ -168,19 +168,42 @@
                                     <constraint firstItem="iKW-mb-a3t" firstAttribute="leading" secondItem="e0Q-Al-v4n" secondAttribute="leading" id="ogN-7i-Wsc"/>
                                 </constraints>
                             </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="36p-C0-SUM">
+                                <rect key="frame" x="16" y="324" width="361" height="220"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="220" id="dSg-Yf-Ol2"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caption your post..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bw5-eF-kBK">
+                                <rect key="frame" x="16" y="290" width="149.33333333333334" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AOH-sx-SuZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="36p-C0-SUM" firstAttribute="leading" secondItem="AOH-sx-SuZ" secondAttribute="leading" constant="16" id="0RX-yz-wbO"/>
+                            <constraint firstItem="bw5-eF-kBK" firstAttribute="leading" secondItem="AOH-sx-SuZ" secondAttribute="leading" constant="16" id="C5h-hV-Aco"/>
                             <constraint firstItem="e0Q-Al-v4n" firstAttribute="leading" secondItem="AOH-sx-SuZ" secondAttribute="leading" id="SI0-h1-Hi6"/>
                             <constraint firstItem="e0Q-Al-v4n" firstAttribute="trailing" secondItem="AOH-sx-SuZ" secondAttribute="trailing" id="eM1-xo-lBg"/>
+                            <constraint firstItem="AOH-sx-SuZ" firstAttribute="trailing" secondItem="36p-C0-SUM" secondAttribute="trailing" constant="16" id="l3U-9r-wka"/>
+                            <constraint firstItem="36p-C0-SUM" firstAttribute="firstBaseline" secondItem="bw5-eF-kBK" secondAttribute="baseline" constant="17.666666666666668" symbolType="layoutAnchor" id="mpk-2M-TT7"/>
+                            <constraint firstItem="bw5-eF-kBK" firstAttribute="top" secondItem="e0Q-Al-v4n" secondAttribute="bottom" constant="40" id="ssw-Fl-17m"/>
                             <constraint firstItem="e0Q-Al-v4n" firstAttribute="top" secondItem="AOH-sx-SuZ" secondAttribute="top" id="wXI-tr-Blk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Post" id="uMC-H4-mnt">
-                        <barButtonItem key="rightBarButtonItem" title="Share" id="iaS-az-NsI"/>
+                        <barButtonItem key="rightBarButtonItem" title="Share" style="done" id="iaS-az-NsI"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="descriptionTextView" destination="36p-C0-SUM" id="3uc-Of-m6U"/>
                         <outlet property="mediaView" destination="e0Q-Al-v4n" id="QG7-pZ-fhw"/>
                     </connections>
                 </viewController>
@@ -193,6 +216,9 @@
         <image name="movieclapper" catalog="system" width="128" height="113"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="photo" catalog="system" width="128" height="93"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -9,17 +9,32 @@ import UIKit
 import AVFoundation
 import AVKit
 
-class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     
     @IBOutlet weak var mediaView: UIView!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
+    // placeholder text for the descriptionTextView
+    let placeholderText = "Caption"
+    let placeholderTextColor = UIColor.systemGray
     
     let picker = UIImagePickerController()
     
+    // used if displaying an uploaded video
     var avpController = AVPlayerViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         picker.delegate = self
+        descriptionTextView.delegate = self
+        
+        // styling for description text view
+        descriptionTextView.layer.borderWidth = 0.5
+        descriptionTextView.layer.borderColor = UIColor.systemGray2.cgColor
+        descriptionTextView.layer.cornerRadius = 5.0
+        descriptionTextView.text = placeholderText
+        descriptionTextView.textColor = placeholderTextColor
     }
     
     func addMediaButtonPressed(type: String) {
@@ -106,8 +121,39 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         
         dismiss(animated: true)
     }
+    
+    // Dismiss keyboard when user clicks on the view outside of the descriptionTextView
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    // Dismiss keyboard when 'return' pressed
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    // for placeholder text
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == placeholderTextColor {
+            textView.text = ""
+            textView.textColor = UIColor.label
+        }
+    }
+
+    // for placeholder text
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = placeholderText
+            textView.textColor = placeholderTextColor
+        }
+    }
 
     @IBAction func photoButtonPressed(_ sender: Any) {
+        // don't allow cropping for the picker if using a photo
         picker.allowsEditing = false
         addMediaButtonPressed(type: "photo")
     }
