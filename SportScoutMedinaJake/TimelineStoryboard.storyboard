@@ -261,6 +261,7 @@
                     <connections>
                         <outlet property="descriptionTextView" destination="36p-C0-SUM" id="3uc-Of-m6U"/>
                         <outlet property="mediaView" destination="e0Q-Al-v4n" id="QG7-pZ-fhw"/>
+                        <outlet property="scrollView" destination="z87-nK-jyu" id="GvY-0F-y4R"/>
                         <outlet property="sportTableView" destination="VDc-4H-bzI" id="o78-q7-qKH"/>
                     </connections>
                 </viewController>

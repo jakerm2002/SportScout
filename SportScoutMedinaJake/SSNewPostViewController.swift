@@ -31,10 +31,14 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         "Racquetball"
     ]
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var mediaView: UIView!
     @IBOutlet weak var descriptionTextView: UITextView!
     
     @IBOutlet weak var sportTableView: UITableView!
+    
+    weak var activeField: UITextView?
     
     // true if the user has selected media to upload, regardless of upload status
     var userDidSubmitMedia = false
@@ -50,11 +54,15 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
     
     let newPostSportTableViewCellIdentifier = "NewPostSportTableViewCellIdentifier"
     
+    var currentScrollViewOffset: CGPoint?
+    
     // used if displaying an uploaded video
     var avpController = AVPlayerViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scrollView.keyboardDismissMode = .onDrag
         
         picker.delegate = self
         descriptionTextView.delegate = self
@@ -206,8 +214,16 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         return true
     }
     
-    // for placeholder text
     func textViewDidBeginEditing(_ textView: UITextView) {
+        activeField = textView
+//        let scrollPoint : CGPoint = CGPoint.init(x:0, y:textView.frame.origin.y)
+//        let f: CGFloat = self.view.frame.height / 2 - textView.frame.height
+        let scrollPoint = CGPoint.init(x:0, y: textView.frame.origin.y - 200)
+        
+        currentScrollViewOffset = scrollView.contentOffset
+        scrollView.setContentOffset(scrollPoint, animated: true)
+        
+        // for placeholder text
         if textView.textColor == placeholderTextColor {
             userDidChangeCaption = true
             textView.text = ""
@@ -215,8 +231,12 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         }
     }
 
-    // for placeholder text
     func textViewDidEndEditing(_ textView: UITextView) {
+        if let previousScrollOffset = currentScrollViewOffset {
+            scrollView.setContentOffset(previousScrollOffset, animated: true)
+        }
+
+        // for placeholder text
         if textView.text.isEmpty {
             userDidChangeCaption = false
             textView.text = placeholderText
