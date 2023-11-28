@@ -6,6 +6,11 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+import FirebaseStorage
+import FirebaseAuth
 import AVFoundation
 import AVKit
 
@@ -30,6 +35,9 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var descriptionTextView: UITextView!
     
     @IBOutlet weak var sportTableView: UITableView!
+    
+    // true if the user has selected media to upload, regardless of upload status
+    var userDidSubmitMedia = false
     
     // placeholder text for the descriptionTextView
     let placeholderText = "Caption"
@@ -163,6 +171,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
             imageView.frame.size.width = mediaView.frame.height
             imageView.contentMode = .scaleAspectFit
             mediaView.addSubview(imageView)
+            userDidSubmitMedia = true
         case UTType.movie.identifier:
             let chosenVideo = info[.mediaURL] as! URL
             let player = AVPlayer(url: chosenVideo)
@@ -171,8 +180,9 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
             avpController.view.frame.size.height = mediaView.frame.height
             avpController.view.frame.size.width = mediaView.frame.width
             self.mediaView.addSubview(avpController.view)
-            break
+            userDidSubmitMedia = true
         default:
+            print("no media selected")
             break
         }
         
@@ -222,6 +232,58 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
     }
     
     @IBAction func shareButtonPressed(_ sender: Any) {
+        // the media must be uploaded to firebase. this can be done asynchronously from other tasks
+        let sportCell = sportTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SSNewPostSportTableViewCell
         
+        let postCaption = descriptionTextView.text.isEmpty ? nil : descriptionTextView.text
+        let postSport = sportCell.selectedLabel.text == "None" ? nil : sportCell.selectedLabel.text
+        
+        var validationErrors: [String] = []
+        
+        if !userDidSubmitMedia && postCaption == nil {
+            validationErrors.append("Post cannot be empty. You must upload media or write a caption.")
+        }
+        
+        if !validationErrors.isEmpty {
+            let alert = UIAlertController(title: "Can't share post", message: "The following information is malformed:", preferredStyle: .alert)
+            for err in validationErrors {
+                alert.message?.append("\n\u{2022} \(err)")
+            }
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        } else {
+            guard let uid = Auth.auth().currentUser?.uid else {return}
+            
+            let newPost = TimelinePost(
+                author: db.collection("users").document(String(uid)),
+                mediaPath: nil,
+                caption: postCaption,
+                sport: postSport
+            )
+            
+            // let document ID be auto-generated
+            do {
+                let newPostReference = db.collection("timelinePosts").document()
+                try newPostReference.setData(from: newPost) {
+                    _ in
+                    print("New timeline post created successfully in Firestore.")
+                    self.navigationController?.popViewController(animated: true)
+                    
+                    
+                    // TODO: add the event to the corresponding users' 'posts' array.
+                    // TODO: catch possible error from this operation
+//                    db.collection("users").document(uid).updateData([
+//                        "posts": FieldValue.arrayUnion([newPostReference])
+//                    ]) {
+//                        _ in
+//                        print("New post created successfully in Firestore.")
+//                        self.navigationController?.popViewController(animated: true)
+//                    }
+                }
+            } catch let error {
+                print("Error creating timeline post in Firestore: \(error.localizedDescription)")
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
 }

@@ -65,8 +65,10 @@ struct User: Identifiable, Codable, Equatable {
 struct TimelinePost: Identifiable, Codable {
     @DocumentID var id: String?
     var author: DocumentReference
-    var mediaPath: String
-    var description: String
-    var sport: String
-    var createdAt: Date
+    @ExplicitNull var mediaPath: String?
+    @ExplicitNull var caption: String?
+    @ExplicitNull var sport: String?
+    
+    // auto-filled to current time by Firestore when nil is passed in
+    @ServerTimestamp var createdAt: Date?
 }
