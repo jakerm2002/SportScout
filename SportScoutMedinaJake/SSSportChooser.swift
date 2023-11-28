@@ -14,31 +14,29 @@ class SSSportChooser: UITableViewController {
     
     var delegate: UIViewController?
     
-    var sportChooserCellIdentifier = "SportChooserCellIdentifier"
-    
-    var sports = [
-        "Volleyball (indoor)",
-        "Volleyball (sand)",
-        "Spikeball",
-        "Pickleball",
-        "Soccer",
-        "Frisbee",
-        "Tennis",
-        "Racquetball"
-    ]
+    let sportChooserCellIdentifier = "SportChooserCellIdentifier"
     
     var dismissOnRowSelect = false
-        
+    
+    var items: [String]?
+    
+    let noItemsErrorMsg = "SSSportChooser must be assigned an array of items to display."
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reusableBasicCellIdentifier")
         
-        sports = sports.sorted()
+        guard items != nil else { print(noItemsErrorMsg); fatalError(noItemsErrorMsg) }
+        items = items!.sorted()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sports.count
+        guard items != nil else {
+            print(noItemsErrorMsg)
+            return 0
+        }
+        return items!.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,7 +47,11 @@ class SSSportChooser: UITableViewController {
         } else {
             cell.accessoryType = .none
         }
-        cell.textLabel!.text = sports[row]
+        
+        if let items = items {
+            cell.textLabel!.text = items[row]
+        }
+        
         return cell
     }
     
@@ -57,7 +59,8 @@ class SSSportChooser: UITableViewController {
         let oldSelectedIndex = selectedRowIndex
         selectedRowIndex = indexPath.row
         let otherVC = delegate as! SSSportModifier
-        otherVC.changeSport(newSport: sports[selectedRowIndex], newIndex: selectedRowIndex)
+        guard items != nil else { print(noItemsErrorMsg); return }
+        otherVC.changeSport(newSport: items![selectedRowIndex], newIndex: selectedRowIndex)
         tableView.deselectRow(at: indexPath, animated: true)
         if oldSelectedIndex != -1 {
             tableView.reloadRows(at: [

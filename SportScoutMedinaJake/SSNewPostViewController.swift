@@ -15,6 +15,17 @@ protocol SSSportModifier {
 
 class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, SSSportModifier {
     
+    var sports = [
+        "Volleyball (indoor)",
+        "Volleyball (sand)",
+        "Spikeball",
+        "Pickleball",
+        "Soccer",
+        "Frisbee",
+        "Tennis",
+        "Racquetball"
+    ]
+    
     @IBOutlet weak var mediaView: UIView!
     @IBOutlet weak var descriptionTextView: UITextView!
     
@@ -73,6 +84,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextVC = SSSportChooser()
+        nextVC.items = sports
         nextVC.dismissOnRowSelect = true
         let sportIndexPath = IndexPath(row: 0, section: 0)
         let sportCell = sportTableView.cellForRow(at: sportIndexPath) as! SSNewPostSportTableViewCell
