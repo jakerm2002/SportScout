@@ -9,16 +9,26 @@ import UIKit
 import AVFoundation
 import AVKit
 
-class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+protocol SSSportModifier {
+    func changeSport(newSport: String, newIndex: Int)
+}
+
+class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource, SSSportModifier {
     
     @IBOutlet weak var mediaView: UIView!
     @IBOutlet weak var descriptionTextView: UITextView!
+    
+    @IBOutlet weak var sportTableView: UITableView!
     
     // placeholder text for the descriptionTextView
     let placeholderText = "Caption"
     let placeholderTextColor = UIColor.systemGray
     
     let picker = UIImagePickerController()
+    
+    let SSSportChooserSegueIdentifier = "SSSportChooserSegueIdentifier"
+    
+    let newPostSportTableViewCellIdentifier = "NewPostSportTableViewCellIdentifier"
     
     // used if displaying an uploaded video
     var avpController = AVPlayerViewController()
@@ -29,12 +39,47 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         picker.delegate = self
         descriptionTextView.delegate = self
         
+        sportTableView.delegate = self
+        sportTableView.dataSource = self
+        sportTableView.register(UINib(nibName: "SSNewPostSportTableViewCell", bundle: nil), forCellReuseIdentifier: newPostSportTableViewCellIdentifier)
+        
         // styling for description text view
         descriptionTextView.layer.borderWidth = 0.5
         descriptionTextView.layer.borderColor = UIColor.systemGray2.cgColor
         descriptionTextView.layer.cornerRadius = 5.0
         descriptionTextView.text = placeholderText
         descriptionTextView.textColor = placeholderTextColor
+    }
+    
+    func changeSport(newSport: String, newIndex: Int) {
+        let sportIndexPath = IndexPath(row: 0, section: 0)
+        let sportCell = sportTableView.cellForRow(at: sportIndexPath) as! SSNewPostSportTableViewCell
+        sportCell.selectedLabel.text = newSport
+        sportCell.selectedSportIndex = newIndex
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: newPostSportTableViewCellIdentifier, for: indexPath) as! SSNewPostSportTableViewCell
+
+        cell.titleLabel.text = "Sport"
+        cell.selectedLabel.text = "None"
+
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nextVC = SSSportChooser()
+        nextVC.dismissOnRowSelect = true
+        let sportIndexPath = IndexPath(row: 0, section: 0)
+        let sportCell = sportTableView.cellForRow(at: sportIndexPath) as! SSNewPostSportTableViewCell
+        nextVC.delegate = self
+        nextVC.selectedRowIndex = sportCell.selectedSportIndex
+        present(nextVC, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func addMediaButtonPressed(type: String) {

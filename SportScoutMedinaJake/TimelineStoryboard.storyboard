@@ -185,14 +185,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="VDc-4H-bzI">
+                                <rect key="frame" x="0.0" y="560" width="393" height="125"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="uGG-VO-moG"/>
+                                </constraints>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AOH-sx-SuZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="36p-C0-SUM" firstAttribute="leading" secondItem="AOH-sx-SuZ" secondAttribute="leading" constant="16" id="0RX-yz-wbO"/>
                             <constraint firstItem="bw5-eF-kBK" firstAttribute="leading" secondItem="AOH-sx-SuZ" secondAttribute="leading" constant="16" id="C5h-hV-Aco"/>
+                            <constraint firstItem="VDc-4H-bzI" firstAttribute="leading" secondItem="AOH-sx-SuZ" secondAttribute="leading" id="LP9-8v-MVT"/>
                             <constraint firstItem="e0Q-Al-v4n" firstAttribute="leading" secondItem="AOH-sx-SuZ" secondAttribute="leading" id="SI0-h1-Hi6"/>
                             <constraint firstItem="e0Q-Al-v4n" firstAttribute="trailing" secondItem="AOH-sx-SuZ" secondAttribute="trailing" id="eM1-xo-lBg"/>
+                            <constraint firstItem="VDc-4H-bzI" firstAttribute="top" secondItem="36p-C0-SUM" secondAttribute="bottom" constant="16" id="epl-Wy-E9H"/>
+                            <constraint firstItem="VDc-4H-bzI" firstAttribute="trailing" secondItem="AOH-sx-SuZ" secondAttribute="trailing" id="jqN-0y-lKf"/>
                             <constraint firstItem="AOH-sx-SuZ" firstAttribute="trailing" secondItem="36p-C0-SUM" secondAttribute="trailing" constant="16" id="l3U-9r-wka"/>
                             <constraint firstItem="36p-C0-SUM" firstAttribute="firstBaseline" secondItem="bw5-eF-kBK" secondAttribute="baseline" constant="17.666666666666668" symbolType="layoutAnchor" id="mpk-2M-TT7"/>
                             <constraint firstItem="bw5-eF-kBK" firstAttribute="top" secondItem="e0Q-Al-v4n" secondAttribute="bottom" constant="40" id="ssw-Fl-17m"/>
@@ -205,6 +215,7 @@
                     <connections>
                         <outlet property="descriptionTextView" destination="36p-C0-SUM" id="3uc-Of-m6U"/>
                         <outlet property="mediaView" destination="e0Q-Al-v4n" id="QG7-pZ-fhw"/>
+                        <outlet property="sportTableView" destination="VDc-4H-bzI" id="o78-q7-qKH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t0C-2w-gtP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -223,10 +234,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
