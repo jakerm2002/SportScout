@@ -38,6 +38,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
     
     // true if the user has selected media to upload, regardless of upload status
     var userDidSubmitMedia = false
+    var userDidChangeCaption = false
     
     // placeholder text for the descriptionTextView
     let placeholderText = "Caption"
@@ -98,7 +99,9 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         let sportCell = sportTableView.cellForRow(at: sportIndexPath) as! SSNewPostSportTableViewCell
         nextVC.delegate = self
         nextVC.selectedRowIndex = sportCell.selectedSportIndex
-        present(nextVC, animated: true)
+        
+        let navVC = UINavigationController(rootViewController: nextVC)
+        present(navVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -206,6 +209,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
     // for placeholder text
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == placeholderTextColor {
+            userDidChangeCaption = true
             textView.text = ""
             textView.textColor = UIColor.label
         }
@@ -214,6 +218,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
     // for placeholder text
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
+            userDidChangeCaption = false
             textView.text = placeholderText
             textView.textColor = placeholderTextColor
         }
@@ -240,14 +245,17 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         
         var validationErrors: [String] = []
         
-        if !userDidSubmitMedia && postCaption == nil {
+        if !userDidSubmitMedia && (!userDidChangeCaption || postCaption == nil) {
             validationErrors.append("Post cannot be empty. You must upload media or write a caption.")
         }
         
         if !validationErrors.isEmpty {
-            let alert = UIAlertController(title: "Can't share post", message: "The following information is malformed:", preferredStyle: .alert)
-            for err in validationErrors {
-                alert.message?.append("\n\u{2022} \(err)")
+            let alert = UIAlertController(title: "Can't share post", message: "", preferredStyle: .alert)
+            for (idx, err) in validationErrors.enumerated() {
+                if (idx != 0) {
+                    alert.message?.append("\n")
+                }
+                alert.message?.append("\u{2022} \(err)")
             }
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)

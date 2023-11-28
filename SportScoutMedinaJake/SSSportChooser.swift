@@ -27,6 +27,8 @@ class SSSportChooser: UITableViewController {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reusableBasicCellIdentifier")
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(SSSportChooser.clearButtonPressed))
+        
         guard items != nil else { print(noItemsErrorMsg); fatalError(noItemsErrorMsg) }
         items = items!.sorted()
     }
@@ -76,6 +78,14 @@ class SSSportChooser: UITableViewController {
                 self.dismiss(animated: true)
             }
         }
+    }
+    
+    @objc func clearButtonPressed() {
+        print("clear button pressed")
+        selectedRowIndex = -1
+        let otherVC = delegate as! SSSportModifier
+        otherVC.changeSport(newSport: "None", newIndex: -1)
+        self.dismiss(animated: true)
     }
     
 }

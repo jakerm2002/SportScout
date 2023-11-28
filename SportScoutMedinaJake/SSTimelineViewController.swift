@@ -50,19 +50,18 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         
         topOffset = collectionView.contentOffset.y - 150
         
-        let child = SpinnerViewController()
-
-        // add the spinner view controller
-        addChild(child)
-        child.view.frame = view.frame
-        view.addSubview(child.view)
-        child.didMove(toParent: self)
+        // spinner wheel for first loading state
+        let spinnerVC = SpinnerViewController()
+        addChild(spinnerVC)
+        spinnerVC.view.frame = view.frame
+        view.addSubview(spinnerVC.view)
+        spinnerVC.didMove(toParent: self)
 
         Task {
             await fetchTimelinePosts()
-            child.willMove(toParent: nil)
-            child.view.removeFromSuperview()
-            child.removeFromParent()
+            spinnerVC.willMove(toParent: nil)
+            spinnerVC.view.removeFromSuperview()
+            spinnerVC.removeFromParent()
         }
     }
     
