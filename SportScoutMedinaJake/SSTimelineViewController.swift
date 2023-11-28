@@ -7,6 +7,11 @@
 
 import UIKit
 
+import FirebaseCore
+//import FirebaseFirestore
+import FirebaseFirestoreSwift
+//import FirebaseStorage
+
 class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -16,6 +21,8 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
     let timelineToNewPostSegueIdentifier = "TimelineToNewPostSegueIdentifier"
     
     var searchBar = UISearchBar()
+    
+    var viewableTimelinePosts: [TimelinePost] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,16 +40,33 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(SSTimelineViewController.newPostButtonPressed))
         navigationItem.titleView = searchBar
+        
+        Task {
+            await fetchTimelinePosts()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return viewableTimelinePosts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: timelineCollectionViewCellIdentifier, for: indexPath)
         
         return cell
+    }
+    
+    @MainActor
+    func fetchTimelinePosts() async {
+        do {
+            let timelinePostsResult = try await db.collection("timelinePosts").order(by: "createdAt").getDocuments().documents
+            for post in timelinePostsResult {
+                viewableTimelinePosts.append(try post.data(as: TimelinePost.self))
+            }
+            print(viewableTimelinePosts.debugDescription)
+        } catch {
+            print("There was an issue fetching timeline posts: \(error.localizedDescription)")
+        }
     }
     
     override func viewDidLayoutSubviews() {
