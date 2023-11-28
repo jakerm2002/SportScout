@@ -60,6 +60,9 @@ struct User: Identifiable, Codable, Equatable {
     var sports: String
     var username: String
     var weight: String
+    
+    // image url, could be nil
+    var url: String?
 }
 
 struct TimelinePost: Identifiable, Codable {
@@ -72,6 +75,6 @@ struct TimelinePost: Identifiable, Codable {
     // auto-filled to current time by Firestore when nil is passed in
     @ServerTimestamp var createdAt: Date?
     
-    var authorRealName: String?
-    var authorUsername: String?
+    // should never be set when creating a TimelinePost
+    var authorAsUserModel: User?
 }

@@ -8,9 +8,8 @@
 import UIKit
 
 import FirebaseCore
-//import FirebaseFirestore
 import FirebaseFirestoreSwift
-//import FirebaseStorage
+import FirebaseStorage
 
 class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -25,6 +24,8 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
     private let refreshControl = UIRefreshControl()
     
     var viewableTimelinePosts: [TimelinePost] = []
+    
+    var topOffset: CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,14 +48,26 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(SSTimelineViewController.newPostButtonPressed))
         navigationItem.titleView = searchBar
         
+        topOffset = collectionView.contentOffset.y - 150
+        
+        let child = SpinnerViewController()
+
+        // add the spinner view controller
+        addChild(child)
+        child.view.frame = view.frame
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+
         Task {
             await fetchTimelinePosts()
+            child.willMove(toParent: nil)
+            child.view.removeFromSuperview()
+            child.removeFromParent()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewableTimelinePosts.count
-//        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -63,7 +76,9 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         let row = indexPath.row
         let currentPost = viewableTimelinePosts[row]
         
-        cell.authorUsernameLabel.text = currentPost.authorUsername
+        cell.authorUsernameLabel.text = currentPost.authorAsUserModel?.username
+        
+//        cell.authorProfileImage.image = currentPost.authorAsUserModel?.url
         
         let formatter = RelativeDateTimeFormatter()
         if let createdAt = currentPost.createdAt {
@@ -86,8 +101,7 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
             for post in timelinePostsResult {
                 var timelinePost = try post.data(as: TimelinePost.self)
                 let author = try await timelinePost.author.getDocument(as: User.self)
-                timelinePost.authorRealName = author.fullName
-                timelinePost.authorUsername = author.username
+                timelinePost.authorAsUserModel = author
                 viewableTimelinePosts.append(timelinePost)
             }
             print(viewableTimelinePosts.debugDescription)
@@ -97,8 +111,20 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
+//    @MainActor
+//    func fetchUserImage(imgPath: String) async {
+//    
+//        do {
+//            let imageRef = try await storage.reference(forURL: imgPath).getData(maxSize: 1024*1024, completion: {_,_ in })
+//            collectionView.reloadItems(at: <#T##[IndexPath]#>)
+//        } catch {
+//            print("There was an issue fetching timeline posts: \(error.localizedDescription)")
+//        }
+//    }
+    
 
     @objc func doRefresh(refreshControl: UIRefreshControl) {
+        print("refreshing")
         Task {
             await fetchTimelinePosts()
         }

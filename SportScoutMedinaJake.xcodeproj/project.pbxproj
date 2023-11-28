@@ -10,6 +10,7 @@
 		6607E9A82ADF85AA00F90978 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */; };
 		66119D5A2B0F1F3C004E3530 /* TimelineStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66119D592B0F1F3C004E3530 /* TimelineStoryboard.storyboard */; };
 		66119D5E2B0F20FA004E3530 /* SSTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66119D5D2B0F20FA004E3530 /* SSTimelineViewController.swift */; };
+		66143E2B2B168094002D4C6A /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66143E2A2B168094002D4C6A /* SpinnerViewController.swift */; };
 		661FB4A32B0F278B0056E307 /* HomeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 661FB4A22B0F278B0056E307 /* HomeStoryboard.storyboard */; };
 		661FB4A52B11421E0056E307 /* SSTimelineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661FB4A42B11421E0056E307 /* SSTimelineCollectionViewCell.swift */; };
 		66408F4F2AF331D500763C4A /* NewEventStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */; };
@@ -70,6 +71,7 @@
 		6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66119D592B0F1F3C004E3530 /* TimelineStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimelineStoryboard.storyboard; sourceTree = "<group>"; };
 		66119D5D2B0F20FA004E3530 /* SSTimelineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTimelineViewController.swift; sourceTree = "<group>"; };
+		66143E2A2B168094002D4C6A /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		661FB4A22B0F278B0056E307 /* HomeStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeStoryboard.storyboard; sourceTree = "<group>"; };
 		661FB4A42B11421E0056E307 /* SSTimelineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTimelineCollectionViewCell.swift; sourceTree = "<group>"; };
 		66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewEventStoryboard.storyboard; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				66CEDB8F2B146A32009F8B7D /* SSNewPostViewController.swift */,
 				661FB4A42B11421E0056E307 /* SSTimelineCollectionViewCell.swift */,
 				66119D5D2B0F20FA004E3530 /* SSTimelineViewController.swift */,
+				66143E2A2B168094002D4C6A /* SpinnerViewController.swift */,
 				66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */,
 				66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */,
 				66408F582AF3379B00763C4A /* SSEventDetailsViewController.swift */,
@@ -391,6 +394,7 @@
 				69348AA12AF16C4F00175A7B /* SSNewEventStartsAtTableViewCell.swift in Sources */,
 				66C066652ADA3FB500DE3845 /* SSLocationDetailsViewController.swift in Sources */,
 				698634122AF19ACA008ADA0A /* SSChooseSportViewController.swift in Sources */,
+				66143E2B2B168094002D4C6A /* SpinnerViewController.swift in Sources */,
 				66C3D97E2AD88FEC003E1C99 /* ViewController.swift in Sources */,
 				66C3D9DE2AD8FC79003E1C99 /* ProfileViewController.swift in Sources */,
 				698634142AF19EF5008ADA0A /* SSNewEventSportTableViewCell.swift in Sources */,
