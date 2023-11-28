@@ -127,6 +127,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: customLocationCellIdentifier, for: indexPath as IndexPath) as! SSHomeTableViewCell
         
+//        cell.contentView.layer.backgroundColor = UIColor.black.cgColor
+        
         let row = indexPath.row
         // print("generating cell for row \(row)")
         cell.locationTitleTextLabel?.text = locations[row].name

@@ -16,7 +16,7 @@ class SSHomeTableViewCell: UITableViewCell {
     // https://stackoverflow.com/questions/37645408/uitableviewcell-rounded-corners-and-shadow
     override func layoutSubviews() {
         super.layoutSubviews()
-        let bottomSpace: CGFloat = 10.0
+        let bottomSpace: CGFloat = 5.0
         self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: bottomSpace, right: 0))
         
         // add shadow on cell
@@ -28,7 +28,7 @@ class SSHomeTableViewCell: UITableViewCell {
         self.layer.shadowColor = UIColor.black.cgColor
         
         // add corner radius on `contentView`
-        self.contentView.backgroundColor = .white
+        self.contentView.backgroundColor = .secondarySystemBackground
         self.contentView.layer.cornerRadius = 8
     }
 }
