@@ -12,6 +12,7 @@ class SSTimelineCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var authorUsernameLabel: UILabel!
     @IBOutlet weak var authorProfileImage: UIImageView!
     @IBOutlet weak var createdAtLabel: UILabel!
+    @IBOutlet weak var captionLabel: UITextView!
     @IBOutlet weak var sportLabel: UILabel!
     
     @IBOutlet weak var mediaView: UIView!

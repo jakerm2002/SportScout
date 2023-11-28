@@ -71,4 +71,7 @@ struct TimelinePost: Identifiable, Codable {
     
     // auto-filled to current time by Firestore when nil is passed in
     @ServerTimestamp var createdAt: Date?
+    
+    var authorRealName: String?
+    var authorUsername: String?
 }

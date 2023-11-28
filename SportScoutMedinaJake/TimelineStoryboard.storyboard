@@ -22,21 +22,21 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZsC-nF-4c5">
-                                    <size key="itemSize" width="376" height="356"/>
+                                    <size key="itemSize" width="376" height="433"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TimelineCollectionViewCellIdentifier" id="C2e-4X-OmB" customClass="SSTimelineCollectionViewCell" customModule="SportScoutMedinaJake" customModuleProvider="target">
-                                        <rect key="frame" x="8.6666666666666661" y="0.0" width="376" height="356"/>
+                                        <rect key="frame" x="8.6666666666666661" y="0.0" width="376" height="433"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wUi-tT-QGu">
-                                            <rect key="frame" x="0.0" y="0.0" width="376" height="356"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="376" height="433"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7FN-gM-JyH">
-                                                    <rect key="frame" x="0.0" y="0.0" width="376" height="356"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="376" height="433"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qjy-2J-y9h">
                                                             <rect key="frame" x="0.0" y="0.0" width="376" height="70.333333333333329"/>
@@ -73,11 +73,19 @@
                                                             </subviews>
                                                         </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FiR-fd-2QI" userLabel="Media View">
-                                                            <rect key="frame" x="0.0" y="74.333333333333343" width="376" height="257.33333333333326"/>
+                                                            <rect key="frame" x="0.0" y="74.333333333333329" width="376" height="230.66666666666669"/>
                                                             <color key="backgroundColor" systemColor="systemGray2Color"/>
                                                         </view>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wE-79-vNz">
+                                                            <rect key="frame" x="0.0" y="309" width="376" height="99.666666666666686"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+                                                            <color key="textColor" systemColor="labelColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        </textView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Osu-4R-xPi">
-                                                            <rect key="frame" x="0.0" y="335.66666666666669" width="376" height="20.333333333333314"/>
+                                                            <rect key="frame" x="0.0" y="412.66666666666669" width="376" height="20.333333333333314"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -92,10 +100,11 @@
                                                 <constraint firstAttribute="bottom" secondItem="7FN-gM-JyH" secondAttribute="bottom" id="ufV-dS-G45"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="376" height="356"/>
+                                        <size key="customSize" width="376" height="433"/>
                                         <connections>
                                             <outlet property="authorProfileImage" destination="G8U-cO-mnX" id="fIf-iP-SMh"/>
                                             <outlet property="authorUsernameLabel" destination="2LB-Np-F38" id="c9S-Bw-YPb"/>
+                                            <outlet property="captionLabel" destination="6wE-79-vNz" id="ewZ-Mr-6Xx"/>
                                             <outlet property="createdAtLabel" destination="DbO-x0-CC7" id="2Ka-JW-nq4"/>
                                             <outlet property="mediaView" destination="FiR-fd-2QI" id="aZ8-TG-IZL"/>
                                             <outlet property="sportLabel" destination="Osu-4R-xPi" id="gHz-qO-Xj8"/>
