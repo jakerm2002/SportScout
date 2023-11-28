@@ -72,7 +72,7 @@
                                                                 </stackView>
                                                             </subviews>
                                                         </stackView>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FiR-fd-2QI" userLabel="Video View">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FiR-fd-2QI" userLabel="Media View">
                                                             <rect key="frame" x="0.0" y="74.333333333333343" width="376" height="257.33333333333326"/>
                                                             <color key="backgroundColor" systemColor="systemGray2Color"/>
                                                         </view>
@@ -93,6 +93,13 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="376" height="356"/>
+                                        <connections>
+                                            <outlet property="authorProfileImage" destination="G8U-cO-mnX" id="fIf-iP-SMh"/>
+                                            <outlet property="authorUsernameLabel" destination="2LB-Np-F38" id="c9S-Bw-YPb"/>
+                                            <outlet property="createdAtLabel" destination="DbO-x0-CC7" id="2Ka-JW-nq4"/>
+                                            <outlet property="mediaView" destination="FiR-fd-2QI" id="aZ8-TG-IZL"/>
+                                            <outlet property="sportLabel" destination="Osu-4R-xPi" id="gHz-qO-Xj8"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
