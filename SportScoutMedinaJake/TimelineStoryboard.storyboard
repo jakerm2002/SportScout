@@ -210,7 +210,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Post" id="uMC-H4-mnt">
-                        <barButtonItem key="rightBarButtonItem" title="Share" style="done" id="iaS-az-NsI"/>
+                        <barButtonItem key="rightBarButtonItem" title="Share" style="done" id="iaS-az-NsI">
+                            <connections>
+                                <action selector="shareButtonPressed:" destination="taz-4z-W7w" id="Srw-Xu-xlA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionTextView" destination="36p-C0-SUM" id="3uc-Of-m6U"/>

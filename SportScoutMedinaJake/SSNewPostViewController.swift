@@ -219,6 +219,9 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         // allow video trimming
         picker.allowsEditing = true
         addMediaButtonPressed(type: "video")
+    }
+    
+    @IBAction func shareButtonPressed(_ sender: Any) {
         
     }
 }

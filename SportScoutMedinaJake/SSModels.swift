@@ -61,3 +61,12 @@ struct User: Identifiable, Codable, Equatable {
     var username: String
     var weight: String
 }
+
+struct TimelinePost: Identifiable, Codable {
+    @DocumentID var id: String?
+    var author: DocumentReference
+    var mediaPath: String
+    var description: String
+    var sport: String
+    var createdAt: Date
+}
