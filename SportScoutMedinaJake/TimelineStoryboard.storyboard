@@ -130,20 +130,30 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="iKW-mb-a3t">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="250"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U2M-r3-JmH" customClass="SSPhotoButton" customModule="SportScoutMedinaJake" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4A-k5-w7E">
                                                 <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="250"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                <buttonConfiguration key="configuration" style="plain" image="photo" catalog="system" imagePlacement="top" title="Photo" imagePadding="10">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="font">
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                    </preferredSymbolConfiguration>
+                                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
+                                                </buttonConfiguration>
                                                 <connections>
-                                                    <action selector="photoButtonPressed:" destination="taz-4z-W7w" eventType="touchUpInside" id="swY-Vq-IzX"/>
+                                                    <action selector="photoButtonPressed:" destination="taz-4z-W7w" eventType="touchUpInside" id="KLW-I9-tcU"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PiZ-bG-V4O" customClass="SSVideoButton" customModule="SportScoutMedinaJake" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QK0-8E-hvB">
                                                 <rect key="frame" x="196.66666666666663" y="0.0" width="196.33333333333337" height="250"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                <buttonConfiguration key="configuration" style="plain" image="movieclapper" catalog="system" imagePlacement="top" title="Video" imagePadding="10">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="font">
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                    </preferredSymbolConfiguration>
+                                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
+                                                </buttonConfiguration>
                                                 <connections>
-                                                    <action selector="videoButtonPressed:" destination="taz-4z-W7w" eventType="touchUpInside" id="ke5-mX-TJr"/>
+                                                    <action selector="videoButtonPressed:" destination="taz-4z-W7w" eventType="touchUpInside" id="1nN-TI-fRE"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -180,7 +190,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="movieclapper" catalog="system" width="128" height="113"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="photo" catalog="system" width="128" height="93"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
