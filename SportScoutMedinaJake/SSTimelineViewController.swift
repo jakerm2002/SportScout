@@ -27,6 +27,8 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
     
     var topOffset: CGFloat?
     
+    let spinnerVC = SpinnerViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,7 +41,7 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         // dismiss search bar when user scrolls the collection view
         collectionView.keyboardDismissMode = .onDrag
         
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: [.foregroundColor : UIColor.secondaryLabel])
         refreshControl.addTarget(self, action: #selector(doRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
         
@@ -51,7 +53,6 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         topOffset = collectionView.contentOffset.y - 150
         
         // spinner wheel for first loading state
-        let spinnerVC = SpinnerViewController()
         addChild(spinnerVC)
         spinnerVC.view.frame = view.frame
         view.addSubview(spinnerVC.view)
@@ -66,6 +67,11 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if viewableTimelinePosts.count == 0 && !self.spinnerVC.view.isDescendant(of: self.view) {
+            self.collectionView.setEmptyMessage("No Posts")
+        } else {
+            self.collectionView.restore()
+        }
         return viewableTimelinePosts.count
     }
     
@@ -152,4 +158,24 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         performSegue(withIdentifier: timelineToNewPostSegueIdentifier, sender: nil)
     }
 
+}
+
+
+extension UICollectionView {
+
+    func setEmptyMessage(_ message: String) {
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
+        messageLabel.text = message
+        messageLabel.textColor = .systemGray3
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont.systemFont(ofSize: 30.0, weight: .semibold)
+        messageLabel.sizeToFit()
+
+        self.backgroundView = messageLabel
+    }
+
+    func restore() {
+        self.backgroundView = nil
+    }
 }
