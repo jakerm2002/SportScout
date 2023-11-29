@@ -83,7 +83,16 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         
         cell.authorUsernameLabel.text = currentPost.authorAsUserModel?.username
         
-//        cell.authorProfileImage.image = currentPost.authorAsUserModel?.url
+        // if the user's image is available, display it
+        if let profilePic = currentPost.authorImageData {
+            cell.authorProfileImage.image = UIImage(data: profilePic)
+        } else {
+            Task {
+                if let path = currentPost.authorAsUserModel?.url {
+                    await fetchImage(imgPath: path, indexPath: indexPath)
+                }
+            }
+        }
         
         let formatter = RelativeDateTimeFormatter()
         if let createdAt = currentPost.createdAt {
@@ -116,16 +125,26 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
-//    @MainActor
-//    func fetchUserImage(imgPath: String) async {
-//    
-//        do {
+    @MainActor
+    func fetchImage(imgPath: String, indexPath: IndexPath) async {
+    
+        do {
 //            let imageRef = try await storage.reference(forURL: imgPath).getData(maxSize: 1024*1024, completion: {_,_ in })
-//            collectionView.reloadItems(at: <#T##[IndexPath]#>)
-//        } catch {
-//            print("There was an issue fetching timeline posts: \(error.localizedDescription)")
-//        }
-//    }
+            let imageRef = try storage.reference(withPath: imgPath).getData(maxSize: 1024*1024) { [self]
+                (data, error) in
+                if let error = error {
+                    print("error fetching an image")
+                } else {
+//                    let cell = collectionView(collectionView, cellForItemAt: indexPath) as! SSTimelineCollectionViewCell
+//                    cell.authorProfileImage.image = UIImage(data: data!)
+                    viewableTimelinePosts[indexPath.row].authorImageData = data
+                    collectionView.reloadItems(at: [indexPath])
+                }
+            }
+        } catch {
+            print("There was an issue fetching timeline posts: \(error.localizedDescription)")
+        }
+    }
     
 
     @objc func doRefresh(refreshControl: UIRefreshControl) {

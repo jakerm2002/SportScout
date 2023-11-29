@@ -76,6 +76,7 @@ struct TimelinePost: Identifiable, Codable {
     // auto-filled to current time by Firestore when nil is passed in
     @ServerTimestamp var createdAt: Date?
     
-    // should never be set when creating a TimelinePost
+    // these should never be set when creating a TimelinePost:
     var authorAsUserModel: User?
+    var authorImageData: Data?
 }

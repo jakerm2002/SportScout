@@ -38,6 +38,10 @@ class SSTimelineCollectionViewCell: UICollectionViewCell {
         layer.shadowOpacity = 0.35
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 10)
+        
+        // circular profile picture
+        authorProfileImage.layer.cornerRadius = authorProfileImage.bounds.height / 2
+        authorProfileImage.contentMode = .scaleAspectFill
     }
     
     override func layoutSubviews() {
