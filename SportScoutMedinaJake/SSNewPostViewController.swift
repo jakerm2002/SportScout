@@ -14,6 +14,11 @@ import FirebaseAuth
 import AVFoundation
 import AVKit
 
+enum NewPostError: Error {
+    case mediaUnavailable
+    case mediaEmptyOrBadFormat
+}
+
 protocol SSSportModifier {
     func changeSport(newSport: String, newIndex: Int)
 }
@@ -39,6 +44,9 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var sportTableView: UITableView!
     
     weak var activeField: UITextView?
+    
+    var currentImageMedia: UIImage?
+    var currentVideoMedia: URL?
     
     // true if the user has selected media to upload, regardless of upload status
     var userDidSubmitMedia = false
@@ -177,6 +185,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         switch mediaType {
         case UTType.image.identifier:
             let chosenImage = info[.originalImage] as! UIImage
+            currentImageMedia = chosenImage
             let imageView = UIImageView(image: chosenImage)
             imageView.frame.size.height = mediaView.frame.height
             imageView.frame.size.width = mediaView.frame.height
@@ -243,6 +252,63 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
             textView.textColor = placeholderTextColor
         }
     }
+    
+    // uploads media and returns the Firebase Storage path for the media
+    @MainActor
+    func attemptMediaUpload(postDocumentID: String) async -> String? {
+        if userDidSubmitMedia {
+            // only works for photos
+            do {
+                guard currentImageMedia != nil else {
+                    throw NewPostError.mediaUnavailable
+                }
+                let imgRef = storage.reference().child("timelinePostMedia/\(postDocumentID)")
+                guard let imageData = currentImageMedia!.jpegData(compressionQuality: 0.8) else {
+                    throw NewPostError.mediaEmptyOrBadFormat
+                }
+                
+                let resultMetadata = try await imgRef.putDataAsync(imageData, metadata: nil)
+                print("Media upload complete.")
+                return resultMetadata.path
+            } catch {
+                print("Error uploading media.")
+            }
+        }
+        return nil
+    }
+    
+    func createPost(ref: DocumentReference, uid: String, caption: String?, sport:String?, pathToFirebaseStorageMedia: String) {
+        let newPost = TimelinePost(
+            author: db.collection("users").document(String(uid)),
+            mediaPath: pathToFirebaseStorageMedia,
+            caption: caption,
+            sport: sport
+        )
+        
+        do {
+            try ref.setData(from: newPost) {
+                _ in
+                print("New timeline post created successfully in Firestore.")
+                self.navigationController?.popViewController(animated: true)
+                
+                
+                // TODO: add the event to the corresponding users' 'posts' array.
+                // TODO: catch possible error from this operation
+                //                    db.collection("users").document(uid).updateData([
+                //                        "posts": FieldValue.arrayUnion([newPostReference])
+                //                    ]) {
+                //                        _ in
+                //                        print("New post created successfully in Firestore.")
+                //                        self.navigationController?.popViewController(animated: true)
+                //                    }
+            }
+        }
+        catch let error {
+            print("Error creating timeline post in Firestore: \(error.localizedDescription)")
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
 
     @IBAction func photoButtonPressed(_ sender: Any) {
         // don't allow cropping for the picker if using a photo
@@ -282,35 +348,18 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         } else {
             guard let uid = Auth.auth().currentUser?.uid else {return}
             
-            let newPost = TimelinePost(
-                author: db.collection("users").document(String(uid)),
-                mediaPath: nil,
-                caption: postCaption,
-                sport: postSport
-            )
-            
             // let document ID be auto-generated
-            do {
-                let newPostReference = db.collection("timelinePosts").document()
-                try newPostReference.setData(from: newPost) {
-                    _ in
-                    print("New timeline post created successfully in Firestore.")
-                    self.navigationController?.popViewController(animated: true)
-                    
-                    
-                    // TODO: add the event to the corresponding users' 'posts' array.
-                    // TODO: catch possible error from this operation
-//                    db.collection("users").document(uid).updateData([
-//                        "posts": FieldValue.arrayUnion([newPostReference])
-//                    ]) {
-//                        _ in
-//                        print("New post created successfully in Firestore.")
-//                        self.navigationController?.popViewController(animated: true)
-//                    }
-                }
-            } catch let error {
-                print("Error creating timeline post in Firestore: \(error.localizedDescription)")
-                self.navigationController?.popViewController(animated: true)
+            let newPostReference = db.collection("timelinePosts").document()
+            
+            Task {
+                let path = await attemptMediaUpload(postDocumentID: newPostReference.documentID)
+                createPost(
+                    ref: newPostReference,
+                    uid: uid,
+                    caption: postCaption,
+                    sport: postSport,
+                    pathToFirebaseStorageMedia: path!
+                )
             }
         }
     }
