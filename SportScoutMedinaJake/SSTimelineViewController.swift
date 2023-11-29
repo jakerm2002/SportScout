@@ -94,6 +94,8 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
             }
         }
         
+        // begin fetching media
+        
         let formatter = RelativeDateTimeFormatter()
         if let createdAt = currentPost.createdAt {
             cell.createdAtLabel.text = formatter.localizedString(for: createdAt, relativeTo: Date.now)
@@ -127,22 +129,14 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
     
     @MainActor
     func fetchImage(imgPath: String, indexPath: IndexPath) async {
-    
-        do {
-//            let imageRef = try await storage.reference(forURL: imgPath).getData(maxSize: 1024*1024, completion: {_,_ in })
-            let imageRef = try storage.reference(withPath: imgPath).getData(maxSize: 1024*1024) { [self]
-                (data, error) in
-                if let error = error {
-                    print("error fetching an image")
-                } else {
-//                    let cell = collectionView(collectionView, cellForItemAt: indexPath) as! SSTimelineCollectionViewCell
-//                    cell.authorProfileImage.image = UIImage(data: data!)
-                    viewableTimelinePosts[indexPath.row].authorImageData = data
-                    collectionView.reloadItems(at: [indexPath])
-                }
+        let imageRef = storage.reference(withPath: imgPath).getData(maxSize: 1024*1024) { [self]
+            (data, error) in
+            if let error = error {
+                print("There was an issue fetching profile picture image: \(error.localizedDescription)")
+            } else {
+                viewableTimelinePosts[indexPath.row].authorImageData = data
+                collectionView.reloadItems(at: [indexPath])
             }
-        } catch {
-            print("There was an issue fetching timeline posts: \(error.localizedDescription)")
         }
     }
     
@@ -165,7 +159,7 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         
         layout.itemSize = CGSize(width: cellSize, height: cellSize)
         layout.minimumLineSpacing = 20
-        layout.minimumInteritemSpacing = 5
+//        layout.minimumInteritemSpacing = 5
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         collectionView.collectionViewLayout = layout
