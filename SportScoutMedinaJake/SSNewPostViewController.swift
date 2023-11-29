@@ -218,7 +218,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         activeField = textView
 //        let scrollPoint : CGPoint = CGPoint.init(x:0, y:textView.frame.origin.y)
 //        let f: CGFloat = self.view.frame.height / 2 - textView.frame.height
-        let scrollPoint = CGPoint.init(x:0, y: textView.frame.origin.y - 200)
+        let scrollPoint = CGPoint.init(x:0, y: textView.frame.origin.y - 250)
         
         currentScrollViewOffset = scrollView.contentOffset
         scrollView.setContentOffset(scrollPoint, animated: true)
