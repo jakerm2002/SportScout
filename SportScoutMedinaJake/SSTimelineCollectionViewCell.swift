@@ -15,7 +15,13 @@ class SSTimelineCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var captionLabel: UITextView!
     @IBOutlet weak var sportLabel: UILabel!
     
-    @IBOutlet weak var mediaView: UIView!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var mediaView: SSTimelinePostMediaView!
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
+    
+    var hasMedia: Bool = false
     
     var cornerRadius: CGFloat = 5.0
     

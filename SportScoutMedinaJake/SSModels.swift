@@ -68,7 +68,7 @@ struct User: Identifiable, Codable, Equatable {
 struct TimelinePost: Identifiable, Codable {
     @DocumentID var id: String?
     var author: DocumentReference
-    @ExplicitNull var mediaType: Bool?
+    @ExplicitNull var mediaType: String?
     @ExplicitNull var mediaPath: String?
     @ExplicitNull var caption: String?
     @ExplicitNull var sport: String?
@@ -79,4 +79,6 @@ struct TimelinePost: Identifiable, Codable {
     // these should never be set when creating a TimelinePost:
     var authorAsUserModel: User?
     var authorImageData: Data?
+    var mediaImageData: Data?
+    var mediaVideoURL: URL?
 }

@@ -51,6 +51,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
     // true if the user has selected media to upload, regardless of upload status
     var userDidSubmitMedia = false
     var userDidChangeCaption = false
+    var userMediaSubmissionType: String?
     
     // placeholder text for the descriptionTextView
     let placeholderText = "Caption"
@@ -192,6 +193,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
             imageView.contentMode = .scaleAspectFit
             mediaView.addSubview(imageView)
             userDidSubmitMedia = true
+            userMediaSubmissionType = "photo"
         case UTType.movie.identifier:
             let chosenVideo = info[.mediaURL] as! URL
             let player = AVPlayer(url: chosenVideo)
@@ -201,6 +203,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
             avpController.view.frame.size.width = mediaView.frame.width
             self.mediaView.addSubview(avpController.view)
             userDidSubmitMedia = true
+            userMediaSubmissionType = "video"
         default:
             print("no media selected")
             break
@@ -280,6 +283,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
     func createPost(ref: DocumentReference, uid: String, caption: String?, sport:String?, pathToFirebaseStorageMedia: String) {
         let newPost = TimelinePost(
             author: db.collection("users").document(String(uid)),
+            mediaType: userMediaSubmissionType,
             mediaPath: pathToFirebaseStorageMedia,
             caption: caption,
             sport: sport

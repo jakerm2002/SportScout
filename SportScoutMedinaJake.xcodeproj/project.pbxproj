@@ -11,6 +11,7 @@
 		66119D5A2B0F1F3C004E3530 /* TimelineStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66119D592B0F1F3C004E3530 /* TimelineStoryboard.storyboard */; };
 		66119D5E2B0F20FA004E3530 /* SSTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66119D5D2B0F20FA004E3530 /* SSTimelineViewController.swift */; };
 		66143E2B2B168094002D4C6A /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66143E2A2B168094002D4C6A /* SpinnerViewController.swift */; };
+		661D662F2B16E4A20094D1E0 /* SSTimelinePostMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661D662E2B16E4A20094D1E0 /* SSTimelinePostMediaView.swift */; };
 		661FB4A32B0F278B0056E307 /* HomeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 661FB4A22B0F278B0056E307 /* HomeStoryboard.storyboard */; };
 		661FB4A52B11421E0056E307 /* SSTimelineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661FB4A42B11421E0056E307 /* SSTimelineCollectionViewCell.swift */; };
 		66408F4F2AF331D500763C4A /* NewEventStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */; };
@@ -72,6 +73,7 @@
 		66119D592B0F1F3C004E3530 /* TimelineStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimelineStoryboard.storyboard; sourceTree = "<group>"; };
 		66119D5D2B0F20FA004E3530 /* SSTimelineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTimelineViewController.swift; sourceTree = "<group>"; };
 		66143E2A2B168094002D4C6A /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
+		661D662E2B16E4A20094D1E0 /* SSTimelinePostMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTimelinePostMediaView.swift; sourceTree = "<group>"; };
 		661FB4A22B0F278B0056E307 /* HomeStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeStoryboard.storyboard; sourceTree = "<group>"; };
 		661FB4A42B11421E0056E307 /* SSTimelineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTimelineCollectionViewCell.swift; sourceTree = "<group>"; };
 		66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewEventStoryboard.storyboard; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				66E07EBE2B15AEFC007309A2 /* SSSportChooser.xib */,
 				66C3D9792AD88FEC003E1C99 /* AppDelegate.swift */,
 				66C066662ADA406600DE3845 /* SSModels.swift */,
+				661D662E2B16E4A20094D1E0 /* SSTimelinePostMediaView.swift */,
 				66C3D97B2AD88FEC003E1C99 /* SceneDelegate.swift */,
 				66C3D97D2AD88FEC003E1C99 /* ViewController.swift */,
 				66C3D97F2AD88FEC003E1C99 /* Main.storyboard */,
@@ -401,6 +404,7 @@
 				66C3D97A2AD88FEC003E1C99 /* AppDelegate.swift in Sources */,
 				66C3D9E42AD903DF003E1C99 /* SSSettingsViewController.swift in Sources */,
 				66408F592AF3379B00763C4A /* SSEventDetailsViewController.swift in Sources */,
+				661D662F2B16E4A20094D1E0 /* SSTimelinePostMediaView.swift in Sources */,
 				66C3D9E62AD91034003E1C99 /* SSNewEventViewController.swift in Sources */,
 				66C3D97C2AD88FEC003E1C99 /* SceneDelegate.swift in Sources */,
 				E355B2E72AFADCD4004D0066 /* SSChooseParticipantsViewController.swift in Sources */,
