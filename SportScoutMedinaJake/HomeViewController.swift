@@ -41,6 +41,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         homeTableView.clipsToBounds = false
         searchBar.sizeToFit()
         
+        homeTableView.keyboardDismissMode = .onDrag
+        
         fetchData()
         
         // Segmented control styling.
