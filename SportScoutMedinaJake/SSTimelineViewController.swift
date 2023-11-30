@@ -89,16 +89,22 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.authorUsernameLabel.text = currentPost.authorAsUserModel?.username
         
         // if the user's image is available, display it
-        if let profilePic = currentPost.authorImageData {
-            cell.authorProfileImage.image = UIImage(data: profilePic)
+        if let authorImageData = currentPost.authorImageData {
+            cell.mediaView.isHidden = true
+            cell.imageView.image = UIImage(data: authorImageData)
         } else {
-            Task {
-                if let path = currentPost.authorAsUserModel?.url {
-                    print("going to fetch image for \(indexPath.row)")
-                    await fetchImage(imgPath: path, indexPath: indexPath, viewToChange: "profile")
-                }
-            }
+            cell.imageView.image = nil
         }
+//        if let profilePic = currentPost.authorImageData {
+//            cell.authorProfileImage.image = UIImage(data: profilePic)
+//        } else {
+//            Task {
+//                if let path = currentPost.authorAsUserModel?.url {
+//                    print("going to fetch image for \(indexPath.row)")
+//                    await fetchImage(imgPath: path, indexPath: indexPath, viewToChange: "profile")
+//                }
+//            }
+//        }
         
 //        // begin fetching media
 //        if currentPost.mediaType == "photo" {
@@ -179,17 +185,18 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
     
     // currently images only
     func getMediaForEachPost() {
+        print("getMediaForEachPost")
         for (idx, post) in viewableTimelinePosts.enumerated() {
-            
+            print("looking at timeline posts with index \(idx)")
             // get the profile picture
             mediaLoaderQueue.async {
                 if let imgPath = post.authorAsUserModel?.url {
                     self.getImageData(imgPath: imgPath) {
                         data in
                         if data != nil {
-                            DispatchQueue.main.async {
+//                            DispatchQueue.main.async {
                                 self.viewableTimelinePosts[idx].authorImageData = data
-                            }
+//                            }
                         }
                     }
                 }
@@ -200,15 +207,17 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
                 self.getImageData(imgPath: imgPath) {
                     data in
                     if data != nil {
-                        DispatchQueue.main.async {
+//                        DispatchQueue.main.async {
                             self.viewableTimelinePosts[idx].mediaImageData = data
-                        }
+//                        }
                     }
                 }
             }
             
+            print("finished fetching media for \(idx)")
             // now that we have the media, refresh the cell
-            collectionView.reloadItems(at: [IndexPath(row: idx, section: 0)])
+//            collectionView.reloadItems(at: [IndexPath(row: idx, section: 0)])
+            collectionView.reloadData()
         }
     }
 
@@ -302,6 +311,7 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         print("refreshing")
         Task {
             await fetchTimelinePosts()
+            getMediaForEachPost()
         }
         DispatchQueue.main.async {
             refreshControl.endRefreshing()
