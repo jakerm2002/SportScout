@@ -10,6 +10,9 @@ import UIKit
 import FirebaseCore
 import FirebaseFirestoreSwift
 import FirebaseStorage
+import Nuke
+import NukeExtensions
+import FirebaseStorageUI
 
 class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -30,6 +33,12 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
     let spinnerVC = SpinnerViewController()
     
     var mediaLoaderQueue: DispatchQueue!
+    
+    // MARK: Nuke Image Loading
+//    var preheater = ImagePrefetcher(pipeline: ImagePipeline.shared)
+//    var requests: [ImageRequest]?
+//    // You need to populate remoteImages with the URLs you want prefetched
+//    var remoteImages = [URL]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +79,23 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
+//    func fetchImages() {
+//        requests = remoteImages.map {
+//          var request = ImageRequest(url: $0)
+//          request.priority = .high
+//          return request
+//        }
+//        if let requests = requests, requests.count > 0 {
+//          preheater.startPrefetching(with: requests)
+//        }
+//      }
+//
+//    deinit {
+//        if let requests = requests, requests.count > 0 {
+//          preheater.stopPrefetching(with: requests)
+//        }
+//    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if viewableTimelinePosts.count == 0 && !self.spinnerVC.view.isDescendant(of: self.view) {
             self.collectionView.setEmptyMessage("No Posts")
@@ -88,6 +114,24 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.authorUsernameLabel.text = currentPost.authorAsUserModel?.username
         
         // TODO: display images
+        if let url = viewableTimelinePosts[indexPath.row].authorAsUserModel?.url {
+            let imgRef = storage.reference().child(url)
+            cell.authorProfileImage.sd_setImage(with: imgRef)
+        }
+        
+        if viewableTimelinePosts[indexPath.row].mediaType == "photo" {
+            if let mediaPhoto = viewableTimelinePosts[indexPath.row].mediaPath {
+                let imgRef = storage.reference().child(mediaPhoto)
+                cell.imageView.sd_setImage(with: imgRef)
+            }
+        } else if viewableTimelinePosts[indexPath.row].mediaType == "video" {
+            cell.imageView.image = nil
+        }
+        else {
+            cell.imageView.image = nil
+        }
+        
+        cell.mediaView.isHidden = true
 
         let formatter = RelativeDateTimeFormatter()
         if let createdAt = currentPost.createdAt {
@@ -138,7 +182,7 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         let numColumns = 1.0
         let cellSize = (containerWidth - 32) / numColumns
         
-        layout.itemSize = CGSize(width: cellSize, height: cellSize + 300)
+        layout.itemSize = CGSize(width: cellSize, height: cellSize)
         layout.minimumLineSpacing = 20
 //        layout.minimumInteritemSpacing = 5
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
