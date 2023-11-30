@@ -23,8 +23,7 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.profilePhoto!.layer.cornerRadius =
-        self.profilePhoto!.frame.size.height / 2
+        self.profilePhoto!.layer.cornerRadius = self.profilePhoto!.frame.size.height / 2
         self.profilePhoto.contentMode = .scaleAspectFill
         // Do any additional setup after loading the view.
     }

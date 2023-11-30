@@ -36,7 +36,9 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.profileImage!.layer.cornerRadius = self.profileImage!.frame.size.height / 2
+        self.profileImage.contentMode = .scaleAspectFill
+        
         // Do any additional setup after loading the view.
         nameField.delegate = self
         usernameField.delegate = self
@@ -63,6 +65,14 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
                 self.locationField.text = String(describing: document.get("location")!)
                 self.sportsText.text = String(describing: document.get("sports")!)
                 self.bioField.text = String(describing: document.get("bio")!)
+                let imageURL = String(describing: document.get("url")!)
+                
+                let fileRef = storage.reference(withPath: imageURL)
+                fileRef.getData(maxSize: 1024 * 1024) { data, err in
+                    if err == nil && data != nil {
+                        self.profileImage.image = UIImage(data: data!)
+                    }
+                }
             } else {
                 print("Document does not exist")
             }
