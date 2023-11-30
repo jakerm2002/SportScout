@@ -200,14 +200,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="bioText" destination="8k1-sb-NyW" id="jAK-ZD-fCR"/>
-                        <outlet property="heightText" destination="kbH-pj-5su" id="Q8N-cW-Tzx"/>
-                        <outlet property="locationText" destination="x9e-7o-lOU" id="Tra-tR-BEa"/>
-                        <outlet property="nameText" destination="L51-bn-wQZ" id="jJC-OH-IoA"/>
-                        <outlet property="profilePhoto" destination="Lal-93-QHY" id="RLh-RV-ZB6"/>
-                        <outlet property="sportsText" destination="Vm2-Jf-4ft" id="mOP-cC-EGU"/>
-                        <outlet property="usernameText" destination="oAK-tf-Zl2" id="KhC-5u-8Xi"/>
-                        <outlet property="weightText" destination="x8t-bq-uzT" id="cvc-Ob-flc"/>
+                        <outlet property="bioText" destination="8k1-sb-NyW" id="G06-dl-p6W"/>
+                        <outlet property="heightText" destination="kbH-pj-5su" id="w06-gU-X8P"/>
+                        <outlet property="locationText" destination="x9e-7o-lOU" id="26P-6u-yfn"/>
+                        <outlet property="nameText" destination="L51-bn-wQZ" id="YwH-eZ-tm2"/>
+                        <outlet property="profilePhoto" destination="Lal-93-QHY" id="DbG-JP-q2f"/>
+                        <outlet property="sportsText" destination="Vm2-Jf-4ft" id="MvL-nL-y7b"/>
+                        <outlet property="usernameText" destination="oAK-tf-Zl2" id="zus-CJ-XWI"/>
+                        <outlet property="weightText" destination="x8t-bq-uzT" id="KxT-N9-TYM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KXS-KV-6NX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

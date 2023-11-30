@@ -9,6 +9,8 @@ import UIKit
 
 class SSEventDetailsParticipantTableViewCell: UITableViewCell {
     
+    var participantType:String?
+    
     @IBOutlet var profilePicture: UIView!
     @IBOutlet var username: UILabel!
 

@@ -180,7 +180,17 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         } else {
             guard let uid = Auth.auth().currentUser?.uid else {return}
             
-            let newEvent = Event(owner: db.collection("users").document(String(uid)),
+            guard let uid = Auth.auth().currentUser?.uid else {return}
+            let docRef = db.collection("users").document(String(uid))
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    
+                } else {
+                    print("Document does not exist")
+                }
+            }
+            
+            let newEvent = Event(owner: docRef,
                                  name: nameCell.titleTextField.text!,
                                  location: db.collection("Locations").document(locationDocumentID),
                                  locationName: locationName,

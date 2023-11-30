@@ -233,6 +233,8 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
             
             // populate fields of next VC
             destination.event = curEventObj
+//            destination.eventOwnerLabel.text = curEventObj.owner
+//            destination.event = curEventObj
             destination.documentID = curEventObj.id!
                }
     }
