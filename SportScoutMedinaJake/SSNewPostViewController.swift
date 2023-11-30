@@ -33,7 +33,8 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         "Soccer",
         "Frisbee",
         "Tennis",
-        "Racquetball"
+        "Racquetball",
+        "Basketball"
     ]
     
     @IBOutlet weak var scrollView: UIScrollView!
