@@ -15,11 +15,13 @@ import FirebaseStorage
 let db = Firestore.firestore()
 let storage = Storage.storage()
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var homeTableView: UITableView!
     
     var locations:[Location] = []
+    var filteredLocations:[Location] = []
+    var filtered: Bool = false
     
     var leftNavBarSegment = UISegmentedControl(items: ["Map", "List"])
     var searchBar = UISearchBar()
@@ -32,6 +34,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        searchBar.delegate = self
         
         // UI styling
         homeTableView.separatorStyle = .none
@@ -52,6 +55,34 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationItem.titleView = searchBar
     }
     
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if let search = searchBar.text {
+            if text.count == 0 {
+                filterText(String(search.dropLast()))
+            } else {
+                filterText(search+text)
+            }
+        }
+        return true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            filtered = false
+            filteredLocations.removeAll()
+            homeTableView.reloadData()
+        }
+    }
+    func filterText(_ query: String) {
+        filteredLocations.removeAll()
+        for location in locations {
+            if location.name.lowercased().contains(query.lowercased()) {
+                filteredLocations.append(location)
+            }
+        }
+        homeTableView.reloadData()
+        filtered = true
+    }
     // Get all locations from Firestore and refresh table view.
     func fetchData() {
         db.collection("Locations").addSnapshotListener { (querySnapshot, error) in
@@ -102,7 +133,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return locations.count
+        if !filteredLocations.isEmpty {
+            return filteredLocations.count
+        }
+        return filtered ? 0 :locations.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -130,9 +164,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        cell.contentView.layer.backgroundColor = UIColor.black.cgColor
         
         let row = indexPath.row
+        let location:Location
+        if !filteredLocations.isEmpty {
+            location = filteredLocations[row]
+        } else {
+            location = locations[row]
+        }
         // print("generating cell for row \(row)")
-        cell.locationTitleTextLabel?.text = locations[row].name
-        cell.locationAddressTextLabel?.text = locations[row].addr_field_1
+        cell.locationTitleTextLabel?.text = location.name
+        cell.locationAddressTextLabel?.text = location.addr_field_1
         
         // Retrieve the cell's image.
         // This works for dummy data, but, in the future,
@@ -141,7 +181,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // being called when a cell is becoming visible.
         cell.tag += 1
         let tag = cell.tag
-        let photoUrl = locations[row].imgPath
+        let photoUrl = location.imgPath
         getImage(url: photoUrl) { photo in
             if photo != nil {
                 if cell.tag == tag {
@@ -163,7 +203,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
            let destination = segue.destination as? SSLocationDetailsViewController,
            let index = homeTableView.indexPathForSelectedRow?.row
         {
-            destination.documentID = locations[index].id!
+            if !filteredLocations.isEmpty {
+                destination.documentID = filteredLocations[index].id!
+            } else {
+                destination.documentID = locations[index].id!
+            }
+
         }
     }
     
