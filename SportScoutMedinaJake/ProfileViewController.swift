@@ -43,12 +43,8 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate {
                 self.bioText.text = String(describing: document.get("bio")!)
                 let imageURL = String(describing: document.get("url")!)
                 
-                let fileRef = storage.reference(withPath: imageURL)
-                fileRef.getData(maxSize: 1024 * 1024) { data, err in
-                    if err == nil && data != nil {
-                        self.profilePhoto.image = UIImage(data: data!)
-                    }
-                }
+                let imgRef = storage.reference().child(imageURL)
+                self.profilePhoto.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
             } else {
                 print("Document does not exist")
             }

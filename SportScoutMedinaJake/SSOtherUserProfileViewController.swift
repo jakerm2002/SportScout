@@ -31,14 +31,9 @@ class SSOtherUserProfileViewController: UIViewController, UIScrollViewDelegate {
         self.profilePhoto.contentMode = .scaleAspectFill
         
         // get user passed in and show profile
-        // TODO: USER PFP
         if let url = user!.url {
-            let fileRef = storage.reference(withPath: url)
-            fileRef.getData(maxSize: 1024 * 1024) { data, err in
-                if err == nil && data != nil {
-                    self.profilePhoto.image = UIImage(data: data!)
-                }
-            }
+            let imgRef = storage.reference().child(url)
+            self.profilePhoto.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
         }
         nameText.text = user!.fullName
         usernameText.text = user!.username
