@@ -10,6 +10,7 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseStorage
+import FirebaseStorageUI
 
 // globals for Firestore
 let db = Firestore.firestore()
@@ -177,24 +178,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.locationAddressTextLabel?.text = location.addr_field_1
         
         // Retrieve the cell's image.
-        // This works for dummy data, but, in the future,
-        // images might seem like they load slowly when
-        // scrolling due to the cellForRowAt function only
-        // being called when a cell is becoming visible.
-        cell.tag += 1
-        let tag = cell.tag
-        let photoUrl = location.imgPath
-        getImage(url: photoUrl) { photo in
-            if photo != nil {
-                if cell.tag == tag {
-                    DispatchQueue.main.async {
-                        cell.locationImageView?.layer.cornerRadius = 5.0
-                        cell.locationImageView?.layer.masksToBounds = true
-                        cell.locationImageView?.image = photo
-                    }
-                }
-            }
-        }
+        let url = location.imgPath
+        let imgRef = storage.reference(forURL: url)
+        cell.locationImageView.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "photo"))
+        
         return cell
     }
     

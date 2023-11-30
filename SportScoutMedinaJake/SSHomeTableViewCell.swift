@@ -30,5 +30,8 @@ class SSHomeTableViewCell: UITableViewCell {
         // add corner radius on `contentView`
         self.contentView.backgroundColor = .secondarySystemBackground
         self.contentView.layer.cornerRadius = 8
+        
+        locationImageView.layer.cornerRadius = 5.0
+        locationImageView.layer.masksToBounds = true
     }
 }
