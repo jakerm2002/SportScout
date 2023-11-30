@@ -24,6 +24,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
     let requestedSection = 2
     var documentID = "" // set from location VC
     var userIsEventOwner = false
+    var hideButton = false // delete later
     
     @IBOutlet var eventOwnerLabel: UILabel!
     @IBOutlet var locationLabel: UILabel!
@@ -48,10 +49,10 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         right.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(right)
         
-        checkIfUserIsOwner()
+        checkIfUserIsOwner() // will show event owner 3 sections in participant table & hide requestToJoinButton
         
         // populate data depending on user status
-        if userIsEventOwner {
+        if userIsEventOwner || hideButton {
             // hide request to join button
             requestToJoinButton.isHidden = true
             // make participant table show confirmed, pending invite/invited, requested to join
@@ -61,25 +62,31 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         print("Fetching data")
         eventDescription.isEditable = false
         // Do any additional setup after loading the view.
-        fetchParticipantData()
+//        fetchParticipants()
         fetchEventData()
     }
     
     // TODO: Write functionality
     @IBAction func requestToJoinPressed(_ sender: Any) {
-    }
-    
-    // PARTICIPANT TABLE CODE
-    
-    class Participant {
-        var user: [User]?
-        var participantType: String?
-        
-        init(user: User? = nil, participantType: String? = nil) {
-            self.user?.append(user!)
-            self.participantType = participantType
+        let user = Auth.auth().currentUser
+        let docuRef = db.collection("users").document(user!.uid)
+        if event.participants!.contains(docuRef) {
+            // show alert so user knows they are a participant
+            let controller = UIAlertController(
+                title: "Unable To Complete Action",
+                message: "You are already a confirmed participant for this event!",
+                preferredStyle: .alert)
+                        controller.addAction(UIAlertAction(title: "OK", style: .default))
+            present(controller, animated: true)
+        } else {
+            // add user as participant
+            event.participants!.append(docuRef)
         }
+        
+        db.collection("events").document(documentID).updateData(["participants": event.participants!])
+        fetchParticipants()
     }
+    
     
     let participantTypes = ["Confirmed", "Pending Invite", "Requested"]
     
@@ -111,7 +118,6 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: participantCellIdentifier, for: indexPath) as! SSEventDetailsParticipantTableViewCell
         
-//        let participant = event.participants![indexPath.row]
         
         print("section: \(indexPath.section)")
         print("row: \(indexPath.row)")
@@ -146,7 +152,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             // show only confirmed participants
             if indexPath.section == confirmedSection {
                 cell.username.text = confirmedParticipants[indexPath.row].username
-//                cell.imageView?.image = confirmedParticipants.image
+                cell.imageView?.image = UIImage(contentsOfFile: confirmedParticipants[indexPath.row].url)
             }
         }
         return cell
@@ -212,51 +218,32 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             // populate profile
             print("final chosen participant: \(chosenParticipantProfile?.username ?? "none")")
             nextVC.user = chosenParticipantProfile
-            
-//            nextVC.bioText.text = chosenParticipantProfile.bio
-//            nextVC.heightText.text = "\(chosenParticipantProfile.feet) '\(chosenParticipantProfile.inches)"
-//            // TODO: location in profile? (DONE)
-//            nextVC.locationText.text = chosenParticipantProfile.location
-            // TODO: add pfp
         }
     }
     
     // Get all participant data for this event entry in Firestore database.
     // Populate the UI.
-    func fetchParticipantData() {
-        // for participant table
-        db.collection("users").addSnapshotListener {(querySnapshot, error) in
-            guard let documents = querySnapshot?.documents else {
-                print("No documents")
-                return
-            }
-            self.confirmedParticipants = documents.compactMap { (queryDocumentSnapshot) -> User? in
-                return try? queryDocumentSnapshot.data(as: User.self)
-            }
-//            self.invitedParticipants = documents.compactMap { (queryDocumentSnapshot) -> User? in
+//    func fetchParticipantData() {
+//        // for participant table
+//        db.collection("users").addSnapshotListener {(querySnapshot, error) in
+//            guard let documents = querySnapshot?.documents else {
+//                print("No documents")
+//                return
+//            }
+//            self.confirmedParticipants = documents.compactMap { (queryDocumentSnapshot) -> User? in
 //                return try? queryDocumentSnapshot.data(as: User.self)
 //            }
-//            self.requestedParticipants = documents.compactMap { (queryDocumentSnapshot) -> User? in
-//                return try? queryDocumentSnapshot.data(as: User.self)
+////            self.invitedParticipants = documents.compactMap { (queryDocumentSnapshot) -> User? in
+////                return try? queryDocumentSnapshot.data(as: User.self)
+////            }
+////            self.requestedParticipants = documents.compactMap { (queryDocumentSnapshot) -> User? in
+////                return try? queryDocumentSnapshot.data(as: User.self)
+////            }
+//            DispatchQueue.main.async {
+//                self.participantList.reloadData()
 //            }
-            DispatchQueue.main.async {
-                self.participantList.reloadData()
-            }
-        }
-    }
-    
-    func getDoc() {
-        let docRef = db.collection("events").document(documentID)
-
-        docRef.getDocument { (document, error) in
-          if let document = document, document.exists {
-            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-            print("Document data: \(dataDescription)")
-          } else {
-            print("Document does not exist")
-          }
-        }
-    }
+//        }
+//    }
     
     func fetchEventData() {
         // event data
@@ -307,11 +294,18 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
     func fetchParticipants() {
         // we can use getDocument to access the document referenced by the DocumentReference
         if event != nil && event.participants != nil {
+//            var temp:[User] = []
+            
             for docRef in event.participants! {
+//                print("count: \(temp.count)")
                 docRef.getDocument(as: User.self) { result in
                     do {
                         let value = try result.get()
                         print("Found participant at event \(self.event.name) with value: \(value).")
+                        if !self.confirmedParticipants.contains(value) {
+                            self.confirmedParticipants.append(value)
+                        }
+//                        temp.append(value)
     
                         DispatchQueue.main.async {
                             // TODO: Figure out how to reload after all events added, not after each event
@@ -322,6 +316,12 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                     }
                 }
             }
+            
+//            self.confirmedParticipants = temp
+//            print("\nConfirmed Participants:")
+//            for confirmedParticipant in confirmedParticipants {
+//                print(confirmedParticipant)
+//            }
         }
     }
     
@@ -348,10 +348,11 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             // owner document reference
             // if current user is the owner
             if event.owner.documentID == uid {
-                userIsEventOwner = true
+//                userIsEventOwner = true
+                hideButton = true
                 print("user is event owner\n")
             } else {
-                userIsEventOwner = false
+//                userIsEventOwner = false
                 print("user is not event owner\n")
             }
         }

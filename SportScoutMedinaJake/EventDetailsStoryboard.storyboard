@@ -92,7 +92,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q09-gh-hBM">
                                 <rect key="frame" x="125" y="437" width="143" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Request to Join" cornerStyle="capsule"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Join" cornerStyle="capsule"/>
                                 <connections>
                                     <action selector="requestToJoinPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="KBB-eJ-cON"/>
                                 </connections>

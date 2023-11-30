@@ -180,7 +180,7 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         } else {
             guard let uid = Auth.auth().currentUser?.uid else {return}
             
-            guard let uid = Auth.auth().currentUser?.uid else {return}
+//            guard let uid = Auth.auth().currentUser?.uid else {return}
             let docRef = db.collection("users").document(String(uid))
             docRef.getDocument { (document, error) in
                 if let document = document, document.exists {

@@ -61,4 +61,5 @@ struct User: Identifiable, Codable, Equatable {
     var sports: String
     var username: String
     var weight: String
+    var url: String
 }
