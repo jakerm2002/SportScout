@@ -81,11 +81,10 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             present(controller, animated: true)
         } else {
             // add user as participant
-            event.participants!.append(docuRef)
+            db.collection("events").document(documentID).updateData([
+                "participants": FieldValue.arrayUnion([docuRef])
+            ])
         }
-        
-        db.collection("events").document(documentID).updateData(["participants": event.participants!])
-        fetchParticipants()
     }
     
     
