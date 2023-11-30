@@ -67,21 +67,6 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
         // calendarView.scroll(to: exampleStartDateForCalendar as Date, options: .dateTime, animated: true)
     }
     
-    // retrieve an image from Firestore and execute a function once finished
-    func getImage(url: String, completion: @escaping (UIImage?) -> ()) {
-        let storageRef = storage.reference(forURL: url)
-        storageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) -> Void in
-            if data != nil {
-                print("adding image for url \(url)")
-                let pic = UIImage(data: data!)
-                completion(pic)
-            } else {
-                print("error fetching image for location with url \(url): \(String(describing: error?.localizedDescription))")
-                completion(nil)
-            }
-        }
-    }
-    
     // get a color for an event on the calendar
     func selectEventViewColor(forIndex idx: UInt) -> UIColor {
         // make this implementation better later,
