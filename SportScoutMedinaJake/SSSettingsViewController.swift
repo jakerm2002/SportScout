@@ -6,13 +6,16 @@
 //
 
 import UIKit
+import Firebase
 
-public let notificationSettings = ["All", "Urgent", "None"]
-public let faqQuestions = ["Question 1", "Question 2", "Question 3"]
-public let faqAnswer = ["Answer 1", "Answer 2", "Answer 3"]
+public let notificationSettings = ["On", "Off"]
+public let faqQuestionsAnswers = ["Q1 - How to set up an event?", "Answer1", "Q2", "Answer2", "Q3", "Answer3"]
 
 class SSSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var settingsTableView: UITableView!
+    
+    let logoutSegueIdentifier = "LogoutSegue"
+    var notifStatus = true
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -22,7 +25,7 @@ class SSSettingsViewController: UIViewController, UITableViewDelegate, UITableVi
         if section == 0 {
             return notificationSettings.count
         } else {
-            return faqQuestions.count
+            return faqQuestionsAnswers.count
         }
     }
     
@@ -32,8 +35,11 @@ class SSSettingsViewController: UIViewController, UITableViewDelegate, UITableVi
         
         if indexPath.section == 0 {
             cell.textLabel?.text = notificationSettings[row]
+            if (row == 0 && notifStatus || row == 1 && !notifStatus) {
+                cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+            }
         } else {
-            cell.textLabel?.text = faqQuestions[row]
+            cell.textLabel?.text = faqQuestionsAnswers[row]
         }
         
         return cell
@@ -44,13 +50,16 @@ class SSSettingsViewController: UIViewController, UITableViewDelegate, UITableVi
         
         // checkmarks for notification settings
         if indexPath.section == 0 {
-            if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCell.AccessoryType.checkmark {
-                tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
-            } else {
+            if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCell.AccessoryType.none {
                 tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+                if (notifStatus) {
+                    notifStatus = false
+                } else {
+                    notifStatus = true
+                }
+            } else {
+                tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
             }
-            
-            // todo: only allow one cell to be checkmarked at a time
         }
     }
     
@@ -76,14 +85,19 @@ class SSSettingsViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func logoutButtonPressed(_ sender: Any) {
+        let auth = Auth.auth()
+        do {
+            try auth.signOut()
+            performSegue(withIdentifier: logoutSegueIdentifier, sender: self)
+        } catch let signOutError {
+            print(signOutError.localizedDescription)
+        }
     }
-    */
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == logoutSegueIdentifier {
+            guard let vc = segue.destination as? LoginViewController else { return }
+        }
+    }
 }
