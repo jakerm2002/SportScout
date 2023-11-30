@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorageUI
 
 class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource /*, ParticipantsChanger*/ {
     
@@ -125,36 +126,47 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         if userIsEventOwner {
             
             var cellUsername = ""
-            var cellImage:UIImage?
+//            var cellImage:UIImage?
             
-            // TODO: give pfp to participants in list
+            // give pfp to participants in list
+            
             //        cell.imageView?.image = currentParticipants[indexPath.row].user?.
             switch indexPath.section {
             case confirmedSection:
                 cellUsername = confirmedParticipants[indexPath.row].username
-                //            cellImage = confirmedParticipants[indexPath.row].image
                 
+                if let url = confirmedParticipants[indexPath.row].url {
+                    let imgRef = storage.reference().child(url)
+                    cell.profilePicture.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
+                }
             case invitedSection:
                 cellUsername = invitedParticipants[indexPath.row].username
-                //            cellImage = invitedParticipants[indexPath.row].image
                 
+                if let url = invitedParticipants[indexPath.row].url {
+                    let imgRef = storage.reference().child(url)
+                    cell.profilePicture.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
+                }
             case requestedSection:
                 cellUsername = requestedParticipants[indexPath.row].username
-                //            cellImage = requestedParticipants[indexPath.row].image
                 
+                if let url = requestedParticipants[indexPath.row].url {
+                    let imgRef = storage.reference().child(url)
+                    cell.profilePicture.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
+                }
             default:
                 break
             }
             
             cell.username.text = cellUsername
-            cell.imageView?.image = cellImage
+//            cell.imageView?.image = cellImage
         } else {
             // show only confirmed participants
             if indexPath.section == confirmedSection {
                 cell.username.text = confirmedParticipants[indexPath.row].username
                 
                 if let url = confirmedParticipants[indexPath.row].url {
-                    cell.imageView?.image = UIImage(contentsOfFile: url)
+                    let imgRef = storage.reference().child(url)
+                    cell.profilePicture.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
                 }
             }
         }

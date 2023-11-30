@@ -11,7 +11,7 @@ class SSEventDetailsParticipantTableViewCell: UITableViewCell {
     
     var participantType:String?
     
-    @IBOutlet var profilePicture: UIView!
+    @IBOutlet var profilePicture: UIImageView!
     @IBOutlet var username: UILabel!
 
     override func awakeFromNib() {
@@ -19,9 +19,8 @@ class SSEventDetailsParticipantTableViewCell: UITableViewCell {
         // Initialization code
         
         // rounded image view to store pfp
-        self.imageView!.layer.cornerRadius =
-        self.imageView!.frame.size.height / 2
-        self.imageView!.contentMode = .scaleAspectFill
+        self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.height / 2
+        self.profilePicture.contentMode = .scaleAspectFill
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
