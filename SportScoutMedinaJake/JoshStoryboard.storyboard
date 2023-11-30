@@ -67,7 +67,7 @@
                                     <constraint firstAttribute="width" constant="244" id="Vk8-O0-QrA"/>
                                     <constraint firstAttribute="height" constant="52" id="ZrC-k0-sxE"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -108,7 +108,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sportsText" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vm2-Jf-4ft">
-                                <rect key="frame" x="133.33333333333334" y="411" width="244.00000000000003" height="21"/>
+                                <rect key="frame" x="133.33333333333334" y="411.66666666666669" width="244.00000000000003" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

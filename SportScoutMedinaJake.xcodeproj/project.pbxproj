@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F71BC692B1824B5007A1EFB /* CustomizeSportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F71BC682B1824B5007A1EFB /* CustomizeSportViewController.swift */; };
 		6607E9A82ADF85AA00F90978 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */; };
 		66408F4F2AF331D500763C4A /* NewEventStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */; };
 		66408F512AF3320600763C4A /* LocationDetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		1B82BE8E04B0D578ECB220C9 /* Pods_SportScoutMedinaJake.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportScoutMedinaJake.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F71BC682B1824B5007A1EFB /* CustomizeSportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizeSportViewController.swift; sourceTree = "<group>"; };
 		6607E9A72ADF85AA00F90978 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewEventStoryboard.storyboard; sourceTree = "<group>"; };
 		66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetailsStoryboard.storyboard; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			children = (
 				E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */,
 				66B8C6752AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard */,
+				5F71BC682B1824B5007A1EFB /* CustomizeSportViewController.swift */,
 				E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */,
 				66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */,
 				66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */,
@@ -356,6 +359,7 @@
 				66C3D97E2AD88FEC003E1C99 /* ViewController.swift in Sources */,
 				66C3D9DE2AD8FC79003E1C99 /* ProfileViewController.swift in Sources */,
 				698634142AF19EF5008ADA0A /* SSNewEventSportTableViewCell.swift in Sources */,
+				5F71BC692B1824B5007A1EFB /* CustomizeSportViewController.swift in Sources */,
 				66C3D97A2AD88FEC003E1C99 /* AppDelegate.swift in Sources */,
 				66C3D9E42AD903DF003E1C99 /* SSSettingsViewController.swift in Sources */,
 				66408F592AF3379B00763C4A /* SSEventDetailsViewController.swift in Sources */,

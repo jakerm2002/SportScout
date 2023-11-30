@@ -12,7 +12,11 @@ import FirebaseStorage
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
 
-class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+protocol addSportText {
+    func addSportText(newSport: String)
+}
+
+class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, addSportText {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var inchesField: UITextField!
@@ -130,6 +134,16 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
         picker.dismiss(animated: true, completion: nil)
     }
     
+    func addSportText(newSport: String) {
+        sportsText.text = newSport
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "chooseSportsSegue",
+           let nextVC = segue.destination as? CustomizeSportViewController
+        {
+            nextVC.delegate = self
+        }
+    }
 }
 
