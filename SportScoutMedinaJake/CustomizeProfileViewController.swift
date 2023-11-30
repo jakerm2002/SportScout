@@ -99,7 +99,7 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     
     private func storeUserInfo(fullName: String, username: String, weight: String, feet: String, inches: String, location: String, sports: String, bio: String, url: String) {
         guard let uid = Auth.auth().currentUser?.uid else {return}
-        let userData = ["uid": uid, "username": username,"fullName": fullName, "weight": weight, "feet": feet, "inches": inches, "location": location, "sports": sports, "bio": bio, "url": url]
+        let userData = ["username": username,"fullName": fullName, "weight": weight, "feet": feet, "inches": inches, "location": location, "sports": sports, "bio": bio, "url": url]
         db.collection("users").document(uid).setData(userData)
         print("user data stored")
     }
