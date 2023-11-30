@@ -26,9 +26,18 @@ class SSOtherUserProfileViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.profilePhoto!.layer.cornerRadius =
+        self.profilePhoto!.frame.size.height / 2
+        self.profilePhoto.contentMode = .scaleAspectFill
+        
         // get user passed in and show profile
         // TODO: USER PFP
-        // profilePhoto.image = user.
+        let fileRef = storage.reference(withPath: user!.url)
+        fileRef.getData(maxSize: 1024 * 1024) { data, err in
+            if err == nil && data != nil {
+                self.profilePhoto.image = UIImage(data: data!)
+            }
+        }
         nameText.text = user!.fullName
         usernameText.text = user!.username
         bioText.text = user!.bio
@@ -67,15 +76,4 @@ class SSOtherUserProfileViewController: UIViewController, UIScrollViewDelegate {
 //            }
 //        }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

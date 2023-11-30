@@ -224,23 +224,14 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func fetchUsers(userIds: [String]) -> [FirebaseFirestore.DocumentReference] {
-        var result:[FirebaseFirestore.DocumentReference] = []
-        for userId in userIds {
-            let docRef = db.collection("users").document(userId)
-
-            docRef.getDocument { document, error in
-              if let error = error as NSError? {
-                  print("error")
-              }
-              else {
-                if let document = document {
-                    result.append(docRef)
-                }
-              }
+            var result:[FirebaseFirestore.DocumentReference] = []
+            for userId in userIds {
+                let docRef = db.collection("users").document(userId)
+                result.append(docRef)
+                print("\ndocRef of user added: \(docRef)")
             }
+            return result
         }
-        return result
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SSChooseSportSegue,
