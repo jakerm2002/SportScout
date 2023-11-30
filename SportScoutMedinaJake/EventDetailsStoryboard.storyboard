@@ -149,7 +149,6 @@
                             <constraint firstItem="Uk2-gA-BET" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="h4N-0j-HPy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="UKt-hc-1hE" secondAttribute="trailing" constant="16" id="iGe-e1-WMQ"/>
                             <constraint firstItem="q09-gh-hBM" firstAttribute="top" secondItem="5sp-Nv-ZLB" secondAttribute="bottom" constant="8" symbolic="YES" id="kkl-n0-1Kq"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Sau-5c-yYh" secondAttribute="trailing" constant="277" id="qCn-Pg-otW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Qba-IF-8jm"/>

@@ -203,7 +203,8 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         if segue.identifier == profileSegueIdentifier,
            let nextVC = segue.destination as? SSOtherUserProfileViewController,
            let participantSection = participantList.indexPathForSelectedRow?.section,
-           let participantRow = participantList.indexPathForSelectedRow?.row
+           let participantRow = participantList.indexPathForSelectedRow?.row,
+           let selectedIndexPath = participantList.indexPathForSelectedRow
         {
             print("seguing to user profile in section: \(participantSection) at row: \(participantRow)")
             var chosenParticipantProfile:User?
@@ -226,6 +227,8 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             // populate profile
             print("final chosen participant: \(chosenParticipantProfile?.username ?? "none")")
             nextVC.user = chosenParticipantProfile
+            
+            participantList.deselectRow(at: selectedIndexPath, animated: true)
         }
     }
     
