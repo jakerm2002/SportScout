@@ -126,6 +126,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         if userIsEventOwner {
             
             var cellUsername = ""
+            var cellRealName = ""
 //            var cellImage:UIImage?
             
             // give pfp to participants in list
@@ -134,6 +135,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             switch indexPath.section {
             case confirmedSection:
                 cellUsername = confirmedParticipants[indexPath.row].username
+                cellRealName = confirmedParticipants[indexPath.row].fullName
                 
                 if let url = confirmedParticipants[indexPath.row].url {
                     let imgRef = storage.reference().child(url)
@@ -141,6 +143,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                 }
             case invitedSection:
                 cellUsername = invitedParticipants[indexPath.row].username
+                cellRealName = invitedParticipants[indexPath.row].fullName
                 
                 if let url = invitedParticipants[indexPath.row].url {
                     let imgRef = storage.reference().child(url)
@@ -148,6 +151,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                 }
             case requestedSection:
                 cellUsername = requestedParticipants[indexPath.row].username
+                cellRealName = requestedParticipants[indexPath.row].fullName
                 
                 if let url = requestedParticipants[indexPath.row].url {
                     let imgRef = storage.reference().child(url)
@@ -158,11 +162,13 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             }
             
             cell.username.text = cellUsername
+            cell.realName.text = cellRealName
 //            cell.imageView?.image = cellImage
         } else {
             // show only confirmed participants
             if indexPath.section == confirmedSection {
                 cell.username.text = confirmedParticipants[indexPath.row].username
+                cell.realName.text = confirmedParticipants[indexPath.row].fullName
                 
                 if let url = confirmedParticipants[indexPath.row].url {
                     let imgRef = storage.reference().child(url)

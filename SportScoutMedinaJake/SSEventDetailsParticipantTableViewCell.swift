@@ -12,6 +12,7 @@ class SSEventDetailsParticipantTableViewCell: UITableViewCell {
     var participantType:String?
     
     @IBOutlet var profilePicture: UIImageView!
+    @IBOutlet weak var realName: UILabel!
     @IBOutlet var username: UILabel!
 
     override func awakeFromNib() {
