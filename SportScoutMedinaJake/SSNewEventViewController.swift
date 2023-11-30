@@ -227,20 +227,8 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
             var result:[FirebaseFirestore.DocumentReference] = []
             for userId in userIds {
                 let docRef = db.collection("users").document(userId)
-
+                result.append(docRef)
                 print("\ndocRef of user added: \(docRef)")
-                
-                docRef.getDocument { document, error in
-                  if let error = error as NSError? {
-                      print("error")
-                  }
-                  else {
-                    if let document = document {
-                        print("adding to list of participants")
-                        result.append(docRef)
-                    }
-                  }
-                }
             }
             return result
         }
