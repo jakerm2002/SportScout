@@ -31,16 +31,23 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     var username = ""
     var imageURL = ""
 
+    var customizeProfileToTabBarControllerSegueIdentifier = "CustomizeProfileToTabBarControllerSegueIdentifier"
+    var chooseSportsSegueIdentifier = "chooseSportsSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        inchesField.delegate = self
-        feetField.delegate = self
-        weightField.delegate = self
         nameField.delegate = self
+        usernameField.delegate = self
+        weightField.delegate = self
+        feetField.delegate = self
+        inchesField.delegate = self
+        locationField.delegate = self
+        bioField.delegate = self
+        
         usernameField.text = username
+        sportsText.text = ""
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,11 +100,12 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         if (nameField.text == ""  || usernameField.text == ""  || weightField.text == "" || feetField.text == "" || inchesField.text == "" || locationField.text == "" || sportsText.text == "" || bioField.text == "") {
-            print("error")
+            print("CustomizeProfile error: please fill out all fields.")
             self.errorLabel.text = "Fill out all fields."
         } else {
             storeImageinStorage()
             storeUserInfo(fullName: nameField.text!, username: usernameField.text!, weight: weightField.text!, feet: feetField.text!, inches: inchesField.text!, location: locationField.text!, sports: sportsText.text!, bio: bioField.text!, url: imageURL)
+            performSegue(withIdentifier: "CustomizeProfileToTabBarControllerSegueIdentifier", sender: nil)
         }
     }
     
@@ -139,7 +147,7 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "chooseSportsSegue",
+        if segue.identifier == chooseSportsSegueIdentifier,
            let nextVC = segue.destination as? CustomizeSportViewController
         {
             nextVC.delegate = self

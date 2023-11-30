@@ -60,7 +60,6 @@
                                 <buttonConfiguration key="configuration" style="gray" title="Complete Profile"/>
                                 <connections>
                                     <action selector="doneButtonPressed:" destination="oCL-uO-4qh" eventType="touchUpInside" id="20m-fn-QSP"/>
-                                    <segue destination="yTj-UD-UxN" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="1L7-9A-JBv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="128-0s-Apl">
@@ -251,11 +250,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VtJ-U0-0IP">
-                                <rect key="frame" x="97" y="692" width="200" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VtJ-U0-0IP">
+                                <rect key="frame" x="16" y="692" width="361" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="5hJ-KQ-X9V"/>
-                                    <constraint firstAttribute="width" constant="200" id="vxG-dT-s4V"/>
+                                    <constraint firstAttribute="width" constant="361" id="vxG-dT-s4V"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
@@ -275,7 +274,6 @@
                             <constraint firstItem="6EV-Xa-LQN" firstAttribute="leading" secondItem="T8N-Ug-lHy" secondAttribute="trailing" constant="74" id="8Hf-g9-dAT"/>
                             <constraint firstItem="128-0s-Apl" firstAttribute="centerX" secondItem="8Is-Ff-wMO" secondAttribute="centerX" id="D57-I4-dn8"/>
                             <constraint firstItem="sOV-Lu-NPW" firstAttribute="trailing" secondItem="VUy-GJ-KbQ" secondAttribute="trailing" constant="15" id="D7R-9D-QFr"/>
-                            <constraint firstItem="VtJ-U0-0IP" firstAttribute="centerX" secondItem="fAs-cg-UPj" secondAttribute="centerX" id="Egx-Ia-Ui0"/>
                             <constraint firstItem="bcu-oY-1fY" firstAttribute="top" secondItem="Rw9-vg-ntV" secondAttribute="bottom" constant="10" id="GXD-sB-VWd"/>
                             <constraint firstItem="Xec-wF-8Zg" firstAttribute="leading" secondItem="sOV-Lu-NPW" secondAttribute="leading" constant="16" id="Giq-aO-75r"/>
                             <constraint firstItem="bcu-oY-1fY" firstAttribute="leading" secondItem="Xec-wF-8Zg" secondAttribute="trailing" constant="72.333333333333371" id="HFz-Qx-57x"/>
@@ -307,6 +305,7 @@
                             <constraint firstItem="zjy-fh-xbz" firstAttribute="leading" secondItem="sOV-Lu-NPW" secondAttribute="leading" constant="16" id="jcB-wv-ua2"/>
                             <constraint firstItem="Rw9-vg-ntV" firstAttribute="top" secondItem="6EV-Xa-LQN" secondAttribute="bottom" constant="15" id="jgS-2R-hKf"/>
                             <constraint firstItem="T8N-Ug-lHy" firstAttribute="leading" secondItem="sOV-Lu-NPW" secondAttribute="leading" constant="16" id="lUR-gL-zdP"/>
+                            <constraint firstItem="VtJ-U0-0IP" firstAttribute="centerX" secondItem="8Is-Ff-wMO" secondAttribute="centerX" id="mGE-RE-BYc"/>
                             <constraint firstItem="fAs-cg-UPj" firstAttribute="top" secondItem="VtJ-U0-0IP" secondAttribute="bottom" constant="-64" id="mt8-pI-wz3"/>
                             <constraint firstItem="V62-yo-EKB" firstAttribute="trailing" secondItem="vLJ-hq-dF6" secondAttribute="trailing" id="mzz-nW-VoK"/>
                             <constraint firstItem="T8N-Ug-lHy" firstAttribute="baseline" secondItem="Pjt-Vo-CEE" secondAttribute="baseline" id="ngc-GF-JQb"/>
@@ -333,11 +332,12 @@
                         <outlet property="sportsText" destination="bcu-oY-1fY" id="myx-cj-CQw"/>
                         <outlet property="usernameField" destination="h2b-7O-uOO" id="6ZX-Me-kg0"/>
                         <outlet property="weightField" destination="Ys8-g0-FqG" id="gBl-XY-0TJ"/>
+                        <segue destination="yTj-UD-UxN" kind="presentation" identifier="CustomizeProfileToTabBarControllerSegueIdentifier" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="V6r-aB-iPs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j2S-qg-fVm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2796" y="2261"/>
+            <point key="canvasLocation" x="2794.6564885496182" y="2260.5633802816901"/>
         </scene>
         <!--Select Sport-->
         <scene sceneID="BNX-Ol-9DV">
