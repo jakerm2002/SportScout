@@ -313,6 +313,23 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         }
     }
     
+    func createUploadingAlert() -> UIAlertController {
+        let alert = UIAlertController(title: "Uploading Post...", message: nil, preferredStyle: .alert)
+        
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.isUserInteractionEnabled = false
+        activityIndicator.startAnimating()
+
+        alert.view.addSubview(activityIndicator)
+        alert.view.heightAnchor.constraint(equalToConstant: 95).isActive = true
+
+        activityIndicator.centerXAnchor.constraint(equalTo: alert.view.centerXAnchor, constant: 0).isActive = true
+        activityIndicator.bottomAnchor.constraint(equalTo: alert.view.bottomAnchor, constant: -20).isActive = true
+
+        present(alert, animated: true)
+        return alert
+    }
 
     @IBAction func photoButtonPressed(_ sender: Any) {
         // don't allow cropping for the picker if using a photo
@@ -327,6 +344,8 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
     }
     
     @IBAction func shareButtonPressed(_ sender: Any) {
+        let uploadingAlert = createUploadingAlert()
+        
         // the media must be uploaded to firebase. this can be done asynchronously from other tasks
         let sportCell = sportTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SSNewPostSportTableViewCell
         
@@ -364,6 +383,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
                     sport: postSport,
                     pathToFirebaseStorageMedia: path!
                 )
+                uploadingAlert.dismiss(animated: true)
             }
         }
     }
