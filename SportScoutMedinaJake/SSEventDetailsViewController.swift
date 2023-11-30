@@ -152,7 +152,10 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             // show only confirmed participants
             if indexPath.section == confirmedSection {
                 cell.username.text = confirmedParticipants[indexPath.row].username
-                cell.imageView?.image = UIImage(contentsOfFile: confirmedParticipants[indexPath.row].url)
+                
+                if let url = confirmedParticipants[indexPath.row].url {
+                    cell.imageView?.image = UIImage(contentsOfFile: url)
+                }
             }
         }
         return cell

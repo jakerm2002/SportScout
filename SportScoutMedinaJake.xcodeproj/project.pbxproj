@@ -13,6 +13,7 @@
 		66119D5E2B0F20FA004E3530 /* SSTimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66119D5D2B0F20FA004E3530 /* SSTimelineViewController.swift */; };
 		66143E2B2B168094002D4C6A /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66143E2A2B168094002D4C6A /* SpinnerViewController.swift */; };
 		661D662F2B16E4A20094D1E0 /* SSTimelinePostMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661D662E2B16E4A20094D1E0 /* SSTimelinePostMediaView.swift */; };
+		661EC2BE2B189BBB00E4F795 /* CustomizeProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 661EC2BD2B189BBB00E4F795 /* CustomizeProfileStoryboard.storyboard */; };
 		661FB4A32B0F278B0056E307 /* HomeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 661FB4A22B0F278B0056E307 /* HomeStoryboard.storyboard */; };
 		661FB4A52B11421E0056E307 /* SSTimelineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661FB4A42B11421E0056E307 /* SSTimelineCollectionViewCell.swift */; };
 		66408F4F2AF331D500763C4A /* NewEventStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */; };
@@ -26,7 +27,6 @@
 		66911D672B182BF600D4125C /* NukeExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 66911D662B182BF600D4125C /* NukeExtensions */; };
 		66911D692B182BF600D4125C /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 66911D682B182BF600D4125C /* NukeUI */; };
 		66911D6B2B182BF600D4125C /* NukeVideo in Frameworks */ = {isa = PBXBuildFile; productRef = 66911D6A2B182BF600D4125C /* NukeVideo */; };
-		66B8C6762AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66B8C6752AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard */; };
 		66C066652ADA3FB500DE3845 /* SSLocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066642ADA3FB500DE3845 /* SSLocationDetailsViewController.swift */; };
 		66C066672ADA406600DE3845 /* SSModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C066662ADA406600DE3845 /* SSModels.swift */; };
 		66C3D97A2AD88FEC003E1C99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9792AD88FEC003E1C99 /* AppDelegate.swift */; };
@@ -67,7 +67,6 @@
 		94B1C2312B0F76CD0035CD70 /* SSOtherUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B1C2302B0F76CC0035CD70 /* SSOtherUserProfileViewController.swift */; };
 		94B1C2332B0F78BA0035CD70 /* OtherUserProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B1C2322B0F78BA0035CD70 /* OtherUserProfileStoryboard.storyboard */; };
 		9611118B2AF5C08600B9DF78 /* SSEventDetailsParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9611118A2AF5C08600B9DF78 /* SSEventDetailsParticipantTableViewCell.swift */; };
-		96DDF4562AFB590F00E9F286 /* CustomizeProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96DDF4552AFB590F00E9F286 /* CustomizeProfileStoryboard.storyboard */; };
 		BF2BADDFF2D1ABC54FBA5885 /* Pods_SportScoutMedinaJake.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B82BE8E04B0D578ECB220C9 /* Pods_SportScoutMedinaJake.framework */; };
 		E35264542ADB34E400CAAA09 /* TarBarControllerStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264532ADB34E400CAAA09 /* TarBarControllerStoryboard.storyboard */; };
 		E35264562ADB374600CAAA09 /* JoshStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */; };
@@ -83,6 +82,7 @@
 		66119D5D2B0F20FA004E3530 /* SSTimelineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTimelineViewController.swift; sourceTree = "<group>"; };
 		66143E2A2B168094002D4C6A /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		661D662E2B16E4A20094D1E0 /* SSTimelinePostMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTimelinePostMediaView.swift; sourceTree = "<group>"; };
+		661EC2BD2B189BBB00E4F795 /* CustomizeProfileStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomizeProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		661FB4A22B0F278B0056E307 /* HomeStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeStoryboard.storyboard; sourceTree = "<group>"; };
 		661FB4A42B11421E0056E307 /* SSTimelineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTimelineCollectionViewCell.swift; sourceTree = "<group>"; };
 		66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewEventStoryboard.storyboard; sourceTree = "<group>"; };
@@ -133,7 +133,6 @@
 		94B1C2322B0F78BA0035CD70 /* OtherUserProfileStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OtherUserProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		9611118A2AF5C08600B9DF78 /* SSEventDetailsParticipantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEventDetailsParticipantTableViewCell.swift; sourceTree = "<group>"; };
 		96DDF4552AFB590F00E9F286 /* CustomizeProfileStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomizeProfileStoryboard.storyboard; sourceTree = "<group>"; };
-		E35264532ADB34E400CAAA09 /* JakeStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JakeStoryboard.storyboard; sourceTree = "<group>"; };
 		E35264532ADB34E400CAAA09 /* TarBarControllerStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TarBarControllerStoryboard.storyboard; sourceTree = "<group>"; };
 		E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JoshStoryboard.storyboard; sourceTree = "<group>"; };
 		E355B2E62AFADCD4004D0066 /* SSChooseParticipantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSChooseParticipantsViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +159,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		661EC2BC2B189A7200E4F795 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				96DDF4552AFB590F00E9F286 /* CustomizeProfileStoryboard.storyboard */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		66C3D96D2AD88FEC003E1C99 = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +174,7 @@
 				66C3D9772AD88FEC003E1C99 /* Products */,
 				E3E1EEA62ADB417300AFCC05 /* Frameworks */,
 				C57FF900B231F4B5A2E92D53 /* Pods */,
+				661EC2BC2B189A7200E4F795 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -181,8 +189,8 @@
 		66C3D9782AD88FEC003E1C99 /* SportScoutMedinaJake */ = {
 			isa = PBXGroup;
 			children = (
+				661EC2BD2B189BBB00E4F795 /* CustomizeProfileStoryboard.storyboard */,
 				E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */,
-				66B8C6752AFB57F700FCBD50 /* CustomizeProfileStoryboard.storyboard */,
 				5F71BC682B1824B5007A1EFB /* CustomizeSportViewController.swift */,
 				94B1C2322B0F78BA0035CD70 /* OtherUserProfileStoryboard.storyboard */,
 				E35264532ADB34E400CAAA09 /* TarBarControllerStoryboard.storyboard */,
@@ -340,6 +348,7 @@
 				66408F4F2AF331D500763C4A /* NewEventStoryboard.storyboard in Resources */,
 				66408F512AF3320600763C4A /* LocationDetailsStoryboard.storyboard in Resources */,
 				666DD4212B159CDC00FAA43F /* SSNewPostSportTableViewCell.xib in Resources */,
+				661EC2BE2B189BBB00E4F795 /* CustomizeProfileStoryboard.storyboard in Resources */,
 				66119D5A2B0F1F3C004E3530 /* TimelineStoryboard.storyboard in Resources */,
 				66C3D9892AD88FED003E1C99 /* LaunchScreen.storyboard in Resources */,
 				66C3D9862AD88FED003E1C99 /* Assets.xcassets in Resources */,
@@ -352,7 +361,6 @@
 				66C3D9932AD897BE003E1C99 /* recSports.png in Resources */,
 				66408F572AF336F400763C4A /* EventDetailsStoryboard.storyboard in Resources */,
 				6607E9A82ADF85AA00F90978 /* LaunchScreen.storyboard in Resources */,
-				96DDF4562AFB590F00E9F286 /* CustomizeProfileStoryboard.storyboard in Resources */,
 				66C3D9972AD89844003E1C99 /* hancockRec.png in Resources */,
 				E35264542ADB34E400CAAA09 /* TarBarControllerStoryboard.storyboard in Resources */,
 			);

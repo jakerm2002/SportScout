@@ -32,10 +32,12 @@ class SSOtherUserProfileViewController: UIViewController, UIScrollViewDelegate {
         
         // get user passed in and show profile
         // TODO: USER PFP
-        let fileRef = storage.reference(withPath: user!.url)
-        fileRef.getData(maxSize: 1024 * 1024) { data, err in
-            if err == nil && data != nil {
-                self.profilePhoto.image = UIImage(data: data!)
+        if let url = user!.url {
+            let fileRef = storage.reference(withPath: url)
+            fileRef.getData(maxSize: 1024 * 1024) { data, err in
+                if err == nil && data != nil {
+                    self.profilePhoto.image = UIImage(data: data!)
+                }
             }
         }
         nameText.text = user!.fullName
