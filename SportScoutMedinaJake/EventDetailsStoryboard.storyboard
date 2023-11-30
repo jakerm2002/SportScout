@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -79,10 +79,12 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="XLZ-HY-BTx" secondAttribute="bottom" constant="7" id="yqU-Sa-4Nz"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
                                         <connections>
                                             <outlet property="profilePicture" destination="w17-ME-VOF" id="W6Q-id-AoD"/>
                                             <outlet property="username" destination="XLZ-HY-BTx" id="b0f-RO-gdH"/>
-                                            <segue destination="4HB-ad-dF2" kind="showDetail" identifier="SegueToSelectedUserProfile" id="arv-6h-z9h"/>
+                                            <outletCollection property="gestureRecognizers" destination="LFn-pa-Mc6" appends="YES" id="Z1O-HZ-75f"/>
+                                            <segue destination="4HB-ad-dF2" kind="presentation" identifier="SegueToSelectedUserProfile" id="arv-6h-z9h"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -90,7 +92,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q09-gh-hBM">
                                 <rect key="frame" x="125" y="437" width="143" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Request to Join" cornerStyle="capsule"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Join" cornerStyle="capsule"/>
                                 <connections>
                                     <action selector="requestToJoinPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="KBB-eJ-cON"/>
                                 </connections>
@@ -150,6 +152,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Sau-5c-yYh" secondAttribute="trailing" constant="277" id="qCn-Pg-otW"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Qba-IF-8jm"/>
                     <connections>
                         <outlet property="dateLabel" destination="u6q-Lf-NRr" id="tYV-Hk-rQu"/>
                         <outlet property="eventDescription" destination="5sp-Nv-ZLB" id="TBJ-QF-urO"/>
@@ -157,20 +160,24 @@
                         <outlet property="locationLabel" destination="UKt-hc-1hE" id="ieV-TQ-Baw"/>
                         <outlet property="numParticipantsLabel" destination="hg7-cf-eLW" id="2Fj-nc-nW1"/>
                         <outlet property="participantList" destination="JmR-Di-hb4" id="t4G-hz-oQb"/>
+                        <outlet property="requestToJoinButton" destination="q09-gh-hBM" id="TzS-9O-q1x"/>
                         <outlet property="timeLabel" destination="Uk2-gA-BET" id="y3d-62-beC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="LFn-pa-Mc6"/>
             </objects>
-            <point key="canvasLocation" x="130.53435114503816" y="-28.169014084507044"/>
+            <point key="canvasLocation" x="1057.2519083969464" y="-28.169014084507044"/>
         </scene>
-        <!--JoshStoryboard-->
+        <!--OtherUserProfileStoryboard-->
         <scene sceneID="Xe1-Xk-fZT">
             <objects>
-                <viewControllerPlaceholder storyboardName="JoshStoryboard" id="4HB-ad-dF2" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="OtherUserProfileStoryboard" id="4HB-ad-dF2" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="jdF-DK-NRp"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYi-FK-3LH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="707" y="-114"/>
+            <point key="canvasLocation" x="1632.824427480916" y="-114.08450704225352"/>
         </scene>
     </scenes>
     <resources>

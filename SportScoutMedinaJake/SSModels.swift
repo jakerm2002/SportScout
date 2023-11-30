@@ -57,7 +57,9 @@ struct User: Identifiable, Codable, Equatable {
     var feet: String
     var fullName: String
     var inches: String
+    var location: String
     var sports: String
     var username: String
     var weight: String
+    var url: String
 }

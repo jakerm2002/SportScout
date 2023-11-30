@@ -90,7 +90,7 @@
                         <outlet property="locationCityStateZipTextLabel" destination="VnZ-J9-aon" id="kXH-u5-kEb"/>
                         <outlet property="locationImageView" destination="Eg5-Nx-8dW" id="gD4-15-eZQ"/>
                         <outlet property="locationNameTextLabel" destination="nlJ-BV-arv" id="1Vu-r1-cgB"/>
-                        <segue destination="3Wj-sw-kOL" kind="presentation" identifier="LocationDetailsToSelectedEventSegueIdentifier" id="Ua4-pt-ZeS"/>
+                        <segue destination="3Wj-sw-kOL" kind="showDetail" identifier="LocationDetailsToSelectedEventSegueIdentifier" id="Ua4-pt-ZeS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fzJ-N3-sbX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
