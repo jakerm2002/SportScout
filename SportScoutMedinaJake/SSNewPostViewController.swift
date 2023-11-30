@@ -168,7 +168,6 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
                 picker.cameraCaptureMode = .photo
             } else {
                 picker.mediaTypes = [UTType.movie.identifier as String]
-                picker.videoQuality = .typeHigh
                 picker.cameraCaptureMode = .video
             }
             present(picker,animated: true)
@@ -276,7 +275,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
                     print("Media upload complete (photo).")
                     return resultMetadata.path
                 } catch {
-                    print("Error uploading media (photo).")
+                    print("Error uploading media (photo): \(error.localizedDescription)")
                 }
             } else if userMediaSubmissionType == "video" {
                 do {
@@ -289,7 +288,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
                     print("Media upload complete (video).")
                     return resultMetadata.path
                 } catch {
-                    print("Error uploading media (video).")
+                    print("Error uploading media (video): \(error.localizedDescription)")
                 }
             }
         }
@@ -377,6 +376,8 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
                 alert.message?.append("\u{2022} \(err)")
             }
             alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+            print("New post validation error")
         } else {
             guard let uid = Auth.auth().currentUser?.uid else {return}
             
