@@ -163,19 +163,24 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
 //        performSegue(withIdentifier: profileSegueIdentifier, sender: nil)
     }
     
-    // delete from core data
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            let pizzaToDelete = corePizzas[indexPath.row]
-//            context.delete(pizzaToDelete)
-//            pizzas.remove(at: indexPath.row)
-//            corePizzas.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//            saveContext()
-//        } else if editingStyle == .insert {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-//        }
-//    }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return hideButton
+    }
+    
+    // delete from table
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            let userToDelete = event.participants![indexPath.row]
+            event.participants!.remove(at: indexPath.row)
+            db.collection("events").document(documentID).updateData(["participants": event.participants!])
+            fetchParticipants()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }  else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
+            
+    }
     
     // swipe gestures to accept/remove participants for event owner
     @IBAction func recognizeSwipeGesture(recognizer: UISwipeGestureRecognizer)
@@ -220,30 +225,6 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             nextVC.user = chosenParticipantProfile
         }
     }
-    
-    // Get all participant data for this event entry in Firestore database.
-    // Populate the UI.
-//    func fetchParticipantData() {
-//        // for participant table
-//        db.collection("users").addSnapshotListener {(querySnapshot, error) in
-//            guard let documents = querySnapshot?.documents else {
-//                print("No documents")
-//                return
-//            }
-//            self.confirmedParticipants = documents.compactMap { (queryDocumentSnapshot) -> User? in
-//                return try? queryDocumentSnapshot.data(as: User.self)
-//            }
-////            self.invitedParticipants = documents.compactMap { (queryDocumentSnapshot) -> User? in
-////                return try? queryDocumentSnapshot.data(as: User.self)
-////            }
-////            self.requestedParticipants = documents.compactMap { (queryDocumentSnapshot) -> User? in
-////                return try? queryDocumentSnapshot.data(as: User.self)
-////            }
-//            DispatchQueue.main.async {
-//                self.participantList.reloadData()
-//            }
-//        }
-//    }
     
     func fetchEventData() {
         // event data
@@ -293,6 +274,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     func fetchParticipants() {
         // we can use getDocument to access the document referenced by the DocumentReference
+        confirmedParticipants = []
         if event != nil && event.participants != nil {
 //            var temp:[User] = []
             
@@ -300,11 +282,15 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
 //                print("count: \(temp.count)")
                 docRef.getDocument(as: User.self) { result in
                     do {
+                        
                         let value = try result.get()
                         print("Found participant at event \(self.event.name) with value: \(value).")
-                        if !self.confirmedParticipants.contains(value) {
+                        
+//                        if !self.confirmedParticipants.contains(value) {
                             self.confirmedParticipants.append(value)
-                        }
+//                        }
+                        
+                    
 //                        temp.append(value)
     
                         DispatchQueue.main.async {
@@ -352,6 +338,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                 hideButton = true
                 print("user is event owner\n")
             } else {
+                hideButton = false
 //                userIsEventOwner = false
                 print("user is not event owner\n")
             }
