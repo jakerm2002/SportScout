@@ -22,8 +22,6 @@ class SSTimelineCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nukeLazyImageView: LazyImageView!
     
-    var hasMedia: Bool = false
-    
     var cornerRadius: CGFloat = 5.0
     
     override func awakeFromNib() {

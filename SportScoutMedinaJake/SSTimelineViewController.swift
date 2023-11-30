@@ -74,6 +74,19 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         view.addSubview(spinnerVC.view)
         spinnerVC.didMove(toParent: self)
         
+        // TODO: attempt Nuke cache videos
+//        let pipeline = ImagePipeline {
+//            $0.dataLoader = DataLoader(configuration: {
+//                // Disable disk caching built into URLSession
+//                let conf = DataLoader.defaultConfiguration
+//                conf.urlCache = nil
+//                return conf
+//            }())
+//
+//            $0.imageCache = ImageCache()
+//            $0.dataCache = try! DataCache(name: "com.github.kean.Nuke.DataCache")
+//        }
+        
         // for video playback
         ImageDecoderRegistry.shared.register(ImageDecoders.Video.init)
 
@@ -84,23 +97,6 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
             spinnerVC.removeFromParent()
         }
     }
-    
-//    func fetchImages() {
-//        requests = remoteImages.map {
-//          var request = ImageRequest(url: $0)
-//          request.priority = .high
-//          return request
-//        }
-//        if let requests = requests, requests.count > 0 {
-//          preheater.startPrefetching(with: requests)
-//        }
-//      }
-//
-//    deinit {
-//        if let requests = requests, requests.count > 0 {
-//          preheater.stopPrefetching(with: requests)
-//        }
-//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if viewableTimelinePosts.count == 0 && !self.spinnerVC.view.isDescendant(of: self.view) {
@@ -128,7 +124,8 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         if viewableTimelinePosts[indexPath.row].mediaType == "photo" {
             if let mediaPhoto = viewableTimelinePosts[indexPath.row].mediaPath {
                 let imgRef = storage.reference().child(mediaPhoto)
-                cell.imageView.sd_setImage(with: imgRef)
+                cell.imageView.sd_setImage(with: imgRef, placeholderImage: nil)
+//                cell.mediaView.isHidden = true
             }
         } else if viewableTimelinePosts[indexPath.row].mediaType == "video" {
             if let mediaVideo = viewableTimelinePosts[indexPath.row].mediaPath {
@@ -152,12 +149,19 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
                         print("Error downloading video: \(error.localizedDescription)")
                     } else {
                         cell.nukeLazyImageView.url = url
+//                        (cell.nukeLazyImageView.customImageView as! VideoPlayerView).playerLayer.player?.pause()
+//                        cell.mediaView.isHidden = true
                     }
                 }
             }
         } else {
             cell.imageView.image = nil
             cell.nukeLazyImageView.url = nil
+            if let mediaType = currentPost.mediaType {
+//                cell.mediaView.isHidden = false
+            } else {
+//                cell.mediaView.isHidden = true
+            }
         }
         
         cell.mediaView.isHidden = true
