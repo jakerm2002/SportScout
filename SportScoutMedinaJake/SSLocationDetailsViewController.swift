@@ -53,6 +53,10 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
         calendarView.eventIndicatorDotColor = UIColor(.red)
         calendarView.dataSource = self
         calendarView.delegate = self
+        
+        calendarView.backgroundColor = .white
+        calendarView.daySeparatorsColor = .systemGray
+        calendarView.timeSeparatorsColor = .systemGray
     }
     
     override func viewDidAppear(_ animated: Bool) {
