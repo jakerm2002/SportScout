@@ -192,10 +192,13 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         if editingStyle == .delete {
             
             let userToDelete = event.participants![indexPath.row]
+            print("\n\ndeleting \(userToDelete)")
             event.participants!.remove(at: indexPath.row)
             db.collection("events").document(documentID).updateData(["participants": event.participants!])
-            fetchParticipants()
+            print("updating confirmedParticipants")
+            confirmedParticipants.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            participantList.reloadData()
         }  else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
@@ -297,7 +300,6 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     func fetchParticipants() {
         // we can use getDocument to access the document referenced by the DocumentReference
-        confirmedParticipants = []
         if event != nil && event.participants != nil {
 //            var temp:[User] = []
             
@@ -309,10 +311,9 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                         let value = try result.get()
                         print("Found participant at event \(self.event.name) with value: \(value).")
                         
-//                        if !self.confirmedParticipants.contains(value) {
+                        if !self.confirmedParticipants.contains(value) {
                             self.confirmedParticipants.append(value)
-//                        }
-                        
+                        }
                     
 //                        temp.append(value)
     
