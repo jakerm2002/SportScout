@@ -39,7 +39,13 @@ class SSTimelineCollectionViewCell: UICollectionViewCell {
         contentView.layer.cornerRadius = cornerRadius
         contentView.layer.masksToBounds = true
         
-        layer.backgroundColor = UIColor.purple.cgColor
+//        layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
+        layer.backgroundColor = UIColor(red: 0.71, green: 0.16, blue: 0.71, alpha: 1.00).cgColor
+        authorRealNameLabel.textColor = .white
+        authorUsernameLabel.textColor = .white
+        createdAtLabel.textColor = .white
+        captionLabel.textColor = .white
+        sportLabel.textColor = .white
         
         // Set masks to bounds to false to avoid the shadow
         // from being clipped to the corner radius
