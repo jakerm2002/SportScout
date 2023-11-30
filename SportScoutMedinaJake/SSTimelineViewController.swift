@@ -11,8 +11,11 @@ import FirebaseCore
 import FirebaseFirestoreSwift
 import FirebaseStorage
 import Nuke
+import NukeUI
 import NukeExtensions
+import NukeVideo
 import FirebaseStorageUI
+import AVFoundation
 
 class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -70,6 +73,9 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         spinnerVC.view.frame = view.frame
         view.addSubview(spinnerVC.view)
         spinnerVC.didMove(toParent: self)
+        
+        // for video playback
+        ImageDecoderRegistry.shared.register(ImageDecoders.Video.init)
 
         Task {
             await fetchTimelinePosts()
@@ -125,10 +131,33 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
                 cell.imageView.sd_setImage(with: imgRef)
             }
         } else if viewableTimelinePosts[indexPath.row].mediaType == "video" {
+            if let mediaVideo = viewableTimelinePosts[indexPath.row].mediaPath {
+                cell.nukeLazyImageView.makeImageView = {
+                    container in
+                    if let type = container.type, type.isVideo, let asset = container.userInfo[.videoAssetKey] as? AVAsset {
+                        let view = VideoPlayerView()
+                        view.asset = asset
+                        view.play()
+                        return view
+                    }
+                    return nil
+                }
+                
+                let videoRef = storage.reference(withPath: mediaVideo)
+                
+                videoRef.downloadURL() {
+                    (url, error) in
+                    if let error = error {
+                        // Handle any errors
+                        print("Error downloading video: \(error.localizedDescription)")
+                    } else {
+                        cell.nukeLazyImageView.url = url
+                    }
+                }
+            }
+        } else {
             cell.imageView.image = nil
-        }
-        else {
-            cell.imageView.image = nil
+            cell.nukeLazyImageView.url = nil
         }
         
         cell.mediaView.isHidden = true

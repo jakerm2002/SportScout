@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NukeUI
 
 class SSTimelineCollectionViewCell: UICollectionViewCell {
     
@@ -19,7 +20,7 @@ class SSTimelineCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mediaView: SSTimelinePostMediaView!
     
     @IBOutlet weak var imageView: UIImageView!
-    
+    @IBOutlet weak var nukeLazyImageView: LazyImageView!
     
     var hasMedia: Bool = false
     

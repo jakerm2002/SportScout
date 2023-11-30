@@ -80,5 +80,4 @@ struct TimelinePost: Identifiable, Codable {
     var authorAsUserModel: User?
     var authorImageData: Data?
     var mediaImageData: Data?
-    var mediaVideoURL: URL?
 }
