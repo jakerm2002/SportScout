@@ -19,6 +19,7 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var heightText: UILabel!
     @IBOutlet weak var locationText: UILabel!
     
+    var logoutSegueIdentifier = "LogoutSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,14 +55,20 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func logoutButtonPressed(_ sender: Any) {
+        let auth = Auth.auth()
+        do {
+            try auth.signOut()
+            performSegue(withIdentifier: logoutSegueIdentifier, sender: self)
+        } catch let signOutError {
+            print(signOutError.localizedDescription)
+        }
     }
-    */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == logoutSegueIdentifier {
+            guard let vc = segue.destination as? LoginViewController else { return }
+        }
+    }
 
 }
