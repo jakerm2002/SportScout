@@ -283,8 +283,12 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
                         throw NewPostError.mediaUnavailable
                     }
                     let videoRef = storage.reference().child("timelinePostMedia/\(postDocumentID)")
+                    let videoData = try Data(contentsOf: currentVideoMedia!)
                     
-                    let resultMetadata = try await videoRef.putFileAsync(from: currentVideoMedia!, metadata: nil)
+                    let uploadMetadata = StorageMetadata()
+                    uploadMetadata.contentType = "video/quicktime"
+                    
+                    let resultMetadata = try await videoRef.putDataAsync(videoData, metadata: uploadMetadata)
                     print("Media upload complete (video).")
                     return resultMetadata.path
                 } catch {
@@ -358,7 +362,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         // the media must be uploaded to firebase. this can be done asynchronously from other tasks
         let sportCell = sportTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SSNewPostSportTableViewCell
         
-        let postCaption = descriptionTextView.text.isEmpty ? nil : descriptionTextView.text
+        let postCaption = (!userDidChangeCaption || descriptionTextView.text.isEmpty) ? nil : descriptionTextView.text
         let postSport = sportCell.selectedLabel.text == "None" ? nil : sportCell.selectedLabel.text
         
         var validationErrors: [String] = []
