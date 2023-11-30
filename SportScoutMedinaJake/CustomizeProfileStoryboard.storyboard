@@ -35,8 +35,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="pnJ-IZ-H0h">
-                                <rect key="frame" x="132.66666666666666" y="81" width="127.99999999999997" height="124.66666666666666"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="pnJ-IZ-H0h">
+                                <rect key="frame" x="132.66666666666666" y="80" width="127.99999999999997" height="126.66666666666669"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="F7s-CF-3IJ"/>
                                     <constraint firstAttribute="height" constant="128" id="UZo-lT-tRE"/>
@@ -401,7 +401,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
