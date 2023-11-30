@@ -64,7 +64,6 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
 
         Task {
             await fetchTimelinePosts()
-            getMediaForEachPost()
             spinnerVC.willMove(toParent: nil)
             spinnerVC.view.removeFromSuperview()
             spinnerVC.removeFromParent()
@@ -88,75 +87,8 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         
         cell.authorUsernameLabel.text = currentPost.authorAsUserModel?.username
         
-        // if the user's image is available, display it
-        if let authorImageData = currentPost.authorImageData {
-            cell.mediaView.isHidden = true
-            cell.imageView.image = UIImage(data: authorImageData)
-        } else {
-            cell.imageView.image = nil
-        }
-//        if let profilePic = currentPost.authorImageData {
-//            cell.authorProfileImage.image = UIImage(data: profilePic)
-//        } else {
-//            Task {
-//                if let path = currentPost.authorAsUserModel?.url {
-//                    print("going to fetch image for \(indexPath.row)")
-//                    await fetchImage(imgPath: path, indexPath: indexPath, viewToChange: "profile")
-//                }
-//            }
-//        }
-        
-//        // begin fetching media
-//        if currentPost.mediaType == "photo" {
-//            if let mediaImageData = currentPost.mediaImageData {
-////                cell.mediaView.addImage(imageData: mediaImageData)
-////                cell.stackView.distribution = .fillProportionally
-//                
-//                
-//                
-////                let imageSubview = UIImageView()
-////                imageSubview.image = UIImage(data: mediaImageData)
-////                imageSubview.contentMode = .scaleAspectFit
-////                cell.stackView.subviews[1].removeFromSuperview()
-////                cell.stackView.insertArrangedSubview(imageSubview, at: 1)
-////                cell.stackView.layoutIfNeeded()
-////                cell.stackView.layoutIfNeeded()
-//                
-////                cell.mediaView.isHidden = true
-////                cell.imageView.image = UIImage(data: mediaImageData)
-////                cell.imageView.contentMode = .scaleAspectFit
-////                cell.imageView.image = .checkmark
-////                cell.mediaView.isHidden = true
-//                cell.imageView.image = UIImage(data: mediaImageData)
-//            } else {
-////                Task {
-////                    if let path = currentPost.mediaPath {
-////                        await fetchImage(imgPath: path, indexPath: indexPath, viewToChange: "media")
-////                    }
-////                    print("successfully fetched timeline post image: \(currentPost.mediaPath)")
-////                }
-//            }
-//        }
-        
-        if let mediaImageData = currentPost.mediaImageData {
-            cell.mediaView.isHidden = true
-            cell.imageView.image = UIImage(data: mediaImageData)
-        } else {
-            cell.imageView.image = nil
-        }
-        
-//        getImage(url: photoUrl) { photo in
-//            if photo != nil {
-//                if cell.tag == tag {
-//                    DispatchQueue.main.async {
-//                        cell.locationImageView?.layer.cornerRadius = 5.0
-//                        cell.locationImageView?.layer.masksToBounds = true
-//                        cell.locationImageView?.image = photo
-//                    }
-//                }
-//            }
-//        }
-        
+        // TODO: display images
+
         let formatter = RelativeDateTimeFormatter()
         if let createdAt = currentPost.createdAt {
             cell.createdAtLabel.text = formatter.localizedString(for: createdAt, relativeTo: Date.now)
@@ -183,45 +115,6 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
-    // currently images only
-    func getMediaForEachPost() {
-        print("getMediaForEachPost")
-        for (idx, post) in viewableTimelinePosts.enumerated() {
-            print("looking at timeline posts with index \(idx)")
-            // get the profile picture
-            mediaLoaderQueue.async {
-                if let imgPath = post.authorAsUserModel?.url {
-                    self.getImageData(imgPath: imgPath) {
-                        data in
-                        if data != nil {
-//                            DispatchQueue.main.async {
-                                self.viewableTimelinePosts[idx].authorImageData = data
-//                            }
-                        }
-                    }
-                }
-            }
-            
-            // get the post media
-            if let imgPath = post.mediaPath {
-                self.getImageData(imgPath: imgPath) {
-                    data in
-                    if data != nil {
-//                        DispatchQueue.main.async {
-                            self.viewableTimelinePosts[idx].mediaImageData = data
-//                        }
-                    }
-                }
-            }
-            
-            print("finished fetching media for \(idx)")
-            // now that we have the media, refresh the cell
-//            collectionView.reloadItems(at: [IndexPath(row: idx, section: 0)])
-            collectionView.reloadData()
-        }
-    }
-
-    
     @MainActor
     func fetchTimelinePosts() async {
         do {
@@ -239,43 +132,6 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
             collectionView.reloadData()
         } catch {
             print("There was an issue fetching timeline posts: \(error.localizedDescription)")
-        }
-    }
-    
-    // retrieve an image from Firestore and execute a function once finished
-    func getImage(url: String, completion: @escaping (UIImage?) -> ()) {
-        let storageRef = storage.reference(forURL: url)
-        storageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) -> Void in
-            if data != nil {
-                print("adding image for url \(url)")
-                let pic = UIImage(data: data!)
-                completion(pic)
-            } else {
-                print("error fetching image for location with url \(url): \(String(describing: error?.localizedDescription))")
-                completion(nil)
-            }
-        }
-    }
-    
-    @MainActor
-    func fetchImage(imgPath: String, indexPath: IndexPath, viewToChange: String) async {
-        let imageRef = storage.reference(withPath: imgPath).getData(maxSize: 3000*3000) {
-            (data, error) in
-            if let error = error {
-                print("There was an issue fetching \(viewToChange) image: \(error.localizedDescription)")
-            } else {
-                switch viewToChange {
-                case "profile":
-                    self.viewableTimelinePosts[indexPath.row].authorImageData = data
-                case "media":
-                    self.viewableTimelinePosts[indexPath.row].mediaImageData = data
-                default:
-                    print("fetchImage can't handle view of type \(viewToChange)")
-                    break
-                }
-                print("fetching image for \(indexPath.row)")
-                self.collectionView.reloadItems(at: [indexPath])
-            }
         }
     }
     
@@ -311,7 +167,6 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         print("refreshing")
         Task {
             await fetchTimelinePosts()
-            getMediaForEachPost()
         }
         DispatchQueue.main.async {
             refreshControl.endRefreshing()
