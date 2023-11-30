@@ -113,6 +113,7 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         let row = indexPath.row
         let currentPost = viewableTimelinePosts[row]
         
+        cell.authorRealNameLabel.text = currentPost.authorAsUserModel?.fullName
         cell.authorUsernameLabel.text = currentPost.authorAsUserModel?.username
         
         // TODO: display images

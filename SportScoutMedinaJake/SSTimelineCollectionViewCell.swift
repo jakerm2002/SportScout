@@ -10,6 +10,7 @@ import NukeUI
 
 class SSTimelineCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var authorRealNameLabel: UILabel!
     @IBOutlet weak var authorUsernameLabel: UILabel!
     @IBOutlet weak var authorProfileImage: UIImageView!
     @IBOutlet weak var createdAtLabel: UILabel!
@@ -26,6 +27,13 @@ class SSTimelineCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        captionLabel.textContainerInset = .zero
+        captionLabel.textContainer.lineFragmentPadding = 0
+        
+//        sportLabel.layer.backgroundColor = UIColor.systemGray2.withAlphaComponent(0.7).cgColor
+//        sportLabel.layer.cornerRadius = 2.0
+//        sportLabel.layer.masksToBounds = true
             
         // Apply rounded corners to contentView
         contentView.layer.cornerRadius = cornerRadius
