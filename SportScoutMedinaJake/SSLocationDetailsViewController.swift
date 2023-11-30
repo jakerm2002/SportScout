@@ -153,13 +153,13 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
                 do {
                     self.LocationObject = try document.data(as: Location.self)
                     // update UI labels, get events for calendar
-                    DispatchQueue.main.async {
                         self.locationNameTextLabel.text = self.LocationObject.name
                         self.locationAddrTextLabel.text = self.LocationObject.addr_field_1
                         self.locationCityStateZipTextLabel.text = "\(self.LocationObject.city) \(self.LocationObject.state), \(self.LocationObject.zip)"
-                        self.fetchEvents()
-                        self.calendarView.reloadAllEvents()
-                    }
+                        
+                        Task {
+                            await self.fetchEvents()
+                        }
                     
                     let url = self.LocationObject.imgPath
                     let imgRef = storage.reference(forURL: url)
@@ -172,14 +172,16 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     }
     
     // Get all the events scheduled at this location.
-    func fetchEvents() {
+    @MainActor
+    func fetchEvents() async {
+        eventsOnDate.removeAll()
         // we can use getDocument to access the document referenced by the DocumentReference
         if LocationObject != nil && LocationObject.events != nil {
             for docRef in LocationObject.events! {
                 docRef.getDocument(as: Event.self) { result in
                     do {
                         let value = try result.get()
-                        // print("Found event at location \(self.LocationObject.name) with value: \(value).")
+                         print("Found event at location \(self.LocationObject.name) with value: \(value).")
                         let dateWithoutTime = self.removeTimeStamp(fromDate: value.startTime)
                         if self.eventsOnDate[dateWithoutTime] != nil {
                             // https://stackoverflow.com/a/24535563
@@ -188,11 +190,7 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
                         } else {
                             self.eventsOnDate[dateWithoutTime] = [value]
                         }
-
-                        DispatchQueue.main.async {
-                            // TODO: Figure out how to reload after all events added, not after each event
-                            self.calendarView.reloadAllEvents() // force refresh to see new event
-                        }
+                        self.calendarView.reloadAllEvents()
                     } catch {
                         print("Error retrieving event at location \(self.LocationObject.name): \(error)")
                     }
