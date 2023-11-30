@@ -168,6 +168,8 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
                 picker.cameraCaptureMode = .photo
             } else {
                 picker.mediaTypes = [UTType.movie.identifier as String]
+//                picker.videoQuality = .typeHigh
+                picker.videoExportPreset = AVAssetExportPresetPassthrough
                 picker.cameraCaptureMode = .video
             }
             present(picker,animated: true)
@@ -196,6 +198,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
             userMediaSubmissionType = "photo"
         case UTType.movie.identifier:
             let chosenVideo = info[.mediaURL] as! URL
+            currentVideoMedia = chosenVideo
             let player = AVPlayer(url: chosenVideo)
             player.allowsExternalPlayback = false
             avpController.player = player
@@ -260,21 +263,35 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
     @MainActor
     func attemptMediaUpload(postDocumentID: String) async -> String? {
         if userDidSubmitMedia {
-            // only works for photos
-            do {
-                guard currentImageMedia != nil else {
-                    throw NewPostError.mediaUnavailable
+            if userMediaSubmissionType == "photo" {
+                do {
+                    guard currentImageMedia != nil else {
+                        throw NewPostError.mediaUnavailable
+                    }
+                    let imgRef = storage.reference().child("timelinePostMedia/\(postDocumentID)")
+                    guard let imageData = currentImageMedia!.jpegData(compressionQuality: 0.8) else {
+                        throw NewPostError.mediaEmptyOrBadFormat
+                    }
+                    
+                    let resultMetadata = try await imgRef.putDataAsync(imageData, metadata: nil)
+                    print("Media upload complete (photo).")
+                    return resultMetadata.path
+                } catch {
+                    print("Error uploading media (photo).")
                 }
-                let imgRef = storage.reference().child("timelinePostMedia/\(postDocumentID)")
-                guard let imageData = currentImageMedia!.jpegData(compressionQuality: 0.8) else {
-                    throw NewPostError.mediaEmptyOrBadFormat
+            } else if userMediaSubmissionType == "video" {
+                do {
+                    guard currentVideoMedia != nil else {
+                        throw NewPostError.mediaUnavailable
+                    }
+                    let videoRef = storage.reference().child("timelinePostMedia/\(postDocumentID)")
+                    
+                    let resultMetadata = try await videoRef.putFileAsync(from: currentVideoMedia!, metadata: nil)
+                    print("Media upload complete (video).")
+                    return resultMetadata.path
+                } catch {
+                    print("Error uploading media (video).")
                 }
-                
-                let resultMetadata = try await imgRef.putDataAsync(imageData, metadata: nil)
-                print("Media upload complete.")
-                return resultMetadata.path
-            } catch {
-                print("Error uploading media.")
             }
         }
         return nil
