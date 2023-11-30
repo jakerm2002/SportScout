@@ -172,13 +172,9 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
                         self.calendarView.reloadAllEvents()
                     }
                     
-                    self.getImage(url: self.LocationObject.imgPath) { photo in
-                        if photo != nil {
-                            DispatchQueue.main.async {
-                                self.locationImageView?.image = photo
-                            }
-                        }
-                    }
+                    let url = self.LocationObject.imgPath
+                    let imgRef = storage.reference(forURL: url)
+                    self.locationImageView.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "photo"))
                 }
                 catch {
                     print("error")
