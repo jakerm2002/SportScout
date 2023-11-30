@@ -276,7 +276,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
 
                       self.locationLabel.text = self.event.locationName
                       self.dateLabel.text = self.reformatDateTime(date:self.event.startTime, format: "EEEE, MMMM dd")
-                      self.timeLabel.text = self.reformatDateTime(date: self.event.startTime, format: "h:mm a")
+                      self.timeLabel.text = "\(self.reformatDateTime(date: self.event.startTime, format: "h:mm a")) — \(self.reformatDateTime(date: self.event.endTime, format: "h:mm a"))"
                       self.eventDescription.text = self.event.description
                       self.eventDescription.isEditable = false
                       self.numParticipantsLabel.text = "\(String(self.event.participants!.count)) Participants"
