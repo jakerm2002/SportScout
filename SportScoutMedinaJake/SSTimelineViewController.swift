@@ -102,19 +102,6 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         return cell
     }
     
-    // retrieve an image from Firestore and execute a function once finished
-    func getImageData(imgPath: String, completion: @escaping (Data?) -> ()) {
-        storage.reference(withPath: imgPath).getData(maxSize: 3000 * 3000) { (data, error) -> Void in
-            if data != nil {
-                print("adding image for path \(imgPath)")
-                completion(data!)
-            } else {
-                print("error fetching image with path \(imgPath): \(String(describing: error?.localizedDescription))")
-                completion(nil)
-            }
-        }
-    }
-    
     @MainActor
     func fetchTimelinePosts() async {
         do {
@@ -132,34 +119,6 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
             collectionView.reloadData()
         } catch {
             print("There was an issue fetching timeline posts: \(error.localizedDescription)")
-        }
-    }
-    
-    func downloadMedia(mediaPath: String) async {
-        let mediaRef = storage.reference(withPath: mediaPath)
-        // be careful with the max size
-        mediaRef.getData(maxSize: INT64_MAX) {
-            (data, error) in
-            if let error = error {
-                print("There was an issue downloading media for a cell's media view: \(error.localizedDescription)")
-            } else {
-                mediaRef.getMetadata() {
-                    (metadata, metadataError) in
-                    if let error = metadataError {
-                        print("There was an issue downloading media for a cell's media view: \(error.localizedDescription)")
-                    } else {
-                        switch metadata?.contentType {
-                        case "image/jpeg":
-                            
-                            break
-//                        case
-                        default:
-                            print("There was an issue recognizing the media format for a cell's media view.")
-                            break
-                        }
-                    }
-                }
-            }
         }
     }
 
