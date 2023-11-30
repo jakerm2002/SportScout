@@ -168,8 +168,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
                 picker.cameraCaptureMode = .photo
             } else {
                 picker.mediaTypes = [UTType.movie.identifier as String]
-//                picker.videoQuality = .typeHigh
-                picker.videoExportPreset = AVAssetExportPresetPassthrough
+                picker.videoQuality = .typeHigh
                 picker.cameraCaptureMode = .video
             }
             present(picker,animated: true)
@@ -297,7 +296,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         return nil
     }
     
-    func createPost(ref: DocumentReference, uid: String, caption: String?, sport:String?, pathToFirebaseStorageMedia: String) {
+    func createPost(ref: DocumentReference, uid: String, caption: String?, sport:String?, pathToFirebaseStorageMedia: String?) {
         let newPost = TimelinePost(
             author: db.collection("users").document(String(uid)),
             mediaType: userMediaSubmissionType,
@@ -310,8 +309,6 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
             try ref.setData(from: newPost) {
                 _ in
                 print("New timeline post created successfully in Firestore.")
-                self.navigationController?.popViewController(animated: true)
-                
                 
                 // TODO: add the event to the corresponding users' 'posts' array.
                 // TODO: catch possible error from this operation
@@ -326,7 +323,6 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
         }
         catch let error {
             print("Error creating timeline post in Firestore: \(error.localizedDescription)")
-            self.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -343,8 +339,7 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
 
         activityIndicator.centerXAnchor.constraint(equalTo: alert.view.centerXAnchor, constant: 0).isActive = true
         activityIndicator.bottomAnchor.constraint(equalTo: alert.view.bottomAnchor, constant: -20).isActive = true
-
-        present(alert, animated: true)
+        
         return alert
     }
 
@@ -361,8 +356,6 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
     }
     
     @IBAction func shareButtonPressed(_ sender: Any) {
-        let uploadingAlert = createUploadingAlert()
-        
         // the media must be uploaded to firebase. this can be done asynchronously from other tasks
         let sportCell = sportTableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! SSNewPostSportTableViewCell
         
@@ -384,10 +377,11 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
                 alert.message?.append("\u{2022} \(err)")
             }
             alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
         } else {
             guard let uid = Auth.auth().currentUser?.uid else {return}
             
+            let uploadingAlert = createUploadingAlert()
+            present(uploadingAlert, animated: true)
             // let document ID be auto-generated
             let newPostReference = db.collection("timelinePosts").document()
             
@@ -398,9 +392,12 @@ class SSNewPostViewController: UIViewController, UIImagePickerControllerDelegate
                     uid: uid,
                     caption: postCaption,
                     sport: postSport,
-                    pathToFirebaseStorageMedia: path!
+                    pathToFirebaseStorageMedia: path
                 )
-                uploadingAlert.dismiss(animated: true)
+
+                uploadingAlert.dismiss(animated: true) {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }
