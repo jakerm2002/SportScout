@@ -22,6 +22,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         // Hide password
         passwordTextField.isSecureTextEntry = true
+        
+        // sign in the user if they already signed in
+        Auth.auth().addStateDidChangeListener() {
+            (auth,user) in
+            if let user = user {
+                // check if the user is done customizing their profile;
+                // meaning that they have an entry in the 'users' table
+                let docRef = db.collection("users").document(user.uid)
+                docRef.getDocument {
+                    (documentSnapshot, error) in
+                    if let document = documentSnapshot, document.exists {
+                        self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                        self.emailTextField.text = nil
+                        self.passwordTextField.text = nil
+                    }
+                    if error != nil {
+                        print("Error: LoginViewController: Unable to check if user exists.")
+                    }
+                }
+            }
+        }
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {

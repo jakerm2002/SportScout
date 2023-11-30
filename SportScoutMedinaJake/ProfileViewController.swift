@@ -55,8 +55,6 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate {
             }
         }
     }
-
-
     
     @IBAction func logoutButtonPressed(_ sender: Any) {
         let auth = Auth.auth()

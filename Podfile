@@ -7,4 +7,5 @@ target 'SportScoutMedinaJake' do
 
   # Pods for SportScoutMedinaJake
   pod 'CalendarLib'
+  pod 'FirebaseStorageUI'
 end
