@@ -19,15 +19,16 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var heightText: UILabel!
     @IBOutlet weak var locationText: UILabel!
     
+    var logoutSegueIdentifier = "LogoutSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.profilePhoto!.layer.cornerRadius = self.profilePhoto!.frame.size.height / 2
+        self.profilePhoto.contentMode = .scaleAspectFill
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        var imageURL = ""
         guard let uid = Auth.auth().currentUser?.uid else {return}
         let docRef = db.collection("users").document(String(uid))
         docRef.getDocument { (document, error) in
@@ -40,28 +41,30 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate {
                 self.locationText.text = String(describing: document.get("location")!)
                 self.sportsText.text = String(describing: document.get("sports")!)
                 self.bioText.text = String(describing: document.get("bio")!)
-                imageURL = String(describing: document.get("url")!)
+                let imageURL = String(describing: document.get("url")!)
+                
+                let imgRef = storage.reference().child(imageURL)
+                self.profilePhoto.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
             } else {
                 print("Document does not exist")
             }
         }
-        let fileRef = Storage.storage().reference().child(imageURL)
-        fileRef.getData(maxSize: 1024 * 1024) { data, err in
-            if err == nil && data != nil {
-                print("retrieve worked")
-                self.profilePhoto.image = UIImage(data: data!)
-            }
+    }
+    
+    @IBAction func logoutButtonPressed(_ sender: Any) {
+        let auth = Auth.auth()
+        do {
+            try auth.signOut()
+            performSegue(withIdentifier: logoutSegueIdentifier, sender: self)
+        } catch let signOutError {
+            print(signOutError.localizedDescription)
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == logoutSegueIdentifier {
+            guard let vc = segue.destination as? LoginViewController else { return }
+        }
     }
-    */
 
 }

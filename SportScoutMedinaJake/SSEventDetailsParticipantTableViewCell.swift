@@ -9,7 +9,10 @@ import UIKit
 
 class SSEventDetailsParticipantTableViewCell: UITableViewCell {
     
-    @IBOutlet var profilePicture: UIView!
+    var participantType:String?
+    
+    @IBOutlet var profilePicture: UIImageView!
+    @IBOutlet weak var realName: UILabel!
     @IBOutlet var username: UILabel!
 
     override func awakeFromNib() {
@@ -17,8 +20,8 @@ class SSEventDetailsParticipantTableViewCell: UITableViewCell {
         // Initialization code
         
         // rounded image view to store pfp
-        self.imageView!.layer.cornerRadius =
-        self.imageView!.frame.size.height / 2
+        self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.height / 2
+        self.profilePicture.contentMode = .scaleAspectFill
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

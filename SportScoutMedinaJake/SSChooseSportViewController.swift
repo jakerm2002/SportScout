@@ -15,7 +15,8 @@ var sports = [
     "Soccer",
     "Frisbee",
     "Tennis",
-    "Racquetball"
+    "Racquetball",
+    "Basketball"
 ]
 
 class SSChooseSportViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {

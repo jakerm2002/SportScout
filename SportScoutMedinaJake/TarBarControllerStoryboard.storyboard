@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="px5-WH-PIw">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--TimelineStoryboard-->
+        <scene sceneID="pPh-tF-fou">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TimelineStoryboard" id="QR3-96-Zee" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="mEZ-96-YcR"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2FJ-E6-fUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1311" y="1560"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="D5O-9B-kpB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hoh-Cd-LCY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="fMV-mQ-0bb"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BHt-7p-XEX">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="v3u-Or-lfO" kind="relationship" relationship="rootViewController" id="g55-Xe-6Vh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FEm-Kj-X8d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1956.4885496183206" y="1555.6338028169014"/>
+        </scene>
+        <!--HomeStoryboard-->
+        <scene sceneID="WjG-Sz-slm">
+            <objects>
+                <viewControllerPlaceholder storyboardName="HomeStoryboard" id="v3u-Or-lfO" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="3ow-OX-nLL"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pmV-cg-hZw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2514" y="1560"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="23f-WB-dOn">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="px5-WH-PIw" customClass="SSTabBarController" customModule="SportScoutMedinaJake" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LfO-Ms-MOi">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="saw-Fc-8Wu" kind="relationship" relationship="viewControllers" id="sep-hF-HT6"/>
+                        <segue destination="hoh-Cd-LCY" kind="relationship" relationship="viewControllers" id="43B-OP-lgm"/>
+                        <segue destination="aAE-TQ-iNV" kind="relationship" relationship="viewControllers" id="dhr-jU-zpB"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vtc-Xd-Q7L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1802" y="825"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="Vza-27-kCY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aAE-TQ-iNV" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.fill" catalog="system" id="oYP-QX-MPD"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="18E-7Q-wvU">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="JT6-qg-foB" kind="relationship" relationship="rootViewController" id="oAa-HZ-dhm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DqJ-3u-cFE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3405.3435114503814" y="1555.6338028169014"/>
+        </scene>
+        <!--JoshStoryboard-->
+        <scene sceneID="XMQ-gv-gLH">
+            <objects>
+                <viewControllerPlaceholder storyboardName="JoshStoryboard" id="JT6-qg-foB" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="4b5-n2-K4w"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UGO-zn-9co" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4054.9618320610684" y="1568.3098591549297"/>
+        </scene>
+        <!--Timeline-->
+        <scene sceneID="DMF-mJ-94k">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="saw-Fc-8Wu" userLabel="Timeline" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Timeline" image="doc.text.image.fill" catalog="system" id="dAe-bg-IdN"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FP4-tM-Mnx">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QR3-96-Zee" kind="relationship" relationship="rootViewController" id="nEI-kI-a93"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SdD-lf-jPj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="735" y="1556"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="doc.text.image.fill" catalog="system" width="115" height="128"/>
+        <image name="house.fill" catalog="system" width="128" height="104"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
+    </resources>
+</document>

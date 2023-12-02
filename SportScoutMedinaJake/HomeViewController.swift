@@ -10,43 +10,19 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseStorage
+import FirebaseStorageUI
 
 // globals for Firestore
 let db = Firestore.firestore()
 let storage = Storage.storage()
 
-// TODO: Move to its own file
-class SSHomeTableViewCell: UITableViewCell {
-    @IBOutlet weak var locationTitleTextLabel: UILabel!
-    @IBOutlet weak var locationAddressTextLabel: UILabel!
-    @IBOutlet weak var locationImageView: UIImageView!
-    
-    // Rounded corners and drop shadow for table view cells
-    // https://stackoverflow.com/questions/37645408/uitableviewcell-rounded-corners-and-shadow
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let bottomSpace: CGFloat = 10.0
-        self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: bottomSpace, right: 0))
-        
-        // add shadow on cell
-        self.backgroundColor = .clear
-        self.layer.masksToBounds = false
-        self.layer.shadowOpacity = 0.23
-        self.layer.shadowRadius = 4
-        self.layer.shadowOffset = CGSize(width: 0, height: 0)
-        self.layer.shadowColor = UIColor.black.cgColor
-        
-        // add corner radius on `contentView`
-        self.contentView.backgroundColor = .white
-        self.contentView.layer.cornerRadius = 8
-    }
-}
-
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var homeTableView: UITableView!
     
     var locations:[Location] = []
+    var filteredLocations:[Location] = []
+    var filtered: Bool = false
     
     var leftNavBarSegment = UISegmentedControl(items: ["Map", "List"])
     var searchBar = UISearchBar()
@@ -59,11 +35,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        searchBar.delegate = self
         
         // UI styling
         homeTableView.separatorStyle = .none
         homeTableView.clipsToBounds = false
         searchBar.sizeToFit()
+        
+        homeTableView.keyboardDismissMode = .onDrag
         
         fetchData()
         
@@ -79,6 +58,34 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationItem.titleView = searchBar
     }
     
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if let search = searchBar.text {
+            if text.count == 0 {
+                filterText(String(search.dropLast()))
+            } else {
+                filterText(search+text)
+            }
+        }
+        return true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            filtered = false
+            filteredLocations.removeAll()
+            homeTableView.reloadData()
+        }
+    }
+    func filterText(_ query: String) {
+        filteredLocations.removeAll()
+        for location in locations {
+            if location.name.lowercased().contains(query.lowercased()) {
+                filteredLocations.append(location)
+            }
+        }
+        homeTableView.reloadData()
+        filtered = true
+    }
     // Get all locations from Firestore and refresh table view.
     func fetchData() {
         db.collection("Locations").addSnapshotListener { (querySnapshot, error) in
@@ -129,7 +136,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return locations.count
+        if !filteredLocations.isEmpty {
+            return filteredLocations.count
+        }
+        return filtered ? 0 :locations.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -154,30 +164,24 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: customLocationCellIdentifier, for: indexPath as IndexPath) as! SSHomeTableViewCell
         
+//        cell.contentView.layer.backgroundColor = UIColor.black.cgColor
+        
         let row = indexPath.row
+        let location:Location
+        if !filteredLocations.isEmpty {
+            location = filteredLocations[row]
+        } else {
+            location = locations[row]
+        }
         // print("generating cell for row \(row)")
-        cell.locationTitleTextLabel?.text = locations[row].name
-        cell.locationAddressTextLabel?.text = locations[row].addr_field_1
+        cell.locationTitleTextLabel?.text = location.name
+        cell.locationAddressTextLabel?.text = location.addr_field_1
         
         // Retrieve the cell's image.
-        // This works for dummy data, but, in the future,
-        // images might seem like they load slowly when
-        // scrolling due to the cellForRowAt function only
-        // being called when a cell is becoming visible.
-        cell.tag += 1
-        let tag = cell.tag
-        let photoUrl = locations[row].imgPath
-        getImage(url: photoUrl) { photo in
-            if photo != nil {
-                if cell.tag == tag {
-                    DispatchQueue.main.async {
-                        cell.locationImageView?.layer.cornerRadius = 5.0
-                        cell.locationImageView?.layer.masksToBounds = true
-                        cell.locationImageView?.image = photo
-                    }
-                }
-            }
-        }
+        let url = location.imgPath
+        let imgRef = storage.reference(forURL: url)
+        cell.locationImageView.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "photo"))
+        
         return cell
     }
     
@@ -188,7 +192,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
            let destination = segue.destination as? SSLocationDetailsViewController,
            let index = homeTableView.indexPathForSelectedRow?.row
         {
-            destination.documentID = locations[index].id!
+            if !filteredLocations.isEmpty {
+                destination.documentID = filteredLocations[index].id!
+            } else {
+                destination.documentID = locations[index].id!
+            }
+
         }
     }
     

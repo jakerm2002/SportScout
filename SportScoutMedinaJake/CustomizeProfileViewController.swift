@@ -12,7 +12,11 @@ import FirebaseStorage
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
 
-class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+protocol addSportText {
+    func addSportText(newSport: String)
+}
+
+class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, addSportText {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var inchesField: UITextField!
@@ -27,16 +31,25 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     var username = ""
     var imageURL = ""
 
+    var customizeProfileToTabBarControllerSegueIdentifier = "CustomizeProfileToTabBarControllerSegueIdentifier"
+    var chooseSportsSegueIdentifier = "chooseSportsSegue"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.profileImage!.layer.cornerRadius = self.profileImage!.frame.size.height / 2
+        self.profileImage.contentMode = .scaleAspectFill
+        
         // Do any additional setup after loading the view.
-        inchesField.delegate = self
-        feetField.delegate = self
-        weightField.delegate = self
         nameField.delegate = self
+        usernameField.delegate = self
+        weightField.delegate = self
+        feetField.delegate = self
+        inchesField.delegate = self
+        locationField.delegate = self
+        bioField.delegate = self
+        
         usernameField.text = username
+        sportsText.text = ""
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +65,10 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
                 self.locationField.text = String(describing: document.get("location")!)
                 self.sportsText.text = String(describing: document.get("sports")!)
                 self.bioField.text = String(describing: document.get("bio")!)
+                let imageURL = String(describing: document.get("url")!)
+                
+                let imgRef = storage.reference().child(imageURL)
+                self.profileImage.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
             } else {
                 print("Document does not exist")
             }
@@ -89,17 +106,18 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
     
     @IBAction func doneButtonPressed(_ sender: Any) {
         if (nameField.text == ""  || usernameField.text == ""  || weightField.text == "" || feetField.text == "" || inchesField.text == "" || locationField.text == "" || sportsText.text == "" || bioField.text == "") {
-            print("error")
+            print("CustomizeProfile error: please fill out all fields.")
             self.errorLabel.text = "Fill out all fields."
         } else {
             storeImageinStorage()
             storeUserInfo(fullName: nameField.text!, username: usernameField.text!, weight: weightField.text!, feet: feetField.text!, inches: inchesField.text!, location: locationField.text!, sports: sportsText.text!, bio: bioField.text!, url: imageURL)
+            performSegue(withIdentifier: "CustomizeProfileToTabBarControllerSegueIdentifier", sender: nil)
         }
     }
     
     private func storeUserInfo(fullName: String, username: String, weight: String, feet: String, inches: String, location: String, sports: String, bio: String, url: String) {
         guard let uid = Auth.auth().currentUser?.uid else {return}
-        let userData = ["uid": uid, "username": username,"fullName": fullName, "weight": weight, "feet": feet, "inches": inches, "location": location, "sports": sports, "bio": bio, "url": url]
+        let userData = ["username": username,"fullName": fullName, "weight": weight, "feet": feet, "inches": inches, "location": location, "sports": sports, "bio": bio, "url": url]
         db.collection("users").document(uid).setData(userData)
         print("user data stored")
     }
@@ -130,6 +148,16 @@ class CustomizeProfileViewController: UIViewController, UITextFieldDelegate, UII
         picker.dismiss(animated: true, completion: nil)
     }
     
+    func addSportText(newSport: String) {
+        sportsText.text = newSport
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == chooseSportsSegueIdentifier,
+           let nextVC = segue.destination as? CustomizeSportViewController
+        {
+            nextVC.delegate = self
+        }
+    }
 }
 

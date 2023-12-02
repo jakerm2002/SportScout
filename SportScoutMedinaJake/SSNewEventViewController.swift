@@ -180,7 +180,17 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
         } else {
             guard let uid = Auth.auth().currentUser?.uid else {return}
             
-            let newEvent = Event(owner: db.collection("users").document(String(uid)),
+//            guard let uid = Auth.auth().currentUser?.uid else {return}
+            let docRef = db.collection("users").document(String(uid))
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    
+                } else {
+                    print("Document does not exist")
+                }
+            }
+            
+            let newEvent = Event(owner: docRef,
                                  name: nameCell.titleTextField.text!,
                                  location: db.collection("Locations").document(locationDocumentID),
                                  locationName: locationName,
@@ -214,23 +224,14 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func fetchUsers(userIds: [String]) -> [FirebaseFirestore.DocumentReference] {
-        var result:[FirebaseFirestore.DocumentReference] = []
-        for userId in userIds {
-            let docRef = db.collection("users").document(userId)
-
-            docRef.getDocument { document, error in
-              if let error = error as NSError? {
-                  print("error")
-              }
-              else {
-                if let document = document {
-                    result.append(docRef)
-                }
-              }
+            var result:[FirebaseFirestore.DocumentReference] = []
+            for userId in userIds {
+                let docRef = db.collection("users").document(userId)
+                result.append(docRef)
+                print("\ndocRef of user added: \(docRef)")
             }
+            return result
         }
-        return result
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SSChooseSportSegue,

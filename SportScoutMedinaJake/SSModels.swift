@@ -57,7 +57,28 @@ struct User: Identifiable, Codable, Equatable {
     var feet: String
     var fullName: String
     var inches: String
+    var location: String
     var sports: String
     var username: String
     var weight: String
+    
+    // image url, could be nil
+    var url: String?
+}
+
+struct TimelinePost: Identifiable, Codable {
+    @DocumentID var id: String?
+    var author: DocumentReference
+    @ExplicitNull var mediaType: String?
+    @ExplicitNull var mediaPath: String?
+    @ExplicitNull var caption: String?
+    @ExplicitNull var sport: String?
+    
+    // auto-filled to current time by Firestore when nil is passed in
+    @ServerTimestamp var createdAt: Date?
+    
+    // these should never be set when creating a TimelinePost:
+    var authorAsUserModel: User?
+    var authorImageData: Data?
+    var mediaImageData: Data?
 }
