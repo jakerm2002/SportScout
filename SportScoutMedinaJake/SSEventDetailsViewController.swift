@@ -192,17 +192,10 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         if editingStyle == .delete {
             
             let userToDelete = event.participants![indexPath.row]
-            print("user chose indexPath.row = \(indexPath.row). deleting \(userToDelete.documentID)")
-            tableView.beginUpdates()
-            db.collection("events").document(documentID).updateData(["events": FieldValue.arrayRemove([userToDelete])]) {
-                _ in
-                tableView.endUpdates()
-            }
-            
-//            db.collection("events").document(documentID).updateData(["participants": event.participants!]) {
-//                
-//            }
-//            tableView.deleteRows(at: [indexPath], with: .fade)
+            event.participants!.remove(at: indexPath.row)
+            db.collection("events").document(documentID).updateData(["participants": event.participants!])
+            fetchParticipants()
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }  else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
@@ -267,11 +260,6 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
               do {
                   self.event = try document.data(as: Event.self)
                   
-                  print("\nparticipants:")
-                  for participant in self.event.participants! {
-                      print("participant \(participant.documentID)")
-                  }
-                  
                   let ownerDocRef = db.collection("users").document(self.event.owner.documentID)
                   ownerDocRef.getDocument { (document, error) in
                       if let document = document, document.exists {
@@ -313,14 +301,8 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         if event != nil && event.participants != nil {
 //            var temp:[User] = []
             
-            print("\nparticipants:")
-            for participant in self.event.participants! {
-                print("AAAAAAHHHH \(participant.documentID)")
-            }
-            
             for docRef in event.participants! {
 //                print("count: \(temp.count)")
-                print("looking at \(docRef.documentID)")
                 docRef.getDocument(as: User.self) { result in
                     do {
                         
