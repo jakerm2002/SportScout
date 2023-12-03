@@ -198,7 +198,8 @@ class SSNewEventViewController: UIViewController, UITableViewDelegate, UITableVi
                                  startTime: startsAtCell.startsAtDatePicker.date,
                                  endTime: endsAtCell.endsAtDatePicker.date,
                                  description: descriptionCell.descriptionTextField.text!,
-                                 participants: fetchUsers(userIds: users)
+                                 invitedParticipants: fetchUsers(userIds: users)
+                                 // no currentParticipants or requestedParticipants yet
             )
             
             // let document ID be auto-generated
