@@ -50,7 +50,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         self.view.addGestureRecognizer(right)
         
         
-        checkIfUserIsOwner() // will show event owner 3 sections in participant table & hide requestToJoinButton
+         // will show event owner 3 sections in participant table & hide requestToJoinButton
         
         // populate data depending on user status
         if userIsEventOwner {
@@ -65,12 +65,16 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         // Do any additional setup after loading the view.
         fetchEventData {
             self.participantList.reloadData()
+            self.checkIfUserIsOwner()
         }
     }
     
     // TODO: Write functionality
     @IBAction func requestToJoinPressed(_ sender: Any) {
         let user = Auth.auth().currentUser
+        guard !user!.uid.isEmpty else {
+            fatalError("no document passed in")
+        }
         let docuRef = db.collection("users").document(user!.uid)
         if event.confirmedParticipants != nil && event.confirmedParticipants!.contains(docuRef) {
             // show alert so user knows they are a participant
@@ -82,6 +86,9 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             present(controller, animated: true)
         } else {
             // send Notification to Event Owner & add them as "requestedParticipant"
+            guard !documentID.isEmpty else {
+                fatalError("no document passed in")
+            }
             db.collection("events").document(documentID).updateData([
                 "requestedParticipants": FieldValue.arrayUnion([docuRef])
             ])
@@ -205,6 +212,9 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             print("deleting \(userToDelete.documentID): e\(confirmedParticipants[indexPath.row])")
             event.confirmedParticipants!.remove(at: indexPath.row)
             
+            guard !documentID.isEmpty else {
+                fatalError("no document passed in")
+            }
             db.collection("events").document(documentID).updateData(["confirmedParticipants": event.confirmedParticipants!])
             confirmedParticipants.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -262,6 +272,9 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     func fetchEventData(completed: @escaping () -> ()) {
         // event data
+        guard !documentID.isEmpty else {
+            fatalError("no document passed in")
+        }
         db.collection("events").document(documentID)
           .addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else {
@@ -271,6 +284,9 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
               do {
                   self.event = try document.data(as: Event.self)
                   
+                  guard !self.event.owner.documentID.isEmpty else {
+                      fatalError("no document passed in")
+                  }
                   let ownerDocRef = db.collection("users").document(self.event.owner.documentID)
                   ownerDocRef.getDocument { (document, error) in
                       if let document = document, document.exists {
@@ -398,6 +414,9 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             print("owner doc ref: \(event.owner.documentID)\n")
             // owner document reference
             // if current user is the owner
+            guard !event.owner.documentID.isEmpty else {
+                fatalError("no document passed in")
+            }
             if event.owner.documentID == uid {
                 userIsEventOwner = true
                 print("user is event owner\n")
