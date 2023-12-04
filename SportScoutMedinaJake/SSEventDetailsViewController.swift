@@ -14,6 +14,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     
     var participantCellIdentifier = "SSEventDetailsParticipantCellIdentifier"
+    var requestedParticipantCellIdentifier = "SSEventDetailsRequestedParticipantCellIdentifier"
     var profileSegueIdentifier = "SegueToSelectedUserProfile"
     
     var event: Event! // set from location VC
@@ -134,11 +135,11 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: participantCellIdentifier, for: indexPath) as! SSEventDetailsParticipantTableViewCell
-        
         
         print("section: \(indexPath.section)")
         print("row: \(indexPath.row)")
+        
+        var cell: SSEventDetailsParticipantTableViewCell?
         
         if userIsEventOwner {
             
@@ -147,50 +148,62 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             
             switch indexPath.section {
             case confirmedSection:
+                cell = tableView.dequeueReusableCell(withIdentifier: participantCellIdentifier, for: indexPath) as? SSEventDetailsParticipantTableViewCell
+                
                 cellUsername = confirmedParticipants[indexPath.row].username
                 cellRealName = confirmedParticipants[indexPath.row].fullName
                 
                 if let url = confirmedParticipants[indexPath.row].url {
                     let imgRef = storage.reference().child(url)
-                    cell.profilePicture.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
+                    cell!.profilePicture.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
                 }
             case invitedSection:
+                cell = tableView.dequeueReusableCell(withIdentifier: participantCellIdentifier, for: indexPath) as? SSEventDetailsParticipantTableViewCell
+                
                 cellUsername = invitedParticipants[indexPath.row].username
                 cellRealName = invitedParticipants[indexPath.row].fullName
                 
                 if let url = invitedParticipants[indexPath.row].url {
                     let imgRef = storage.reference().child(url)
-                    cell.profilePicture.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
+                    cell!.profilePicture.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
                 }
             case requestedSection:
+                cell = tableView.dequeueReusableCell(withIdentifier: requestedParticipantCellIdentifier, for: indexPath) as? SSEventDetailsRequestedParticipantTableViewCell
+                
+                guard cell != nil else {
+                    fatalError("casting error to RequestedParticipant cell type")
+                }
+                
                 cellUsername = requestedParticipants[indexPath.row].username
                 cellRealName = requestedParticipants[indexPath.row].fullName
                 
                 if let url = requestedParticipants[indexPath.row].url {
                     let imgRef = storage.reference().child(url)
-                    cell.profilePicture.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
+                    cell!.profilePicture.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
                 }
+                
+                // if owner accepts participant, move them into the confirmed section
             default:
+                fatalError("SSEventDetailsViewController: Participant section was not one of the three required sections.")
                 break
             }
             
-            cell.username.text = cellUsername
-            cell.realName.text = cellRealName
-            
+            cell?.username.text = cellUsername
+            cell?.realName.text = cellRealName
         } else {
-            
+            cell = tableView.dequeueReusableCell(withIdentifier: participantCellIdentifier, for: indexPath) as? SSEventDetailsParticipantTableViewCell
             // show only confirmed participants
             if indexPath.section == confirmedSection {
-                cell.username.text = confirmedParticipants[indexPath.row].username
-                cell.realName.text = confirmedParticipants[indexPath.row].fullName
+                cell!.username.text = confirmedParticipants[indexPath.row].username
+                cell!.realName.text = confirmedParticipants[indexPath.row].fullName
                 
                 if let url = confirmedParticipants[indexPath.row].url {
                     let imgRef = storage.reference().child(url)
-                    cell.profilePicture.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
+                    cell!.profilePicture.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
                 }
             }
         }
-        return cell
+        return cell!
     }
     
     // TODO: Clicking on a user in participant table will lead to their profile page

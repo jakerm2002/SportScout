@@ -96,6 +96,86 @@
                                             <segue destination="4HB-ad-dF2" kind="presentation" identifier="SegueToSelectedUserProfile" id="arv-6h-z9h"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SSEventDetailsRequestedParticipantCellIdentifier" rowHeight="58" id="jhA-NG-za4" customClass="SSEventDetailsRequestedParticipantTableViewCell" customModule="SportScoutMedinaJake" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="108" width="361" height="58"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jhA-NG-za4" id="dd5-S4-LQP">
+                                            <rect key="frame" x="0.0" y="0.0" width="361" height="58"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xyW-LC-Q8K">
+                                                    <rect key="frame" x="20" y="5" width="48" height="48"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="48" id="vT7-mX-JGn"/>
+                                                        <constraint firstAttribute="height" constant="48" id="zHb-re-4bm"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Lva-EF-5HY">
+                                                    <rect key="frame" x="76" y="5" width="167" height="48"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Real Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ut-wS-dTt">
+                                                            <rect key="frame" x="0.0" y="0.0" width="167" height="25.333333333333332"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JB2-yw-Rt7">
+                                                            <rect key="frame" x="0.0" y="25.333333333333329" width="167" height="22.666666666666671"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tf-Vk-HzL" userLabel="Decline Button">
+                                                    <rect key="frame" x="306" y="11.666666666666664" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="35" id="Lvf-kd-pas"/>
+                                                        <constraint firstAttribute="height" constant="35" id="dl2-ur-EqN"/>
+                                                    </constraints>
+                                                    <color key="tintColor" systemColor="systemRedColor"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="tinted" image="xmark" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="declineButtonPressed:" destination="jhA-NG-za4" eventType="touchUpInside" id="hpM-Wa-ADa"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vKr-kg-61T" userLabel="Accept Button">
+                                                    <rect key="frame" x="251" y="11.666666666666664" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="35" id="zBF-R4-edc"/>
+                                                        <constraint firstAttribute="height" constant="35" id="zTZ-X6-eqV"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="tinted" image="checkmark" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="acceptButtonPressed:" destination="jhA-NG-za4" eventType="touchUpInside" id="mfc-6E-DaS"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="xyW-LC-Q8K" secondAttribute="bottom" constant="5" id="9x4-ff-yeF"/>
+                                                <constraint firstAttribute="bottom" secondItem="Lva-EF-5HY" secondAttribute="bottom" constant="5" id="CTh-tG-ybG"/>
+                                                <constraint firstItem="Lva-EF-5HY" firstAttribute="top" secondItem="dd5-S4-LQP" secondAttribute="top" constant="5" id="DPt-N0-PfS"/>
+                                                <constraint firstItem="1tf-Vk-HzL" firstAttribute="leading" secondItem="vKr-kg-61T" secondAttribute="trailing" constant="20" id="Em8-GB-FYE"/>
+                                                <constraint firstItem="xyW-LC-Q8K" firstAttribute="leading" secondItem="dd5-S4-LQP" secondAttribute="leading" constant="20" symbolic="YES" id="ZoM-cV-05m"/>
+                                                <constraint firstItem="vKr-kg-61T" firstAttribute="leading" secondItem="Lva-EF-5HY" secondAttribute="trailing" constant="8" symbolic="YES" id="gyA-qD-k78"/>
+                                                <constraint firstItem="vKr-kg-61T" firstAttribute="centerY" secondItem="dd5-S4-LQP" secondAttribute="centerY" id="k8L-X5-6Pn"/>
+                                                <constraint firstItem="1tf-Vk-HzL" firstAttribute="centerY" secondItem="dd5-S4-LQP" secondAttribute="centerY" id="kdJ-N6-xwb"/>
+                                                <constraint firstItem="xyW-LC-Q8K" firstAttribute="top" secondItem="dd5-S4-LQP" secondAttribute="top" constant="5" id="lWC-1S-1d5"/>
+                                                <constraint firstItem="Lva-EF-5HY" firstAttribute="leading" secondItem="xyW-LC-Q8K" secondAttribute="trailing" constant="8" symbolic="YES" id="tbH-O3-n6u"/>
+                                                <constraint firstAttribute="trailing" secondItem="1tf-Vk-HzL" secondAttribute="trailing" constant="20" symbolic="YES" id="v2o-jp-rpo"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outlet property="acceptButton" destination="vKr-kg-61T" id="wvw-Ox-rl3"/>
+                                            <outlet property="declineButton" destination="1tf-Vk-HzL" id="P6h-DQ-51k"/>
+                                            <outlet property="profilePicture" destination="xyW-LC-Q8K" id="cHv-tD-VEk"/>
+                                            <outlet property="realName" destination="4ut-wS-dTt" id="j4S-uc-TgH"/>
+                                            <outlet property="username" destination="JB2-yw-Rt7" id="oEl-qp-Mpy"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q09-gh-hBM">
@@ -189,11 +269,16 @@
         </scene>
     </scenes>
     <resources>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
