@@ -23,6 +23,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Hide password
         passwordTextField.isSecureTextEntry = true
         
+        // ask for notification auth
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.badge,.sound]) {
+            (granted,error) in
+            if granted {
+                print("All set!")
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        
         // sign in the user if they already signed in
         Auth.auth().addStateDidChangeListener() {
             (auth,user) in

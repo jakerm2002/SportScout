@@ -63,14 +63,16 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         print("Fetching data")
         eventDescription.isEditable = false
         // Do any additional setup after loading the view.
-        fetchEventData()
+        fetchEventData {
+            self.participantList.reloadData()
+        }
     }
     
     // TODO: Write functionality
     @IBAction func requestToJoinPressed(_ sender: Any) {
         let user = Auth.auth().currentUser
         let docuRef = db.collection("users").document(user!.uid)
-        if event.confirmedParticipants!.contains(docuRef) {
+        if event.confirmedParticipants != nil && event.confirmedParticipants!.contains(docuRef) {
             // show alert so user knows they are a participant
             let controller = UIAlertController(
                 title: "Unable To Complete Action",
@@ -84,7 +86,15 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                 "requestedParticipants": FieldValue.arrayUnion([docuRef])
             ])
             
-            //TODO: Send Notif to Event Owner
+            let controller = UIAlertController(
+                title: "Request Completed!",
+                message: "A request has been sent to the event owner! You will be notified and added as a confirmed participant once the owner accepts.",
+                preferredStyle: .alert)
+                        controller.addAction(UIAlertAction(title: "OK", style: .default))
+            present(controller, animated: true)
+            
+            // TODO: Send Notif to Event Owner
+//            sendEventOwnerNotif()
         }
     }
     
@@ -192,9 +202,11 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         if editingStyle == .delete && indexPath.section == confirmedSection {
             
             let userToDelete = event.confirmedParticipants![indexPath.row]
+            print("deleting \(userToDelete.documentID): e\(confirmedParticipants[indexPath.row])")
             event.confirmedParticipants!.remove(at: indexPath.row)
+            
             db.collection("events").document(documentID).updateData(["confirmedParticipants": event.confirmedParticipants!])
-            fetchParticipants()
+            confirmedParticipants.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }  else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
@@ -210,7 +222,6 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             if recognizer.direction == .right {
                 
             }
-            
         }
     }
     
@@ -249,13 +260,13 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
-    func fetchEventData() {
+    func fetchEventData(completed: @escaping () -> ()) {
         // event data
         db.collection("events").document(documentID)
           .addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else {
               print("Error fetching document: \(error!)")
-              return
+              return completed()
             }
               do {
                   self.event = try document.data(as: Event.self)
@@ -278,9 +289,10 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                       self.timeLabel.text = "\(self.reformatDateTime(date: self.event.startTime, format: "h:mm a")) — \(self.reformatDateTime(date: self.event.endTime, format: "h:mm a"))"
                       self.eventDescription.text = self.event.description
                       self.eventDescription.isEditable = false
-                      self.numParticipantsLabel.text = "\(String(self.confirmedParticipants.count)) Confirmed Participants"
+                      
                       self.fetchParticipants()
-                      self.participantList.reloadData()
+                      self.numParticipantsLabel.text = "\(String(self.confirmedParticipants.count)) Confirmed Participants"
+//                      self.participantList.reloadData()
                   }
               }
               catch {
@@ -291,6 +303,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
               return
             }
             print("Current data: \(data)")
+              completed()
           }
         
     }
@@ -401,5 +414,23 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
-
+    // TODO: Edit so that the event owner gets the notif, not the current user
+    func sendEventOwnerNotif() {
+        // create content
+        let content = UNMutableNotificationContent()
+        content.title = "Participant request for: \(event.name)"
+        content.subtitle = ""
+        content.body = "You have clicked 4 times"
+        content.sound = UNNotificationSound.default
+        
+        // create trigger
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        
+        // combine it all into a request
+        let request = UNNotificationRequest(identifier: "myNotification", content: content, trigger: trigger)
+        
+        // submit our notification request
+        UNUserNotificationCenter.current().add(request)
+    }
+    
 }
