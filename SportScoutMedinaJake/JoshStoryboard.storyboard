@@ -180,7 +180,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="NgI-Ti-Yfu" kind="show" id="Pnw-X2-FTJ"/>
+                                            <segue destination="NgI-Ti-Yfu" kind="show" identifier="ParticipantCellSegue" id="Pnw-X2-FTJ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
