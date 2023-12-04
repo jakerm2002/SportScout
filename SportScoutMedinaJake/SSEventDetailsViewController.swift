@@ -10,7 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorageUI
 
-class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource /*, ParticipantsChanger*/ {
+class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     var participantCellIdentifier = "SSEventDetailsParticipantCellIdentifier"
@@ -373,12 +373,6 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                     }
                 }
             }
-            
-//            self.confirmedParticipants = temp
-//            print("\nConfirmed Participants:")
-//            for confirmedParticipant in confirmedParticipants {
-//                print(confirmedParticipant)
-//            }
         }
     }
     
