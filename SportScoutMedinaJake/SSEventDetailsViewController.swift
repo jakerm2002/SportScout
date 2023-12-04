@@ -25,7 +25,6 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
     let requestedSection = 2
     var documentID = "" // set from location VC
     var userIsEventOwner = false
-    var hideButton = false // delete later
     
     @IBOutlet var eventOwnerLabel: UILabel!
     @IBOutlet var locationLabel: UILabel!
@@ -50,10 +49,11 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         right.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(right)
         
+        
         checkIfUserIsOwner() // will show event owner 3 sections in participant table & hide requestToJoinButton
         
         // populate data depending on user status
-        if userIsEventOwner || hideButton {
+        if userIsEventOwner {
             // hide request to join button
             requestToJoinButton.isHidden = true
             // make participant table show confirmed, pending invite/invited, requested to join
@@ -63,15 +63,16 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         print("Fetching data")
         eventDescription.isEditable = false
         // Do any additional setup after loading the view.
-//        fetchParticipants()
-        fetchEventData()
+        fetchEventData {
+            self.participantList.reloadData()
+        }
     }
     
     // TODO: Write functionality
     @IBAction func requestToJoinPressed(_ sender: Any) {
         let user = Auth.auth().currentUser
         let docuRef = db.collection("users").document(user!.uid)
-        if event.participants!.contains(docuRef) {
+        if event.confirmedParticipants != nil && event.confirmedParticipants!.contains(docuRef) {
             // show alert so user knows they are a participant
             let controller = UIAlertController(
                 title: "Unable To Complete Action",
@@ -80,10 +81,20 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                         controller.addAction(UIAlertAction(title: "OK", style: .default))
             present(controller, animated: true)
         } else {
-            // add user as participant
+            // send Notification to Event Owner & add them as "requestedParticipant"
             db.collection("events").document(documentID).updateData([
-                "participants": FieldValue.arrayUnion([docuRef])
+                "requestedParticipants": FieldValue.arrayUnion([docuRef])
             ])
+            
+            let controller = UIAlertController(
+                title: "Request Completed!",
+                message: "A request has been sent to the event owner! You will be notified and added as a confirmed participant once the owner accepts.",
+                preferredStyle: .alert)
+                        controller.addAction(UIAlertAction(title: "OK", style: .default))
+            present(controller, animated: true)
+            
+            // TODO: Send Notif to Event Owner
+//            sendEventOwnerNotif()
         }
     }
     
@@ -126,11 +137,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             
             var cellUsername = ""
             var cellRealName = ""
-//            var cellImage:UIImage?
             
-            // give pfp to participants in list
-            
-            //        cell.imageView?.image = currentParticipants[indexPath.row].user?.
             switch indexPath.section {
             case confirmedSection:
                 cellUsername = confirmedParticipants[indexPath.row].username
@@ -162,8 +169,9 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             
             cell.username.text = cellUsername
             cell.realName.text = cellRealName
-//            cell.imageView?.image = cellImage
+            
         } else {
+            
             // show only confirmed participants
             if indexPath.section == confirmedSection {
                 cell.username.text = confirmedParticipants[indexPath.row].username
@@ -184,17 +192,21 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return hideButton
+        return userIsEventOwner
     }
     
     // delete from table
+    // TODO: fix functionality
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
+        
+        if editingStyle == .delete && indexPath.section == confirmedSection {
             
-            let userToDelete = event.participants![indexPath.row]
-            event.participants!.remove(at: indexPath.row)
-            db.collection("events").document(documentID).updateData(["participants": event.participants!])
-            fetchParticipants()
+            let userToDelete = event.confirmedParticipants![indexPath.row]
+            print("deleting \(userToDelete.documentID): e\(confirmedParticipants[indexPath.row])")
+            event.confirmedParticipants!.remove(at: indexPath.row)
+            
+            db.collection("events").document(documentID).updateData(["confirmedParticipants": event.confirmedParticipants!])
+            confirmedParticipants.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }  else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
@@ -210,7 +222,6 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             if recognizer.direction == .right {
                 
             }
-            
         }
     }
     
@@ -249,13 +260,13 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
-    func fetchEventData() {
+    func fetchEventData(completed: @escaping () -> ()) {
         // event data
         db.collection("events").document(documentID)
           .addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else {
               print("Error fetching document: \(error!)")
-              return
+              return completed()
             }
               do {
                   self.event = try document.data(as: Event.self)
@@ -278,9 +289,10 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                       self.timeLabel.text = "\(self.reformatDateTime(date: self.event.startTime, format: "h:mm a")) — \(self.reformatDateTime(date: self.event.endTime, format: "h:mm a"))"
                       self.eventDescription.text = self.event.description
                       self.eventDescription.isEditable = false
-                      self.numParticipantsLabel.text = "\(String(self.event.participants!.count)) Participants"
+                      
                       self.fetchParticipants()
-                      self.participantList.reloadData()
+                      self.numParticipantsLabel.text = "\(String(self.confirmedParticipants.count)) Confirmed Participants"
+//                      self.participantList.reloadData()
                   }
               }
               catch {
@@ -291,37 +303,73 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
               return
             }
             print("Current data: \(data)")
+              completed()
           }
         
     }
     
     func fetchParticipants() {
         // we can use getDocument to access the document referenced by the DocumentReference
-        confirmedParticipants = []
-        if event != nil && event.participants != nil {
-//            var temp:[User] = []
-            
-            for docRef in event.participants! {
-//                print("count: \(temp.count)")
-                docRef.getDocument(as: User.self) { result in
-                    do {
-                        
-                        let value = try result.get()
-                        print("Found participant at event \(self.event.name) with value: \(value).")
-                        
-//                        if !self.confirmedParticipants.contains(value) {
-                            self.confirmedParticipants.append(value)
-//                        }
-                        
-                    
-//                        temp.append(value)
-    
-                        DispatchQueue.main.async {
-                            // TODO: Figure out how to reload after all events added, not after each event
-                            self.participantList.reloadData() // force refresh to see new event
+        if event != nil {
+            if event.confirmedParticipants != nil {
+                for docRef in event.confirmedParticipants! {
+                    docRef.getDocument(as: User.self) { result in
+                        do {
+                            let value = try result.get()
+                            print("Found confirmed participant at event \(self.event.name) with value: \(value).")
+                            
+                            if !self.confirmedParticipants.contains(value) {
+                                self.confirmedParticipants.append(value)
+                            }
+                            DispatchQueue.main.async {
+                                // TODO: Figure out how to reload after all events added, not after each event
+                                self.participantList.reloadData() // force refresh to see new event
+                            }
+                        } catch {
+                            print("Error retrieving confirmed participant at event \(self.event.name): \(error)")
                         }
-                    } catch {
-                        print("Error retrieving participant at event \(self.event.name): \(error)")
+                    }
+                }
+            }
+            
+            if event.invitedParticipants != nil {
+                for docRef in event.invitedParticipants! {
+                    docRef.getDocument(as: User.self) { result in
+                        do {
+                            let value = try result.get()
+                            print("Found invited participant at event \(self.event.name) with value: \(value).")
+                            
+                            if !self.invitedParticipants.contains(value) {
+                                self.invitedParticipants.append(value)
+                            }
+                            DispatchQueue.main.async {
+                                // TODO: Figure out how to reload after all events added, not after each event
+                                self.participantList.reloadData() // force refresh to see new event
+                            }
+                        } catch {
+                            print("Error retrieving invited participant at event \(self.event.name): \(error)")
+                        }
+                    }
+                }
+            }
+            
+            if event.requestedParticipants != nil {
+                for docRef in event.requestedParticipants! {
+                    docRef.getDocument(as: User.self) { result in
+                        do {
+                            let value = try result.get()
+                            print("Found requested participant at event \(self.event.name) with value: \(value).")
+                            
+                            if !self.requestedParticipants.contains(value) {
+                                self.requestedParticipants.append(value)
+                            }
+                            DispatchQueue.main.async {
+                                // TODO: Figure out how to reload after all events added, not after each event
+                                self.participantList.reloadData() // force refresh to see new event
+                            }
+                        } catch {
+                            print("Error retrieving requested participant at event \(self.event.name): \(error)")
+                        }
                     }
                 }
             }
@@ -357,16 +405,32 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             // owner document reference
             // if current user is the owner
             if event.owner.documentID == uid {
-//                userIsEventOwner = true
-                hideButton = true
+                userIsEventOwner = true
                 print("user is event owner\n")
             } else {
-                hideButton = false
-//                userIsEventOwner = false
+                userIsEventOwner = false
                 print("user is not event owner\n")
             }
         }
     }
     
-
+    // TODO: Edit so that the event owner gets the notif, not the current user
+    func sendEventOwnerNotif() {
+        // create content
+        let content = UNMutableNotificationContent()
+        content.title = "Participant request for: \(event.name)"
+        content.subtitle = ""
+        content.body = "You have clicked 4 times"
+        content.sound = UNNotificationSound.default
+        
+        // create trigger
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        
+        // combine it all into a request
+        let request = UNNotificationRequest(identifier: "myNotification", content: content, trigger: trigger)
+        
+        // submit our notification request
+        UNUserNotificationCenter.current().add(request)
+    }
+    
 }

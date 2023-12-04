@@ -48,6 +48,7 @@ class SSLocationDetailsViewController: UIViewController, MGCDayPlannerViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         fetchData()
         calendarView.showsAllDayEvents = false
         calendarView.eventIndicatorDotColor = UIColor(.red)
