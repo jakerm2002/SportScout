@@ -46,7 +46,8 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
             uid = user.uid
         }
         // get all events owned by this user
-        db.collection("events").whereField("owner", isEqualTo: uid)
+        let userRef = db.collection("users").document(uid)
+        db.collection("events").whereField("owner", isEqualTo: userRef)
             .getDocuments() { (querySnapshot, err) in
                 guard let documents = querySnapshot?.documents else {
                     print("No documents")
@@ -56,6 +57,7 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
                 self.events = documents.compactMap { (queryDocumentSnapshot) -> Event? in
                     return try? queryDocumentSnapshot.data(as: Event.self)
                 }
+                self.participantRequestTable.reloadData()
             }
     }
     
@@ -103,6 +105,7 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
         } else if segue.identifier == participantCellSegueIdentifier, let nextVC = segue.destination as? SSEventDetailsViewController, let row = participantRequestTable.indexPathForSelectedRow?.row
          {
             nextVC.event = events![row]
+            nextVC.documentID = events![row].id!
          }
     }
     
@@ -115,7 +118,7 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: participantCellIdentifier, for: indexPath as IndexPath)
         
         cell.textLabel?.text = "Event: \( events![indexPath.row].name)"
-        cell.detailTextLabel?.text = "Participants to review: \(String(describing: events![indexPath.row].requestedParticipants?.count))"
+        cell.detailTextLabel?.text = "Participants to review: \( events![indexPath.row].requestedParticipants?.count ?? 0)"
         
         return cell
     }
