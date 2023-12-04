@@ -183,6 +183,38 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                 }
                 
                 // if owner accepts participant, move them into the confirmed section
+                cell?.acceptCallback = {
+                    guard let uid = self.requestedParticipants[indexPath.row].id else {return}
+                    let userToMove = db.collection("users").document(uid)
+                    
+                    self.event.requestedParticipants!.remove(at: indexPath.row)
+                    db.collection("events").document(self.documentID).updateData([
+                        "requestedParticipants": FieldValue.arrayRemove([userToMove])
+                    ]) {
+                        _ in
+                        db.collection("events").document(self.documentID).updateData([
+                            "confirmedParticipants": FieldValue.arrayUnion([userToMove])
+                        ]) {
+                            _ in
+                            self.requestedParticipants.remove(at: indexPath.row)
+                            self.fetchParticipants()
+                        }
+                    }
+                }
+                
+                cell?.declineCallback = {
+                    guard let uid = self.requestedParticipants[indexPath.row].id else {return}
+                    let userToMove = db.collection("users").document(uid)
+                    
+                    self.event.requestedParticipants!.remove(at: indexPath.row)
+                    db.collection("events").document(self.documentID).updateData([
+                        "requestedParticipants": FieldValue.arrayRemove([userToMove])
+                    ]) {
+                        _ in
+                        self.requestedParticipants.remove(at: indexPath.row)
+                        self.fetchParticipants()
+                    }
+                }
             default:
                 fatalError("SSEventDetailsViewController: Participant section was not one of the three required sections.")
                 break
