@@ -119,6 +119,8 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                           print(error)
                         }
                     if userToMoveAsUserStruct != nil {
+                        
+                        print("hello this code is running! inside of request to join pressed")
                         self.confirmedParticipants.append(userToMoveAsUserStruct!)
                     }
                 }
@@ -258,6 +260,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                                   print(error)
                                 }
                             if userToMoveAsUserStruct != nil {
+                                print("hello this code is running! inside of acceptCallback")
                                 self.confirmedParticipants.append(userToMoveAsUserStruct!)
                             }
 //                            self.fetchParticipants()

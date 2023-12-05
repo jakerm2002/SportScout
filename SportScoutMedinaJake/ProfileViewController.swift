@@ -22,7 +22,8 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
     
     @IBOutlet weak var participantRequestTable: UITableView!
     
-    var events: [Event]?
+    var eventsOwnedByThisUser: [Event]?
+    var eventsOwnedWithActiveRequests: [Event]?
     var invites: [Event]?
     var currentUser: User?
     var logoutSegueIdentifier = "LogoutSegue"
@@ -59,8 +60,15 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
                     return
                 }
                 print("getting events")
-                self.events = documents.compactMap { (queryDocumentSnapshot) -> Event? in
+                self.eventsOwnedByThisUser = documents.compactMap { (queryDocumentSnapshot) -> Event? in
                     return try? queryDocumentSnapshot.data(as: Event.self)
+                }
+                self.eventsOwnedWithActiveRequests = documents.compactMap { (queryDocumentSnapshot) -> Event? in
+                    let element = try? queryDocumentSnapshot.data(as: Event.self)
+                    if element?.requestedParticipants != nil && (element?.requestedParticipants!.count)! > 0 {
+                        return element
+                    }
+                    return nil
                 }
                 self.participantRequestTable.reloadData()
             }
@@ -100,7 +108,7 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
                 self.profilePhoto.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
                 
                 self.fetchEventData()
-                print(self.events == nil)
+                print(self.eventsOwnedByThisUser == nil)
                 
             } else {
                 print("Document does not exist")
@@ -127,8 +135,8 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
                 nextVC.event = invites![row]
                 nextVC.documentID = invites![row].id!
             } else if section == requestsSection {
-                nextVC.event = events![row]
-                nextVC.documentID = events![row].id!
+                nextVC.event = eventsOwnedByThisUser![row]
+                nextVC.documentID = eventsOwnedByThisUser![row].id!
             }
             participantRequestTable.deselectRow(at: selectedIndexPath, animated: true)
          }
@@ -143,9 +151,9 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
             cell.detailTextLabel?.text = "Accept or Reject this event invitaton"
         
         case requestsSection:
-            cell.textLabel?.text = "Event: \( events![indexPath.row].name)"
+            cell.textLabel?.text = "Event: \( eventsOwnedWithActiveRequests![indexPath.row].name)"
 
-            var rparticipants = events![indexPath.row].requestedParticipants
+            var rparticipants = eventsOwnedWithActiveRequests![indexPath.row].requestedParticipants
             
             if (rparticipants != nil) {
                 for rp in rparticipants! {
@@ -153,7 +161,7 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
                 }
             }
             
-            cell.detailTextLabel?.text = "Participants to review: \( events![indexPath.row].requestedParticipants!.count )"
+            cell.detailTextLabel?.text = "Participants to review: \( eventsOwnedWithActiveRequests![indexPath.row].requestedParticipants!.count )"
         default:
             break
         }
@@ -170,8 +178,10 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case requestsSection:
-            print("\nnumber of events user owns: \(String(describing: events?.count))")
-            return events?.count ?? 0
+            if eventsOwnedWithActiveRequests == nil || eventsOwnedWithActiveRequests?.count == 0 {
+                return 0
+            }
+            return eventsOwnedWithActiveRequests!.count
         case invitesSection:
             print("\nnumber of events user is invited to: \(String(describing: invites?.count))")
             return invites?.count ?? 0
