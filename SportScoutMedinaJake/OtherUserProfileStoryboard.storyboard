@@ -83,16 +83,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBU-uN-iSF">
-                                <rect key="frame" x="15" y="476" width="77" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="77.000000000000057" id="Jlc-g0-KkF"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highlights:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8h-15-6u7">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8h-15-6u7">
                                 <rect key="frame" x="16" y="447" width="87" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="5BX-20-6ps"/>
@@ -160,6 +151,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdk-es-f75" customClass="MGCDayPlannerView">
+                                <rect key="frame" x="0.0" y="476" width="393" height="342"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="M1Z-MH-u7y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -178,12 +173,13 @@
                             <constraint firstItem="gNw-bY-wgO" firstAttribute="top" secondItem="zP5-RB-6rF" secondAttribute="bottom" constant="27.666666666666686" id="CKB-IG-kyf"/>
                             <constraint firstItem="zP5-RB-6rF" firstAttribute="top" secondItem="Bos-bV-9c9" secondAttribute="bottom" constant="31" id="FRo-O4-PP1"/>
                             <constraint firstItem="M1Z-MH-u7y" firstAttribute="trailing" secondItem="7h7-uN-Yoo" secondAttribute="trailing" constant="16" id="FWF-bG-GqW"/>
+                            <constraint firstItem="Hdk-es-f75" firstAttribute="leading" secondItem="M1Z-MH-u7y" secondAttribute="leading" id="HRk-X6-qJt"/>
                             <constraint firstItem="gNw-bY-wgO" firstAttribute="leading" secondItem="M1Z-MH-u7y" secondAttribute="leading" constant="16" id="Hue-vs-fbB"/>
                             <constraint firstItem="7h7-uN-Yoo" firstAttribute="leading" secondItem="Wu3-TJ-Zcf" secondAttribute="trailing" constant="58" id="IGH-hm-wVz"/>
-                            <constraint firstItem="CBU-uN-iSF" firstAttribute="leading" secondItem="M1Z-MH-u7y" secondAttribute="leading" constant="15" id="J2n-Nw-PRj"/>
                             <constraint firstItem="hDR-EX-08g" firstAttribute="leading" secondItem="M1Z-MH-u7y" secondAttribute="leading" constant="133" id="Lko-kg-RPp"/>
-                            <constraint firstItem="M1Z-MH-u7y" firstAttribute="bottom" secondItem="CBU-uN-iSF" secondAttribute="bottom" constant="321" id="MUn-2z-yTF"/>
                             <constraint firstItem="ngi-am-CP3" firstAttribute="leading" secondItem="J5p-aA-L2Q" secondAttribute="trailing" constant="58" id="N7c-Du-s7G"/>
+                            <constraint firstItem="Hdk-es-f75" firstAttribute="top" secondItem="J8h-15-6u7" secondAttribute="bottom" constant="8" symbolic="YES" id="Oly-nl-fR7"/>
+                            <constraint firstItem="Hdk-es-f75" firstAttribute="bottom" secondItem="M1Z-MH-u7y" secondAttribute="bottom" id="SFd-tQ-jzI"/>
                             <constraint firstItem="M1Z-MH-u7y" firstAttribute="trailing" secondItem="hDR-EX-08g" secondAttribute="trailing" constant="132" id="Tl8-KG-GA7"/>
                             <constraint firstItem="Wu3-TJ-Zcf" firstAttribute="leading" secondItem="M1Z-MH-u7y" secondAttribute="leading" constant="16" id="V1w-Zn-MUd"/>
                             <constraint firstItem="Bos-bV-9c9" firstAttribute="top" secondItem="kXy-zc-piu" secondAttribute="bottom" constant="8" symbolic="YES" id="X8V-jf-6NE"/>
@@ -194,13 +190,11 @@
                             <constraint firstItem="Bos-bV-9c9" firstAttribute="leading" secondItem="M1Z-MH-u7y" secondAttribute="leading" constant="15" id="cMl-hv-4jT"/>
                             <constraint firstItem="Lvk-aC-UJk" firstAttribute="top" secondItem="Bos-bV-9c9" secondAttribute="bottom" constant="15" id="cSU-jf-Fdc"/>
                             <constraint firstItem="7h7-uN-Yoo" firstAttribute="top" secondItem="Xnx-Gs-6f8" secondAttribute="bottom" constant="8" symbolic="YES" id="dEk-u1-NSf"/>
-                            <constraint firstItem="M1Z-MH-u7y" firstAttribute="bottom" secondItem="ngi-am-CP3" secondAttribute="bottom" constant="379" id="eJE-ho-Lvz"/>
-                            <constraint firstItem="M1Z-MH-u7y" firstAttribute="trailing" secondItem="CBU-uN-iSF" secondAttribute="trailing" constant="300.99999999999994" id="gHy-3r-mJ5"/>
+                            <constraint firstItem="Hdk-es-f75" firstAttribute="trailing" secondItem="M1Z-MH-u7y" secondAttribute="trailing" id="djM-3N-G7d"/>
                             <constraint firstItem="kXy-zc-piu" firstAttribute="leading" secondItem="M1Z-MH-u7y" secondAttribute="leading" constant="15" id="iIs-IZ-62m"/>
                             <constraint firstItem="J8h-15-6u7" firstAttribute="top" secondItem="J5p-aA-L2Q" secondAttribute="bottom" constant="8" symbolic="YES" id="kLv-qR-413"/>
                             <constraint firstItem="J5p-aA-L2Q" firstAttribute="leading" secondItem="M1Z-MH-u7y" secondAttribute="leading" constant="16" id="n1f-ZE-T7d"/>
                             <constraint firstItem="COI-IU-Y1S" firstAttribute="top" secondItem="7h7-uN-Yoo" secondAttribute="bottom" constant="8" symbolic="YES" id="n1q-Bd-gYz"/>
-                            <constraint firstItem="CBU-uN-iSF" firstAttribute="top" secondItem="J8h-15-6u7" secondAttribute="bottom" constant="8" symbolic="YES" id="nX4-f9-tJQ"/>
                             <constraint firstItem="M1Z-MH-u7y" firstAttribute="trailing" secondItem="J8h-15-6u7" secondAttribute="trailing" constant="290" id="ozF-HQ-Riw"/>
                             <constraint firstItem="Lvk-aC-UJk" firstAttribute="leading" secondItem="zP5-RB-6rF" secondAttribute="trailing" constant="86" id="v2X-5j-Y6C"/>
                             <constraint firstItem="kXy-zc-piu" firstAttribute="top" secondItem="hDR-EX-08g" secondAttribute="bottom" constant="8" symbolic="YES" id="wLm-gx-NpK"/>
@@ -210,6 +204,7 @@
                     </view>
                     <connections>
                         <outlet property="bioText" destination="Lvk-aC-UJk" id="Xxz-O9-HbN"/>
+                        <outlet property="calendarView" destination="Hdk-es-f75" id="GmU-AV-R8m"/>
                         <outlet property="heightText" destination="7h7-uN-Yoo" id="16l-Zb-70K"/>
                         <outlet property="locationText" destination="COI-IU-Y1S" id="k0W-uP-hxd"/>
                         <outlet property="nameText" destination="kXy-zc-piu" id="IPt-kr-IhJ"/>
@@ -217,11 +212,22 @@
                         <outlet property="sportsText" destination="ngi-am-CP3" id="I3Z-D5-h5H"/>
                         <outlet property="usernameText" destination="Bos-bV-9c9" id="oyd-TU-mTF"/>
                         <outlet property="weightText" destination="Xnx-Gs-6f8" id="4Ub-Cf-9we"/>
+                        <segue destination="NCc-nc-dO4" kind="show" identifier="OtherProfileCalendarToSelectedEventSegueIdentifier" id="jHV-sO-KNb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="so5-t1-fo5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="362.59541984732823" y="3.5211267605633805"/>
+        </scene>
+        <!--EventDetailsStoryboard-->
+        <scene sceneID="kaH-Tf-Y0r">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EventDetailsStoryboard" id="NCc-nc-dO4" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="i9x-As-IYG"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sK8-o7-nEq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="931" y="4"/>
         </scene>
     </scenes>
     <resources>

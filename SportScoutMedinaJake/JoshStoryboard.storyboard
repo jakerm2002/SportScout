@@ -216,9 +216,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jyz-Db-3HM">
-                                <rect key="frame" x="4" y="457" width="126" height="35"/>
+                                <rect key="frame" x="4" y="457" width="134" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="See Calendar"/>
+                                <buttonConfiguration key="configuration" style="plain" title="View Calendar"/>
                                 <connections>
                                     <segue destination="5DY-Og-zRp" kind="show" id="oDs-7F-tm4"/>
                                 </connections>

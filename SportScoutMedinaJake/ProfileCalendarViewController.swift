@@ -17,10 +17,6 @@ class ProfileCalendarViewController: UIViewController, MGCDayPlannerViewDataSour
     var ProfileCalendarToSelectedEventSegueIdentifier = "ProfileCalendarToSelectedEventSegueIdentifier"
     
     var eventsOnDate: [Date: [Event]] = [:] // the events under a certain date key must occur on that date
-    var events: [Event]?
-    
-    var eventsOwnedByThisUser: [Event]?
-    var eventsOwnedWithActiveRequests: [Event]?
     
     var selectedEventDate: Date?
     var selectedEventIndex: UInt = 0
