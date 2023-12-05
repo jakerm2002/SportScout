@@ -326,12 +326,6 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             db.collection("events").document(documentID).updateData(["confirmedParticipants": event.confirmedParticipants!])
             confirmedParticipants.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            // remove this event from the user's array of events (confirmed events)
-            // so the event will no longer show up on the user's calendar
-            let currentEventReference = db.collection("events").document(documentID)
-            db.collection("users").document(userToDelete.documentID).updateData([
-                "events": FieldValue.arrayRemove([currentEventReference])
-            ])
             self.numParticipantsLabel.text = "\(String(self.confirmedParticipants.count)) Confirmed Participants"
 
         }  else if editingStyle == .insert {
