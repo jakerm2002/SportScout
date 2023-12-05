@@ -14,12 +14,13 @@ class ProfileCalendarViewController: UIViewController, MGCDayPlannerViewDataSour
     
     @IBOutlet weak var calendarView: MGCDayPlannerView!
     
-    var LocationDetailsToSelectedEventSegueIdentifier = "LocationDetailsToSelectedEventSegueIdentifier"
-    
-    var UserObject:User!
+    var ProfileCalendarToSelectedEventSegueIdentifier = "ProfileCalendarToSelectedEventSegueIdentifier"
     
     var eventsOnDate: [Date: [Event]] = [:] // the events under a certain date key must occur on that date
-    var events:[String] = [] // will be set from home VC
+    var events: [Event]?
+    
+    var eventsOwnedByThisUser: [Event]?
+    var eventsOwnedWithActiveRequests: [Event]?
     
     var selectedEventDate: Date?
     var selectedEventIndex: UInt = 0
@@ -36,7 +37,6 @@ class ProfileCalendarViewController: UIViewController, MGCDayPlannerViewDataSour
         calendarView.backgroundColor = .white
         calendarView.daySeparatorsColor = .systemGray
         calendarView.timeSeparatorsColor = .systemGray
-        fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,10 +55,6 @@ class ProfileCalendarViewController: UIViewController, MGCDayPlannerViewDataSour
     }
     
     func dayPlannerView(_ view: MGCDayPlannerView!, numberOfEventsOf type: MGCEventType, at date: Date!) -> Int {
-        guard UserObject != nil else {
-            return 0 // Location is not set or is nil
-        }
-        
         let dateWithoutTime = self.removeTimeStamp(fromDate: date)
         
         if let eventsOnDay = self.eventsOnDate[dateWithoutTime] {
@@ -102,39 +98,27 @@ class ProfileCalendarViewController: UIViewController, MGCDayPlannerViewDataSour
         selectedEventIndex = index
         
         calendarView.deselectEvent()
-        // TODO: perform a segue to the event/game page and send over the data from the selected event.
-        performSegue(withIdentifier: LocationDetailsToSelectedEventSegueIdentifier, sender: nil)
+        performSegue(withIdentifier: ProfileCalendarToSelectedEventSegueIdentifier, sender: nil)
     }
     
     func fetchData() {
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        db.collection("users").document(String(uid))
-            .addSnapshotListener { documentSnapshot, error in
-                guard let document = documentSnapshot else {
-                    print("Error fetching document: \(error!)")
+        guard let uid = Auth.auth().currentUser?.uid else {
+            print("error getting user")
+            return}
+        eventsOnDate.removeAll()
+        // get all events the user is attending
+        let userRef = db.collection("users").document(uid)
+        db.collection("events").whereField("confirmedParticipants", arrayContains: userRef)
+            .getDocuments() { (querySnapshot, err) in
+                guard let documents = querySnapshot?.documents else {
+                    print("No documents")
                     return
                 }
-                do {
-                    self.UserObject = try document.data(as: User.self)
-                    Task {
-                        await self.fetchEvents()
-                    }
-                }
-                catch {
-                    print("Error retrieving event \(error.localizedDescription)")
-                }
-            }
-    }
-    
-    @MainActor
-    func fetchEvents() async {
-        eventsOnDate.removeAll()
-        // we can use getDocument to access the document referenced by the DocumentReference
-        if UserObject != nil && UserObject.events != nil {
-            for docRef in UserObject.events! {
-                docRef.getDocument(as: Event.self) { result in
+                
+                for docRef in documents {
                     do {
-                        let value = try result.get()
+                        let value = try docRef.data(as: Event.self)
+                        print(value.name)
                         let dateWithoutTime = self.removeTimeStamp(fromDate: value.startTime)
                         if self.eventsOnDate[dateWithoutTime] != nil {
                             // https://stackoverflow.com/a/24535563
@@ -143,13 +127,23 @@ class ProfileCalendarViewController: UIViewController, MGCDayPlannerViewDataSour
                         } else {
                             self.eventsOnDate[dateWithoutTime] = [value]
                         }
-                        self.calendarView.reloadAllEvents()
                     } catch {
                         print("Error retrieving event for user \(error.localizedDescription)")
                     }
                 }
+                self.calendarView.reloadAllEvents()
             }
-        }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == ProfileCalendarToSelectedEventSegueIdentifier,
+           let destination = segue.destination as? SSEventDetailsViewController {
+            let dateWithoutTime = self.removeTimeStamp(fromDate: selectedEventDate!)
+            let curEventObj = eventsOnDate[dateWithoutTime]![Int(selectedEventIndex)]
+            
+            // populate fields of next VC
+            destination.event = curEventObj
+            destination.documentID = curEventObj.id!
+        }
+    }
 }

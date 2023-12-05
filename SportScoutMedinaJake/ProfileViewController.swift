@@ -169,7 +169,7 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
         return cell
     }
     
-    let types = ["Incoming Invites", "Requests"]
+    let types = ["Events you're invited to", "Requests to join your events"]
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return types[section]
