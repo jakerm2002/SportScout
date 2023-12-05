@@ -35,6 +35,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        searchBar.placeholder = "Filter by location name"
         searchBar.delegate = self
         
         // UI styling

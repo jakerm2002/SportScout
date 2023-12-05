@@ -55,6 +55,7 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.bounces = true
         searchBar.delegate = self
         searchBar.sizeToFit()
+        searchBar.placeholder = "Filter posts by username"
         
         // dismiss search bar when user scrolls the collection view
         collectionView.keyboardDismissMode = .onDrag
@@ -147,6 +148,9 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: timelineCollectionViewCellIdentifier, for: indexPath) as! SSTimelineCollectionViewCell
         
+        cell.imageView.image = nil
+        cell.nukeLazyImageView.url = nil
+        
         let row = indexPath.row
         let currentPost: TimelinePost
         if !filteredViewableTimelinePosts.isEmpty {
@@ -198,8 +202,8 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
                 }
             }
         } else {
-            cell.imageView.image = nil
-            cell.nukeLazyImageView.url = nil
+//            cell.imageView.image = nil
+//            cell.nukeLazyImageView.url = nil
             if let mediaType = currentPost.mediaType {
 //                cell.mediaView.isHidden = false
             } else {
