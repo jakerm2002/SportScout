@@ -116,16 +116,6 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
         }
     }
     
-    @IBAction func logoutButtonPressed(_ sender: Any) {
-        let auth = Auth.auth()
-        do {
-            try auth.signOut()
-            performSegue(withIdentifier: logoutSegueIdentifier, sender: self)
-        } catch let signOutError {
-            print(signOutError.localizedDescription)
-        }
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == logoutSegueIdentifier {
             let vc = segue.destination as? LoginViewController

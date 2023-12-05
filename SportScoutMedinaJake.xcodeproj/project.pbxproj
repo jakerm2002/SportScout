@@ -16,6 +16,8 @@
 		661EC2BE2B189BBB00E4F795 /* CustomizeProfileStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 661EC2BD2B189BBB00E4F795 /* CustomizeProfileStoryboard.storyboard */; };
 		661FB4A32B0F278B0056E307 /* HomeStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 661FB4A22B0F278B0056E307 /* HomeStoryboard.storyboard */; };
 		661FB4A52B11421E0056E307 /* SSTimelineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661FB4A42B11421E0056E307 /* SSTimelineCollectionViewCell.swift */; };
+		662D48BF2B1F0E990009A8ED /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 662D48BE2B1F0E990009A8ED /* Settings.storyboard */; };
+		662D48C12B1F0EC70009A8ED /* SSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662D48C02B1F0EC50009A8ED /* SSSettingsViewController.swift */; };
 		66362E7F2B1E6AC1005EF8D3 /* SSEventDetailsRequestedParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66362E7E2B1E6AC1005EF8D3 /* SSEventDetailsRequestedParticipantTableViewCell.swift */; };
 		66408F4F2AF331D500763C4A /* NewEventStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */; };
 		66408F512AF3320600763C4A /* LocationDetailsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */; };
@@ -87,6 +89,8 @@
 		661EC2BD2B189BBB00E4F795 /* CustomizeProfileStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CustomizeProfileStoryboard.storyboard; sourceTree = "<group>"; };
 		661FB4A22B0F278B0056E307 /* HomeStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HomeStoryboard.storyboard; sourceTree = "<group>"; };
 		661FB4A42B11421E0056E307 /* SSTimelineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSTimelineCollectionViewCell.swift; sourceTree = "<group>"; };
+		662D48BE2B1F0E990009A8ED /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		662D48C02B1F0EC50009A8ED /* SSSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSSettingsViewController.swift; sourceTree = "<group>"; };
 		66362E7E2B1E6AC1005EF8D3 /* SSEventDetailsRequestedParticipantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSEventDetailsRequestedParticipantTableViewCell.swift; sourceTree = "<group>"; };
 		66408F4E2AF331D500763C4A /* NewEventStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewEventStoryboard.storyboard; sourceTree = "<group>"; };
 		66408F502AF3320600763C4A /* LocationDetailsStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetailsStoryboard.storyboard; sourceTree = "<group>"; };
@@ -193,6 +197,8 @@
 		66C3D9782AD88FEC003E1C99 /* SportScoutMedinaJake */ = {
 			isa = PBXGroup;
 			children = (
+				662D48C02B1F0EC50009A8ED /* SSSettingsViewController.swift */,
+				662D48BE2B1F0E990009A8ED /* Settings.storyboard */,
 				661EC2BD2B189BBB00E4F795 /* CustomizeProfileStoryboard.storyboard */,
 				E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */,
 				66D9E8BB2B1EEF8900C8EE36 /* ProfileCalendarViewController.swift */,
@@ -349,6 +355,7 @@
 			files = (
 				66C3D9952AD89838003E1C99 /* northwestRec.png in Resources */,
 				94B1C2332B0F78BA0035CD70 /* OtherUserProfileStoryboard.storyboard in Resources */,
+				662D48BF2B1F0E990009A8ED /* Settings.storyboard in Resources */,
 				661FB4A32B0F278B0056E307 /* HomeStoryboard.storyboard in Resources */,
 				66C3D99D2AD8A328003E1C99 /* GoogleService-Info.plist in Resources */,
 				66408F4F2AF331D500763C4A /* NewEventStoryboard.storyboard in Resources */,
@@ -421,6 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66C3D9E42AD903DF003E1C99 /* SSSettingsViewController.swift in Sources */,
 				66C3D9D62AD8A7BB003E1C99 /* LoginViewController.swift in Sources */,
 				666DD4202B159CDC00FAA43F /* SSNewPostSportTableViewCell.swift in Sources */,
 				66C066672ADA406600DE3845 /* SSModels.swift in Sources */,
@@ -442,10 +450,10 @@
 				66143E2B2B168094002D4C6A /* SpinnerViewController.swift in Sources */,
 				66C3D97E2AD88FEC003E1C99 /* ViewController.swift in Sources */,
 				66C3D9DE2AD8FC79003E1C99 /* ProfileViewController.swift in Sources */,
+				662D48C12B1F0EC70009A8ED /* SSSettingsViewController.swift in Sources */,
 				698634142AF19EF5008ADA0A /* SSNewEventSportTableViewCell.swift in Sources */,
 				5F71BC692B1824B5007A1EFB /* CustomizeSportViewController.swift in Sources */,
 				66C3D97A2AD88FEC003E1C99 /* AppDelegate.swift in Sources */,
-				66C3D9E42AD903DF003E1C99 /* SSSettingsViewController.swift in Sources */,
 				66408F592AF3379B00763C4A /* SSEventDetailsViewController.swift in Sources */,
 				661D662F2B16E4A20094D1E0 /* SSTimelinePostMediaView.swift in Sources */,
 				66C3D9E62AD91034003E1C99 /* SSNewEventViewController.swift in Sources */,

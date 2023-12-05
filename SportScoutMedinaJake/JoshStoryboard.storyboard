@@ -276,9 +276,9 @@
                                 <segue destination="aLz-gG-cDA" kind="show" id="SfR-QC-6AF"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Logout" image="person.fill.xmark.rtl" catalog="system" id="NXv-X6-NgN">
+                        <barButtonItem key="rightBarButtonItem" image="gear" catalog="system" id="dPD-RY-FBx" userLabel="Settings">
                             <connections>
-                                <action selector="logoutButtonPressed:" destination="apE-gd-lQ4" id="diQ-bc-JIt"/>
+                                <segue destination="xBP-Vp-Xxs" kind="show" id="cee-Eo-eF6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -298,6 +298,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KXS-KV-6NX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3609.9236641221373" y="1555.6338028169014"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="ALz-Af-NYo">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Settings" id="xBP-Vp-Xxs" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="XRz-tm-ijf"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xWF-BS-oO3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4399" y="1498"/>
         </scene>
         <!--EventDetailsStoryboard-->
         <scene sceneID="urL-qr-Our">
@@ -331,8 +341,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gear" catalog="system" width="128" height="122"/>
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
-        <image name="person.fill.xmark.rtl" catalog="system" width="128" height="89"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
