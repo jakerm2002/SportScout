@@ -38,7 +38,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IQV-zd-IdA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5153" y="1556"/>
+            <point key="canvasLocation" x="5735" y="1556"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Z68-TE-QiP">
@@ -95,18 +95,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rct-JG-Owq">
-                                <rect key="frame" x="14.666666666666664" y="489" width="77" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highlights:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hST-xE-iaF">
-                                <rect key="frame" x="16" y="460" width="87" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sportsText" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vm2-Jf-4ft">
                                 <rect key="frame" x="133.33333333333334" y="431.66666666666669" width="244.00000000000003" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -143,6 +131,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xTp-CJ-ycv" customClass="MGCDayPlannerView">
+                                <rect key="frame" x="16" y="460" width="361" height="358"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="361" id="6g2-rh-xVP"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="a5R-kQ-FH9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -150,27 +145,27 @@
                             <constraint firstItem="Vm2-Jf-4ft" firstAttribute="baseline" secondItem="Zks-Dp-59j" secondAttribute="baseline" id="0MG-gA-l2u"/>
                             <constraint firstItem="8k1-sb-NyW" firstAttribute="leading" secondItem="x8t-bq-uzT" secondAttribute="leading" id="0Wu-il-kC5"/>
                             <constraint firstItem="8k1-sb-NyW" firstAttribute="trailing" secondItem="x8t-bq-uzT" secondAttribute="trailing" id="0fT-uX-uoo"/>
+                            <constraint firstItem="xTp-CJ-ycv" firstAttribute="leading" secondItem="a5R-kQ-FH9" secondAttribute="leading" constant="16" id="2Fr-BX-JDf"/>
                             <constraint firstItem="IcR-3z-CXy" firstAttribute="baseline" secondItem="x9e-7o-lOU" secondAttribute="baseline" id="3Vl-ui-t8u"/>
                             <constraint firstItem="G13-gP-xW3" firstAttribute="leading" secondItem="Zks-Dp-59j" secondAttribute="leading" id="4kN-fs-Tg7"/>
                             <constraint firstItem="Lal-93-QHY" firstAttribute="top" secondItem="a5R-kQ-FH9" secondAttribute="top" constant="20" id="56Z-As-F6t"/>
-                            <constraint firstItem="rct-JG-Owq" firstAttribute="top" secondItem="hST-xE-iaF" secondAttribute="bottom" constant="8" symbolic="YES" id="6Ug-ZR-U7S"/>
                             <constraint firstItem="G13-gP-xW3" firstAttribute="baseline" secondItem="x8t-bq-uzT" secondAttribute="baseline" id="7nW-1Y-O1c"/>
                             <constraint firstItem="8k1-sb-NyW" firstAttribute="leading" secondItem="Vm2-Jf-4ft" secondAttribute="leading" id="8Oz-IU-ibc"/>
                             <constraint firstItem="Lal-93-QHY" firstAttribute="centerX" secondItem="5hM-ec-3B3" secondAttribute="centerX" id="AM3-Yr-mdO"/>
-                            <constraint firstItem="hST-xE-iaF" firstAttribute="top" secondItem="Zks-Dp-59j" secondAttribute="bottom" constant="8" symbolic="YES" id="BT1-t6-xzc"/>
                             <constraint firstItem="G13-gP-xW3" firstAttribute="leading" secondItem="IcR-3z-CXy" secondAttribute="leading" id="FXa-m8-Ha0"/>
+                            <constraint firstItem="xTp-CJ-ycv" firstAttribute="bottom" secondItem="5hM-ec-3B3" secondAttribute="bottomMargin" id="H5C-cD-IVe"/>
                             <constraint firstItem="8k1-sb-NyW" firstAttribute="trailing" secondItem="Vm2-Jf-4ft" secondAttribute="trailing" id="ISB-hJ-zVZ"/>
                             <constraint firstItem="Lal-93-QHY" firstAttribute="centerX" secondItem="L51-bn-wQZ" secondAttribute="centerX" id="JA3-qd-SBO"/>
                             <constraint firstItem="L51-bn-wQZ" firstAttribute="top" secondItem="Lal-93-QHY" secondAttribute="bottom" constant="8" symbolic="YES" id="Mj5-0x-xyV"/>
                             <constraint firstItem="L51-bn-wQZ" firstAttribute="leading" secondItem="a5R-kQ-FH9" secondAttribute="leading" constant="16" id="Q4w-3x-YnM"/>
                             <constraint firstItem="oAK-tf-Zl2" firstAttribute="trailing" secondItem="L51-bn-wQZ" secondAttribute="trailing" id="Qb0-bP-qtT"/>
-                            <constraint firstItem="G13-gP-xW3" firstAttribute="leading" secondItem="hST-xE-iaF" secondAttribute="leading" id="QhV-WY-FiJ"/>
                             <constraint firstItem="8k1-sb-NyW" firstAttribute="leading" secondItem="kbH-pj-5su" secondAttribute="leading" id="WfN-il-lH4"/>
                             <constraint firstItem="8k1-sb-NyW" firstAttribute="leading" secondItem="x9e-7o-lOU" secondAttribute="leading" id="ZRh-O9-hb4"/>
                             <constraint firstItem="8k1-sb-NyW" firstAttribute="top" secondItem="oAK-tf-Zl2" secondAttribute="bottom" constant="15" id="aG0-hk-odW"/>
                             <constraint firstItem="8k1-sb-NyW" firstAttribute="trailing" secondItem="kbH-pj-5su" secondAttribute="trailing" id="aXO-EO-dbp"/>
                             <constraint firstItem="x8t-bq-uzT" firstAttribute="top" secondItem="8k1-sb-NyW" secondAttribute="bottom" constant="12" id="acA-BQ-kxt"/>
                             <constraint firstItem="oAK-tf-Zl2" firstAttribute="leading" secondItem="L51-bn-wQZ" secondAttribute="leading" id="c6Z-r2-THD"/>
+                            <constraint firstItem="xTp-CJ-ycv" firstAttribute="top" secondItem="Zks-Dp-59j" secondAttribute="bottom" constant="8" symbolic="YES" id="e0e-XC-Ahx"/>
                             <constraint firstItem="Zks-Dp-59j" firstAttribute="top" secondItem="IcR-3z-CXy" secondAttribute="bottom" constant="8" symbolic="YES" id="e8Y-NS-tdh"/>
                             <constraint firstItem="8k1-sb-NyW" firstAttribute="centerY" secondItem="Ovm-ab-a6n" secondAttribute="centerY" id="eWu-6v-oas"/>
                             <constraint firstItem="G13-gP-xW3" firstAttribute="leading" secondItem="PWQ-lj-Nec" secondAttribute="leading" id="fOf-DE-w3O"/>
@@ -182,7 +177,6 @@
                             <constraint firstItem="Ovm-ab-a6n" firstAttribute="leading" secondItem="a5R-kQ-FH9" secondAttribute="leading" constant="16" id="roO-XI-k2D"/>
                             <constraint firstItem="x9e-7o-lOU" firstAttribute="top" secondItem="kbH-pj-5su" secondAttribute="bottom" constant="8" symbolic="YES" id="sS3-Zx-oT2"/>
                             <constraint firstItem="Lal-93-QHY" firstAttribute="leading" secondItem="a5R-kQ-FH9" secondAttribute="leading" constant="132.66999999999999" id="upa-Ak-4K2"/>
-                            <constraint firstItem="IcR-3z-CXy" firstAttribute="centerX" secondItem="rct-JG-Owq" secondAttribute="centerX" id="wP5-Ab-IF9"/>
                             <constraint firstItem="Ovm-ab-a6n" firstAttribute="top" secondItem="oAK-tf-Zl2" secondAttribute="bottom" constant="10" id="wXR-HA-iMG"/>
                             <constraint firstItem="8k1-sb-NyW" firstAttribute="trailing" secondItem="x9e-7o-lOU" secondAttribute="trailing" id="yDZ-Uz-Cns"/>
                         </constraints>
@@ -201,6 +195,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bioText" destination="8k1-sb-NyW" id="jAK-ZD-fCR"/>
+                        <outlet property="calendarView" destination="xTp-CJ-ycv" id="xVp-2P-8I0"/>
                         <outlet property="heightText" destination="kbH-pj-5su" id="Q8N-cW-Tzx"/>
                         <outlet property="locationText" destination="x9e-7o-lOU" id="Tra-tR-BEa"/>
                         <outlet property="nameText" destination="L51-bn-wQZ" id="jJC-OH-IoA"/>
@@ -209,11 +204,12 @@
                         <outlet property="usernameText" destination="oAK-tf-Zl2" id="KhC-5u-8Xi"/>
                         <outlet property="weightText" destination="x8t-bq-uzT" id="cvc-Ob-flc"/>
                         <segue destination="6Q4-Rp-A43" kind="presentation" identifier="LogoutSegue" modalPresentationStyle="fullScreen" id="bQT-wf-fQO"/>
+                        <segue destination="1wy-cz-o4u" kind="showDetail" identifier="LocationDetailsToSelectedEventSegueIdentifier" id="hNh-QH-aj1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KXS-KV-6NX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3610" y="1556"/>
+            <point key="canvasLocation" x="3609.9236641221373" y="1555.6338028169014"/>
         </scene>
         <!--Main-->
         <scene sceneID="Bjb-Jp-bTp">
@@ -234,6 +230,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zm5-Tp-RNM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4267" y="1134"/>
+        </scene>
+        <!--EventDetailsStoryboard-->
+        <scene sceneID="XUJ-pu-lbW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EventDetailsStoryboard" id="1wy-cz-o4u" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qX3-iX-Tud" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4382" y="1568"/>
         </scene>
     </scenes>
     <resources>

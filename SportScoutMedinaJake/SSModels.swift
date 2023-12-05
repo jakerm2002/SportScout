@@ -75,6 +75,7 @@ struct User: Identifiable, Codable, Equatable {
     var sports: String
     var username: String
     var weight: String
+    var events: [FirebaseFirestore.DocumentReference]?
     
     // image url, could be nil
     var url: String?
