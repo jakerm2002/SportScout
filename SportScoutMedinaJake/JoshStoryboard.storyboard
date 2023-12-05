@@ -174,7 +174,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="GpU-Vh-G6T">
-                                <rect key="frame" x="16" y="523" width="361" height="295"/>
+                                <rect key="frame" x="16" y="515" width="361" height="303"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="361" id="k9b-Ck-F1d"/>
@@ -230,7 +230,7 @@
                             <constraint firstItem="Vm2-Jf-4ft" firstAttribute="baseline" secondItem="Zks-Dp-59j" secondAttribute="baseline" id="0MG-gA-l2u"/>
                             <constraint firstItem="8k1-sb-NyW" firstAttribute="leading" secondItem="x8t-bq-uzT" secondAttribute="leading" id="0Wu-il-kC5"/>
                             <constraint firstItem="8k1-sb-NyW" firstAttribute="trailing" secondItem="x8t-bq-uzT" secondAttribute="trailing" id="0fT-uX-uoo"/>
-                            <constraint firstItem="GpU-Vh-G6T" firstAttribute="top" secondItem="vdF-Vx-tvh" secondAttribute="bottom" constant="8" symbolic="YES" id="2WI-kf-Omz"/>
+                            <constraint firstItem="GpU-Vh-G6T" firstAttribute="top" secondItem="vdF-Vx-tvh" secondAttribute="bottom" id="2WI-kf-Omz"/>
                             <constraint firstItem="IcR-3z-CXy" firstAttribute="baseline" secondItem="x9e-7o-lOU" secondAttribute="baseline" id="3Vl-ui-t8u"/>
                             <constraint firstItem="G13-gP-xW3" firstAttribute="leading" secondItem="Zks-Dp-59j" secondAttribute="leading" id="4kN-fs-Tg7"/>
                             <constraint firstItem="Lal-93-QHY" firstAttribute="top" secondItem="a5R-kQ-FH9" secondAttribute="top" constant="20" id="56Z-As-F6t"/>
