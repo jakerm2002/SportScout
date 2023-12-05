@@ -41,15 +41,8 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         participantList.delegate = self
         participantList.dataSource = self
         
-        // initialize swipe gestures to remove/accept participants
-        let left = UISwipeGestureRecognizer(target: self, action: #selector(recognizeSwipeGesture(recognizer:)))
-                left.direction = UISwipeGestureRecognizer.Direction.left
-        self.view.addGestureRecognizer(left)
         
-        let right = UISwipeGestureRecognizer(target: self, action: #selector(recognizeSwipeGesture(recognizer:)))
-        right.direction = UISwipeGestureRecognizer.Direction.right
-        self.view.addGestureRecognizer(right)
-        
+        checkIfUserIsOwner()
         
          // will show event owner 3 sections in participant table & hide requestToJoinButton
         
@@ -70,21 +63,76 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
         }
     }
     
-    // TODO: Write functionality
     @IBAction func requestToJoinPressed(_ sender: Any) {
         let user = Auth.auth().currentUser
         guard !user!.uid.isEmpty else {
             fatalError("no document passed in")
         }
+        
         let docuRef = db.collection("users").document(user!.uid)
+            
+            // check if user is already a confirmed participant
         if event.confirmedParticipants != nil && event.confirmedParticipants!.contains(docuRef) {
             // show alert so user knows they are a participant
             let controller = UIAlertController(
                 title: "Unable To Complete Action",
                 message: "You are already a confirmed participant for this event!",
                 preferredStyle: .alert)
+            controller.addAction(UIAlertAction(title: "OK", style: .default))
+            present(controller, animated: true)
+            
+            // check if user has been invited & add to confirmed participants automatically
+            
+        } else if event.invitedParticipants != nil && event.invitedParticipants!.contains(docuRef) {
+            
+            print("user accepted invite to event\n")
+//            
+//            self.requestedParticipants.remove(at: (sender as AnyObject).tag)
+            
+//            let row = participantList.indexPathForSelectedRow?.row
+//            let section = participantList.indexPathForSelectedRow?.section
+//            
+//            let indexPath = IndexPath(row: row!, section: section!)
+            
+            invitedParticipants.removeAll { user in
+                user.id == docuRef.documentID
+              }
+            
+//            guard let uid = self.invitedParticipants[row!].id else {return}
+            let userToMove = db.collection("users").document(docuRef.documentID)
+            
+//            self.event.invitedParticipants!.remove(at: row!)
+            db.collection("events").document(self.documentID).updateData([
+                "invitedParticipants": FieldValue.arrayRemove([userToMove])
+            ]) {
+                _ in
+                db.collection("events").document(self.documentID).updateData([
+                    "confirmedParticipants": FieldValue.arrayUnion([userToMove])
+                ]) {
+                    _ in
+//                    self.invitedParticipants.remove(at: row!)
+                    var userToMoveAsUserStruct: User?
+                    do {
+                          try userToMove.setData(from: userToMoveAsUserStruct)
+                        }
+                        catch {
+                          print(error)
+                        }
+                    if userToMoveAsUserStruct != nil {
+                        self.confirmedParticipants.append(userToMoveAsUserStruct!)
+                    }
+                }
+            }
+            
+        } else if event.requestedParticipants != nil && event.requestedParticipants!.contains(docuRef) {
+            
+            let controller = UIAlertController(
+                title: "Unable To Complete Action",
+                message: "You have already requested to join this event!",
+                preferredStyle: .alert)
                         controller.addAction(UIAlertAction(title: "OK", style: .default))
             present(controller, animated: true)
+            
         } else {
             // send Notification to Event Owner & add them as "requestedParticipant"
             guard !documentID.isEmpty else {
@@ -182,8 +230,13 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                     cell!.profilePicture.sd_setImage(with: imgRef, placeholderImage: UIImage(named: "person.crop.circle"))
                 }
                 
+                print("\nbefore decision:")
+                print("num confirmed: \(String(describing: self.event.confirmedParticipants?.count))")
+                print("num requested: \(String(describing: self.event.requestedParticipants?.count))")
+                
                 // if owner accepts participant, move them into the confirmed section
                 cell?.acceptCallback = {
+                    print("user accepted \n")
                     guard let uid = self.requestedParticipants[indexPath.row].id else {return}
                     let userToMove = db.collection("users").document(uid)
                     
@@ -197,12 +250,24 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                         ]) {
                             _ in
                             self.requestedParticipants.remove(at: indexPath.row)
-                            self.fetchParticipants()
+                            var userToMoveAsUserStruct: User?
+                            do {
+                                  try userToMove.setData(from: userToMoveAsUserStruct)
+                                }
+                                catch {
+                                  print(error)
+                                }
+                            if userToMoveAsUserStruct != nil {
+                                self.confirmedParticipants.append(userToMoveAsUserStruct!)
+                            }
+//                            self.fetchParticipants()
+                            
                         }
                     }
                 }
                 
                 cell?.declineCallback = {
+                    print("user declined\n")
                     guard let uid = self.requestedParticipants[indexPath.row].id else {return}
                     let userToMove = db.collection("users").document(uid)
                     
@@ -212,9 +277,14 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                     ]) {
                         _ in
                         self.requestedParticipants.remove(at: indexPath.row)
-                        self.fetchParticipants()
+//                        self.fetchParticipants()
                     }
                 }
+                
+                print("\nafter decision:")
+                print("num confirmed: \(String(describing: self.event.confirmedParticipants?.count))")
+                print("num requested: \(String(describing: self.event.requestedParticipants?.count))")
+
             default:
                 fatalError("SSEventDetailsViewController: Participant section was not one of the three required sections.")
                 break
@@ -235,6 +305,7 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                 }
             }
         }
+        self.numParticipantsLabel.text = "\(String(self.confirmedParticipants.count)) Confirmed Participants"
         return cell!
     }
     
@@ -243,8 +314,20 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
 //        performSegue(withIdentifier: profileSegueIdentifier, sender: nil)
     }
     
+    // what cells can user edit
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return userIsEventOwner
+        // only edit if you are event owner & only edit confirmed and requested sections
+        return userIsEventOwner && indexPath.section != invitedSection
+    }
+    
+    // ways each cell can be edited
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        // confirmed participants can only be deleted
+        if indexPath.section == confirmedSection {
+            return .delete
+        } else {
+            return .none
+        }
     }
     
     // delete from table
@@ -263,23 +346,12 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
             db.collection("events").document(documentID).updateData(["confirmedParticipants": event.confirmedParticipants!])
             confirmedParticipants.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            self.numParticipantsLabel.text = "\(String(self.confirmedParticipants.count)) Confirmed Participants"
         }  else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
             
     }
-    
-    // swipe gestures to accept/remove participants for event owner
-    @IBAction func recognizeSwipeGesture(recognizer: UISwipeGestureRecognizer)
-    {
-        if recognizer.state == .ended {
-            // accept participant
-            if recognizer.direction == .right {
-                
-            }
-        }
-    }
-    
     
     // TODO: populate Profile of user pressed
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

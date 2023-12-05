@@ -23,10 +23,13 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
     @IBOutlet weak var participantRequestTable: UITableView!
     
     var events: [Event]?
+    var invites: [Event]?
     var currentUser: User?
     var logoutSegueIdentifier = "LogoutSegue"
     var participantCellSegueIdentifier = "ParticipantCellSegue"
     var participantCellIdentifier = "ParticipantCell"
+    let requestsSection = 1
+    let invitesSection = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +48,10 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
         if let user = user {
             uid = user.uid
         }
-        // get all events owned by this user
+        
         let userRef = db.collection("users").document(uid)
+        
+        // get all events owned by this user
         db.collection("events").whereField("owner", isEqualTo: userRef)
             .getDocuments() { (querySnapshot, err) in
                 guard let documents = querySnapshot?.documents else {
@@ -55,6 +60,20 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
                 }
                 print("getting events")
                 self.events = documents.compactMap { (queryDocumentSnapshot) -> Event? in
+                    return try? queryDocumentSnapshot.data(as: Event.self)
+                }
+                self.participantRequestTable.reloadData()
+            }
+        
+        // get all invites sent to this user
+        db.collection("events").whereField("invitedParticipants", arrayContains: userRef)
+            .getDocuments() { (querySnapshot, err) in
+                guard let documents = querySnapshot?.documents else {
+                    print("No documents")
+                    return
+                }
+                print("getting invites")
+                self.invites = documents.compactMap { (queryDocumentSnapshot) -> Event? in
                     return try? queryDocumentSnapshot.data(as: Event.self)
                 }
                 self.participantRequestTable.reloadData()
@@ -102,28 +121,69 @@ class ProfileViewController: UIViewController, UIScrollViewDelegate, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == logoutSegueIdentifier {
             let vc = segue.destination as? LoginViewController
-        } else if segue.identifier == participantCellSegueIdentifier, let nextVC = segue.destination as? SSEventDetailsViewController, let row = participantRequestTable.indexPathForSelectedRow?.row
+        } else if segue.identifier == participantCellSegueIdentifier, let nextVC = segue.destination as? SSEventDetailsViewController, let row = participantRequestTable.indexPathForSelectedRow?.row, let section = participantRequestTable.indexPathForSelectedRow?.section, let selectedIndexPath = participantRequestTable.indexPathForSelectedRow
          {
-            nextVC.event = events![row]
-            nextVC.documentID = events![row].id!
+            if section == invitesSection {
+                nextVC.event = invites![row]
+                nextVC.documentID = invites![row].id!
+            } else if section == requestsSection {
+                nextVC.event = events![row]
+                nextVC.documentID = events![row].id!
+            }
+            participantRequestTable.deselectRow(at: selectedIndexPath, animated: true)
          }
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("number of events user owns: \(String(describing: events?.count))")
-        return events?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: participantCellIdentifier, for: indexPath as IndexPath)
         
-        cell.textLabel?.text = "Event: \( events![indexPath.row].name)"
-        cell.detailTextLabel?.text = "Participants to review: \( events![indexPath.row].requestedParticipants?.count ?? 0)"
+        switch indexPath.section {
+        case invitesSection:
+            cell.textLabel?.text = "Event: \( invites![indexPath.row].name)"
+            cell.detailTextLabel?.text = "Accept or Reject this event invitaton"
+        
+        case requestsSection:
+            cell.textLabel?.text = "Event: \( events![indexPath.row].name)"
+
+            var rparticipants = events![indexPath.row].requestedParticipants
+            
+            if (rparticipants != nil) {
+                for rp in rparticipants! {
+                    print("participant who requested: \(rp)")
+                }
+            }
+            
+            cell.detailTextLabel?.text = "Participants to review: \( events![indexPath.row].requestedParticipants!.count )"
+        default:
+            break
+        }
         
         return cell
     }
     
+    let types = ["Incoming Invites", "Requests"]
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return types[section]
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case requestsSection:
+            print("\nnumber of events user owns: \(String(describing: events?.count))")
+            return events?.count ?? 0
+        case invitesSection:
+            print("\nnumber of events user is invited to: \(String(describing: invites?.count))")
+            return invites?.count ?? 0
+        default:
+            return 0
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return types.count
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        performSegue(withIdentifier: profileSegueIdentifier, sender: nil)
     }
 }

@@ -76,11 +76,19 @@ struct User: Identifiable, Codable, Equatable {
     var username: String
     var weight: String
     var events: [DocumentReference]?
+    var invites: [DocumentReference]?
     
     // image url, could be nil
     var url: String?
     
     var eventsPaths: [String]? {
+        events?.compactMap() {
+            document -> String in
+            return document.path
+        }
+    }
+    
+    var invitesPaths: [String]? {
         events?.compactMap() {
             document -> String in
             return document.path
