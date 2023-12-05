@@ -17,7 +17,7 @@ import NukeVideo
 import FirebaseStorageUI
 import AVFoundation
 
-class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -30,6 +30,8 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
     private let refreshControl = UIRefreshControl()
     
     var viewableTimelinePosts: [TimelinePost] = []
+    var filteredViewableTimelinePosts: [TimelinePost] = []
+    var filtered: Bool = false
     
     var topOffset: CGFloat?
     
@@ -51,6 +53,8 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         collectionView.isScrollEnabled = true
         collectionView.alwaysBounceVertical = true
         collectionView.bounces = true
+        searchBar.delegate = self
+        searchBar.sizeToFit()
         
         // dismiss search bar when user scrolls the collection view
         collectionView.keyboardDismissMode = .onDrag
@@ -98,11 +102,44 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if let search = searchBar.text {
+            if text.count == 0 {
+                filterText(String(search.dropLast()))
+            } else {
+                filterText(search+text)
+            }
+        }
+        return true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            filtered = false
+            filteredViewableTimelinePosts.removeAll()
+            collectionView.reloadData()
+        }
+    }
+    
+    func filterText(_ query: String) {
+        filteredViewableTimelinePosts.removeAll()
+        for timelinePost in viewableTimelinePosts {
+            if ((timelinePost.authorAsUserModel?.username.lowercased().contains(query.lowercased()))!) {
+                filteredViewableTimelinePosts.append(timelinePost)
+            }
+        }
+        collectionView.reloadData()
+        filtered = true
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if viewableTimelinePosts.count == 0 && !self.spinnerVC.view.isDescendant(of: self.view) {
             self.collectionView.setEmptyMessage("No Posts")
         } else {
             self.collectionView.restore()
+        }
+        if (!filteredViewableTimelinePosts.isEmpty) {
+            return filteredViewableTimelinePosts.count
         }
         return viewableTimelinePosts.count
     }
@@ -111,25 +148,30 @@ class SSTimelineViewController: UIViewController, UICollectionViewDelegate, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: timelineCollectionViewCellIdentifier, for: indexPath) as! SSTimelineCollectionViewCell
         
         let row = indexPath.row
-        let currentPost = viewableTimelinePosts[row]
+        let currentPost: TimelinePost
+        if !filteredViewableTimelinePosts.isEmpty {
+            currentPost = filteredViewableTimelinePosts[row]
+        } else {
+            currentPost = viewableTimelinePosts[row]
+        }
         
         cell.authorRealNameLabel.text = currentPost.authorAsUserModel?.fullName
         cell.authorUsernameLabel.text = currentPost.authorAsUserModel?.username
         
         // TODO: display images
-        if let url = viewableTimelinePosts[indexPath.row].authorAsUserModel?.url {
+        if let url = currentPost.authorAsUserModel?.url {
             let imgRef = storage.reference().child(url)
             cell.authorProfileImage.sd_setImage(with: imgRef)
         }
         
-        if viewableTimelinePosts[indexPath.row].mediaType == "photo" {
-            if let mediaPhoto = viewableTimelinePosts[indexPath.row].mediaPath {
+        if currentPost.mediaType == "photo" {
+            if let mediaPhoto = currentPost.mediaPath {
                 let imgRef = storage.reference().child(mediaPhoto)
                 cell.imageView.sd_setImage(with: imgRef, placeholderImage: nil)
 //                cell.mediaView.isHidden = true
             }
-        } else if viewableTimelinePosts[indexPath.row].mediaType == "video" {
-            if let mediaVideo = viewableTimelinePosts[indexPath.row].mediaPath {
+        } else if currentPost.mediaType == "video" {
+            if let mediaVideo = currentPost.mediaPath {
                 cell.nukeLazyImageView.makeImageView = {
                     container in
                     if let type = container.type, type.isVideo, let asset = container.userInfo[.videoAssetKey] as? AVAsset {
