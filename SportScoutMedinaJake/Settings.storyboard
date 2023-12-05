@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Settings-->
+        <scene sceneID="Fwg-Ba-hbv">
+            <objects>
+                <viewController id="A8c-p0-Zi2" customClass="SSSettingsViewController" customModule="SportScoutMedinaJake" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4pD-AZ-7PX">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rsF-X5-K7e">
+                                <rect key="frame" x="0.0" y="79" width="393" height="739"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Aes-y8-Roe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rsF-X5-K7e" firstAttribute="top" secondItem="Aes-y8-Roe" secondAttribute="top" constant="20" id="4iG-zG-wtw"/>
+                            <constraint firstItem="rsF-X5-K7e" firstAttribute="trailing" secondItem="Aes-y8-Roe" secondAttribute="trailing" id="RhG-Ml-Hoi"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="rsF-X5-K7e" secondAttribute="bottom" id="eLB-vd-tSU"/>
+                            <constraint firstItem="rsF-X5-K7e" firstAttribute="leading" secondItem="Aes-y8-Roe" secondAttribute="leading" id="jUx-Ss-0af"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="2i9-SK-a4j">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" image="person.fill.xmark" catalog="system" id="5jR-5W-WBl">
+                            <connections>
+                                <action selector="logoutButtonPressed:" destination="A8c-p0-Zi2" id="tGk-Kz-SJW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="settingsTableView" destination="rsF-X5-K7e" id="O30-nv-Wf2"/>
+                        <segue destination="prY-j1-KA4" kind="presentation" identifier="LogoutSegue" modalPresentationStyle="fullScreen" id="V5x-Eb-TIO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EVy-Sa-qCv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5153" y="1556"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="4oV-fL-dPq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="prY-j1-KA4" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="2fL-uu-0VB"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="32A-pu-7VA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5827" y="1474"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="person.fill.xmark" catalog="system" width="128" height="89"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 public let notificationSettings = ["All", "Urgent", "None"]
 public let faqQuestions = ["Question 1", "Question 2", "Question 3"]
@@ -13,6 +14,7 @@ public let faqAnswer = ["Answer 1", "Answer 2", "Answer 3"]
 
 class SSSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var settingsTableView: UITableView!
+    var logoutSegueIdentifier = "LogoutSegue"
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -59,6 +61,21 @@ class SSSettingsViewController: UIViewController, UITableViewDelegate, UITableVi
             return "Notification Settings"
         } else {
             return "Frequently Asked Questions"
+        }
+    }
+    @IBAction func logoutButtonPressed(_ sender: Any) {
+        let auth = Auth.auth()
+        do {
+            try auth.signOut()
+            performSegue(withIdentifier: logoutSegueIdentifier, sender: self)
+        } catch let signOutError {
+            print(signOutError.localizedDescription)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == logoutSegueIdentifier {
+            guard let vc = segue.destination as? LoginViewController else { return }
         }
     }
     
