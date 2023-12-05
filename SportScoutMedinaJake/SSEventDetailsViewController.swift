@@ -111,18 +111,6 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                 ]) {
                     _ in
 //                    self.invitedParticipants.remove(at: row!)
-                    var userToMoveAsUserStruct: User?
-                    do {
-                          try userToMove.setData(from: userToMoveAsUserStruct)
-                        }
-                        catch {
-                          print(error)
-                        }
-                    if userToMoveAsUserStruct != nil {
-                        
-                        print("hello this code is running! inside of request to join pressed")
-                        self.confirmedParticipants.append(userToMoveAsUserStruct!)
-                    }
                 }
             }
             
@@ -252,17 +240,6 @@ class SSEventDetailsViewController: UIViewController, UITableViewDelegate, UITab
                         ]) {
                             _ in
                             self.requestedParticipants.remove(at: indexPath.row)
-                            var userToMoveAsUserStruct: User?
-                            do {
-                                  try userToMove.setData(from: userToMoveAsUserStruct)
-                                }
-                                catch {
-                                  print(error)
-                                }
-                            if userToMoveAsUserStruct != nil {
-                                print("hello this code is running! inside of acceptCallback")
-                                self.confirmedParticipants.append(userToMoveAsUserStruct!)
-                            }
 //                            self.fetchParticipants()
                             
                         }
