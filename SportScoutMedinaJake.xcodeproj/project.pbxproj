@@ -56,6 +56,7 @@
 		66C3D9E42AD903DF003E1C99 /* SSSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9E32AD903DF003E1C99 /* SSSettingsViewController.swift */; };
 		66C3D9E62AD91034003E1C99 /* SSNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C3D9E52AD91034003E1C99 /* SSNewEventViewController.swift */; };
 		66CEDB902B146A32009F8B7D /* SSNewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CEDB8F2B146A32009F8B7D /* SSNewPostViewController.swift */; };
+		66D9E8BC2B1EEF8900C8EE36 /* ProfileCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D9E8BB2B1EEF8900C8EE36 /* ProfileCalendarViewController.swift */; };
 		66E07EBF2B15AEFC007309A2 /* SSSportChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E07EBD2B15AEFC007309A2 /* SSSportChooser.swift */; };
 		66E07EC02B15AEFC007309A2 /* SSSportChooser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66E07EBE2B15AEFC007309A2 /* SSSportChooser.xib */; };
 		69348A9D2AF16C1A00175A7B /* SSNewEventTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69348A9C2AF16C1A00175A7B /* SSNewEventTitleTableViewCell.swift */; };
@@ -121,6 +122,7 @@
 		66C3D9E32AD903DF003E1C99 /* SSSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSSettingsViewController.swift; sourceTree = "<group>"; };
 		66C3D9E52AD91034003E1C99 /* SSNewEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSNewEventViewController.swift; sourceTree = "<group>"; };
 		66CEDB8F2B146A32009F8B7D /* SSNewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSNewPostViewController.swift; sourceTree = "<group>"; };
+		66D9E8BB2B1EEF8900C8EE36 /* ProfileCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCalendarViewController.swift; sourceTree = "<group>"; };
 		66E07EBD2B15AEFC007309A2 /* SSSportChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSSportChooser.swift; sourceTree = "<group>"; };
 		66E07EBE2B15AEFC007309A2 /* SSSportChooser.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SSSportChooser.xib; sourceTree = "<group>"; };
 		69348A9C2AF16C1A00175A7B /* SSNewEventTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSNewEventTitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			children = (
 				661EC2BD2B189BBB00E4F795 /* CustomizeProfileStoryboard.storyboard */,
 				E35264552ADB374600CAAA09 /* JoshStoryboard.storyboard */,
+				66D9E8BB2B1EEF8900C8EE36 /* ProfileCalendarViewController.swift */,
 				5F71BC682B1824B5007A1EFB /* CustomizeSportViewController.swift */,
 				94B1C2322B0F78BA0035CD70 /* OtherUserProfileStoryboard.storyboard */,
 				E35264532ADB34E400CAAA09 /* TarBarControllerStoryboard.storyboard */,
@@ -430,6 +433,7 @@
 				66C3D9912AD89553003E1C99 /* HomeViewController.swift in Sources */,
 				66C3D9842AD88FEC003E1C99 /* SportScoutMedinaJake.xcdatamodeld in Sources */,
 				66C3D9E02AD8FF75003E1C99 /* SSTabBarController.swift in Sources */,
+				66D9E8BC2B1EEF8900C8EE36 /* ProfileCalendarViewController.swift in Sources */,
 				69348AA12AF16C4F00175A7B /* SSNewEventStartsAtTableViewCell.swift in Sources */,
 				66C066652ADA3FB500DE3845 /* SSLocationDetailsViewController.swift in Sources */,
 				66362E7F2B1E6AC1005EF8D3 /* SSEventDetailsRequestedParticipantTableViewCell.swift in Sources */,
