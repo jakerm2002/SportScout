@@ -14,6 +14,9 @@ class SSEventDetailsParticipantTableViewCell: UITableViewCell {
     @IBOutlet var profilePicture: UIImageView!
     @IBOutlet weak var realName: UILabel!
     @IBOutlet var username: UILabel!
+    
+    var acceptCallback: (() -> Void)? = nil
+    var declineCallback: (() -> Void)? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
